@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-11-17",
+  "descripcion": "Apartados que se mostraran despues de elegir el pais. Cada apartado enlaza a las fuentes oficiales correspondientes.",
+  "temas": [
+    {
+      "id": "sga",
+      "nombre": "SGA / Clasificación de peligros",
+      "descripcion": "Sistema Globalmente Armonizado: clasificacion de peligros fisicos, para la salud y para el medio ambiente; pictogramas, palabras de advertencia, frases H y P, etiquetado.",
+      "fuente_clave": "unece-ghs-rev11",
+      "gobierno_o_institucion": "UNECE (ONU), MinAmbiente, DOF-STPS, LATU"
+    },
+    {
+      "id": "fds",
+      "nombre": "Fichas de Datos de Seguridad (FDS/SDS)",
+      "descripcion": "Estructura de las 16 secciones de la FDS segun el SGA, diferencias frente a la ficha tecnica y antiguas MSDS, y bases oficiales de fichas por sustancia.",
+      "fuente_clave": "oit-icsc",
+      "gobierno_o_institucion": "OIT, INSST, OSHA (referencia)"
+    },
+    {
+      "id": "convenios",
+      "nombre": "Convenios internacionales",
+      "descripcion": "Convenios de Basilea, Rotterdam, Estocolmo, Minamata y convenios maritimos de la OMI (HNS, MARPOL, SOLAS).",
+      "fuente_clave": "pic-convenios",
+      "gobierno_o_institucion": "Convencion de Rotterdam (PIC), OMI, DIMAR"
+    },
+    {
+      "id": "transporte",
+      "nombre": "Regulación del transporte",
+      "descripcion": "Reglamentacion Modelo de la ONU (Libro Naranja), ADR (carretera), RID (ferrocarril), ADN (vias navegables), IMDG (mar) e IATA DGR (aire).",
+      "fuente_clave": "unece-dangerous-goods",
+      "gobierno_o_institucion": "UNECE, OMI, MITMA, INTT, SENCAMER, MINAM"
+    },
+    {
+      "id": "legislacion",
+      "nombre": "Legislación nacional",
+      "descripcion": "Manipulacion, almacenamiento, control y comercializacion de sustancias peligrosas segun el pais seleccionado.",
+      "fuente_clave": "insst-normativa-quimicos",
+      "gobierno_o_institucion": "BOE, INSST, DOF, SINIA-MINAM, Asamblea Nacional, base local de Cuba"
+    }
+  ]
+}

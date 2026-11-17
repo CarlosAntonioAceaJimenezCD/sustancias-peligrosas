@@ -1,0 +1,315 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-11-17",
+  "nota_metodologica": "Enlaces a portales e instrumentos oficiales por pais. Los registros con verificacion 'contenido_verificado' fueron abiertos y confirmados. Los de 'dominio_snippet' se confirmaron por dominio gubernamental y resultado de busqueda. Los de 'portal_validar' son URLs canonicas de portales oficiales que deben ser confirmadas en navegador antes de publicarse. Cuba se alimenta de la base local del usuario y no se busca en internet.",
+  "verificaciones": {
+    "contenido_verificado": "Pagina abierta y contenido confirmado",
+    "dominio_snippet": "Dominio gubernamental confirmado + resultado de busqueda; el sitio bloquea al lector automatico",
+    "portal_validar": "URL canonica del organismo; pendiente de confirmacion manual",
+    "base_local_usuario": "Fuente proporcionada por el usuario, pendiente de importacion"
+  },
+  "paises": {
+    "colombia": {
+      "portales_oficiales": [
+        {
+          "id": "co-portal-minambiente",
+          "institucion": "Ministerio de Ambiente y Desarrollo Sostenible",
+          "url": "https://www.minambiente.gov.co/",
+          "verificacion": "portal_validar"
+        },
+        {
+          "id": "co-suin-juriscol",
+          "institucion": "Sistema Unico de Informacion Normativa (SUIN-Juriscol)",
+          "url": "https://www.suin-juriscol.gov.co/",
+          "verificacion": "portal_validar"
+        },
+        {
+          "id": "co-diario-oficial",
+          "institucion": "Diario Oficial de Colombia (Ministerio del Interior)",
+          "url": "https://www.diariooficial.interior.gob.co/",
+          "verificacion": "portal_validar"
+        }
+      ],
+      "instrumentos": [
+        {
+          "id": "co-decreto-4741-2005",
+          "titulo": "Decreto 4741 de 2005 - Reglamento para la gestion de residuos peligrosos",
+          "tema": "legislacion",
+          "url": "https://www.suin-juriscol.gov.co/",
+          "verificacion": "portal_validar",
+          "nota": "Buscar el numero de decreto en SUIN-Juriscol; no se encontro URL directa verificada."
+        },
+        {
+          "id": "co-guia-sga-clasificacion",
+          "titulo": "Guia de clasificacion de peligros segun el SGA (2017)",
+          "tema": "sga",
+          "url": "https://quimicos.minambiente.gov.co/wp-content/uploads/2021/06/4.-Guia-de-clasificacion-de-peligros-segun-SGA-2017.pdf",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "co-guia-sga-comunicacion",
+          "titulo": "Guia de comunicacion de peligros segun el SGA (2017)",
+          "tema": "sga",
+          "url": "https://quimicos.minambiente.gov.co/wp-content/uploads/2021/06/5.-Guia-de-comunicacion-de-peligros-segun-el-SGA-2017.pdf",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "co-gth09",
+          "titulo": "Guia G-TH-09 de manipulacion y almacenamiento de sustancias quimicas",
+          "tema": "legislacion",
+          "url": "https://dapre.presidencia.gov.co/dapre/DocumentosSIGEPRE/G-TH-09-Guia-Manipulacion-Almacenamiento-Sustancias-Quimicas.pdf",
+          "verificacion": "dominio_snippet"
+        }
+      ]
+    },
+    "espana": {
+      "portales_oficiales": [
+        {
+          "id": "es-boe",
+          "institucion": "Boletin Oficial del Estado",
+          "url": "https://www.boe.es/",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "es-insst",
+          "institucion": "Instituto Nacional de Seguridad y Salud en el Trabajo",
+          "url": "https://www.insst.es/normativa/riesgos-quimicos",
+          "verificacion": "contenido_verificado"
+        },
+        {
+          "id": "es-eurlex",
+          "institucion": "EUR-Lex (Union Europea)",
+          "url": "https://eur-lex.europa.eu/",
+          "verificacion": "portal_validar"
+        }
+      ],
+      "instrumentos": [
+        {
+          "id": "es-ley-31-1995",
+          "titulo": "Ley 31/1995, de Prevencion de Riesgos Laborales",
+          "tema": "legislacion",
+          "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1995-24292",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "es-rd-374-2001",
+          "titulo": "Real Decreto 374/2001, proteccion frente a riesgos de agentes quimicos",
+          "tema": "legislacion",
+          "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2001-8436",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "es-rd-363-1995",
+          "titulo": "Real Decreto 363/1995, clasificacion, envasado y etiquetado de sustancias peligrosas (adaptado a REACH por RD 1802/2008)",
+          "tema": "legislacion",
+          "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1995-13535",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "es-rd-145-1989",
+          "titulo": "Real Decreto 145/1989, admision, manipulacion y almacenamiento de mercancias peligrosas en puertos",
+          "tema": "legislacion",
+          "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1989-3496",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "es-rd-1566-1999",
+          "titulo": "Real Decreto 1566/1999, consejeros de seguridad para el transporte de mercancias peligrosas",
+          "tema": "transporte",
+          "url": "https://www.boe.es/buscar/act.php?id=BOE-A-1999-20640",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "es-directiva-2008-68-ce",
+          "titulo": "Directiva 2008/68/CE del Parlamento Europeo y del Consejo, transporte terrestre de mercancias peligrosas",
+          "tema": "transporte",
+          "url": "https://eur-lex.europa.eu/",
+          "verificacion": "portal_validar",
+          "nota": "Buscar el numero de directiva en EUR-Lex; no se encontro URL directa verificada."
+        }
+      ]
+    },
+    "mexico": {
+      "portales_oficiales": [
+        {
+          "id": "mx-dof",
+          "institucion": "Diario Oficial de la Federacion",
+          "url": "https://www.dof.gob.mx/",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "mx-stps",
+          "institucion": "Secretaria del Trabajo y Prevision Social",
+          "url": "https://www.stps.gob.mx/",
+          "verificacion": "portal_validar"
+        },
+        {
+          "id": "mx-semarnat",
+          "institucion": "Secretaria de Medio Ambiente y Recursos Naturales",
+          "url": "https://www.semarnat.gob.mx/",
+          "verificacion": "portal_validar"
+        },
+        {
+          "id": "mx-sct",
+          "institucion": "Secretaria de Comunicaciones y Transportes",
+          "url": "https://www.sct.gob.mx/",
+          "verificacion": "portal_validar"
+        }
+      ],
+      "instrumentos": [
+        {
+          "id": "mx-nom-005-stps-1998",
+          "titulo": "NOM-005-STPS-1998 - Condiciones de seguridad e higiene para el manejo, transporte y almacenamiento de sustancias quimicas peligrosas",
+          "tema": "legislacion",
+          "url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=2052048",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "mx-nom-018-stps-2015",
+          "titulo": "NOM-018-STPS-2015 - Sistema armonizado para la identificacion y comunicacion de peligros y riesgos",
+          "tema": "sga",
+          "url": "https://dof.gob.mx/normasOficiales/9496/stps/stps.html",
+          "verificacion": "dominio_snippet"
+        }
+      ]
+    },
+    "peru": {
+      "portales_oficiales": [
+        {
+          "id": "pe-sinia-minam",
+          "institucion": "SINIA - Ministerio del Ambiente",
+          "url": "https://sinia.minam.gob.pe/",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "pe-elperuano",
+          "institucion": "Diario Oficial El Peruano",
+          "url": "https://www.elperuano.pe/",
+          "verificacion": "portal_validar"
+        },
+        {
+          "id": "pe-mtc",
+          "institucion": "Ministerio de Transportes y Comunicaciones",
+          "url": "https://www.mtc.gob.pe/",
+          "verificacion": "portal_validar"
+        }
+      ],
+      "instrumentos": [
+        {
+          "id": "pe-ley-28256",
+          "titulo": "Ley N 28256 - Transporte terrestre de materiales y residuos peligrosos",
+          "tema": "legislacion",
+          "url": "https://sinia.minam.gob.pe/normas/ley-que-regula-transporte-terrestre-materiales-residuos-peligrosos",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "pe-reglamento-transporte",
+          "titulo": "Reglamento Nacional de Transporte Terrestre de Materiales y Residuos Peligrosos",
+          "tema": "transporte",
+          "url": "https://sinia.minam.gob.pe/normas/aprueban-reglamento-nacional-transporte-terrestre-materiales-residuos",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "pe-plan-contingencia",
+          "titulo": "Lineamientos para la elaboracion de un Plan de Contingencia para el Transporte Terrestre de Materiales y/o Residuos Peligrosos",
+          "tema": "transporte",
+          "url": "https://sinia.minam.gob.pe/normas/aprueban-lineamientos-elaboracion-un-plan-contingencia-transporte",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "pe-convenio-basilea",
+          "titulo": "Convenio de Basilea sobre el control de los movimientos transfronterizos de desechos peligrosos",
+          "tema": "convenios",
+          "url": "https://sinia.minam.gob.pe/normas/convenio-basilea-control-movimientos-transfronterizos-desechos-peligrosos",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "pe-convenio-rotterdam",
+          "titulo": "Convenio de Rotterdam - Procedimiento de Consentimiento Fundamentado Previo",
+          "tema": "convenios",
+          "url": "https://sinia.minam.gob.pe/normas/convenio-rotterdam-procedimiento-consentimiento-fundamentado-previo",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "pe-plan-estocolmo",
+          "titulo": "Plan Nacional de Implementacion del Convenio de Estocolmo sobre Contaminantes Organicos Persistentes",
+          "tema": "convenios",
+          "url": "https://sinia.minam.gob.pe/documentos/plan-nacional-implementacion-convenio-estocolmo-contaminantes",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "pe-lista-residuos",
+          "titulo": "Anexo 4: Listado de Residuos Peligrosos - Reglamento de la Ley General de Residuos Solidos",
+          "tema": "legislacion",
+          "url": "https://sinia.minam.gob.pe/normas/reglamento-ley-general-residuos-solidos",
+          "verificacion": "dominio_snippet"
+        }
+      ]
+    },
+    "venezuela": {
+      "portales_oficiales": [
+        {
+          "id": "ve-asamblea",
+          "institucion": "Asamblea Nacional de Venezuela",
+          "url": "https://www.asambleanacional.gob.ve/",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "ve-minec",
+          "institucion": "Ministerio del Poder Popular de Economia y Comercio",
+          "url": "https://www.minec.gob.ve/minec/marco-juridico/",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "ve-resquimc",
+          "institucion": "Registro Nacional Unico de Operadores de Sustancias Quimicas Controladas",
+          "url": "https://www.resquimc.gob.ve/normativas-legales/",
+          "verificacion": "dominio_snippet"
+        }
+      ],
+      "instrumentos": [
+        {
+          "id": "ve-ley-55",
+          "titulo": "Ley sobre Sustancias, Materiales y Desechos Peligrosos (Ley N 55, Gaceta Oficial 5.554 Extraordinario, 13/11/2001)",
+          "tema": "legislacion",
+          "url": "https://www.asambleanacional.gob.ve/leyes/sancionadas/ley-sobre-sustancias-materiales-y-desechos-peligrosos",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "ve-decreto-2635",
+          "titulo": "Decreto 2635 - Normas para el control de la recuperacion de materiales peligrosos y el manejo de desechos peligrosos",
+          "tema": "legislacion",
+          "url": "https://www.bolipuertos.gob.ve/?page_id=9965",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "ve-ntf-3060",
+          "titulo": "NTF 3060:2011 - Materiales peligrosos: clasificacion e identificacion para su transporte terrestre",
+          "tema": "transporte",
+          "url": "https://www.intt.gob.ve/wp-content/uploads/2026/08/ntf-3060-2011-materiales-peligrosos-clasificacion-e-identificacion-para-su-transporte-terrestre.pdf",
+          "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "ve-covenin-2670",
+          "titulo": "COVENIN 2670-2001 - Materiales peligrosos: guia de respuesta a emergencias",
+          "tema": "transporte",
+          "url": "https://sigbs.sencamer.gob.ve/cgi-bin/koha/opac-detail.pl?biblionumber=549",
+          "verificacion": "dominio_snippet"
+        }
+      ]
+    },
+    "cuba": {
+      "portales_oficiales": [],
+      "instrumentos": [
+        {
+          "id": "cu-base-local",
+          "titulo": "Base local de legislacion cubana (proporcionada por el usuario)",
+          "tema": "legislacion",
+          "url": null,
+          "verificacion": "base_local_usuario",
+          "nota": "No se realizan busquedas web. La base se importara al repositorio cuando se defina su formato."
+        }
+      ]
+    }
+  }
+}

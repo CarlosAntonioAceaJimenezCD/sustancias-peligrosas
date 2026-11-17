@@ -1,0 +1,412 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-11-17",
+  "descripcion": "Registro de fuentes oficiales para el marco legal y técnico de sustancias peligrosas. Solo se aceptan gobiernos, organismos internacionales o instituciones publicas reconocidas.",
+  "criterios": {
+    "aceptado": [
+      "Dominio gubernamental (.gob.*, .gov.*, .mil.*)",
+      "Organismo internacional o Convencion (ONU, UNECE, OMI, OIT, OPCW, PIC)",
+      "Institucion publica reconocida (ej. LATU)"
+    ],
+    "rechazado": [
+      "Empresas privadas y consultoras",
+      "Blogs y agregadores comerciales",
+      "Enciclopedias y repositorios de presentaciones",
+      "Fuentes sin institucion identificable"
+    ]
+  },
+  "valores_verificacion": {
+    "contenido_verificado": "La pagina fue abierta y se confirmo su contenido",
+    "dominio_snippet": "La institucionalidad se confirmo por dominio y resultado de busqueda; el sitio bloquea al lector automatico. Validar en navegador"
+  },
+  "fuentes": [
+    {
+      "id": "unece-ghs-rev11",
+      "pais": "internacional",
+      "institucion": "UNECE (Naciones Unidas)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "sga",
+      "titulo": "Sistema Globalmente Armonizado de Clasificacion y Etiquetado de Productos Quimicos (GHS), Rev.11 (2025)",
+      "url": "https://unece.org/transport/dangerous-goods/ghs-rev11-2025",
+      "descripcion": "Edicion vigente del SGA: clasificacion de peligros, etiquetado, pictogramas, frases H y fichas de datos de seguridad.",
+      "verificacion": "dominio_snippet",
+      "oficial": true,
+      "nota": "El sitio devuelve 403 al lector automatico."
+    },
+    {
+      "id": "unece-dangerous-goods",
+      "pais": "internacional",
+      "institucion": "UNECE (Naciones Unidas)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "transporte",
+      "titulo": "Centro de mercancias peligrosas de la UNECE",
+      "url": "https://unece.org/transport/dangerous-goods",
+      "descripcion": "Hub oficial de la Reglamentacion Modelo (Libro Naranja), Manual de Pruebas y Criterios, ADR, ADN y SGA.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "unece-manual-pruebas",
+      "pais": "internacional",
+      "institucion": "UNECE (Naciones Unidas)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "transporte",
+      "titulo": "Manual de Pruebas y Criterios de las Naciones Unidas",
+      "url": "https://unece.org/transport/dangerous-goods/rev7-files",
+      "descripcion": "Criterios y metodos de ensayo para clasificar mercancias peligrosas y peligros fisicos del SGA.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "unece-adr",
+      "pais": "internacional",
+      "institucion": "UNECE (Naciones Unidas)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "transporte",
+      "titulo": "Acuerdo Europeo sobre el Transporte Internacional de Mercancias Peligrosas por Carretera (ADR)",
+      "url": "https://unece.org/about-adr",
+      "descripcion": "Texto oficial y ediciones vigentes del ADR.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "imo-convenios",
+      "pais": "internacional",
+      "institucion": "Organizacion Maritima Internacional (OMI)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "convenios",
+      "titulo": "Lista de convenios de la OMI",
+      "url": "https://www.imo.org/es/about/conventions/pages/listofconventions.aspx",
+      "descripcion": "SOLAS, MARPOL, STCW, Convenio HNS 1996 y su Protocolo de 2010, CLC, FUND, BWM y AFS.",
+      "verificacion": "contenido_verificado",
+      "oficial": true
+    },
+    {
+      "id": "imo-imdg",
+      "pais": "internacional",
+      "institucion": "Organizacion Maritima Internacional (OMI)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "transporte",
+      "titulo": "Codigo Maritimo Internacional de Mercancias Peligrosas (IMDG)",
+      "url": "https://www.imo.org/es/publications/Pages/IMDG%20Code.aspx",
+      "descripcion": "Edicion 2024 con enmienda 42-24, obligatoria desde el 1 de enero de 2026.",
+      "verificacion": "contenido_verificado",
+      "oficial": true
+    },
+    {
+      "id": "oit-icsc",
+      "pais": "internacional",
+      "institucion": "Oficina Internacional del Trabajo (OIT)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "fds",
+      "titulo": "Fichas Internacionales de Seguridad Quimica (ICSC)",
+      "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es",
+      "descripcion": "Fichas de seguridad y salud de sustancias quimicas producidas conjuntamente por la OMS y la OIT.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "pic-convenios",
+      "pais": "internacional",
+      "institucion": "Convencion de Rotterdam (Secretaria PIC)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "convenios",
+      "titulo": "Los convenios sobre productos quimicos y desechos peligrosos",
+      "url": "https://www.pic.int/",
+      "descripcion": "Marco conjunto de Basilea, Rotterdam y Estocolmo para la gestion del ciclo de vida de los productos quimicos.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "hns-convention",
+      "pais": "internacional",
+      "institucion": "Convencion HNS (OMI)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "convenios",
+      "titulo": "Convenio internacional sobre responsabilidad e indemnizacion por danos del transporte maritimo de sustancias nocivas y potencialmente peligrosas",
+      "url": "https://www.hnsconvention.org/es/el-convenio/",
+      "descripcion": "Texto oficial del Convenio SNP/HNS, 1996, y su Protocolo de 2010.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "opcw-transporte",
+      "pais": "internacional",
+      "institucion": "Organizacion para la Prohibicion de las Armas Quimicas (OPCW)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "transporte",
+      "titulo": "Directrices orientativas para el transporte seguro y protegido de sustancias quimicas peligrosas",
+      "url": "https://www.opcw.org/sites/default/files/documents/2025/06/Final%20version%20guidelines_rev%206.3-%20clean%20Spanish.pdf",
+      "descripcion": "Directrices de 2025 elaboradas a partir de talleres de expertos.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "latu-ghs-sga",
+      "pais": "internacional",
+      "institucion": "LATU (Laboratorio Tecnologico del Uruguay)",
+      "tipo_institucion": "institucion_publica",
+      "tema": "sga",
+      "titulo": "Clasificacion de peligros segun el Sistema Globalmente Armonizado",
+      "url": "https://ghs-sga.com/clasificacion-de-peligros-segun-sga/",
+      "descripcion": "Explicacion tecnica en espanol de los tres pasos de identificacion de peligros y tablas de ensayos por clase.",
+      "verificacion": "contenido_verificado",
+      "oficial": true,
+      "nota": "Unica fuente no gubernamental conservada: LATU es ente publico uruguayo, centro coordinador del Convenio de Basilea y centro regional del Convenio de Estocolmo para America Latina y el Caribe."
+    },
+
+    {
+      "id": "insst-normativa-quimicos",
+      "pais": "espana",
+      "institucion": "Instituto Nacional de Seguridad y Salud en el Trabajo (INSST)",
+      "tipo_institucion": "gobierno",
+      "tema": "legislacion",
+      "titulo": "Normativa nacional de riesgos quimicos",
+      "url": "https://www.insst.es/normativa/riesgos-quimicos",
+      "descripcion": "Ley 31/1995 de Prevencion de Riesgos Laborales, RD 374/2001 de agentes quimicos, RD 363/1995, RD 145/1989 de puertos, RD 1566/1999 de consejeros de seguridad, guias tecnicas de almacenamiento y accesos a REACH-CLP.",
+      "verificacion": "contenido_verificado",
+      "oficial": true
+    },
+    {
+      "id": "insst-fisq",
+      "pais": "espana",
+      "institucion": "Instituto Nacional de Seguridad y Salud en el Trabajo (INSST)",
+      "tipo_institucion": "gobierno",
+      "tema": "fds",
+      "titulo": "Fichas Internacionales de Seguridad Quimica (FISQ)",
+      "url": "https://www.insst.es/documentacion/colecciones-tecnicas/fisq",
+      "descripcion": "Version espanola de las ICSC. Buscable por numero FISQ, CAS, CE, ONU o nombre de la sustancia.",
+      "verificacion": "contenido_verificado",
+      "oficial": true
+    },
+    {
+      "id": "boe",
+      "pais": "espana",
+      "institucion": "Boletin Oficial del Estado (BOE)",
+      "tipo_institucion": "gobierno",
+      "tema": "legislacion",
+      "titulo": "Boletin Oficial del Estado",
+      "url": "https://www.boe.es/",
+      "descripcion": "Textos consolidados y vigentes de leyes, reales decretos y ordenes ministeriales.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "miteco-reach-clp",
+      "pais": "espana",
+      "institucion": "Ministerio para la Transicion Ecologica (MITECO)",
+      "tipo_institucion": "gobierno",
+      "tema": "legislacion",
+      "titulo": "Portal de informacion REACH-CLP",
+      "url": "https://www.miteco.gob.es/es/calidad-y-evaluacion-ambiental/temas/productos-quimicos/portal-reach-clp/",
+      "descripcion": "Registro, evaluacion, autorizacion y restriccion de sustancias quimicas; clasificacion, etiquetado y envasado.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "echa",
+      "pais": "espana",
+      "institucion": "Agencia Europea de Sustancias y Mezclas Quimicas (ECHA)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "legislacion",
+      "titulo": "Guías de orientacion sobre REACH y CLP",
+      "url": "https://echa.europa.eu/es/",
+      "descripcion": "Guías de aplicacion de los reglamentos REACH y CLP de la Union Europea.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "mitma-mercancias",
+      "pais": "espana",
+      "institucion": "Ministerio de Transportes y Movilidad Sostenible (MITMA)",
+      "tipo_institucion": "gobierno",
+      "tema": "transporte",
+      "titulo": "Transporte de mercancias peligrosas y perecederas",
+      "url": "https://www.mitma.es/transporte-terrestre/mercancias-peligrosas-y-perecederas",
+      "descripcion": "Normativa y gestion del transporte terrestre de mercancias peligrosas en Espana.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+
+    {
+      "id": "minambiente-clasificacion-sga",
+      "pais": "colombia",
+      "institucion": "Ministerio de Ambiente y Desarrollo Sostenible (MinAmbiente)",
+      "tipo_institucion": "gobierno",
+      "tema": "sga",
+      "titulo": "Guia de clasificacion de peligros segun el SGA (2017)",
+      "url": "https://quimicos.minambiente.gov.co/wp-content/uploads/2021/06/4.-Guia-de-clasificacion-de-peligros-segun-SGA-2017.pdf",
+      "descripcion": "Guia oficial colombiana para clasificar sustancias quimicas segun el SGA.",
+      "verificacion": "dominio_snippet",
+      "oficial": true,
+      "nota": "El PDF no es procesable por el lector automatico."
+    },
+    {
+      "id": "minambiente-comunicacion-sga",
+      "pais": "colombia",
+      "institucion": "Ministerio de Ambiente y Desarrollo Sostenible (MinAmbiente)",
+      "tipo_institucion": "gobierno",
+      "tema": "sga",
+      "titulo": "Guia de comunicacion de peligros segun el SGA (2017)",
+      "url": "https://quimicos.minambiente.gov.co/wp-content/uploads/2021/06/5.-Guia-de-comunicacion-de-peligros-segun-el-SGA-2017.pdf",
+      "descripcion": "Etiquetado, pictogramas, palabras de advertencia, frases H y P y fichas de datos de seguridad.",
+      "verificacion": "dominio_snippet",
+      "oficial": true,
+      "nota": "El PDF no es procesable por el lector automatico."
+    },
+    {
+      "id": "dapre-manipulacion-almacenamiento",
+      "pais": "colombia",
+      "institucion": "Departamento Administrativo de la Presidencia de la Republica (DAPRE)",
+      "tipo_institucion": "gobierno",
+      "tema": "legislacion",
+      "titulo": "Guia de manipulacion y almacenamiento de sustancias quimicas (G-TH-09)",
+      "url": "https://dapre.presidencia.gov.co/dapre/DocumentosSIGEPRE/G-TH-09-Guia-Manipulacion-Almacenamiento-Sustancias-Quimicas.pdf",
+      "descripcion": "Peligro quimico derivado de la manipulacion, uso, almacenamiento y transporte por parte de los operarios.",
+      "verificacion": "dominio_snippet",
+      "oficial": true,
+      "nota": "El PDF no es procesable por el lector automatico."
+    },
+    {
+      "id": "dimar-convenios",
+      "pais": "colombia",
+      "institucion": "Direccion General Maritima (DIMAR)",
+      "tipo_institucion": "gobierno",
+      "tema": "convenios",
+      "titulo": "Convenios internacionales implementados por Colombia",
+      "url": "https://www.dimar.mil.co/proteccion_del_medio_marino/convenios-internacionales",
+      "descripcion": "Convenios de la OMI aplicados por Colombia como Estado miembro.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+
+    {
+      "id": "dof-nom-005",
+      "pais": "mexico",
+      "institucion": "Diario Oficial de la Federacion / Secretaria del Trabajo y Prevision Social",
+      "tipo_institucion": "gobierno",
+      "tema": "legislacion",
+      "titulo": "NOM-005-STPS-1998 - Condiciones de seguridad e higiene para el manejo, transporte y almacenamiento de sustancias quimicas peligrosas",
+      "url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=2052048",
+      "descripcion": "Norma oficial mexicana sobre manejo, transporte y almacenamiento de sustancias quimicas peligrosas en los centros de trabajo.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "dof-nom-018",
+      "pais": "mexico",
+      "institucion": "Diario Oficial de la Federacion / Secretaria del Trabajo y Prevision Social",
+      "tipo_institucion": "gobierno",
+      "tema": "sga",
+      "titulo": "NOM-018-STPS-2015 - Sistema armonizado para la identificacion y comunicacion de peligros y riesgos",
+      "url": "https://dof.gob.mx/normasOficiales/9496/stps/stps.html",
+      "descripcion": "Implementacion del SGA en centros de trabajo en Mexico.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+
+    {
+      "id": "sinia-ley-28256",
+      "pais": "peru",
+      "institucion": "Sistema de Informacion Nacional de Ambiente del Ministerio del Ambiente (SINIA-MINAM)",
+      "tipo_institucion": "gobierno",
+      "tema": "legislacion",
+      "titulo": "Ley N 28256 - Ley que regula el transporte terrestre de materiales y residuos peligrosos",
+      "url": "https://sinia.minam.gob.pe/normas/ley-que-regula-transporte-terrestre-materiales-residuos-peligrosos",
+      "descripcion": "Ley peruana que regula el transporte terrestre de materiales y residuos peligrosos.",
+      "verificacion": "dominio_snippet",
+      "oficial": true,
+      "nota": "El sitio devuelve 403 al lector automatico."
+    },
+    {
+      "id": "sinia-reglamento-transporte",
+      "pais": "peru",
+      "institucion": "Sistema de Informacion Nacional de Ambiente del Ministerio del Ambiente (SINIA-MINAM)",
+      "tipo_institucion": "gobierno",
+      "tema": "transporte",
+      "titulo": "Reglamento Nacional de Transporte Terrestre de Materiales y Residuos Peligrosos",
+      "url": "https://sinia.minam.gob.pe/normas/aprueban-reglamento-nacional-transporte-terrestre-materiales-residuos",
+      "descripcion": "Reglamento que desarrolla la Ley 28256 en el Peru.",
+      "verificacion": "dominio_snippet",
+      "oficial": true,
+      "nota": "El sitio devuelve 403 al lector automatico."
+    },
+
+    {
+      "id": "asamblea-ley-55",
+      "pais": "venezuela",
+      "institucion": "Asamblea Nacional de Venezuela",
+      "tipo_institucion": "gobierno",
+      "tema": "legislacion",
+      "titulo": "Ley sobre Sustancias, Materiales y Desechos Peligrosos (Ley N 55, Gaceta Oficial 5.554 Extraordinario, 13/11/2001)",
+      "url": "https://www.asambleanacional.gob.ve/leyes/sancionadas/ley-sobre-sustancias-materiales-y-desechos-peligrosos",
+      "descripcion": "Regula la generacion, uso, recoleccion, almacenamiento, transporte, tratamiento y disposicion final de sustancias, materiales y desechos peligrosos.",
+      "verificacion": "dominio_snippet",
+      "oficial": true,
+      "nota": "El sitio no responde al lector automatico."
+    },
+    {
+      "id": "minec-marco-juridico",
+      "pais": "venezuela",
+      "institucion": "Ministerio del Poder Popular de Economia y Comercio (MINEC)",
+      "tipo_institucion": "gobierno",
+      "tema": "legislacion",
+      "titulo": "Marco juridico y registro de empresas manejadoras de sustancias peligrosas",
+      "url": "https://www.minec.gob.ve/minec/marco-juridico/",
+      "descripcion": "Ley N 55, decretos y tramite de registro y autorizacion de empresas manejadoras.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "intt-ntf-3060",
+      "pais": "venezuela",
+      "institucion": "Instituto Nacional de Transporte Terrestre (INTT)",
+      "tipo_institucion": "gobierno",
+      "tema": "transporte",
+      "titulo": "NTF 3060:2011 - Materiales peligrosos: clasificacion e identificacion para su transporte terrestre",
+      "url": "https://www.intt.gob.ve/wp-content/uploads/2026/08/ntf-3060-2011-materiales-peligrosos-clasificacion-e-identificacion-para-su-transporte-terrestre.pdf",
+      "descripcion": "Norma tecnica venezolana de clasificacion, simbolos y senales de identificacion.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "sencamer-covenin-2670",
+      "pais": "venezuela",
+      "institucion": "Servicio Autonomo Nacional de Normalizacion, Certificacion y Metrologia (SENCAMER)",
+      "tipo_institucion": "gobierno",
+      "tema": "transporte",
+      "titulo": "COVENIN 2670-2001 - Materiales peligrosos: guia de respuesta a emergencias",
+      "url": "https://sigbs.sencamer.gob.ve/cgi-bin/koha/opac-detail.pl?biblionumber=549",
+      "descripcion": "Guia de respuesta a emergencias para materiales peligrosos.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+    {
+      "id": "resquimc-normativas",
+      "pais": "venezuela",
+      "institucion": "Registro Nacional Unico de Operadores de Sustancias Quimicas Controladas (RESQUIMC)",
+      "tipo_institucion": "gobierno",
+      "tema": "legislacion",
+      "titulo": "Normativas legales vigentes de Venezuela",
+      "url": "https://www.resquimc.gob.ve/normativas-legales/",
+      "descripcion": "Regulacion vigente, gacetas oficiales y resoluciones obligatorias.",
+      "verificacion": "dominio_snippet",
+      "oficial": true
+    },
+
+    {
+      "id": "osha-sds-ejemplo",
+      "pais": "eeuu",
+      "institucion": "Occupational Safety and Health Administration (OSHA)",
+      "tipo_institucion": "gobierno",
+      "tema": "fds",
+      "titulo": "Ejemplo de Hoja de Datos de Seguridad",
+      "url": "https://www.osha.gov/sites/default/files/2022-01/Ejemplo%20de%20Hoja%20de%20Datos%20de%20Seguridad.pdf",
+      "descripcion": "Plantilla oficial estadounidense de hoja de datos de seguridad.",
+      "verificacion": "dominio_snippet",
+      "oficial": true,
+      "aplicable": false,
+      "nota": "Referencia complementaria. No es norma aplicable en los paises de este proyecto."
+    }
+  ]
+}

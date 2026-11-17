@@ -1,0 +1,67 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-11-17",
+  "descripcion": "Paises disponibles para seleccionar el marco legal. El flujo de la aplicacion es: pais -> apartado/tema -> sustancia.",
+  "paises": [
+    {
+      "id": "internacional",
+      "nombre": "Marco internacional",
+      "codigo": "INT",
+      "tipo": "global",
+      "descripcion": "SGA/GHS, convenios de la ONU y Reglamentacion Modelo para el Transporte de Mercancias Peligrosas. Aplica como base comun a todos los paises."
+    },
+    {
+      "id": "colombia",
+      "nombre": "Colombia",
+      "codigo": "CO",
+      "tipo": "nacional",
+      "descripcion": "Marco legal colombiano de sustancias peligrosas, residuos y transporte."
+    },
+    {
+      "id": "espana",
+      "nombre": "España",
+      "codigo": "ES",
+      "tipo": "nacional",
+      "bloque": "union_europea",
+      "descripcion": "Legislacion espanola de riesgos quimicos, PRL, REACH-CLP y transporte de mercancias peligrosas."
+    },
+    {
+      "id": "mexico",
+      "nombre": "México",
+      "codigo": "MX",
+      "tipo": "nacional",
+      "descripcion": "Normas Oficiales Mexicanas de la STPS y la SEMARNAT."
+    },
+    {
+      "id": "peru",
+      "nombre": "Perú",
+      "codigo": "PE",
+      "tipo": "nacional",
+      "descripcion": "Normativa del MINAM sobre materiales y residuos peligrosos y su transporte terrestre."
+    },
+    {
+      "id": "venezuela",
+      "nombre": "Venezuela",
+      "codigo": "VE",
+      "tipo": "nacional",
+      "descripcion": "Ley sobre Sustancias, Materiales y Desechos Peligrosos y normativa tecnica de transporte."
+    },
+    {
+      "id": "cuba",
+      "nombre": "Cuba",
+      "codigo": "CU",
+      "tipo": "nacional",
+      "origen_legislacion": "base_local_usuario",
+      "estado": "pendiente_importacion",
+      "descripcion": "El usuario dispone de la legislacion cubana completa en una base local. No se realizan busquedas web para este pais; la base se importara cuando se defina su formato."
+    },
+    {
+      "id": "eeuu",
+      "nombre": "Estados Unidos",
+      "codigo": "US",
+      "tipo": "referencia",
+      "aplicable": false,
+      "descripcion": "Referencia complementaria (OSHA). No es marco aplicable en los paises del proyecto."
+    }
+  ]
+}
