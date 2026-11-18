@@ -112,6 +112,14 @@ SQLite se compila incluida (`bundled`) y el frontend se compila a WebAssembly, d
 - **Cuba** — normas de la Gaceta Oficial localizadas en la base del usuario e incluidas en `data/leyes/cuba/`.
 - **Estados Unidos** — referencia complementaria (OSHA), no marco aplicable.
 
+## Publicación en GitHub Pages
+
+El repositorio es público. El despliegue de la app Dioxus está automatizado en `.github/workflows/deploy-pages.yml`: cada `push` a `main` compila el WASM con `dx build --release` y publica el resultado en GitHub Pages.
+
+Paso único en el repositorio: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Después de eso, el workflow se ejecuta solo y la URL queda en **Settings → Pages**.
+
+También se puede lanzar a mano desde la pestaña **Actions → Deploy Dioxus a GitHub Pages → Run workflow**.
+
 ## Acceso a las leyes cubanas
 
 El usuario final no necesita la carpeta local. Al seleccionar **Cuba**, el panel de marco legal muestra cada norma con:

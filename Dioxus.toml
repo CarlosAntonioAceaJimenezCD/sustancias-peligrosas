@@ -1,0 +1,19 @@
+[application]
+name = "sustancias-web"
+default_platform = "web"
+
+[web.app]
+title = "Sustancias Peligrosas"
+base_path = "sustancias-peligrosas"
+
+[web.watcher]
+reload_html = true
+watch_path = ["crates/web/src", "data"]
+
+[web.resource]
+style = []
+script = []
+
+[web.resource.dev]
+style = []
+script = []
