@@ -163,6 +163,7 @@ Las 6 fichas actuales son de demostración. Para incorporar una sustancia verifi
    - `fuentes`: array de `{"titulo", "url"}` apuntando a ICSC/OIT, INSST, ECHA o el fabricante.
    - `secciones`: array con las **16 secciones** del SGA (`numero`, `id`, `titulo`, `texto`, `campos`, `listas`, `notas`).
    - **`estado: "verificado"`** (esto cambia la insignia a "FDS VERIFICADA"). Opcional: `verificado_por`, `fecha_verificacion`.
+   - Si tienes la FDS en PDF, añade `pdf_url` (URL pública del archivo) y `pdf_nombre` (nombre sugerido de descarga). Aparecerá el botón **"Descargar FDS en PDF"**.
    - Si se omite `estado` o es `"demo"`, la app muestra "DEMO · 16 SECCIONES".
 
 2. Regenera los datos de la vista previa (el bloque `python3` de la sección "Vista previa").
@@ -176,6 +177,12 @@ cargo run -p sustancias-dbtool -- build
 4. Haz `push` a `main`: GitHub Pages recompila la app Dioxus automáticamente.
 
 Si la sustancia nueva no tiene reglas en `data/interactions.json`, el analizador aplica la **regla general** de "sin reacción registrada", que advierte no asumir compatibilidad. Para reacciones concretas, añade pares al array `interacciones` con `sustancias: [id_a, id_b]`, `nivel`, `tipo`, `descripcion`, `productos`, `consecuencias` y `acciones`.
+
+## Descarga de documentos
+
+- **Leyes cubanas**: el lector de normas muestra *Abrir PDF original* y *Descargar PDF*. La descarga usa `fetch` + `blob` (el hosting `raw.githubusercontent.com` permite CORS), con el nombre de archivo de la Gaceta.
+- **Fichas de sustancias**: si la sustancia tiene `pdf_url`, aparece *Descargar FDS en PDF*. Para las fichas sin PDF (como las de demostración) existe *Guardar ficha como PDF (imprimir)*, que abre el diálogo de impresión del navegador con una hoja de estilo que oculta paneles, menús y botones, dejando solo la ficha de 16 secciones.
+- La aplicación Dioxus realiza la misma descarga ejecutando el patrón `fetch`/`blob` desde Rust mediante `dioxus::document::eval`.
 
 ## Pendiente
 

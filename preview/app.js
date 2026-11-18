@@ -3,6 +3,25 @@
 const $ = (id) => document.getElementById(id);
 const icon = (name, cls = "ico") => `<svg class="${cls}"><use href="#i-${name}"/></svg>`;
 
+async function descargarArchivo(url, nombre) {
+  if (!url) return;
+  const nombreFinal = nombre || url.split("/").pop().split("?")[0] || "documento.pdf";
+  try {
+    const respuesta = await fetch(url);
+    if (!respuesta.ok) throw new Error("HTTP " + respuesta.status);
+    const blob = await respuesta.blob();
+    const enlace = document.createElement("a");
+    enlace.href = URL.createObjectURL(blob);
+    enlace.download = nombreFinal;
+    document.body.appendChild(enlace);
+    enlace.click();
+    enlace.remove();
+    setTimeout(() => URL.revokeObjectURL(enlace.href), 2000);
+  } catch (error) {
+    window.open(url, "_blank", "noopener");
+  }
+}
+
 const I18N = {
   es: {
     select_country: "Selecciona tu país",
@@ -246,11 +265,15 @@ function abrirNorma(id) {
   ].filter(Boolean).join(" · ");
   $("norma-texto").textContent = norma.texto;
   const pdf = $("norma-pdf");
+  const descargar = $("norma-descargar");
   if (norma.url) {
     pdf.href = norma.url;
     pdf.classList.remove("oculto");
+    descargar.classList.remove("oculto");
+    descargar.onclick = () => descargarArchivo(norma.url, norma.pdf_nombre);
   } else {
     pdf.classList.add("oculto");
+    descargar.classList.add("oculto");
   }
   $("norma-modal").classList.remove("oculto");
 }
@@ -369,7 +392,21 @@ function renderFicha() {
         ${(sec.listas || []).map((l) => `<p class="lista-titulo">${esc(l.titulo)}</p><ul class="lista">${l.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>`).join("")}
         ${(sec.notas || []).map((n) => `<p class="nota">${icon("info")}${esc(n)}</p>`).join("")}
       </div>`).join("")}
+    <div class="seccion documentos">
+      <h5>Documentos y descarga</h5>
+      <p>Guarda esta ficha o descarga el documento PDF original cuando esté disponible.</p>
+      <div class="documentos-acciones">
+        ${s.pdf_url ? `<button class="boton boton-descargar" data-descarga="${esc(s.pdf_url)}" data-nombre="${esc(s.pdf_nombre || s.id + ".pdf")}">${icon("download")}Descargar FDS en PDF</button>` : ""}
+        <button class="boton boton-secundario" id="imprimir-ficha">${icon("file")}Guardar ficha como PDF (imprimir)</button>
+      </div>
+    </div>
   `;
+
+  $("ficha").querySelectorAll("[data-descarga]").forEach((btn) => {
+    btn.addEventListener("click", () => descargarArchivo(btn.dataset.descarga, btn.dataset.nombre));
+  });
+  const imprimir = $("imprimir-ficha");
+  if (imprimir) imprimir.addEventListener("click", () => window.print());
 }
 
 /* --- Multi sustancia: análisis de reacciones ---------------------------- */

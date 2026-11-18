@@ -115,6 +115,8 @@ pub struct Instrument {
     pub paginas: String,
     #[serde(default)]
     pub texto: String,
+    #[serde(default)]
+    pub pdf_nombre: String,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -245,6 +247,10 @@ pub struct Substance {
     #[serde(default)]
     pub fecha_verificacion: String,
     #[serde(default)]
+    pub pdf_url: String,
+    #[serde(default)]
+    pub pdf_nombre: String,
+    #[serde(default)]
     pub palabra_advertencia: String,
     #[serde(default)]
     pub secciones: Vec<FdsSection>,
@@ -365,6 +371,20 @@ pub fn instruments_for(country_id: &str) -> Vec<Instrument> {
 /// Base de interacciones entre sustancias.
 pub fn interactions_db() -> InteractionsDb {
     parse::<InteractionsDb>(INTERACTIONS_JSON)
+}
+
+/// Nombre de archivo sugerido para descargar un PDF.
+pub fn pdf_filename(url: &str, fallback: &str) -> String {
+    if !fallback.is_empty() {
+        return fallback.to_string();
+    }
+    url.rsplit('/')
+        .next()
+        .unwrap_or(fallback)
+        .split('?')
+        .next()
+        .unwrap_or(fallback)
+        .to_string()
 }
 
 /// Indica si una ficha ha sido verificada frente a fuentes oficiales.

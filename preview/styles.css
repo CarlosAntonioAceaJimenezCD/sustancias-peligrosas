@@ -507,7 +507,25 @@ body {
   color: #b9c3ce;
   margin: 0 0 14px;
 }
-.norma-modal .boton { align-self: flex-start; text-decoration: none; }
+.norma-modal .boton { text-decoration: none; }
+.norma-acciones { display: flex; gap: 8px; flex-wrap: wrap; }
+.boton-descargar { background: #1f6feb; border-color: #388bfd; }
+.boton-descargar:hover { background: #388bfd; }
+.boton-secundario { background: var(--card-alt); color: var(--ink); border: 1px solid var(--line); }
+.boton-secundario:hover { border-color: #6e7681; }
+.documentos-acciones { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.documentos-acciones .boton { text-decoration: none; }
+
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  .cabecera, .banner, #panel-legal, .multi, .movil-tabs, .pie, .flotante,
+  .fds-index, .documentos, .overlay { display: none !important; }
+  .contenido { display: block; margin: 0; padding: 0; }
+  #panel-sustancia { border: 0; box-shadow: none; padding: 0; }
+  .seccion { break-inside: avoid; }
+  .seccion h5 { color: #0550ae; }
+  .prop, .interaccion { background: #fff; border-color: #ccc; }
+}
 .leer-norma { margin-top: 8px; background: var(--card-alt); color: var(--accent); border: 1px solid var(--line); }
 .leer-norma:hover { border-color: var(--accent); }
 

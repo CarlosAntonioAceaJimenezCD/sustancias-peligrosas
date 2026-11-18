@@ -146,6 +146,17 @@ font-size:11px;line-height:1.55;color:#b9c3ce;margin:0 0 14px}
 .interaccion-tipo{font-size:11px;color:var(--accent);margin:5px 0 7px;font-weight:600}
 .interaccion p{margin:0 0 7px;font-size:11px;line-height:1.55;color:#b9c3ce}
 .interaccion .lista{margin-bottom:6px}.interaccion-productos b{color:var(--purple)}
+.norma-acciones{display:flex;gap:8px;flex-wrap:wrap}
+.norma-modal .boton{text-decoration:none}
+.boton-descargar{background:#1f6feb;border-color:#388bfd}.boton-descargar:hover{background:#388bfd}
+.boton-secundario{background:var(--card-alt);color:var(--ink);border:1px solid var(--line)}
+.boton-secundario:hover{border-color:#6e7681}
+.documentos-acciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.documentos-acciones .boton{text-decoration:none}
+@media print{body{background:#fff!important;color:#000!important}
+.cabecera,.banner,#panel-legal,.multi,.movil-tabs,.pie,.flotante,.fds-index,.documentos,.overlay{display:none!important}
+.contenido{display:block;margin:0;padding:0}#panel-sustancia{border:0;box-shadow:none;padding:0}
+.seccion{break-inside:avoid}.seccion h5{color:#0550ae}.prop,.interaccion{background:#fff;border-color:#ccc}}
 .movil-tabs{display:none}
 @media(max-width:900px){
 .cabecera{padding:12px 16px}.marca-icono{width:32px;height:32px}.marca strong{font-size:14px}.marca small{font-size:10px}
@@ -183,6 +194,7 @@ fn icon(name: &str, class: &str) -> String {
         "alert" => ("0 0 24 24", r#"<path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><path d="M12 9v5M12 17h.01"/>"#),
         "file" => ("0 0 24 24", r#"<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M16 13H8M16 17H8M10 9H8"/>"#),
         "link" => ("0 0 24 24", r#"<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><path d="M10 14L21 3"/>"#),
+        "download" => ("0 0 24 24", r#"<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><path d="M12 15V3"/>"#),
         "book" => ("0 0 24 24", r#"<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>"#),
         "filter" => ("0 0 24 24", r#"<polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>"#),
         "check" => ("0 0 24 24", r#"<path d="M20 6L9 17l-5-5"/>"#),
@@ -191,6 +203,13 @@ fn icon(name: &str, class: &str) -> String {
         _ => ("0 0 24 24", ""),
     };
     format!("<svg class=\"{}\" viewBox=\"{}\">{}</svg>", class, view, body)
+}
+
+/// Genera JavaScript para descargar un PDF mediante fetch + blob.
+fn js_descargar(url: &str, nombre: &str) -> String {
+    format!(
+        r#"(async()=>{{const r=await fetch({url:?});const b=await r.blob();const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download={nombre:?};document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}})();"#
+    )
 }
 
 fn txt(key: &str, lang: &str) -> &'static str {
@@ -237,7 +256,7 @@ fn App() -> Element {
     let mut multi_input: Signal<String> = use_signal(String::new);
     let mut multi_ids: Signal<Vec<String>> = use_signal(Vec::new);
     let mut movil_tab: Signal<&'static str> = use_signal(|| "legal");
-    let mut norma: Signal<Option<(String, String, String, String)>> = use_signal(|| None);
+    let mut norma: Signal<Option<(String, String, String, String, String)>> = use_signal(|| None);
 
     let country = selected_id()
         .and_then(|id| core::country_by_id(&id))
@@ -422,7 +441,8 @@ fn App() -> Element {
                                             let meta = format!("Páginas {} de la Gaceta Oficial", i.paginas);
                                             let texto = i.texto.clone();
                                             let url = i.url.clone();
-                                            move |_| norma.set(Some((titulo.clone(), meta.clone(), texto.clone(), url.clone())))
+                                            let nombre = core::pdf_filename(&i.url, &i.pdf_nombre);
+                                            move |_| norma.set(Some((titulo.clone(), meta.clone(), texto.clone(), url.clone(), nombre.clone())))
                                         },
                                         dangerous_inner_html: "{icon(\"book\", \"ico\")}",
                                         "Leer norma íntegra"
@@ -617,6 +637,35 @@ fn App() -> Element {
                                 a { href: "{f.url}", target: "_blank", "{f.titulo}" }
                             }
                         }
+                        div { class: "seccion documentos",
+                            h5 { "Documentos y descarga" }
+                            p { "Guarda esta ficha o descarga el documento PDF original cuando esté disponible." }
+                            div { class: "documentos-acciones",
+                                if !s.pdf_url.is_empty() {
+                                    button {
+                                        class: "boton boton-descargar",
+                                        onclick: {
+                                            let url = s.pdf_url.clone();
+                                            let nombre = core::pdf_filename(&s.pdf_url, &s.pdf_nombre);
+                                            move |_| {
+                                                let js = js_descargar(&url, &nombre);
+                                                dioxus::document::eval(&js);
+                                            }
+                                        },
+                                        dangerous_inner_html: "{icon(\"download\", \"ico\")}",
+                                        "Descargar FDS en PDF"
+                                    }
+                                }
+                                button {
+                                    class: "boton boton-secundario",
+                                    onclick: move |_| {
+                                        dioxus::document::eval("window.print()");
+                                    },
+                                    dangerous_inner_html: "{icon(\"file\", \"ico\")}",
+                                    "Guardar ficha como PDF (imprimir)"
+                                }
+                            }
+                        }
                     } else {
                         div { class: "ficha-vacia",
                             span { dangerous_inner_html: "{icon(\"file\", \"ico ico-xl\")}" }
@@ -628,7 +677,7 @@ fn App() -> Element {
             }
         }
 
-        if let Some((titulo, meta, texto, url)) = norma() {
+        if let Some((titulo, meta, texto, url, nombre_pdf)) = norma() {
             div { class: "overlay",
                 div { class: "overlay-card norma-modal",
                     button {
@@ -639,12 +688,23 @@ fn App() -> Element {
                     h2 { "{titulo}" }
                     p { "{meta}" }
                     pre { class: "norma-texto", "{texto}" }
-                    a {
-                        class: "boton",
-                        href: "{url}",
-                        target: "_blank",
-                        dangerous_inner_html: "{icon(\"link\", \"ico\")}",
-                        "Abrir PDF original"
+                    div { class: "norma-acciones",
+                        a {
+                            class: "boton",
+                            href: "{url}",
+                            target: "_blank",
+                            dangerous_inner_html: "{icon(\"link\", \"ico\")}",
+                            "Abrir PDF original"
+                        }
+                        button {
+                            class: "boton boton-descargar",
+                            onclick: move |_| {
+                                let js = js_descargar(&url, &nombre_pdf);
+                                dioxus::document::eval(&js);
+                            },
+                            dangerous_inner_html: "{icon(\"download\", \"ico\")}",
+                            "Descargar PDF"
+                        }
                     }
                 }
             }
