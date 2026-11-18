@@ -94,6 +94,18 @@ El usuario dispone de la **base de legislación cubana completa en local**. No s
 |---|---|---|
 | OSHA (EE. UU.) | Ejemplo de Hoja de Datos de Seguridad | https://www.osha.gov/sites/default/files/2022-01/Ejemplo%20de%20Hoja%20de%20Datos%20de%20Seguridad.pdf |
 
+## Enlaces legislativos directos verificados con scraper
+
+Se sustituyeron varios enlaces de portal por URLs directas, confirmadas con HTTP 200 y título coincidente:
+
+- **Colombia**: Decreto 4741/2005 (Minvivienda, ANLA) y Decreto 1079/2015 (MinTransporte).
+- **España**: RD 97/2014, Ley 9/2013, RD 656/2017 (vigente) y RD 379/2001 (histórico) en BOE; Directiva 2008/68/CE en EUR-Lex y versión española en BOE; portal de normativa vigente del MITMA.
+- **México**: NOM-005-STPS-1998 en DOF y LGPGIR en PROFEPA.
+- **Perú**: Ley 28256 en la Plataforma del Estado Peruano (`gob.pe`), con SINIA-MINAM como alternativa.
+- **Venezuela**: Ley N° 55 en la Asamblea Nacional.
+
+Aun con 403: UNECE, SINIA-MINAM y ECHA. Con timeout: chemicalsafety.com y `diputados.gob.mx`.
+
 ## Fuentes de datos de sustancias (decisión del usuario)
 
 El usuario aceptó estas fuentes como **fuente de datos de sustancias y FDS**. Las que no son gubernamentales **no se usan como fuente normativa oficial**.

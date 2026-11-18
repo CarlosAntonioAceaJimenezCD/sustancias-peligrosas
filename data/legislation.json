@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "updated": "2026-11-17",
-  "nota_metodologica": "Enlaces a portales e instrumentos oficiales por pais. Los registros con verificacion 'contenido_verificado' fueron abiertos y confirmados. Los de 'dominio_snippet' se confirmaron por dominio gubernamental y resultado de busqueda. Los de 'portal_validar' son URLs canonicas de portales oficiales que deben ser confirmadas en navegador antes de publicarse. Cuba se alimenta de la base local del usuario y no se busca en internet.",
+  "nota_metodologica": "Enlaces a portales e instrumentos oficiales por pais. Los registros con verificacion 'contenido_verificado' fueron abiertos y confirmados, la mayoria con el scraper local (scrapling/curl_cffi con impersonacion chrome120) sobre DuckDuckGo y las propias paginas oficiales. Los de 'dominio_snippet' se confirmaron por dominio gubernamental y resultado de busqueda. Los de 'portal_validar' son URLs canonicas pendientes de confirmacion. Cuba se alimenta de la base local del usuario y no se busca en internet.",
   "verificaciones": {
     "contenido_verificado": "Pagina abierta y contenido confirmado",
     "dominio_snippet": "Dominio gubernamental confirmado + resultado de busqueda; el sitio bloquea al lector automatico",
@@ -35,9 +35,18 @@
           "id": "co-decreto-4741-2005",
           "titulo": "Decreto 4741 de 2005 - Reglamento para la gestion de residuos peligrosos",
           "tema": "legislacion",
-          "url": "https://www.suin-juriscol.gov.co/",
-          "verificacion": "portal_validar",
-          "nota": "Buscar el numero de decreto en SUIN-Juriscol; no se encontro URL directa verificada."
+          "url": "https://www.minvivienda.gov.co/normativa/decreto-4741-2005",
+          "verificacion": "contenido_verificado",
+          "alternativas": [
+            "https://www.anla.gov.co/wanla/eureka/normativa/decretos/decreto-reglamentario-4741-de-2005-gestion-integral-de-los-residuos-o-desechos-peligrosos-residuos-peligrosos-repsel"
+          ]
+        },
+        {
+          "id": "co-decreto-1079-2015",
+          "titulo": "Decreto 1079 de 2015 - Decreto Unico Reglamentario del Sector Transporte",
+          "tema": "transporte",
+          "url": "https://mintransporte.gov.co/documentos/593/decreto-1079-de-2015-unico-reglamentario-del-sector-transporte/",
+          "verificacion": "contenido_verificado"
         },
         {
           "id": "co-guia-sga-clasificacion",
@@ -120,12 +129,52 @@
           "verificacion": "dominio_snippet"
         },
         {
+          "id": "es-rd-97-2014",
+          "titulo": "Real Decreto 97/2014, operaciones de transporte de mercancias peligrosas por carretera en territorio espanol",
+          "tema": "transporte",
+          "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2014-2110",
+          "verificacion": "contenido_verificado"
+        },
+        {
+          "id": "es-ley-9-2013",
+          "titulo": "Ley 9/2013, modificacion de la Ley 16/1987 de Ordenacion de los Transportes Terrestres (sanciones mercancias peligrosas)",
+          "tema": "transporte",
+          "url": "https://www.boe.es/buscar/act.php?id=BOE-A-2013-7320",
+          "verificacion": "contenido_verificado"
+        },
+        {
+          "id": "es-rd-656-2017",
+          "titulo": "Real Decreto 656/2017, Reglamento de Almacenamiento de Productos Quimicos y sus ITC (norma vigente)",
+          "tema": "legislacion",
+          "url": "https://www.boe.es/diario_boe/txt.php?id=BOE-A-2017-8755",
+          "verificacion": "contenido_verificado",
+          "nota": "Sustituye al Real Decreto 379/2001."
+        },
+        {
+          "id": "es-rd-379-2001",
+          "titulo": "Real Decreto 379/2001, Reglamento de almacenamiento de productos quimicos y sus ITC (historico)",
+          "tema": "legislacion",
+          "url": "https://www.boe.es/buscar/doc.php?id=BOE-A-2001-8971",
+          "verificacion": "contenido_verificado",
+          "nota": "Referencia historica; consultar RD 656/2017 como norma vigente."
+        },
+        {
           "id": "es-directiva-2008-68-ce",
           "titulo": "Directiva 2008/68/CE del Parlamento Europeo y del Consejo, transporte terrestre de mercancias peligrosas",
           "tema": "transporte",
-          "url": "https://eur-lex.europa.eu/",
-          "verificacion": "portal_validar",
-          "nota": "Buscar el numero de directiva en EUR-Lex; no se encontro URL directa verificada."
+          "url": "https://eur-lex.europa.eu/eli/dir/2008/68/oj/eng",
+          "verificacion": "contenido_verificado",
+          "alternativas": [
+            "https://www.boe.es/buscar/doc.php?id=DOUE-L-2008-81911"
+          ]
+        },
+        {
+          "id": "es-portal-normativa-mitma",
+          "titulo": "Normativa vigente de transporte de mercancias peligrosas y perecederas (MITMA)",
+          "tema": "transporte",
+          "url": "https://www.transportes.gob.es/transporte-terrestre/normativa/normativa-vigente-transporte-de-mercancias-peligrosas-y-perecederas",
+          "verificacion": "contenido_verificado",
+          "tipo": "portal"
         }
       ]
     },
@@ -162,7 +211,8 @@
           "titulo": "NOM-005-STPS-1998 - Condiciones de seguridad e higiene para el manejo, transporte y almacenamiento de sustancias quimicas peligrosas",
           "tema": "legislacion",
           "url": "https://dof.gob.mx/nota_detalle_popup.php?codigo=2052048",
-          "verificacion": "dominio_snippet"
+          "verificacion": "contenido_verificado",
+          "nota": "Accedido con scraper (HTTP 200, titulo DOF - Diario Oficial de la Federacion)."
         },
         {
           "id": "mx-nom-018-stps-2015",
@@ -170,6 +220,14 @@
           "tema": "sga",
           "url": "https://dof.gob.mx/normasOficiales/9496/stps/stps.html",
           "verificacion": "dominio_snippet"
+        },
+        {
+          "id": "mx-lgpgir",
+          "titulo": "Ley General para la Prevencion y Gestion Integral de los Residuos",
+          "tema": "legislacion",
+          "url": "https://www.gob.mx/profepa/documentos/ley-general-para-la-prevencion-y-gestion-integral-de-los-residuos-62914",
+          "verificacion": "contenido_verificado",
+          "nota": "Texto publicado por la Procuraduria Federal de Proteccion al Ambiente. El sitio de la Camara de Diputados (diputados.gob.mx) dio timeout en esta sesion."
         }
       ]
     },
@@ -199,8 +257,11 @@
           "id": "pe-ley-28256",
           "titulo": "Ley N 28256 - Transporte terrestre de materiales y residuos peligrosos",
           "tema": "legislacion",
-          "url": "https://sinia.minam.gob.pe/normas/ley-que-regula-transporte-terrestre-materiales-residuos-peligrosos",
-          "verificacion": "dominio_snippet"
+          "url": "https://www.gob.pe/institucion/minam/normas-legales/3597-28256",
+          "verificacion": "contenido_verificado",
+          "alternativas": [
+            "https://sinia.minam.gob.pe/normas/ley-que-regula-transporte-terrestre-materiales-residuos-peligrosos"
+          ]
         },
         {
           "id": "pe-reglamento-transporte",
@@ -273,7 +334,7 @@
           "titulo": "Ley sobre Sustancias, Materiales y Desechos Peligrosos (Ley N 55, Gaceta Oficial 5.554 Extraordinario, 13/11/2001)",
           "tema": "legislacion",
           "url": "https://www.asambleanacional.gob.ve/leyes/sancionadas/ley-sobre-sustancias-materiales-y-desechos-peligrosos",
-          "verificacion": "dominio_snippet"
+          "verificacion": "contenido_verificado"
         },
         {
           "id": "ve-decreto-2635",
