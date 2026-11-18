@@ -94,6 +94,17 @@ El usuario dispone de la **base de legislación cubana completa en local**. No s
 |---|---|---|
 | OSHA (EE. UU.) | Ejemplo de Hoja de Datos de Seguridad | https://www.osha.gov/sites/default/files/2022-01/Ejemplo%20de%20Hoja%20de%20Datos%20de%20Seguridad.pdf |
 
+## Fuentes de referencia (decisión del usuario)
+
+Aunque son agregadores comerciales, el usuario decidió aceptarlos **como referencia de datos**. No se usan como fuente normativa oficial.
+
+| Fuente | Contenido | URL | Verificación |
+|---|---|---|---|
+| Chemical Safety | Buscador de FDS de múltiples fabricantes | https://chemicalsafety.com/es/sds-search-page-es/ | `dominio_snippet` — acceso fallido por timeout en esta sesión; reintentar |
+| SDS Manager | Biblioteca online de FDS, búsqueda por CAS y código de barras | https://sdsmanager.es/search/ | `contenido_verificado` — HTTP 200 con scraper |
+
+También se usa como referencia `find_sds` (https://github.com/khoivan88/find_sds): consulta por CAS a ChemBlink, VWR, Fisher Scientific, TCI Chemicals, ChemicalSafety y Fluorochem. No incluye base de datos propia; descarga los PDF a una carpeta local.
+
 ## Fuentes rechazadas
 
 | Fuente | Motivo | Reemplazo oficial |
@@ -105,7 +116,7 @@ El usuario dispone de la **base de legislación cubana completa en local**. No s
 | Wikipedia | No oficial | — |
 | Prezi, Scribd | Repositorios de presentaciones | — |
 | preciocombustible, simcoconsulting, sparxlogistics, Savino Del Bene, DSV, terminal98 | Blogs y empresas de logística | — |
-| chemicalsafety.com, sdsmanager.es | Agregadores comerciales de FDS | INSST FISQ / OIT ICSC |
+| chemicalsafety.com, sdsmanager.es | Agregadores comerciales de FDS | Aceptados como referencia por decisión del usuario (ver sección "Fuentes de referencia") |
 
 ## Limitaciones de la búsqueda
 

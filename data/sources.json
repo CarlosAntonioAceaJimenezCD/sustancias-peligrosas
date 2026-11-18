@@ -395,6 +395,36 @@
     },
 
     {
+      "id": "chemicalsafety-com",
+      "pais": "internacional",
+      "institucion": "Chemical Safety (chemicalsafety.com)",
+      "tipo_institucion": "agregador_comercial",
+      "tema": "fds",
+      "titulo": "Base de datos de fichas de datos de seguridad (SDS) de fabricantes",
+      "url": "https://chemicalsafety.com/es/sds-search-page-es/",
+      "descripcion": "Buscador de FDS de multiples fabricantes. Usado como una de las fuentes del repo find_sds.",
+      "verificacion": "dominio_snippet",
+      "oficial": false,
+      "categoria": "referencia",
+      "aplicable": true,
+      "nota": "Agregador comercial aceptado por decision del usuario como referencia de datos, no como fuente normativa oficial. Acceso fallido en esta sesion (timeout de conexion); reintentar mas tarde."
+    },
+    {
+      "id": "sdsmanager-es",
+      "pais": "internacional",
+      "institucion": "SDS Manager (sdsmanager.es)",
+      "tipo_institucion": "agregador_comercial",
+      "tema": "fds",
+      "titulo": "Biblioteca online de fichas de seguridad",
+      "url": "https://sdsmanager.es/search/",
+      "descripcion": "Biblioteca de FDS con busqueda por nombre, CAS y codigo de barras, gestion de versiones y acceso por QR.",
+      "verificacion": "contenido_verificado",
+      "oficial": false,
+      "categoria": "referencia",
+      "aplicable": true,
+      "nota": "Agregador comercial aceptado por decision del usuario como referencia de datos, no como fuente normativa oficial. Pagina abierta y verificada con scraper (HTTP 200)."
+    },
+    {
       "id": "osha-sds-ejemplo",
       "pais": "eeuu",
       "institucion": "Occupational Safety and Health Administration (OSHA)",
