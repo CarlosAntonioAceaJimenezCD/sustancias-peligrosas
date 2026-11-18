@@ -559,13 +559,23 @@ fn App() -> Element {
                     if let Some(s) = active_substance {
                         div { class: "ficha-titulo",
                             h4 { "{s.nombre}" }
-                            span { class: "badge badge-demo", "FDS · 16 SECCIONES" }
+                            if core::substance_is_verified(&s) {
+                                span { class: "badge badge-ok", "FDS VERIFICADA" }
+                            } else {
+                                span { class: "badge badge-demo", "DEMO · 16 SECCIONES" }
+                            }
                         }
                         div { class: "identificadores",
                             span { class: "ident", "CAS {s.cas}" }
                             span { class: "ident", "CE {s.ce}" }
                             span { class: "ident", "ONU {s.onu}" }
                             span { class: "ident", "{s.palabra_advertencia}" }
+                            if !s.fecha_verificacion.is_empty() {
+                                span { class: "ident", "Verificada: {s.fecha_verificacion}" }
+                            }
+                            if !s.verificado_por.is_empty() {
+                                span { class: "ident", "Por: {s.verificado_por}" }
+                            }
                         }
                         div { class: "fds-index",
                             for sec in s.secciones.iter() {

@@ -241,6 +241,10 @@ pub struct Substance {
     #[serde(default)]
     pub estado: String,
     #[serde(default)]
+    pub verificado_por: String,
+    #[serde(default)]
+    pub fecha_verificacion: String,
+    #[serde(default)]
     pub palabra_advertencia: String,
     #[serde(default)]
     pub secciones: Vec<FdsSection>,
@@ -361,6 +365,11 @@ pub fn instruments_for(country_id: &str) -> Vec<Instrument> {
 /// Base de interacciones entre sustancias.
 pub fn interactions_db() -> InteractionsDb {
     parse::<InteractionsDb>(INTERACTIONS_JSON)
+}
+
+/// Indica si una ficha ha sido verificada frente a fuentes oficiales.
+pub fn substance_is_verified(s: &Substance) -> bool {
+    s.estado == "verificado"
 }
 
 /// Advertencia sobre el uso de las interacciones.

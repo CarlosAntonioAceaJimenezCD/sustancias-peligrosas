@@ -5452,7 +5452,7 @@ window.DATA = {
       "palabra_advertencia": "Peligro"
     }
   ],
-  "warning": "FICHAS DE DEMOSTRACIÓN CON ESTRUCTURA COMPLETA DE 16 SECCIONES (SGA/GHS, Anexo 4). Los datos deben verificarse en las fuentes oficiales antes de cualquier uso real.",
+  "warning": " Las fichas marcadas como DEMO son ejemplos con estructura completa de 16 secciones (SGA/GHS, Anexo 4) y requieren verificación. Las marcadas como FDS VERIFICADA enlazan a su fuente oficial. Revísalas siempre antes de un uso real.",
   "interactions": {
     "version": "1.0.0",
     "updated": "2026-11-18",

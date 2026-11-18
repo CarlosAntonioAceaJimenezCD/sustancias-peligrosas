@@ -154,6 +154,29 @@ Por plataforma:
 
 Opcional: `wasm-opt` (Binaryen) para optimizar el bundle WASM, y `wasm-bindgen` (lo gestiona `dioxus-cli`).
 
+## Añadir una sustancia real (no demo)
+
+Las 6 fichas actuales son de demostración. Para incorporar una sustancia verificada:
+
+1. Añade un objeto a `data/substances.json` con la misma estructura:
+   - Identificadores: `id`, `nombre`, `sinonimos`, `cas`, `ce`, `onu`, `formula`.
+   - `fuentes`: array de `{"titulo", "url"}` apuntando a ICSC/OIT, INSST, ECHA o el fabricante.
+   - `secciones`: array con las **16 secciones** del SGA (`numero`, `id`, `titulo`, `texto`, `campos`, `listas`, `notas`).
+   - **`estado: "verificado"`** (esto cambia la insignia a "FDS VERIFICADA"). Opcional: `verificado_por`, `fecha_verificacion`.
+   - Si se omite `estado` o es `"demo"`, la app muestra "DEMO · 16 SECCIONES".
+
+2. Regenera los datos de la vista previa (el bloque `python3` de la sección "Vista previa").
+
+3. Reconstruye la base SQLite:
+
+```bash
+cargo run -p sustancias-dbtool -- build
+```
+
+4. Haz `push` a `main`: GitHub Pages recompila la app Dioxus automáticamente.
+
+Si la sustancia nueva no tiene reglas en `data/interactions.json`, el analizador aplica la **regla general** de "sin reacción registrada", que advierte no asumir compatibilidad. Para reacciones concretas, añade pares al array `interacciones` con `sustancias: [id_a, id_b]`, `nivel`, `tipo`, `descripcion`, `productos`, `consecuencias` y `acciones`.
+
 ## Pendiente
 
 - Sustituir las fichas de demostración por fichas verificadas en fuentes oficiales.

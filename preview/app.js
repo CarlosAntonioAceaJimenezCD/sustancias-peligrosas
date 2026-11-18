@@ -342,16 +342,23 @@ function renderFicha() {
     .map((sec) => `<a href="#sec-${esc(s.id)}-${esc(sec.id)}">${sec.numero}. ${esc(sec.titulo)}</a>`)
     .join("");
 
+  const verificado = s.estado === "verificado";
+  const estadoBadge = verificado
+    ? `<span class="badge badge-ok">${icon("check")}FDS VERIFICADA</span>`
+    : `<span class="badge badge-demo">${icon("info")}DEMO · 16 SECCIONES</span>`;
+
   $("ficha").innerHTML = `
     <div class="ficha-titulo">
       <h4>${esc(s.nombre)}</h4>
-      <span class="badge badge-demo">FDS · 16 SECCIONES</span>
+      ${estadoBadge}
     </div>
     <div class="identificadores">
       <span class="ident">CAS ${esc(s.cas)}</span>
       <span class="ident">CE ${esc(s.ce)}</span>
       <span class="ident">ONU ${esc(s.onu)}</span>
       <span class="ident">${esc(s.palabra_advertencia || "Peligro")}</span>
+      ${verificado && s.fecha_verificacion ? `<span class="ident">Verificada: ${esc(s.fecha_verificacion)}</span>` : ""}
+      ${verificado && s.verificado_por ? `<span class="ident">Por: ${esc(s.verificado_por)}</span>` : ""}
     </div>
     <div class="fds-index">${index}</div>
     ${secciones.map((sec) => `
