@@ -240,7 +240,8 @@ fn url_encode(value: &str) -> String {
         .replace('&', "%26")
 }
 
-/// Genera JavaScript para descargar un PDF mediante fetch + blob.
+/// Genera JavaScript para descargar un PDF mediante fetch + blob (solo web).
+#[cfg(target_arch = "wasm32")]
 fn js_descargar(url: &str, nombre: &str) -> String {
     format!(
         r#"(async()=>{{const r=await fetch({url:?});const b=await r.blob();const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download={nombre:?};document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}})();"#
