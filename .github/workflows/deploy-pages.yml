@@ -33,7 +33,7 @@ jobs:
         run: cargo install dioxus-cli --locked
 
       - name: Compilar aplicación web
-        run: dx build --release
+        run: dx build --release --package sustancias-web
 
       - name: Soporte de rutas del cliente
         run: cp target/dx/sustancias-web/release/web/public/index.html target/dx/sustancias-web/release/web/public/404.html
