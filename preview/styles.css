@@ -261,6 +261,7 @@ body {
 .online-resultado strong { display: block; font-size: 12px; color: #e6edf3; }
 .online-meta { display: block; font-size: 10px; color: var(--muted); margin-top: 2px; }
 .online-resultado .boton { white-space: nowrap; font-size: 11px; }
+.online-acciones { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
 .badge-online { background: rgba(56,139,253,.15); color: #79c0ff; border-color: rgba(56,139,253,.45); }
 
 /* Multi sustancia --------------------------------------------------------- */

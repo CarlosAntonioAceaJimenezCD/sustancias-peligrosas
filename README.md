@@ -36,7 +36,7 @@ Cada fuente lleva un campo `verificacion`:
 | `data/topics.json` | Apartados disponibles: SGA, FDS, convenios, transporte y legislación nacional. |
 | `data/sources.json` | Registro de fuentes oficiales con institución, URL, tema y verificación. |
 | `data/legislation.json` | Portales e instrumentos normativos por país. Cuba se alimenta de la base local del usuario. |
-| `data/substances.json` | Fichas técnicas de demostración (pendientes de sustituir por datos verificados). |
+| `data/substances.json` | **Vacío a propósito.** No se almacenan fichas técnicas en el repositorio; las sustancias se obtienen en vivo de PubChem. |
 
 ## Vista previa (diseño)
 
@@ -154,29 +154,15 @@ Por plataforma:
 
 Opcional: `wasm-opt` (Binaryen) para optimizar el bundle WASM, y `wasm-bindgen` (lo gestiona `dioxus-cli`).
 
-## Añadir una sustancia real (no demo)
+## Sin fichas locales
 
-Las 6 fichas actuales son de demostración. Para incorporar una sustancia verificada:
+No hay **ninguna** sustancia almacenada en el repositorio. `data/substances.json` contiene `"sustancias": []` a propósito. Todas las fichas se generan en vivo desde PubChem (NIH), se marcan como **`DATOS EN LÍNEA · PUBCHEM`** y se construyen con las 16 secciones del SGA. Las secciones que exigen datos del fabricante lo indican y enlazan a fuentes oficiales.
 
-1. Añade un objeto a `data/substances.json` con la misma estructura:
-   - Identificadores: `id`, `nombre`, `sinonimos`, `cas`, `ce`, `onu`, `formula`.
-   - `fuentes`: array de `{"titulo", "url"}` apuntando a ICSC/OIT, INSST, ECHA o el fabricante.
-   - `secciones`: array con las **16 secciones** del SGA (`numero`, `id`, `titulo`, `texto`, `campos`, `listas`, `notas`).
-   - **`estado: "verificado"`** (esto cambia la insignia a "FDS VERIFICADA"). Opcional: `verificado_por`, `fecha_verificacion`.
-   - Si tienes la FDS en PDF, añade `pdf_url` (URL pública del archivo) y `pdf_nombre` (nombre sugerido de descarga). Aparecerá el botón **"Descargar FDS en PDF"**.
-   - Si se omite `estado` o es `"demo"`, la app muestra "DEMO · 16 SECCIONES".
+Esto se probó con sustancias **no incluidas en ningún archivo del repo**: `ibuprofeno` (CID 3672), `paracetamol` (Acetaminophen) y `cafeína`. En los tres casos: 0 resultados locales, ficha de 16 secciones desde PubChem y comparación por parejas con sus nombres reales.
 
-2. Regenera los datos de la vista previa (el bloque `python3` de la sección "Vista previa").
+La comparación multi-sustancia acepta sustancias en línea: cada resultado de PubChem tiene **"Añadir a comparación"**. Las parejas sin regla en `data/interactions.json` usan la regla general de "sin reacción registrada". Para reacciones concretas, añade pares con `sustancias: [id_a, id_b]`, `nivel`, `tipo`, `descripcion`, `productos`, `consecuencias` y `acciones`.
 
-3. Reconstruye la base SQLite:
-
-```bash
-cargo run -p sustancias-dbtool -- build
-```
-
-4. Haz `push` a `main`: GitHub Pages recompila la app Dioxus automáticamente.
-
-Si la sustancia nueva no tiene reglas en `data/interactions.json`, el analizador aplica la **regla general** de "sin reacción registrada", que advierte no asumir compatibilidad. Para reacciones concretas, añade pares al array `interacciones` con `sustancias: [id_a, id_b]`, `nivel`, `tipo`, `descripcion`, `productos`, `consecuencias` y `acciones`.
+Si en el futuro se incorpora una FDS verificada en PDF, el modelo sigue admitiendo `pdf_url` y `pdf_nombre` para mostrar **"Descargar FDS en PDF"**, y `estado: "verificado"` para la insignia verde.
 
 ## Bases de datos oficiales en línea
 
@@ -184,17 +170,17 @@ La aplicación ya no se limita a los datos embebidos:
 
 - **Sustancias**: al escribir en el buscador se consulta en vivo la API PUG REST de **PubChem (NIH, EE. UU.)** con CORS abierto. Los resultados aparecen bajo "Resultados en bases de datos oficiales · PubChem (NIH)". Al pulsar *Ver ficha en línea* se genera una **ficha parcial de 16 secciones** con propiedades reales (fórmula, peso, InChIKey, XLogP, etc.), marcada como `DATOS EN LÍNEA · PUBCHEM` y con enlaces a PubChem y a las fichas ICSC de la OIT. Las secciones que requieren FDS del fabricante lo indican explícitamente: **no se presenta como una FDS completa**.
 - **Marco legal**: al seleccionar cualquier país se muestran **siempre** las fuentes del marco internacional (UNECE, OMI, OIT, convenciones) **junto a** la legislación nacional, más los portales oficiales del país. Ya no es necesario elegir "Marco internacional" por separado para verlo.
-- Las fichas locales (demo o verificadas) siguen teniendo prioridad: si hay coincidencia local, aparece primero; la consulta en línea se muestra debajo.
+- No existen fichas locales: la búsqueda de sustancias se resuelve íntegramente contra PubChem en vivo.
 
 ## Descarga de documentos
 
 - **Leyes cubanas**: el lector de normas muestra *Abrir PDF original* y *Descargar PDF*. La descarga usa `fetch` + `blob` (el hosting `raw.githubusercontent.com` permite CORS), con el nombre de archivo de la Gaceta.
-- **Fichas de sustancias**: si la sustancia tiene `pdf_url`, aparece *Descargar FDS en PDF*. Para las fichas sin PDF (como las de demostración) existe *Guardar ficha como PDF (imprimir)*, que abre el diálogo de impresión del navegador con una hoja de estilo que oculta paneles, menús y botones, dejando solo la ficha de 16 secciones.
+- **Fichas de sustancias**: si una sustancia aporta `pdf_url`, aparece *Descargar FDS en PDF*. Para las fichas generadas en línea (sin PDF) existe *Guardar ficha como PDF (imprimir)*, que abre el diálogo de impresión del navegador con una hoja de estilo que oculta paneles, menús y botones, dejando solo la ficha de 16 secciones.
 - La aplicación Dioxus realiza la misma descarga ejecutando el patrón `fetch`/`blob` desde Rust mediante `dioxus::document::eval`.
 
 ## Pendiente
 
-- Sustituir las fichas de demostración por fichas verificadas en fuentes oficiales.
+- Ampliar las reglas de `data/interactions.json` a más pares de sustancias.
 - Validar en navegador los enlaces con `verificacion: portal_validar`.
-- Importar la base de legislación cubana del usuario y definir su formato.
+- Importar el resto de la base de legislación cubana del usuario (ya hay 3 normas incluidas).
 - Generar los paquetes Dioxus para escritorio y móvil. Las compilaciones de iOS/macOS requieren macOS + Xcode.

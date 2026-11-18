@@ -281,7 +281,7 @@ fn App() -> Element {
     let mut filter: Signal<String> = use_signal(|| "todos".to_string());
     let mut selected_substance: Signal<Option<String>> = use_signal(|| None);
     let mut multi_input: Signal<String> = use_signal(String::new);
-    let mut multi_ids: Signal<Vec<String>> = use_signal(Vec::new);
+    let mut multi_ids: Signal<Vec<(String, String)>> = use_signal(Vec::new);
     let mut movil_tab: Signal<&'static str> = use_signal(|| "legal");
     let mut norma: Signal<Option<(String, String, String, String, String)>> = use_signal(|| None);
     let mut online_resultados: Signal<Vec<core::PubChemCompound>> = use_signal(Vec::new);
@@ -318,7 +318,13 @@ fn App() -> Element {
         .iter()
         .filter(|i| filter() == "todos" || i.tema == filter())
         .collect();
-    let interactions = core::analyze_interactions(&multi_ids());
+    let multi_items = multi_ids();
+    let multi_names: std::collections::HashMap<String, String> = multi_items
+        .iter()
+        .cloned()
+        .collect();
+    let multi_id_list: Vec<String> = multi_items.iter().map(|(id, _)| id.clone()).collect();
+    let interactions = core::analyze_interactions_named(&multi_id_list, &multi_names);
 
     let rsx_countries = |_modal: bool| {
         countries.iter().map(move |c| {
@@ -337,6 +343,7 @@ fn App() -> Element {
                         boe_resultados.set(Vec::new());
                         online_resultados.set(Vec::new());
                         online_ficha.set(None);
+                        multi_ids.set(Vec::new());
                     },
                     span { class: "bandera", "{codigo}" }
                     span {
@@ -627,15 +634,33 @@ fn App() -> Element {
                                     strong { "{p.title}" }
                                     span { class: "online-meta", "CID {p.cid} · {p.molecular_formula} · {p.molecular_weight} g/mol" }
                                 }
-                                button {
-                                    class: "boton",
-                                    onclick: {
-                                        let compuesto = p.clone();
-                                        move |_| {
-                                            online_ficha.set(Some(core::substance_from_pubchem(&compuesto)));
-                                        }
-                                    },
-                                    "Ver ficha en línea"
+                                div { class: "online-acciones",
+                                    button {
+                                        class: "boton",
+                                        onclick: {
+                                            let compuesto = p.clone();
+                                            move |_| {
+                                                online_ficha.set(Some(core::substance_from_pubchem(&compuesto)));
+                                            }
+                                        },
+                                        "Ver ficha en línea"
+                                    }
+                                    button {
+                                        class: "boton boton-secundario",
+                                        onclick: {
+                                            let cid = p.cid;
+                                            let nombre = p.title.clone();
+                                            move |_| {
+                                                let mut items = multi_ids();
+                                                let id = format!("online-{}", cid);
+                                                if !items.iter().any(|(x, _)| x == &id) {
+                                                    items.push((id, nombre.clone()));
+                                                }
+                                                multi_ids.set(items);
+                                            }
+                                        },
+                                        "Añadir a comparación"
+                                    }
                                 }
                             }
                         }
@@ -663,11 +688,17 @@ fn App() -> Element {
                         button {
                             class: "boton",
                             onclick: move |_| {
-                                let found = core::search_substances(&multi_input()).into_iter().next();
-                                if let Some(s) = found {
-                                    let mut ids = multi_ids();
-                                    if !ids.contains(&s.id) { ids.push(s.id.clone()); }
-                                    multi_ids.set(ids);
+                                let texto = multi_input().trim().to_lowercase();
+                                let encontrado = online_resultados()
+                                    .into_iter()
+                                    .find(|p| p.title.to_lowercase().contains(&texto));
+                                if let Some(p) = encontrado {
+                                    let mut items = multi_ids();
+                                    let id = format!("online-{}", p.cid);
+                                    if !items.iter().any(|(x, _)| x == &id) {
+                                        items.push((id, p.title.clone()));
+                                    }
+                                    multi_ids.set(items);
                                     multi_input.set(String::new());
                                 }
                             },
@@ -676,10 +707,8 @@ fn App() -> Element {
                         }
                     }
                     div { class: "multi-chips",
-                        for id in multi_ids().iter() {
-                            if let Some(s) = core::substance_by_id(id) {
-                                span { class: "multi-chip", "{s.nombre}" }
-                            }
+                        for (_, nombre) in multi_items.iter() {
+                            span { class: "multi-chip", "{nombre}" }
                         }
                     }
                     div { class: "interacciones",

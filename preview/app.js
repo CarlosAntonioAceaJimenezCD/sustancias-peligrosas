@@ -458,7 +458,10 @@ async function buscarEnLinea(texto) {
           <strong>${esc(p.nombre)}</strong>
           <span class="online-meta">CID ${esc(p.cid)} · ${esc(p.formula)} · ${esc(p.peso)} g/mol</span>
         </div>
-        <button class="boton" data-online="${esc(p.cid)}">Ver ficha en línea</button>
+        <div class="online-acciones">
+          <button class="boton" data-online="${esc(p.cid)}">Ver ficha en línea</button>
+          <button class="boton boton-secundario" data-anadir-online="${esc(p.cid)}">Añadir a comparación</button>
+        </div>
       </div>`).join("")}
   `;
   const porCid = Object.fromEntries(resultados.map((p) => [String(p.cid), p]));
@@ -468,6 +471,12 @@ async function buscarEnLinea(texto) {
       state.substanceId = null;
       renderResults();
       renderFichaOnline(sustanciaOnline);
+    });
+  });
+  caja.querySelectorAll("[data-anadir-online]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const p = porCid[btn.dataset.anadirOnline];
+      anadirMulti("online-" + p.cid, p.nombre);
     });
   });
 }
@@ -633,21 +642,20 @@ function nivelInfo(nivel) {
   return { ...obj, cls };
 }
 
-function analyzeInteractionsJS(ids) {
+function analyzeInteractionsJS(elementos) {
   const db = window.DATA.interactions || { interacciones: [] };
-  const sustancias = window.DATA.substances;
   const results = [];
-  for (let i = 0; i < ids.length; i++) {
-    for (let j = i + 1; j < ids.length; j++) {
-      const a = ids[i], b = ids[j];
+  for (let i = 0; i < elementos.length; i++) {
+    for (let j = i + 1; j < elementos.length; j++) {
+      const a = elementos[i].id, b = elementos[j].id;
       if (a === b) continue;
       const pair = [a, b].sort();
       const found = (db.interacciones || []).find((it) => {
         const s = [...it.sustancias].sort();
         return s[0] === pair[0] && s[1] === pair[1];
       });
-      const na = sustancias.find((s) => s.id === a)?.nombre || a;
-      const nb = sustancias.find((s) => s.id === b)?.nombre || b;
+      const na = elementos[i].nombre || a;
+      const nb = elementos[j].nombre || b;
       if (found) {
         results.push({ ...found, nombre_a: na, nombre_b: nb, es_regla_general: false });
       } else {
@@ -697,12 +705,15 @@ function renderInteractions() {
   }).join("");
 }
 
+function anadirMulti(id, nombre) {
+  if (state.multi.some((x) => x.id === id)) return;
+  state.multi.push({ id, nombre });
+  renderMulti();
+}
+
 function renderMulti() {
   $("multi-chips").innerHTML = state.multi
-    .map((id) => {
-      const s = window.DATA.substances.find((x) => x.id === id);
-      return s ? `<span class="multi-chip">${esc(s.nombre)}</span>` : "";
-    })
+    .map((x) => `<span class="multi-chip">${esc(x.nombre)}</span>`)
     .join("");
   renderInteractions();
 }
@@ -762,12 +773,14 @@ function init() {
     temporizadorOnline = setTimeout(() => buscarEnLinea(state.query), 450);
   });
 
-  $("multi-boton").addEventListener("click", () => {
-    const found = matchingSubstances($("multi-input").value)[0];
-    if (found && !state.multi.includes(found.id)) {
-      state.multi.push(found.id);
+  $("multi-boton").addEventListener("click", async () => {
+    const texto = $("multi-input").value.trim();
+    if (texto.length < 2) return;
+    const encontrados = await buscarPubChem(texto);
+    if (encontrados.length) {
+      const p = encontrados[0];
+      anadirMulti("online-" + p.cid, p.nombre);
       $("multi-input").value = "";
-      renderMulti();
     }
   });
 

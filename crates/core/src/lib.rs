@@ -576,8 +576,18 @@ pub fn level_label(level: &str) -> String {
 /// Busca una regla explícita para cada par. Si no existe, devuelve una regla
 /// general de "sin reacción conocida" para no dar una respuesta vacía.
 pub fn analyze_interactions(ids: &[String]) -> Vec<PairAnalysis> {
+    let nombres = HashMap::new();
+    analyze_interactions_named(ids, &nombres)
+}
+
+/// Variante que recibe los nombres de las sustancias, necesaria cuando estas
+/// proceden de una base de datos en línea y no están en el repositorio.
+pub fn analyze_interactions_named(
+    ids: &[String],
+    nombres: &HashMap<String, String>,
+) -> Vec<PairAnalysis> {
     let db = interactions_db();
-    let all = substances();
+    let all: Vec<Substance> = Vec::new();
     let mut results = Vec::new();
 
     for i in 0..ids.len() {
@@ -590,15 +600,15 @@ pub fn analyze_interactions(ids: &[String]) -> Vec<PairAnalysis> {
             let mut pair = vec![a.clone(), b.clone()];
             pair.sort();
 
-            let nombre_a = all
-                .iter()
-                .find(|s| &s.id == a)
-                .map(|s| s.nombre.clone())
+            let nombre_a = nombres
+                .get(a)
+                .cloned()
+                .or_else(|| all.iter().find(|s| &s.id == a).map(|s| s.nombre.clone()))
                 .unwrap_or_else(|| a.clone());
-            let nombre_b = all
-                .iter()
-                .find(|s| &s.id == b)
-                .map(|s| s.nombre.clone())
+            let nombre_b = nombres
+                .get(b)
+                .cloned()
+                .or_else(|| all.iter().find(|s| &s.id == b).map(|s| s.nombre.clone()))
                 .unwrap_or_else(|| b.clone());
 
             let found = db.interacciones.iter().find(|it| {
@@ -819,18 +829,40 @@ mod tests {
     }
 
     #[test]
-    fn busca_por_cas_y_acentos() {
-        assert_eq!(search_substances("67-64-1").len(), 1);
-        assert_eq!(search_substances("acido clorhidrico").len(), 1);
-        assert_eq!(search_substances("ACETONA").len(), 1);
+    fn no_hay_fichas_alojadas_en_el_repositorio() {
+        assert!(substances().is_empty());
+        assert!(search_substances("acetona").is_empty());
     }
 
     #[test]
-    fn busca_con_errores_y_sin_acentos() {
-        assert_eq!(search_substances("acetna").len(), 1);
-        assert_eq!(search_substances("acido clorhidrco").len(), 1);
-        assert_eq!(search_substances("hidroxido sodio").len(), 1);
-        assert_eq!(search_substances("amoniaco").len(), 1);
+    fn ficha_desde_pubchem_tiene_16_secciones() {
+        let compuesto = PubChemCompound {
+            cid: 3672,
+            title: "Ibuprofen".to_string(),
+            molecular_formula: "C13H18O2".to_string(),
+            molecular_weight: "206.28".to_string(),
+            inchi_key: "HEFNNWSXXWATRW-JTQLQIEISA-N".to_string(),
+            x_log_p: serde_json::json!(3.97),
+            exact_mass: "206.130679813".to_string(),
+            heavy_atom_count: serde_json::json!(17),
+            complexity: serde_json::json!(263),
+        };
+        let ficha = substance_from_pubchem(&compuesto);
+        assert_eq!(ficha.secciones.len(), 16);
+        assert_eq!(ficha.estado, "online");
+        assert!(ficha.fuentes[0].url.contains("3672"));
+    }
+
+    #[test]
+    fn interacciones_usan_nombres_de_linea() {
+        let ids = vec!["online-3672".to_string(), "online-1983".to_string()];
+        let mut nombres = HashMap::new();
+        nombres.insert("online-3672".to_string(), "Ibuprofen".to_string());
+        nombres.insert("online-1983".to_string(), "Paracetamol".to_string());
+        let resultado = analyze_interactions_named(&ids, &nombres);
+        assert_eq!(resultado.len(), 1);
+        assert_eq!(resultado[0].nombre_a, "Ibuprofen");
+        assert_eq!(resultado[0].nombre_b, "Paracetamol");
     }
 
     #[test]
