@@ -2711,6 +2711,7 @@ name = "sustancias-web"
 version = "0.1.0"
 dependencies = [
  "dioxus",
+ "serde_json",
  "sustancias-core",
 ]
 

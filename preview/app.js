@@ -147,6 +147,8 @@ function selectCountry(id) {
 
   $("buscador-sustancias").value = "";
   $("multi-input").value = "";
+  $("resultados-online").innerHTML = "";
+  sustanciaOnline = null;
 
   renderAll();
 }
@@ -199,40 +201,50 @@ function renderLegal() {
   const c = getCountry();
   if (!c) return;
 
-  let items = [];
-  if (c.id === "internacional") {
-    items = window.DATA.sources
-      .filter((s) => s.oficial && s.pais === "internacional")
-      .filter((s) => state.filter === "todos" || s.tema === state.filter)
-      .map((s) => ({
-        titulo: s.titulo,
-        tema: s.tema,
-        url: s.url,
-        alternativas: [],
-        verificacion: s.verificacion,
-        nota: s.nota,
-      }));
-  } else {
-    const data = window.DATA.legislation[c.id] || { instrumentos: [] };
-    items = data.instrumentos.filter(
-      (i) => state.filter === "todos" || i.tema === state.filter
-    );
-  }
+  const enTema = (x) => state.filter === "todos" || x.tema === state.filter;
+  const internacionales = window.DATA.sources
+    .filter((s) => s.oficial && s.pais === "internacional")
+    .filter(enTema)
+    .map((s) => ({
+      titulo: s.titulo,
+      tema: s.tema,
+      url: s.url,
+      alternativas: [],
+      verificacion: s.verificacion,
+      nota: s.nota,
+      origen: "Marco internacional",
+    }));
+
+  const datosPais = window.DATA.legislation[c.id] || { instrumentos: [], portales_oficiales: [] };
+  const nacionales = c.id === "internacional"
+    ? []
+    : datosPais.instrumentos.filter(enTema).map((i) => ({ ...i, origen: c.nombre }));
+
+  const items = [...internacionales, ...nacionales];
+  const portales = c.id === "internacional" ? [] : (datosPais.portales_oficiales || []);
 
   $("legal-contador").textContent = `${items.length} normas`;
 
+  const htmlPortales = portales.length
+    ? `<div class="portales">
+         <p class="lista-titulo">Portales oficiales de ${esc(c.nombre)}</p>
+         ${portales.map((p) => `<a href="${esc(p.url)}" target="_blank" rel="noopener">${icon("link")}<span>${esc(p.institucion)}</span></a>`).join("")}
+       </div>`
+    : "";
+
   if (!items.length) {
-    $("legal-lista").innerHTML = `<p class="vacio">${esc(t("no_country"))}</p>`;
+    $("legal-lista").innerHTML = htmlPortales + `<p class="vacio">${esc(t("no_country"))}</p>`;
     return;
   }
 
-  $("legal-lista").innerHTML = items
+  $("legal-lista").innerHTML = htmlPortales + items
     .map(
       (i) => `
       <div class="norma">
         <h4>${esc(i.titulo)}</h4>
         <div class="norma-meta">
           <span class="badge">${esc(topicLabel(i.tema))}</span>
+          <span class="badge badge-suave">${esc(i.origen || "")}</span>
           ${verificationBadge(i.verificacion)}
         </div>
         ${i.url ? `<a href="${esc(i.url)}" target="_blank" rel="noopener">${icon("link")}<span>${esc(i.url)}</span></a>` : ""}
@@ -276,6 +288,164 @@ function abrirNorma(id) {
     descargar.classList.add("oculto");
   }
   $("norma-modal").classList.remove("oculto");
+}
+
+/* --- Bases de datos oficiales en línea (PubChem / NIH) ------------------- */
+
+const PUBCHEM_BASE = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/";
+const PUBCHEM_PROPS = "Title,MolecularFormula,MolecularWeight,InChIKey,XLogP,ExactMass,HeavyAtomCount,Complexity";
+let temporizadorOnline = null;
+let sustanciaOnline = null;
+
+async function buscarPubChem(texto) {
+  const q = texto.trim();
+  if (!q) return [];
+  const url = PUBCHEM_BASE + "name/" + encodeURIComponent(q) +
+    "/property/" + PUBCHEM_PROPS + "/JSON";
+  try {
+    const respuesta = await fetch(url);
+    if (!respuesta.ok) return [];
+    const datos = await respuesta.json();
+    return (datos.PropertyTable?.Properties || []).map((p) => ({
+      cid: p.CID,
+      nombre: p.Title,
+      formula: p.MolecularFormula || "",
+      peso: p.MolecularWeight || "",
+      inchikey: p.InChIKey || "",
+      xlogp: p.XLogP ?? "",
+      masas: p.ExactMass || "",
+      atomos: p.HeavyAtomCount ?? "",
+      complejidad: p.Complexity ?? "",
+      url: "https://pubchem.ncbi.nlm.nih.gov/compound/" + p.CID,
+    }));
+  } catch (error) {
+    return [];
+  }
+}
+
+function seccionOnline(numero, id, titulo, texto, campos, listas) {
+  return { numero, id, titulo, texto: texto || "", campos: campos || [], listas: listas || [], notas: [] };
+}
+
+function fichaDesdePubChem(p) {
+  const camposProps = [
+    p.formula && { k: "Fórmula molecular", v: p.formula },
+    p.peso && { k: "Peso molecular (g/mol)", v: String(p.peso) },
+    p.inchikey && { k: "InChIKey", v: p.inchikey },
+    p.xlogp !== "" && { k: "XLogP", v: String(p.xlogp) },
+    p.masas && { k: "Masa exacta", v: p.masas },
+    p.atomos !== "" && { k: "Átomos pesados", v: String(p.atomos) },
+    p.complejidad !== "" && { k: "Complejidad", v: String(p.complejidad) },
+  ].filter(Boolean);
+
+  const consultar = "Esta sección requiere la ficha de datos de seguridad del fabricante o la fuente oficial indicada. Consulta los enlaces al final de la ficha.";
+  const secciones = [
+    seccionOnline(1, "identificacion", "Identificación del producto y del proveedor",
+      "Sustancia identificada en PubChem, base de datos pública del National Institutes of Health (EE. UU.).",
+      [{ k: "Nombre (PubChem)", v: p.nombre }, { k: "CID de PubChem", v: String(p.cid) }]),
+    seccionOnline(2, "peligros", "Identificación de los peligros",
+      "La clasificación GHS no se incluye en esta consulta. Verifica los Pictogramas, frases H y palabras de advertencia en la sección «GHS Classification» de PubChem o en la FDS del proveedor.", [],
+      [{ titulo: "Enlaces oficiales", items: [p.url] }]),
+    seccionOnline(3, "composicion", "Composición / información sobre los componentes",
+      "Identidad química según PubChem. La pureza y las impurezas deben consultarse en el certificado del proveedor.",
+      [{ k: "Fórmula molecular", v: p.formula }, { k: "CID", v: String(p.cid) }]),
+    seccionOnline(4, "primeros_auxilios", "Primeros auxilios", consultar),
+    seccionOnline(5, "incendio", "Medidas de lucha contra incendios", consultar),
+    seccionOnline(6, "derrame", "Medidas en caso de vertido accidental", consultar),
+    seccionOnline(7, "manipulacion", "Manipulación y almacenamiento", consultar),
+    seccionOnline(8, "exposicion", "Controles de exposición / protección personal",
+      "Consulta los límites de exposición profesional vigentes en tu país y la FDS del proveedor."),
+    seccionOnline(9, "propiedades", "Propiedades físicas y químicas",
+      "Propiedades calculadas o experimentales publicadas por PubChem.", camposProps),
+    seccionOnline(10, "estabilidad", "Estabilidad y reactividad", consultar),
+    seccionOnline(11, "toxicologica", "Información toxicológica",
+      "Consulta la sección de toxicología de PubChem y la FDS del proveedor.", [],
+      [{ titulo: "Enlace", items: [p.url + "#toxicity"] }]),
+    seccionOnline(12, "ecotoxicologica", "Información ecotoxicológica", consultar),
+    seccionOnline(13, "eliminacion", "Consideraciones sobre eliminación",
+      "Eliminar conforme a la normativa local de residuos peligrosos."),
+    seccionOnline(14, "transporte", "Información relativa al transporte",
+      "El número ONU, clase y grupo de embalaje deben obtenerse de la FDS del proveedor y verificarse en ADR/RID/IMDG/IATA."),
+    seccionOnline(15, "reglamentacion", "Información sobre la reglamentación",
+      "Verificar REACH, CLP y SGA/GHS según el país seleccionado."),
+    seccionOnline(16, "otras", "Otras informaciones",
+      "Ficha generada en línea a partir de PubChem. Es una orientación parcial, no una FDS completa.",
+      [{ k: "Fuente", v: "PubChem (NIH)" }, { k: "CID", v: String(p.cid) },
+       { k: "Fecha de consulta", v: new Date().toISOString().slice(0, 10) }],
+      [{ titulo: "Fuentes oficiales", items: [p.url, "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"] }]),
+  ];
+
+  return {
+    id: "online-" + p.cid,
+    nombre: p.nombre,
+    sinonimos: [],
+    cas: "",
+    ce: "",
+    onu: "",
+    palabra_advertencia: "Consultar FDS",
+    estado: "online",
+    secciones,
+    fuentes: [
+      { titulo: "PubChem - " + p.nombre + " (CID " + p.cid + ")", url: p.url },
+      { titulo: "ICSC - OIT/OMS", url: "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es" },
+    ],
+  };
+}
+
+async function buscarEnLinea(texto) {
+  const caja = $("resultados-online");
+  const q = texto.trim();
+  if (q.length < 2) {
+    caja.innerHTML = "";
+    return;
+  }
+  caja.innerHTML = `<p class="vacio">Consultando bases de datos oficiales…</p>`;
+  const resultados = await buscarPubChem(q);
+  if (!resultados.length) {
+    caja.innerHTML = `<p class="vacio">Sin resultados en PubChem. Prueba con otro nombre o consulta directamente las fuentes oficiales.</p>`;
+    return;
+  }
+  caja.innerHTML = `
+    <div class="online-titulo">${icon("globe")} Resultados en bases de datos oficiales · PubChem (NIH)</div>
+    ${resultados.map((p) => `
+      <div class="online-resultado">
+        <div>
+          <strong>${esc(p.nombre)}</strong>
+          <span class="online-meta">CID ${esc(p.cid)} · ${esc(p.formula)} · ${esc(p.peso)} g/mol</span>
+        </div>
+        <button class="boton" data-online="${esc(p.cid)}">Ver ficha en línea</button>
+      </div>`).join("")}
+  `;
+  const porCid = Object.fromEntries(resultados.map((p) => [String(p.cid), p]));
+  caja.querySelectorAll("[data-online]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      sustanciaOnline = fichaDesdePubChem(porCid[btn.dataset.online]);
+      state.substanceId = null;
+      renderResults();
+      renderFichaOnline(sustanciaOnline);
+    });
+  });
+}
+
+function renderFichaOnline(s) {
+  $("ficha").innerHTML = `
+    <div class="ficha-titulo">
+      <h4>${esc(s.nombre)}</h4>
+      <span class="badge badge-online">${icon("globe")} DATOS EN LÍNEA · PUBCHEM</span>
+    </div>
+    <div class="identificadores">
+      <span class="ident">CID ${esc(s.secciones[0].campos[1].v)}</span>
+      <span class="ident">Ficha parcial</span>
+    </div>
+    <div class="aviso">${icon("alert")}<span>Esta ficha se ha generado con datos públicos de PubChem. No sustituye la ficha de datos de seguridad del fabricante. Verifica siempre la peligrosidad y el transporte en fuentes oficiales.</span></div>
+    ${s.secciones.map((sec) => `
+      <div class="seccion">
+        <h5>${sec.numero}. ${esc(sec.titulo)}</h5>
+        ${sec.texto ? `<p>${esc(sec.texto)}</p>` : ""}
+        ${sec.campos.length ? `<div class="prop-grid">${sec.campos.map((c) => `<div class="prop"><b>${esc(c.k)}</b>${esc(c.v)}</div>`).join("")}</div>` : ""}
+        ${sec.listas.map((l) => `<p class="lista-titulo">${esc(l.titulo)}</p><ul class="lista">${l.items.map((i) => `<li><a href="${esc(i)}" target="_blank" rel="noopener">${esc(i)}</a></li>`).join("")}</ul>`).join("")}
+      </div>`).join("")}
+  `;
 }
 
 /* --- Sustancias --------------------------------------------------------- */
@@ -538,6 +708,8 @@ function init() {
   $("buscador-sustancias").addEventListener("input", (e) => {
     state.query = e.target.value;
     renderResults();
+    clearTimeout(temporizadorOnline);
+    temporizadorOnline = setTimeout(() => buscarEnLinea(state.query), 450);
   });
 
   $("multi-boton").addEventListener("click", () => {

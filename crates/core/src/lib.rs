@@ -368,6 +368,140 @@ pub fn instruments_for(country_id: &str) -> Vec<Instrument> {
         .unwrap_or_default()
 }
 
+/// Compuesto devuelto por la API PUG REST de PubChem (NIH).
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct PubChemCompound {
+    pub cid: u64,
+    #[serde(default)]
+    pub title: String,
+    #[serde(rename = "MolecularFormula", default)]
+    pub molecular_formula: String,
+    #[serde(rename = "MolecularWeight", default)]
+    pub molecular_weight: String,
+    #[serde(rename = "InChIKey", default)]
+    pub inchi_key: String,
+    #[serde(rename = "XLogP", default)]
+    pub x_log_p: serde_json::Value,
+    #[serde(rename = "ExactMass", default)]
+    pub exact_mass: String,
+    #[serde(rename = "HeavyAtomCount", default)]
+    pub heavy_atom_count: serde_json::Value,
+    #[serde(default)]
+    pub complexity: serde_json::Value,
+}
+
+impl PubChemCompound {
+    pub fn url(&self) -> String {
+        format!("https://pubchem.ncbi.nlm.nih.gov/compound/{}", self.cid)
+    }
+}
+
+/// Construye una ficha parcial de 16 secciones a partir de un compuesto de PubChem.
+/// Se marca como `online` para que la interfaz no la confunda con una FDS verificada.
+pub fn substance_from_pubchem(p: &PubChemCompound) -> Substance {
+    let consultar = "Esta sección requiere la ficha de datos de seguridad del fabricante. Consulta los enlaces oficiales al final de la ficha.";
+    let online_url = p.url();
+    let icsc = "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es";
+
+    let field = |k: &str, v: String| FdsField { k: k.to_string(), v };
+    let sec = |numero: u32, id: &str, titulo: &str, texto: &str,
+               campos: Vec<FdsField>, listas: Vec<FdsList>| FdsSection {
+        numero,
+        id: id.to_string(),
+        titulo: titulo.to_string(),
+        texto: texto.to_string(),
+        campos,
+        listas,
+        notas: Vec::new(),
+    };
+    let links = |items: Vec<String>| vec![FdsList { titulo: "Enlaces oficiales".to_string(), items }];
+
+    let mut propiedades = vec![
+        field("Nombre (PubChem)", p.title.clone()),
+        field("CID de PubChem", p.cid.to_string()),
+    ];
+    if !p.molecular_formula.is_empty() {
+        propiedades.push(field("Fórmula molecular", p.molecular_formula.clone()));
+    }
+    if !p.molecular_weight.is_empty() {
+        propiedades.push(field("Peso molecular (g/mol)", p.molecular_weight.clone()));
+    }
+    if !p.inchi_key.is_empty() {
+        propiedades.push(field("InChIKey", p.inchi_key.clone()));
+    }
+    if !p.x_log_p.is_null() {
+        propiedades.push(field("XLogP", p.x_log_p.to_string()));
+    }
+    if !p.exact_mass.is_empty() {
+        propiedades.push(field("Masa exacta", p.exact_mass.clone()));
+    }
+    if !p.heavy_atom_count.is_null() {
+        propiedades.push(field("Átomos pesados", p.heavy_atom_count.to_string()));
+    }
+    if !p.complexity.is_null() {
+        propiedades.push(field("Complejidad", p.complexity.to_string()));
+    }
+
+    let secciones = vec![
+        sec(1, "identificacion", "Identificación del producto y del proveedor",
+            "Sustancia identificada en PubChem, base de datos pública del National Institutes of Health (EE. UU.).",
+            vec![field("Nombre (PubChem)", p.title.clone()), field("CID", p.cid.to_string())], vec![]),
+        sec(2, "peligros", "Identificación de los peligros",
+            "La clasificación GHS no se incluye en esta consulta. Verifica pictogramas, frases H y palabra de advertencia en PubChem o en la FDS del proveedor.",
+            vec![], links(vec![online_url.clone()])),
+        sec(3, "composicion", "Composición / información sobre los componentes",
+            "Identidad química según PubChem. La pureza debe consultarse en el certificado del proveedor.",
+            vec![field("Fórmula molecular", p.molecular_formula.clone())], vec![]),
+        sec(4, "primeros_auxilios", "Primeros auxilios", consultar, vec![], vec![]),
+        sec(5, "incendio", "Medidas de lucha contra incendios", consultar, vec![], vec![]),
+        sec(6, "derrame", "Medidas en caso de vertido accidental", consultar, vec![], vec![]),
+        sec(7, "manipulacion", "Manipulación y almacenamiento", consultar, vec![], vec![]),
+        sec(8, "exposicion", "Controles de exposición / protección personal",
+            "Consulta los límites de exposición profesional vigentes en tu país.", vec![], vec![]),
+        sec(9, "propiedades", "Propiedades físicas y químicas",
+            "Propiedades publicadas por PubChem.", propiedades, vec![]),
+        sec(10, "estabilidad", "Estabilidad y reactividad", consultar, vec![], vec![]),
+        sec(11, "toxicologica", "Información toxicológica",
+            "Consulta la sección de toxicología de PubChem y la FDS del proveedor.", vec![], links(vec![online_url.clone()])),
+        sec(12, "ecotoxicologica", "Información ecotoxicológica", consultar, vec![], vec![]),
+        sec(13, "eliminacion", "Consideraciones sobre eliminación",
+            "Eliminar conforme a la normativa local de residuos peligrosos.", vec![], vec![]),
+        sec(14, "transporte", "Información relativa al transporte",
+            "Número ONU, clase y grupo de embalaje deben obtenerse de la FDS del proveedor y verificarse en ADR/RID/IMDG/IATA.", vec![], vec![]),
+        sec(15, "reglamentacion", "Información sobre la reglamentación",
+            "Verificar REACH, CLP y SGA/GHS según el país seleccionado.", vec![], vec![]),
+        sec(16, "otras", "Otras informaciones",
+            "Ficha parcial generada en línea a partir de PubChem. No sustituye una FDS completa.",
+            vec![field("Fuente", "PubChem (NIH)".to_string()), field("CID", p.cid.to_string())],
+            links(vec![online_url.clone(), icsc.to_string()])),
+    ];
+
+    Substance {
+        id: format!("online-{}", p.cid),
+        nombre: p.title.clone(),
+        sinonimos: Vec::new(),
+        cas: String::new(),
+        ce: String::new(),
+        onu: String::new(),
+        peligrosidad: Peligrosidad::default(),
+        almacenamiento: String::new(),
+        derrame: String::new(),
+        propiedades: Propiedades::default(),
+        interacciones: Interacciones::default(),
+        fuentes: vec![
+            Fuente { titulo: format!("PubChem - {} (CID {})", p.title, p.cid), url: online_url },
+            Fuente { titulo: "ICSC - OIT/OMS".to_string(), url: icsc.to_string() },
+        ],
+        estado: "online".to_string(),
+        verificado_por: String::new(),
+        fecha_verificacion: String::new(),
+        pdf_url: String::new(),
+        pdf_nombre: String::new(),
+        palabra_advertencia: "Consultar FDS".to_string(),
+        secciones,
+    }
+}
+
 /// Base de interacciones entre sustancias.
 pub fn interactions_db() -> InteractionsDb {
     parse::<InteractionsDb>(INTERACTIONS_JSON)

@@ -138,6 +138,16 @@ font-size:11px;line-height:1.55;color:#b9c3ce;margin:0 0 14px}
 .norma-modal .boton{align-self:flex-start;text-decoration:none}
 .leer-norma{margin-top:8px;background:var(--card-alt);color:var(--accent);border:1px solid var(--line)}
 .leer-norma:hover{border-color:var(--accent)}
+.portales{border:1px solid var(--line);border-radius:6px;padding:10px 12px;background:var(--card-alt);margin-bottom:4px}
+.portales a{display:flex;align-items:center;gap:6px;color:var(--accent);font-size:11px;text-decoration:none;margin-top:5px}
+.portales a:hover{text-decoration:underline}
+.resultados-online{margin:10px 0 14px}
+.online-titulo{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--accent);margin-bottom:8px}
+.online-resultado{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:6px;background:var(--card-alt);padding:9px 11px;margin-bottom:6px}
+.online-resultado strong{display:block;font-size:12px;color:#e6edf3}
+.online-meta{display:block;font-size:10px;color:var(--muted);margin-top:2px}
+.online-resultado .boton{white-space:nowrap;font-size:11px}
+.badge-online{background:rgba(56,139,253,.15);color:#79c0ff;border-color:rgba(56,139,253,.45)}
 .badge-danger{background:rgba(248,81,73,.12);color:#ff7b72;border-color:rgba(248,81,73,.35)}
 .interacciones{display:flex;flex-direction:column;gap:9px;margin-top:12px}
 .interaccion{border:1px solid var(--line);border-left:3px solid #484f58;border-radius:6px;padding:10px 12px;background:var(--card)}
@@ -205,6 +215,19 @@ fn icon(name: &str, class: &str) -> String {
     format!("<svg class=\"{}\" viewBox=\"{}\">{}</svg>", class, view, body)
 }
 
+/// Codificación mínima para incluir un término en una URL.
+fn url_encode(value: &str) -> String {
+    value
+        .replace(' ', "%20")
+        .replace('á', "%C3%A1")
+        .replace('é', "%C3%A9")
+        .replace('í', "%C3%AD")
+        .replace('ó', "%C3%B3")
+        .replace('ú', "%C3%BA")
+        .replace('ñ', "%C3%B1")
+        .replace('&', "%26")
+}
+
 /// Genera JavaScript para descargar un PDF mediante fetch + blob.
 fn js_descargar(url: &str, nombre: &str) -> String {
     format!(
@@ -257,6 +280,9 @@ fn App() -> Element {
     let mut multi_ids: Signal<Vec<String>> = use_signal(Vec::new);
     let mut movil_tab: Signal<&'static str> = use_signal(|| "legal");
     let mut norma: Signal<Option<(String, String, String, String, String)>> = use_signal(|| None);
+    let mut online_resultados: Signal<Vec<core::PubChemCompound>> = use_signal(Vec::new);
+    let mut online_ficha: Signal<Option<core::Substance>> = use_signal(|| None);
+    let mut online_cargando: Signal<bool> = use_signal(|| false);
 
     let country = selected_id()
         .and_then(|id| core::country_by_id(&id))
@@ -276,15 +302,12 @@ fn App() -> Element {
     } else {
         core::instruments_for(&country.id)
     };
-    let international_sources: Vec<core::Source> = if country.id == "internacional" {
-        all_sources
-            .iter()
-            .filter(|s| s.oficial && s.pais == "internacional")
-            .cloned()
-            .collect()
-    } else {
-        Vec::new()
-    };
+    let international_sources: Vec<core::Source> = all_sources
+        .iter()
+        .filter(|s| s.oficial && s.pais == "internacional")
+        .cloned()
+        .collect();
+    let portals = core::portals_for(&country.id);
     let visible_instruments: Vec<&core::Instrument> = instruments
         .iter()
         .filter(|i| filter() == "todos" || i.tema == filter())
@@ -395,64 +418,72 @@ fn App() -> Element {
                     }
                 }
                 div { class: "legal-lista",
-                    if country.id == "internacional" {
-                        for s in international_sources.iter().filter(|s| filter() == "todos" || s.tema == filter()) {
-                            div { class: "norma",
-                                h4 { "{s.titulo}" }
-                                div { class: "norma-meta",
-                                    span { class: "badge", "{core::topic_label(&s.tema)}" }
-                                    span {
-                                        class: if core::is_verified(&s.verificacion) { "badge badge-ok" } else { "badge badge-warn" },
-                                        "{core::verification_label(&s.verificacion)}"
-                                    }
-                                }
-                                a { href: "{s.url}", target: "_blank",
+                    if !portals.is_empty() {
+                        div { class: "portales",
+                            p { class: "lista-titulo", "Portales oficiales de {country.nombre}" }
+                            for p in portals.iter() {
+                                a { href: "{p.url}", target: "_blank",
                                     dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
-                                a { href: "{s.url}", target: "_blank", "{s.url}" }
+                                a { href: "{p.url}", target: "_blank", "{p.institucion}" }
                             }
                         }
-                    } else {
-                        for i in visible_instruments.iter() {
-                            div { class: "norma",
-                                h4 { "{i.titulo}" }
-                                div { class: "norma-meta",
-                                    span { class: "badge", "{core::topic_label(&i.tema)}" }
-                                    span {
-                                        class: if core::is_verified(&i.verificacion) { "badge badge-ok" } else { "badge badge-warn" },
-                                        "{core::verification_label(&i.verificacion)}"
-                                    }
+                    }
+                    for s in international_sources.iter().filter(|s| filter() == "todos" || s.tema == filter()) {
+                        div { class: "norma",
+                            h4 { "{s.titulo}" }
+                            div { class: "norma-meta",
+                                span { class: "badge", "{core::topic_label(&s.tema)}" }
+                                span { class: "badge badge-suave", "Marco internacional" }
+                                span {
+                                    class: if core::is_verified(&s.verificacion) { "badge badge-ok" } else { "badge badge-warn" },
+                                    "{core::verification_label(&s.verificacion)}"
                                 }
-                                if !i.url.is_empty() {
-                                    a { href: "{i.url}", target: "_blank",
-                                        dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
-                                    a { href: "{i.url}", target: "_blank", "{i.url}" }
+                            }
+                            a { href: "{s.url}", target: "_blank",
+                                dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
+                            a { href: "{s.url}", target: "_blank", "{s.url}" }
+                        }
+                    }
+                    for i in visible_instruments.iter() {
+                        div { class: "norma",
+                            h4 { "{i.titulo}" }
+                            div { class: "norma-meta",
+                                span { class: "badge", "{core::topic_label(&i.tema)}" }
+                                span { class: "badge badge-suave", "{country.nombre}" }
+                                span {
+                                    class: if core::is_verified(&i.verificacion) { "badge badge-ok" } else { "badge badge-warn" },
+                                    "{core::verification_label(&i.verificacion)}"
                                 }
-                                for alt in i.alternativas.iter() {
-                                    a { href: "{alt}", target: "_blank", "Alternativa: {alt}" }
-                                }
-                                if !i.nota.is_empty() {
-                                    p { class: "multi-nota", "{i.nota}" }
-                                }
-                                if !i.texto.is_empty() {
-                                    button {
-                                        class: "boton leer-norma",
-                                        onclick: {
-                                            let titulo = i.titulo.clone();
-                                            let meta = format!("Páginas {} de la Gaceta Oficial", i.paginas);
-                                            let texto = i.texto.clone();
-                                            let url = i.url.clone();
-                                            let nombre = core::pdf_filename(&i.url, &i.pdf_nombre);
-                                            move |_| norma.set(Some((titulo.clone(), meta.clone(), texto.clone(), url.clone(), nombre.clone())))
-                                        },
-                                        dangerous_inner_html: "{icon(\"book\", \"ico\")}",
-                                        "Leer norma íntegra"
-                                    }
+                            }
+                            if !i.url.is_empty() {
+                                a { href: "{i.url}", target: "_blank",
+                                    dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
+                                a { href: "{i.url}", target: "_blank", "{i.url}" }
+                            }
+                            for alt in i.alternativas.iter() {
+                                a { href: "{alt}", target: "_blank", "Alternativa: {alt}" }
+                            }
+                            if !i.nota.is_empty() {
+                                p { class: "multi-nota", "{i.nota}" }
+                            }
+                            if !i.texto.is_empty() {
+                                button {
+                                    class: "boton leer-norma",
+                                    onclick: {
+                                        let titulo = i.titulo.clone();
+                                        let meta = format!("Páginas {} de la Gaceta Oficial", i.paginas);
+                                        let texto = i.texto.clone();
+                                        let url = i.url.clone();
+                                        let nombre = core::pdf_filename(&i.url, &i.pdf_nombre);
+                                        move |_| norma.set(Some((titulo.clone(), meta.clone(), texto.clone(), url.clone(), nombre.clone())))
+                                    },
+                                    dangerous_inner_html: "{icon(\"book\", \"ico\")}",
+                                    "Leer norma íntegra"
                                 }
                             }
                         }
                     }
-                }
-            }
+                }            }
 
             section {
                 class: if movil_tab() == "ficha" { "panel movil-activo" } else { "panel" },
@@ -477,7 +508,29 @@ fn App() -> Element {
                     input {
                         placeholder: "Ej. Acetona, 67-64-1, ácido clorhídrico…",
                         value: "{query()}",
-                        oninput: move |e| query.set(e.value()),
+                        oninput: move |e| {
+                            let value = e.value();
+                            query.set(value.clone());
+                            if value.trim().len() < 2 {
+                                online_resultados.set(Vec::new());
+                                return;
+                            }
+                            online_cargando.set(true);
+                            let url = format!(
+                                "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{}/property/Title,MolecularFormula,MolecularWeight,InChIKey,XLogP,ExactMass,HeavyAtomCount,Complexity/JSON",
+                                url_encode(value.trim())
+                            );
+                            let js = format!(r#"(async()=>{{try{{const r=await fetch({url:?});if(!r.ok)return '[]';const j=await r.json();return JSON.stringify(j.PropertyTable?.Properties||[]);}}catch(e){{return '[]';}}}})()"#);
+                            let mut ev = dioxus::document::eval(&js);
+                            spawn(async move {
+                                if let Ok(texto) = ev.recv::<String>().await {
+                                    let parsed: Vec<core::PubChemCompound> =
+                                        serde_json::from_str(&texto).unwrap_or_default();
+                                    online_resultados.set(parsed);
+                                    online_cargando.set(false);
+                                }
+                            });
+                        },
                     }
                 }
 
@@ -487,6 +540,35 @@ fn App() -> Element {
                             class: if selected_substance() == Some(s.id.clone()) { "resultado activo" } else { "resultado" },
                             onclick: { let id = s.id.clone(); move |_| selected_substance.set(Some(id.clone())) },
                             "{s.nombre} · {s.cas}"
+                        }
+                    }
+                }
+
+                div { class: "resultados-online",
+                    if online_cargando() {
+                        p { class: "vacio", "Consultando bases de datos oficiales…" }
+                    } else if !online_resultados().is_empty() {
+                        div { class: "online-titulo",
+                            dangerous_inner_html: "{icon(\"globe\", \"ico\")}",
+                            "Resultados en bases de datos oficiales · PubChem (NIH)"
+                        }
+                        for p in online_resultados().iter() {
+                            div { class: "online-resultado",
+                                div {
+                                    strong { "{p.title}" }
+                                    span { class: "online-meta", "CID {p.cid} · {p.molecular_formula} · {p.molecular_weight} g/mol" }
+                                }
+                                button {
+                                    class: "boton",
+                                    onclick: {
+                                        let compuesto = p.clone();
+                                        move |_| {
+                                            online_ficha.set(Some(core::substance_from_pubchem(&compuesto)));
+                                        }
+                                    },
+                                    "Ver ficha en línea"
+                                }
+                            }
                         }
                     }
                 }
@@ -576,10 +658,12 @@ fn App() -> Element {
                 }
 
                 div { class: "ficha",
-                    if let Some(s) = active_substance {
+                    if let Some(s) = online_ficha().or(active_substance) {
                         div { class: "ficha-titulo",
                             h4 { "{s.nombre}" }
-                            if core::substance_is_verified(&s) {
+                            if s.estado == "online" {
+                                span { class: "badge badge-online", "DATOS EN LÍNEA · PUBCHEM" }
+                            } else if core::substance_is_verified(&s) {
                                 span { class: "badge badge-ok", "FDS VERIFICADA" }
                             } else {
                                 span { class: "badge badge-demo", "DEMO · 16 SECCIONES" }
@@ -595,6 +679,12 @@ fn App() -> Element {
                             }
                             if !s.verificado_por.is_empty() {
                                 span { class: "ident", "Por: {s.verificado_por}" }
+                            }
+                        }
+                        if s.estado == "online" {
+                            div { class: "aviso",
+                                dangerous_inner_html: "{icon(\"alert\", \"ico\")}",
+                                span { "Ficha parcial generada con datos públicos de PubChem. No sustituye la ficha de datos de seguridad del fabricante." }
                             }
                         }
                         div { class: "fds-index",

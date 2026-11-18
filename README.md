@@ -178,6 +178,14 @@ cargo run -p sustancias-dbtool -- build
 
 Si la sustancia nueva no tiene reglas en `data/interactions.json`, el analizador aplica la **regla general** de "sin reacción registrada", que advierte no asumir compatibilidad. Para reacciones concretas, añade pares al array `interacciones` con `sustancias: [id_a, id_b]`, `nivel`, `tipo`, `descripcion`, `productos`, `consecuencias` y `acciones`.
 
+## Bases de datos oficiales en línea
+
+La aplicación ya no se limita a los datos embebidos:
+
+- **Sustancias**: al escribir en el buscador se consulta en vivo la API PUG REST de **PubChem (NIH, EE. UU.)** con CORS abierto. Los resultados aparecen bajo "Resultados en bases de datos oficiales · PubChem (NIH)". Al pulsar *Ver ficha en línea* se genera una **ficha parcial de 16 secciones** con propiedades reales (fórmula, peso, InChIKey, XLogP, etc.), marcada como `DATOS EN LÍNEA · PUBCHEM` y con enlaces a PubChem y a las fichas ICSC de la OIT. Las secciones que requieren FDS del fabricante lo indican explícitamente: **no se presenta como una FDS completa**.
+- **Marco legal**: al seleccionar cualquier país se muestran **siempre** las fuentes del marco internacional (UNECE, OMI, OIT, convenciones) **junto a** la legislación nacional, más los portales oficiales del país. Ya no es necesario elegir "Marco internacional" por separado para verlo.
+- Las fichas locales (demo o verificadas) siguen teniendo prioridad: si hay coincidencia local, aparece primero; la consulta en línea se muestra debajo.
+
 ## Descarga de documentos
 
 - **Leyes cubanas**: el lector de normas muestra *Abrir PDF original* y *Descargar PDF*. La descarga usa `fetch` + `blob` (el hosting `raw.githubusercontent.com` permite CORS), con el nombre de archivo de la Gaceta.

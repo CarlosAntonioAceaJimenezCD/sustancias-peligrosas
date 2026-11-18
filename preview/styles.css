@@ -191,6 +191,9 @@ body {
 }
 .legal-lista::-webkit-scrollbar { width: 8px; }
 .legal-lista::-webkit-scrollbar-thumb { background: #30363d; border-radius: 8px; }
+.portales { border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; background: var(--card-alt); margin-bottom: 4px; }
+.portales a { display: flex; align-items: center; gap: 6px; color: var(--accent); font-size: 11px; text-decoration: none; margin-top: 5px; }
+.portales a:hover { text-decoration: underline; }
 .norma {
   border: 1px solid var(--line);
   border-radius: 6px;
@@ -248,6 +251,13 @@ body {
   background: var(--accent-soft);
   color: var(--accent);
 }
+.resultados-online { margin: 10px 0 14px; }
+.online-titulo { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+.online-resultado { display: flex; justify-content: space-between; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--card-alt); padding: 9px 11px; margin-bottom: 6px; }
+.online-resultado strong { display: block; font-size: 12px; color: #e6edf3; }
+.online-meta { display: block; font-size: 10px; color: var(--muted); margin-top: 2px; }
+.online-resultado .boton { white-space: nowrap; font-size: 11px; }
+.badge-online { background: rgba(56,139,253,.15); color: #79c0ff; border-color: rgba(56,139,253,.45); }
 
 /* Multi sustancia --------------------------------------------------------- */
 .multi {
