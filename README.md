@@ -132,6 +132,9 @@ Normas incluidas: Resolución 253/2021 (productos químicos peligrosos y desecho
 
 ## Herramientas de compilación
 
+Guía completa, comandos y estado real de cada plataforma en [`docs/compilacion.md`](docs/compilacion.md). Scripts listos en `scripts/`: `build-web.sh`, `build-linux.sh` y `build-android.sh`.
+
+
 Comunes a todas las plataformas:
 
 | Herramienta | Uso |

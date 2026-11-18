@@ -13,6 +13,8 @@ use std::io;
 use std::path::{Path, PathBuf};
 
 const APP_DIR: &str = "sustancias-peligrosas";
+/// Carpeta propia que se crea dentro del directorio de descargas.
+pub const EXPORT_DIR: &str = "Sustancias Peligrosas";
 const DOCS_DIR: &str = "documents";
 const INDEX_FILE: &str = "index.json";
 const OPTIONS_FILE: &str = "options.json";
@@ -157,8 +159,8 @@ pub fn delete_document(id: &str) -> io::Result<()> {
     write_index(&restantes)
 }
 
-/// Directorio de descargas efectivo según las opciones.
-pub fn downloads_target(options: &Options) -> PathBuf {
+/// Directorio base de descargas según las opciones (sin la carpeta propia).
+pub fn downloads_base(options: &Options) -> PathBuf {
     options
         .downloads_dir
         .clone()
@@ -166,12 +168,19 @@ pub fn downloads_target(options: &Options) -> PathBuf {
         .unwrap_or_else(|| PathBuf::from("."))
 }
 
-/// Copia un documento guardado al directorio de descargas.
+/// Directorio de exportación: `<Descargas>/Sustancias Peligrosas`.
+pub fn downloads_target(options: &Options) -> PathBuf {
+    downloads_base(options).join(EXPORT_DIR)
+}
+
+/// Copia un documento guardado a la carpeta propia dentro de Descargas.
 pub fn copy_to_downloads(id: &str, options: &Options) -> io::Result<PathBuf> {
     let (doc, bytes) = read_document(id).ok_or_else(|| {
         io::Error::new(io::ErrorKind::NotFound, "el documento no está en la caché local")
     })?;
-    let destino = downloads_target(options).join(safe_filename(&doc.filename));
+    let directorio = downloads_target(options);
+    fs::create_dir_all(&directorio)?;
+    let destino = directorio.join(safe_filename(&doc.filename));
     fs::write(&destino, bytes)?;
     Ok(destino)
 }
@@ -207,5 +216,17 @@ mod tests {
     #[test]
     fn nombre_de_archivo_se_sanitiza() {
         assert_eq!(safe_filename("a/b:c.pdf"), "b_c.pdf");
+    }
+
+    #[test]
+    fn descargas_usa_carpeta_propia() {
+        let opciones = Options {
+            downloads_dir: Some(PathBuf::from("/tmp/descargas")),
+            ..Options::default()
+        };
+        assert_eq!(
+            downloads_target(&opciones),
+            PathBuf::from("/tmp/descargas").join(EXPORT_DIR)
+        );
     }
 }
