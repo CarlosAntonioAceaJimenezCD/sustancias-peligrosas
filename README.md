@@ -109,8 +109,41 @@ SQLite se compila incluida (`bundled`) y el frontend se compila a WebAssembly, d
 - **México** — DOF/STPS, SEMARNAT, SCT.
 - **Perú** — SINIA-MINAM, El Peruano, MTC.
 - **Venezuela** — Asamblea Nacional, MINEC, INTT, SENCAMER, RESQUIMC.
-- **Cuba** — base local del usuario, pendiente de importación.
+- **Cuba** — normas de la Gaceta Oficial localizadas en la base del usuario e incluidas en `data/leyes/cuba/`.
 - **Estados Unidos** — referencia complementaria (OSHA), no marco aplicable.
+
+## Acceso a las leyes cubanas
+
+El usuario final no necesita la carpeta local. Al seleccionar **Cuba**, el panel de marco legal muestra cada norma con:
+
+- **Leer norma íntegra**: abre el texto completo extraído de la Gaceta Oficial, sin salir de la app.
+- **Abrir PDF original**: enlaza al archivo alojado en el repositorio (`data/leyes/cuba/`).
+
+Normas incluidas: Resolución 253/2021 (productos químicos peligrosos y desechos peligrosos), Resolución 96/2004 (productos químicos tóxicos) y el Reglamento del Sistema Nacional de Control de Sustancias Químicas. La Ley 81/1997 aparece como referencia citada, pendiente de incorporar su texto.
+
+## Herramientas de compilación
+
+Comunes a todas las plataformas:
+
+| Herramienta | Uso |
+|---|---|
+| `rustup`, `rustc`, `cargo` | Toolchain Rust (versión 1.85 o superior) |
+| `rustup target add wasm32-unknown-unknown` | Destino WebAssembly para la web |
+| `cargo install dioxus-cli` | CLI `dx`: desarrollo, empaquetado y assets |
+| Compilador C (`cc`, MSVC o Xcode CLT) | Necesario para compilar SQLite incluida (`rusqlite bundled`) |
+
+Por plataforma:
+
+| Plataforma | Requisitos adicionales |
+|---|---|
+| **Web** | Ninguno además de WASM + `dx`. Se publica como sitio estático. |
+| **Windows** | WebView2 Runtime y Visual Studio Build Tools con carga de C++ (MSVC). |
+| **macOS** | Xcode Command Line Tools y macOS SDK. **Solo se puede compilar en una máquina Apple.** |
+| **Linux** | `libwebkit2gtk-4.1-dev`, `libgtk-3-dev`, `libsoup-3.0-dev`, `pkg-config`. |
+| **Android** | Android SDK + NDK, JDK 17, `cargo install cargo-ndk`, targets `aarch64-linux-android`, `armv7-linux-androideabi`, `x86_64-linux-android`, Gradle. |
+| **iOS** | macOS + Xcode + targets `aarch64-apple-ios` y `x86_64-apple-ios`. **No se puede compilar en Linux.** |
+
+Opcional: `wasm-opt` (Binaryen) para optimizar el bundle WASM, y `wasm-bindgen` (lo gestiona `dioxus-cli`).
 
 ## Pendiente
 

@@ -1,6 +1,7 @@
 /* Vista previa interactiva. Toda la lógica es JS para poder editarla sin compilar. */
 
 const $ = (id) => document.getElementById(id);
+const icon = (name, cls = "ico") => `<svg class="${cls}"><use href="#i-${name}"/></svg>`;
 
 const I18N = {
   es: {
@@ -76,15 +77,18 @@ function topicLabel(id) {
 }
 
 function verificationBadge(value) {
-  const verified = value === "contenido_verificado";
+  const verified = value === "contenido_verificado" || value === "documento_local_verificado";
   const labels = {
     contenido_verificado: "Verificado",
+    documento_local_verificado: "Documento local",
     dominio_snippet: "Dominio oficial",
     portal_validar: "Pendiente",
     base_local_usuario: "Base local",
+    referencia_citada: "Referencia",
   };
   const cls = verified ? "badge badge-ok" : "badge badge-warn";
-  return `<span class="${cls}">${esc(labels[value] || "Sin verificar")}</span>`;
+  const ico = verified ? icon("check") : icon("info");
+  return `<span class="${cls}">${ico}${esc(labels[value] || "Sin verificar")}</span>`;
 }
 
 /* --- País --------------------------------------------------------------- */
@@ -94,7 +98,7 @@ function renderCountryGrids() {
     .map(
       (c) => `
       <button class="pais-boton" data-pais="${esc(c.id)}">
-        <span class="bandera">${esc(c.bandera)}</span>
+        <span class="bandera">${esc(c.codigo)}</span>
         <span class="nombre">${esc(c.nombre)}</span>
         <span class="codigo">${esc(c.codigo)}</span>
       </button>`
@@ -134,12 +138,12 @@ function renderBanner() {
   const c = getCountry();
   if (!c) return;
   document.documentElement.lang = c.idioma || "es";
-  $("banner-bandera").textContent = c.bandera;
+  $("banner-bandera").textContent = c.codigo;
   $("banner-saludo").textContent = c.saludo;
   $("banner-descripcion").textContent = c.descripcion;
   $("banner-pais").textContent = `${c.nombre} · ${(c.idioma || "es").toUpperCase()}`;
   $("idioma-badge").textContent = (c.idioma || "es").toUpperCase();
-  $("flotante-bandera").textContent = c.bandera;
+  $("flotante-bandera").textContent = c.codigo;
   $("flotante-nombre").textContent = c.nombre;
 
   $("overlay-titulo").textContent = t("select_country");
@@ -212,17 +216,43 @@ function renderLegal() {
           <span class="badge">${esc(topicLabel(i.tema))}</span>
           ${verificationBadge(i.verificacion)}
         </div>
-        <a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.url)}</a>
+        ${i.url ? `<a href="${esc(i.url)}" target="_blank" rel="noopener">${icon("link")}<span>${esc(i.url)}</span></a>` : ""}
         ${(i.alternativas || [])
           .map(
             (alt) =>
-              `<a href="${esc(alt)}" target="_blank" rel="noopener">Alternativa: ${esc(alt)}</a>`
+              `<a href="${esc(alt)}" target="_blank" rel="noopener">${icon("link")}<span>Alternativa: ${esc(alt)}</span></a>`
           )
           .join("")}
         ${i.nota ? `<p class="multi-nota">${esc(i.nota)}</p>` : ""}
+        ${i.texto ? `<button class="boton leer-norma" data-norma="${esc(i.id)}">${icon("book")}Leer norma íntegra</button>` : ""}
       </div>`
     )
     .join("");
+
+  $("legal-lista").querySelectorAll("[data-norma]").forEach((btn) => {
+    btn.addEventListener("click", () => abrirNorma(btn.dataset.norma));
+  });
+}
+
+function abrirNorma(id) {
+  const c = getCountry();
+  const data = window.DATA.legislation[c.id] || { instrumentos: [] };
+  const norma = data.instrumentos.find((i) => i.id === id);
+  if (!norma || !norma.texto) return;
+  $("norma-titulo").textContent = norma.titulo;
+  $("norma-meta").textContent = [
+    norma.paginas ? `Páginas ${norma.paginas} de la Gaceta Oficial` : "Gaceta Oficial",
+    norma.archivo_local || "",
+  ].filter(Boolean).join(" · ");
+  $("norma-texto").textContent = norma.texto;
+  const pdf = $("norma-pdf");
+  if (norma.url) {
+    pdf.href = norma.url;
+    pdf.classList.remove("oculto");
+  } else {
+    pdf.classList.add("oculto");
+  }
+  $("norma-modal").classList.remove("oculto");
 }
 
 /* --- Sustancias --------------------------------------------------------- */
@@ -264,72 +294,39 @@ function renderFicha() {
   if (!s) {
     $("ficha").innerHTML = `
       <div class="ficha-vacia">
-        <div class="ficha-vacia-icono">📄</div>
+        <div class="ficha-vacia-icono">${icon("file", "ico ico-xl")}</div>
         <h4>${esc(t("pick_substance"))}</h4>
         <p>${esc(t("pick_substance_sub"))}</p>
       </div>`;
     return;
   }
 
-  const p = s.peligrosidad || {};
-  const pr = s.propiedades || {};
-  const inter = s.interacciones || {};
+  const secciones = s.secciones || [];
+  const index = secciones
+    .map((sec) => `<a href="#sec-${esc(s.id)}-${esc(sec.id)}">${sec.numero}. ${esc(sec.titulo)}</a>`)
+    .join("");
 
   $("ficha").innerHTML = `
     <div class="ficha-titulo">
       <h4>${esc(s.nombre)}</h4>
-      <span class="badge badge-warn">DEMO</span>
+      <span class="badge badge-demo">FDS · 16 SECCIONES</span>
     </div>
     <div class="identificadores">
       <span class="ident">CAS ${esc(s.cas)}</span>
       <span class="ident">CE ${esc(s.ce)}</span>
       <span class="ident">ONU ${esc(s.onu)}</span>
+      <span class="ident">${esc(s.palabra_advertencia || "Peligro")}</span>
     </div>
-
-    <div class="seccion">
-      <h5>Peligrosidad y significado</h5>
-      <div>${(p.pictogramas || []).map((x) => `<span class="picto">${esc(x)}</span>`).join("")}</div>
-      ${(p.clasificacion || []).map((x) => `<p class="frase">• ${esc(x)}</p>`).join("")}
-      ${(p.frases_h || []).map((h) => `<p class="frase"><b>${esc(h.codigo)}</b> — ${esc(h.texto)}</p>`).join("")}
-      <p>${esc(p.significado)}</p>
-    </div>
-
-    <div class="seccion">
-      <h5>Condiciones de almacenamiento</h5>
-      <p>${esc(s.almacenamiento)}</p>
-    </div>
-
-    <div class="seccion">
-      <h5>Acciones en caso de derrame o contaminación</h5>
-      <p>${esc(s.derrame)}</p>
-    </div>
-
-    <div class="seccion">
-      <h5>Propiedades químicas y físicas</h5>
-      <div class="prop-grid">
-        ${prop("Estado físico", pr.estado_fisico)}
-        ${prop("Olor", pr.olor)}
-        ${prop("Punto de inflamación", pr.punto_de_inflamacion)}
-        ${prop("Punto de ebullición", pr.punto_de_ebullicion)}
-        ${prop("Punto de fusión", pr.punto_de_fusion)}
-        ${prop("Densidad", pr.densidad)}
-        ${prop("Densidad de gas", pr.densidad_de_gas)}
-        ${prop("Solubilidad en agua", pr.solubilidad_en_agua)}
-        ${prop("Presión de vapor", pr.presion_de_vapor)}
-        ${prop("pH", pr.ph)}
-      </div>
-    </div>
-
-    <div class="seccion">
-      <h5>Interacción con otros elementos</h5>
-      <ul class="lista">${(inter.incompatibilidades || []).map((x) => `<li>${esc(x)}</li>`).join("")}</ul>
-      <p>${esc(inter.nota)}</p>
-    </div>
-
-    <div class="seccion fuentes">
-      <h5>Fuentes</h5>
-      ${(s.fuentes || []).map((f) => `<a href="${esc(f.url)}" target="_blank" rel="noopener">${esc(f.titulo)}</a>`).join("")}
-    </div>`;
+    <div class="fds-index">${index}</div>
+    ${secciones.map((sec) => `
+      <div class="seccion" id="sec-${esc(s.id)}-${esc(sec.id)}">
+        <h5>${sec.numero}. ${esc(sec.titulo)}</h5>
+        ${sec.texto ? `<p>${esc(sec.texto)}</p>` : ""}
+        ${sec.campos && sec.campos.length ? `<div class="prop-grid">${sec.campos.map((c) => `<div class="prop"><b>${esc(c.k)}</b>${esc(c.v)}</div>`).join("")}</div>` : ""}
+        ${(sec.listas || []).map((l) => `<p class="lista-titulo">${esc(l.titulo)}</p><ul class="lista">${l.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>`).join("")}
+        ${(sec.notas || []).map((n) => `<p class="nota">${icon("info")}${esc(n)}</p>`).join("")}
+      </div>`).join("")}
+  `;
 }
 
 /* --- Multi sustancia (en desarrollo) ------------------------------------ */
@@ -354,13 +351,32 @@ function renderAll() {
   renderMulti();
 }
 
+function setMovilTab(tab) {
+  $("panel-legal").classList.toggle("movil-activo", tab === "legal");
+  $("panel-sustancia").classList.toggle("movil-activo", tab === "ficha");
+  $("tab-legal").classList.toggle("activo", tab === "legal");
+  $("tab-ficha").classList.toggle("activo", tab === "ficha");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 function init() {
+  setMovilTab("legal");
+  $("tab-legal").addEventListener("click", () => setMovilTab("legal"));
+  $("tab-ficha").addEventListener("click", () => setMovilTab("ficha"));
   renderCountryGrids();
-  $("aviso-demo").textContent = window.DATA.warning;
+  $("aviso-demo").innerHTML = `${icon("alert")}<span>${esc(window.DATA.warning)}</span>`;
   $("pie-advertencia").textContent = window.DATA.warning;
 
   $("cerrar-modal").addEventListener("click", () => {
     $("pais-modal").classList.add("oculto");
+  });
+
+  $("cerrar-norma").addEventListener("click", () => {
+    $("norma-modal").classList.add("oculto");
+  });
+
+  $("norma-modal").addEventListener("click", (e) => {
+    if (e.target === $("norma-modal")) $("norma-modal").classList.add("oculto");
   });
 
   $("flotante-pais").addEventListener("click", () => {
@@ -386,7 +402,10 @@ function init() {
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") $("pais-modal").classList.add("oculto");
+    if (e.key === "Escape") {
+      $("pais-modal").classList.add("oculto");
+      $("norma-modal").classList.add("oculto");
+    }
   });
 
   renderAll();

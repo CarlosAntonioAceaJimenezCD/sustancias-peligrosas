@@ -1,229 +1,4418 @@
 {
-  "version": "0.1.0-demo",
-  "updated": "2026-11-17",
-  "advertencia": "FICHAS DE DEMOSTRACION. Los datos son de ejemplo y deben verificarse en las fuentes oficiales antes de cualquier uso real. Cada ficha enlaza a su fuente.",
+  "version": "1.0.0",
+  "updated": "2026-11-18",
+  "advertencia": "FICHAS DE DEMOSTRACIÓN CON ESTRUCTURA COMPLETA DE 16 SECCIONES (SGA/GHS, Anexo 4). Los datos deben verificarse en las fuentes oficiales antes de cualquier uso real.",
+  "estructura": "Cada ficha contiene las 16 secciones obligatorias del SGA con campos, listas y notas.",
   "sustancias": [
     {
       "id": "acetona",
       "nombre": "Acetona",
-      "sinonimos": ["Propanona", "Propano-2-ona"],
+      "sinonimos": [
+        "Propanona",
+        "Propano-2-ona"
+      ],
       "cas": "67-64-1",
       "ce": "200-662-2",
       "onu": "1090",
-      "peligrosidad": {
-        "clasificacion": ["Líquido inflamable, categoría 2", "Irritación ocular, categoría 2", "Toxicidad específica en órganos diana (exposición única), categoría 3"],
-        "pictogramas": ["GHS02", "GHS07"],
-        "frases_h": [
-          {"codigo": "H225", "texto": "Líquido y vapores muy inflamables."},
-          {"codigo": "H319", "texto": "Provoca irritación ocular grave."},
-          {"codigo": "H336", "texto": "Puede provocar somnolencia o vértigo."}
-        ],
-        "significado": "Peligro principal: incendio. Sus vapores son más pesados que el aire, pueden desplazarse por el suelo e inflamarse a distancia de la fuente. La exposición prolongada puede afectar al sistema nervioso central."
-      },
-      "almacenamiento": "Almacenar en lugar fresco, bien ventilado y alejado de fuentes de ignición, chispas y llama abierta. Mantener el recipiente herméticamente cerrado. Proteger de la luz solar directa. Separar de agentes oxidantes fuertes, ácidos fuertes y bases fuertes. Zona con ventilación exhaustiva y conexión a tierra de los recipientes para evitar electricidad estática.",
-      "derrame": "Eliminar fuentes de ignición y ventilar la zona. Usar ropa de protección y guantes resistentes a disolventes. No vertir al alcantarillado. Absorber con material inerte (arena, vermiculita o aglutinante universal) y recoger en recipientes cerrados para residuo peligroso. Si entra en contacto con ojos, enjuagar con agua abundante al menos 15 minutos y acudir al médico.",
+      "formula": "C3H6O",
+      "usos": [
+        "Disolvente industrial",
+        "Limpiador de precisión",
+        "Reactivo de laboratorio"
+      ],
+      "concentracion": "≥ 99,5 %",
       "propiedades": {
-        "estado_fisico": "Líquido incoloro",
-        "olor": "Dulce, característico (a acetona)",
-        "punto_de_inflamacion": "-18 °C (vaso cerrado)",
-        "punto_de_ebullicion": "56 °C",
-        "densidad": "0,79 g/cm³ (20 °C)",
-        "solubilidad_en_agua": "Miscible",
-        "presion_de_vapor": "24 kPa (20 °C)"
+        "Estado físico": "Líquido incoloro",
+        "Color": "Incoloro",
+        "Olor": "Dulce, característico",
+        "pH": "No aplicable",
+        "Punto de fusión": "-94 °C",
+        "Punto de ebullición": "56 °C",
+        "Punto de inflamación": "-18 °C (vaso cerrado)",
+        "Temperatura de autoignición": "465 °C",
+        "Densidad": "0,79 g/cm³ (20 °C)",
+        "Solubilidad en agua": "Miscible",
+        "Presión de vapor": "24 kPa (20 °C)",
+        "Coeficiente de reparto log Kow": "-0,24"
+      },
+      "peligrosidad": {
+        "clasificacion": [
+          "Líquido inflamable, categoría 2",
+          "Irritación ocular, categoría 2",
+          "STOT SE, categoría 3"
+        ],
+        "pictogramas": [
+          "GHS02",
+          "GHS07"
+        ],
+        "palabra": "Peligro",
+        "frases_h": [
+          {
+            "codigo": "H225",
+            "texto": "Líquido y vapores muy inflamables."
+          },
+          {
+            "codigo": "H319",
+            "texto": "Provoca irritación ocular grave."
+          },
+          {
+            "codigo": "H336",
+            "texto": "Puede provocar somnolencia o vértigo."
+          }
+        ],
+        "frases_p": [
+          "P210 Mantener alejado del calor, chispas y llama abierta.",
+          "P261 Evitar respirar los vapores.",
+          "P305+P351+P338 En caso de contacto con los ojos, enjuagar con agua abundante."
+        ],
+        "significado": "Peligro principal: incendio. Sus vapores son más pesados que el aire, pueden desplazarse por el suelo e inflamarse a distancia. La exposición prolongada puede afectar al sistema nervioso central.",
+        "otros_peligros": [
+          "Los vapores pueden formar mezclas explosivas con el aire."
+        ]
+      },
+      "primeros": {
+        "inhalacion": "Trasladar al aire libre. Si aparece somnolencia, mantener en posición lateral de seguridad y acudir al médico.",
+        "piel": "Lavar con agua y jabón. Retirar la ropa contaminada.",
+        "ojos": "Enjuagar con agua abundante al menos 15 minutos, manteniendo los párpados abiertos. Acudir al médico.",
+        "ingestion": "No provocar el vómito. Enjuagar la boca y acudir al médico.",
+        "sintomas": [
+          "Irritación ocular",
+          "Mareo y somnolencia",
+          "Sequedad de piel y mucosas"
+        ]
+      },
+      "incendio": {
+        "descripcion": "Líquido muy inflamable. Los vapores pueden propagarse por el suelo y provocar retroceso de llama.",
+        "adecuados": [
+          "Espuma resistente al alcohol",
+          "Polvo químico seco",
+          "Dióxido de carbono (CO2)"
+        ],
+        "inadecuados": [
+          "Chorros directos de agua (pueden extender el fuego)"
+        ],
+        "peligros": [
+          "Mezcla explosiva vapor-aire",
+          "Humos tóxicos en combustión"
+        ],
+        "equipo": [
+          "Aparato respiratorio autónomo",
+          "Traje de protección contra incendios"
+        ]
+      },
+      "derrame": "Eliminar fuentes de ignición, ventilar y usar herramientas antichispa. Absorber con material inerte (arena, vermiculita) y recoger en recipientes cerrados etiquetados como residuo peligroso. Lavar la zona con agua y detergente.",
+      "almacenamiento": "Almacenar en lugar fresco, bien ventilado y alejado de fuentes de ignición. Mantener herméticamente cerrado, proteger de la luz solar y conectar a tierra los recipientes durante la transferencia.",
+      "manipulacion": [
+        "Manipular bajo campana de extracción",
+        "Evitar chispas y descargas estáticas",
+        "Usar herramientas no ferrosas"
+      ],
+      "epp": [
+        "Gafas de seguridad",
+        "Guantes de nitrilo o butilo",
+        "Bata de laboratorio",
+        "Protección respiratoria con filtro A si es necesario"
+      ],
+      "tlv": "OSHA PEL 1000 ppm / ACGIH TLV 250 ppm (consultar normativa local)",
+      "estabilidad": {
+        "texto": "Estable en condiciones normales.",
+        "evitar": [
+          "Calor",
+          "Chispas",
+          "Llama abierta",
+          "Luz solar directa"
+        ],
+        "descomposicion": [
+          "Monóxido de carbono y dióxido de carbono en combustión"
+        ]
       },
       "interacciones": {
-        "incompatibilidades": ["Agentes oxidantes fuertes (peróxidos, permanganatos)", "Ácidos fuertes", "Bases fuertes", "Materiales plásticos no resistentes a disolventes"],
-        "nota": "Puede formar mezclas explosivas con el aire. El contacto con oxidantes fuertes puede provocar incendio o explosión."
-      },
-      "fuentes": [
-        {"titulo": "Base de datos ICSC (OIT/OMS)", "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"},
-        {"titulo": "PubChem - Acetona (CAS 67-64-1)", "url": "https://pubchem.ncbi.nlm.nih.gov/"}
-      ],
-      "estado": "demo"
-    },
-    {
-      "id": "etanol",
-      "nombre": "Etanol",
-      "sinonimos": ["Alcohol etílico", "Etanol absoluto"],
-      "cas": "64-17-5",
-      "ce": "200-578-6",
-      "onu": "1170",
-      "peligrosidad": {
-        "clasificacion": ["Líquido inflamable, categoría 2", "Irritación ocular, categoría 2"],
-        "pictogramas": ["GHS02", "GHS07"],
-        "frases_h": [
-          {"codigo": "H225", "texto": "Líquido y vapores muy inflamables."},
-          {"codigo": "H319", "texto": "Provoca irritación ocular grave."}
+        "incompatibilidades": [
+          "Agentes oxidantes fuertes (peróxidos, permanganatos)",
+          "Ácidos fuertes",
+          "Bases fuertes",
+          "Plásticos no resistentes a disolventes"
         ],
-        "significado": "Peligro principal: incendio. La llama de los alcoholes es casi invisible en ambientes iluminados y sus vapores pueden propagarse por el suelo."
+        "nota": "Puede formar mezclas explosivas con el aire; reacciona violentamente con oxidantes."
       },
-      "almacenamiento": "Conservar en recipientes bien cerrados, en lugar fresco y ventilado, lejos de fuentes de calor, chispas y llama abierta. Mantener separado de agentes oxidantes, ácidos y metales alcalinos. Usar material antichispa y conexión a tierra.",
-      "derrame": "Eliminar ignición, ventilar y absorber el líquido con material inerte. Recoger en recipientes cerrados. No verter a desagües. En caso de contacto ocular, lavar con agua abundante.",
-      "propiedades": {
-        "estado_fisico": "Líquido incoloro",
-        "olor": "Alcohol, característico",
-        "punto_de_inflamacion": "12 °C (vaso cerrado)",
-        "punto_de_ebullicion": "78 °C",
-        "densidad": "0,79 g/cm³ (20 °C)",
-        "solubilidad_en_agua": "Miscible",
-        "presion_de_vapor": "5,9 kPa (20 °C)"
-      },
-      "interacciones": {
-        "incompatibilidades": ["Agentes oxidantes fuertes", "Sodio y potasio metálicos", "Ácidos fuertes"],
-        "nota": "Reacciona violentamente con metales alcalinos liberando hidrógeno inflamable."
-      },
-      "fuentes": [
-        {"titulo": "Base de datos ICSC (OIT/OMS)", "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"},
-        {"titulo": "PubChem - Etanol (CAS 64-17-5)", "url": "https://pubchem.ncbi.nlm.nih.gov/"}
+      "toxicologica": "DL50 oral (rata) aproximadamente 5800 mg/kg. La principal vía de exposición laboral es la inhalación de vapores.",
+      "eta": "ETA oral > 2000 mg/kg (estimación)",
+      "ecotoxicologica": "Poco nociva para organismos acuáticos en concentraciones ambientes, pero puede afectar a microorganismos.",
+      "acuatico": [
+        "LC50 pez (96 h) estimada > 100 mg/L"
       ],
-      "estado": "demo"
+      "persistencia": [
+        "Fácilmente biodegradable"
+      ],
+      "bioacumulacion": [
+        "Bajo potencial"
+      ],
+      "eliminacion": [
+        "Incineración en instalación autorizada",
+        "Recuperación del disolvente si es económicamente viable"
+      ],
+      "designacion": "ACETONA",
+      "clase_transporte": "Clase 3 (líquidos inflamables)",
+      "grupo_embalaje": "II",
+      "contaminante_marino": "No",
+      "reglamentacion": [
+        "REACH (CE) 1907/2006",
+        "CLP (CE) 1272/2008",
+        "SGA/GHS UNECE",
+        "ADR/RID/IMDG/IATA"
+      ],
+      "fuentes": [
+        {
+          "titulo": "Base de datos ICSC (OIT/OMS)",
+          "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"
+        },
+        {
+          "titulo": "PubChem - Acetona (CAS 67-64-1)",
+          "url": "https://pubchem.ncbi.nlm.nih.gov/"
+        },
+        {
+          "titulo": "SGA/GHS, Anexo 4 - UNECE",
+          "url": "https://unece.org/transport/dangerous-goods/ghs-rev11-2025"
+        }
+      ],
+      "estado": "demo",
+      "secciones": [
+        {
+          "numero": 1,
+          "id": "identificacion",
+          "titulo": "Identificación del producto y del proveedor",
+          "texto": "Acetona es una sustancia química identificada internacionalmente mediante los números CAS, CE y ONU indicados. Se suministra para los usos profesionales e industriales descritos.",
+          "campos": [
+            {
+              "k": "Identificador SGA del producto",
+              "v": "Acetona"
+            },
+            {
+              "k": "Sinónimos",
+              "v": "Propanona, Propano-2-ona"
+            },
+            {
+              "k": "Número CAS",
+              "v": "67-64-1"
+            },
+            {
+              "k": "Número CE",
+              "v": "200-662-2"
+            },
+            {
+              "k": "Número ONU",
+              "v": "1090"
+            },
+            {
+              "k": "Fórmula molecular",
+              "v": "C3H6O"
+            },
+            {
+              "k": "Proveedor",
+              "v": "Información del fabricante en la etiqueta del envase"
+            },
+            {
+              "k": "Teléfono de emergencia",
+              "v": "Servicio de emergencias químicas local (112 / 911)"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Uso recomendado",
+              "items": [
+                "Disolvente industrial",
+                "Limpiador de precisión",
+                "Reactivo de laboratorio"
+              ]
+            }
+          ],
+          "notas": [
+            "El proveedor debe indicar en la etiqueta la identidad completa y los datos de contacto."
+          ]
+        },
+        {
+          "numero": 2,
+          "id": "peligros",
+          "titulo": "Identificación de los peligros",
+          "texto": "Peligro principal: incendio. Sus vapores son más pesados que el aire, pueden desplazarse por el suelo e inflamarse a distancia. La exposición prolongada puede afectar al sistema nervioso central.",
+          "campos": [
+            {
+              "k": "Clasificación SGA",
+              "v": "Líquido inflamable, categoría 2; Irritación ocular, categoría 2; STOT SE, categoría 3"
+            },
+            {
+              "k": "Pictogramas",
+              "v": "GHS02, GHS07"
+            },
+            {
+              "k": "Palabra de advertencia",
+              "v": "Peligro"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Indicaciones de peligro (H)",
+              "items": [
+                "H225 — Líquido y vapores muy inflamables.",
+                "H319 — Provoca irritación ocular grave.",
+                "H336 — Puede provocar somnolencia o vértigo."
+              ]
+            },
+            {
+              "titulo": "Consejos de prudencia (P)",
+              "items": [
+                "P210 Mantener alejado del calor, chispas y llama abierta.",
+                "P261 Evitar respirar los vapores.",
+                "P305+P351+P338 En caso de contacto con los ojos, enjuagar con agua abundante."
+              ]
+            }
+          ],
+          "notas": [
+            "Los vapores pueden formar mezclas explosivas con el aire."
+          ]
+        },
+        {
+          "numero": 3,
+          "id": "composicion",
+          "titulo": "Composición / información sobre los componentes",
+          "texto": "Sustancia pura: Acetona. No se consideran impurezas que modifiquen la clasificación de peligro.",
+          "campos": [
+            {
+              "k": "Identidad química",
+              "v": "Acetona"
+            },
+            {
+              "k": "Número CAS",
+              "v": "67-64-1"
+            },
+            {
+              "k": "Número CE",
+              "v": "200-662-2"
+            },
+            {
+              "k": "Concentración",
+              "v": "≥ 99,5 %"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Impurezas y aditivos",
+              "items": [
+                "No se declaran impurezas relevantes para la clasificación"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 4,
+          "id": "primeros_auxilios",
+          "titulo": "Primeros auxilios",
+          "texto": "Trasladar a la persona afectada a un lugar ventilado. Mantener la calma y llamar al servicio de emergencias si los síntomas persisten.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Inhalación",
+              "items": [
+                "Trasladar al aire libre. Si aparece somnolencia, mantener en posición lateral de seguridad y acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Contacto con la piel",
+              "items": [
+                "Lavar con agua y jabón. Retirar la ropa contaminada."
+              ]
+            },
+            {
+              "titulo": "Contacto con los ojos",
+              "items": [
+                "Enjuagar con agua abundante al menos 15 minutos, manteniendo los párpados abiertos. Acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Ingestión",
+              "items": [
+                "No provocar el vómito. Enjuagar la boca y acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Síntomas más importantes",
+              "items": [
+                "Irritación ocular",
+                "Mareo y somnolencia",
+                "Sequedad de piel y mucosas"
+              ]
+            }
+          ],
+          "notas": [
+            "Nunca administrar agua ni leche a una persona inconsciente.",
+            "Llevar esta ficha o la etiqueta al centro médico."
+          ]
+        },
+        {
+          "numero": 5,
+          "id": "incendio",
+          "titulo": "Medidas de lucha contra incendios",
+          "texto": "Líquido muy inflamable. Los vapores pueden propagarse por el suelo y provocar retroceso de llama.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Medios de extinción adecuados",
+              "items": [
+                "Espuma resistente al alcohol",
+                "Polvo químico seco",
+                "Dióxido de carbono (CO2)"
+              ]
+            },
+            {
+              "titulo": "Medios de extinción no adecuados",
+              "items": [
+                "Chorros directos de agua (pueden extender el fuego)"
+              ]
+            },
+            {
+              "titulo": "Peligros específicos",
+              "items": [
+                "Mezcla explosiva vapor-aire",
+                "Humos tóxicos en combustión"
+              ]
+            },
+            {
+              "titulo": "Equipo de protección",
+              "items": [
+                "Aparato respiratorio autónomo",
+                "Traje de protección contra incendios"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 6,
+          "id": "derrame",
+          "titulo": "Medidas que deben tomarse en caso de vertido accidental",
+          "texto": "Eliminar fuentes de ignición, ventilar y usar herramientas antichispa. Absorber con material inerte (arena, vermiculita) y recoger en recipientes cerrados etiquetados como residuo peligroso. Lavar la zona con agua y detergente.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Precauciones individuales",
+              "items": [
+                "Usar guantes, gafas de seguridad y ropa de protección",
+                "Eliminar fuentes de ignición y ventilar la zona"
+              ]
+            },
+            {
+              "titulo": "Precauciones medioambientales",
+              "items": [
+                "Evitar la entrada en alcantarillados, suelos y cursos de agua",
+                "Notificar a la autoridad ambiental si se produce una liberación importante"
+              ]
+            },
+            {
+              "titulo": "Métodos de limpieza",
+              "items": [
+                "Absorber con material inerte y recoger en recipientes cerrados",
+                "Limpiar la zona con agua y detergente, recogiendo los efluentes"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 7,
+          "id": "manipulacion",
+          "titulo": "Manipulación y almacenamiento",
+          "texto": "Almacenar en lugar fresco, bien ventilado y alejado de fuentes de ignición. Mantener herméticamente cerrado, proteger de la luz solar y conectar a tierra los recipientes durante la transferencia.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Precauciones para una manipulación segura",
+              "items": [
+                "Manipular bajo campana de extracción",
+                "Evitar chispas y descargas estáticas",
+                "Usar herramientas no ferrosas"
+              ]
+            },
+            {
+              "titulo": "Condiciones de almacenamiento seguro",
+              "items": [
+                "Mantener el envase cerrado y en lugar fresco",
+                "Proteger de la luz solar directa"
+              ]
+            }
+          ],
+          "notas": [
+            "Incompatibilidades: Agentes oxidantes fuertes (peróxidos, permanganatos); Ácidos fuertes; Bases fuertes; Plásticos no resistentes a disolventes"
+          ]
+        },
+        {
+          "numero": 8,
+          "id": "exposicion",
+          "titulo": "Controles de exposición / protección personal",
+          "texto": "Aplicar controles de ingeniería para mantener la concentración en el aire por debajo de los límites de exposición profesional vigentes en cada país.",
+          "campos": [
+            {
+              "k": "Límite de exposición (TLV-TWA)",
+              "v": "OSHA PEL 1000 ppm / ACGIH TLV 250 ppm (consultar normativa local)"
+            },
+            {
+              "k": "Controles de ingeniería",
+              "v": "Ventilación general y, si procede, extracción localizada"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Equipo de protección personal (EPP)",
+              "items": [
+                "Gafas de seguridad",
+                "Guantes de nitrilo o butilo",
+                "Bata de laboratorio",
+                "Protección respiratoria con filtro A si es necesario"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 9,
+          "id": "propiedades",
+          "titulo": "Propiedades físicas y químicas",
+          "texto": "Los valores siguientes corresponden a condiciones normales de presión y temperatura salvo indicación contraria.",
+          "campos": [
+            {
+              "k": "Estado físico",
+              "v": "Líquido incoloro"
+            },
+            {
+              "k": "Color",
+              "v": "Incoloro"
+            },
+            {
+              "k": "Olor",
+              "v": "Dulce, característico"
+            },
+            {
+              "k": "pH",
+              "v": "No aplicable"
+            },
+            {
+              "k": "Punto de fusión",
+              "v": "-94 °C"
+            },
+            {
+              "k": "Punto de ebullición",
+              "v": "56 °C"
+            },
+            {
+              "k": "Punto de inflamación",
+              "v": "-18 °C (vaso cerrado)"
+            },
+            {
+              "k": "Temperatura de autoignición",
+              "v": "465 °C"
+            },
+            {
+              "k": "Densidad",
+              "v": "0,79 g/cm³ (20 °C)"
+            },
+            {
+              "k": "Solubilidad en agua",
+              "v": "Miscible"
+            },
+            {
+              "k": "Presión de vapor",
+              "v": "24 kPa (20 °C)"
+            },
+            {
+              "k": "Coeficiente de reparto log Kow",
+              "v": "-0,24"
+            }
+          ],
+          "listas": [],
+          "notas": []
+        },
+        {
+          "numero": 10,
+          "id": "estabilidad",
+          "titulo": "Estabilidad y reactividad",
+          "texto": "Estable en condiciones normales.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Condiciones que deben evitarse",
+              "items": [
+                "Calor",
+                "Chispas",
+                "Llama abierta",
+                "Luz solar directa"
+              ]
+            },
+            {
+              "titulo": "Materiales incompatibles",
+              "items": [
+                "Agentes oxidantes fuertes (peróxidos, permanganatos)",
+                "Ácidos fuertes",
+                "Bases fuertes",
+                "Plásticos no resistentes a disolventes"
+              ]
+            },
+            {
+              "titulo": "Productos de descomposición peligrosos",
+              "items": [
+                "Monóxido de carbono y dióxido de carbono en combustión"
+              ]
+            }
+          ],
+          "notas": [
+            "Puede formar mezclas explosivas con el aire; reacciona violentamente con oxidantes."
+          ]
+        },
+        {
+          "numero": 11,
+          "id": "toxicologica",
+          "titulo": "Información toxicológica",
+          "texto": "DL50 oral (rata) aproximadamente 5800 mg/kg. La principal vía de exposición laboral es la inhalación de vapores.",
+          "campos": [
+            {
+              "k": "Estimación de toxicidad aguda (ETA)",
+              "v": "ETA oral > 2000 mg/kg (estimación)"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Vías probables de exposición",
+              "items": [
+                "Inhalación de vapores",
+                "Contacto cutáneo",
+                "Contacto ocular",
+                "Ingestión accidental"
+              ]
+            },
+            {
+              "titulo": "Efectos agudos y crónicos",
+              "items": [
+                "Irritación ocular",
+                "Mareo y somnolencia",
+                "Sequedad de piel y mucosas"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 12,
+          "id": "ecotoxicologica",
+          "titulo": "Información ecotoxicológica",
+          "texto": "Poco nociva para organismos acuáticos en concentraciones ambientes, pero puede afectar a microorganismos.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Efectos en el medio acuático",
+              "items": [
+                "LC50 pez (96 h) estimada > 100 mg/L"
+              ]
+            },
+            {
+              "titulo": "Persistencia y degradabilidad",
+              "items": [
+                "Fácilmente biodegradable"
+              ]
+            },
+            {
+              "titulo": "Potencial de bioacumulación",
+              "items": [
+                "Bajo potencial"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 13,
+          "id": "eliminacion",
+          "titulo": "Información relativa a la eliminación de los productos",
+          "texto": "Eliminar el producto y los envases como residuo peligroso, de acuerdo con la normativa local vigente.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Métodos de eliminación",
+              "items": [
+                "Incineración en instalación autorizada",
+                "Recuperación del disolvente si es económicamente viable"
+              ]
+            },
+            {
+              "titulo": "Envases contaminados",
+              "items": [
+                "Vaciar completamente",
+                "No reutilizar para otros fines",
+                "Entregar al gestor autorizado"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 14,
+          "id": "transporte",
+          "titulo": "Información relativa al transporte",
+          "texto": "Transportar conforme a la Reglamentación Modelo de la ONU y al modo de transporte correspondiente (ADR/RID/IMDG/IATA).",
+          "campos": [
+            {
+              "k": "Número ONU",
+              "v": "1090"
+            },
+            {
+              "k": "Designación oficial de transporte",
+              "v": "ACETONA"
+            },
+            {
+              "k": "Clase de peligro en el transporte",
+              "v": "Clase 3 (líquidos inflamables)"
+            },
+            {
+              "k": "Grupo de embalaje",
+              "v": "II"
+            },
+            {
+              "k": "Contaminante marino",
+              "v": "No"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Precauciones especiales",
+              "items": [
+                "Cerrar herméticamente los envases",
+                "Proteger de fuentes de ignición",
+                "Portar la documentación de transporte exigida"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 15,
+          "id": "reglamentacion",
+          "titulo": "Información sobre la reglamentación",
+          "texto": "Normativa aplicable a la sustancia. Verificar siempre las disposiciones específicas del país de uso.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Disposiciones aplicables",
+              "items": [
+                "REACH (CE) 1907/2006",
+                "CLP (CE) 1272/2008",
+                "SGA/GHS UNECE",
+                "ADR/RID/IMDG/IATA"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 16,
+          "id": "otras",
+          "titulo": "Otras informaciones",
+          "texto": "Esta ficha se ha elaborado con fines informativos a partir de fuentes públicas y debe ser validada por el proveedor antes de su uso.",
+          "campos": [
+            {
+              "k": "Versión",
+              "v": "1.0"
+            },
+            {
+              "k": "Fecha de revisión",
+              "v": "2026-11-18"
+            },
+            {
+              "k": "Estado",
+              "v": "Ficha de demostración — requiere validación"
+            },
+            {
+              "k": "Elaborada por",
+              "v": "Proyecto Sustancias Peligrosas"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Fuentes consultadas",
+              "items": [
+                "Base de datos ICSC (OIT/OMS)",
+                "PubChem - Acetona (CAS 67-64-1)",
+                "SGA/GHS, Anexo 4 - UNECE"
+              ]
+            }
+          ],
+          "notas": [
+            "Las indicaciones de peligro y consejos de prudencia deben verificarse en la edición vigente del SGA."
+          ]
+        }
+      ],
+      "palabra_advertencia": "Peligro"
     },
     {
       "id": "acido-clorhidrico",
       "nombre": "Ácido clorhídrico",
-      "sinonimos": ["Cloruro de hidrógeno en disolución", "HCl acuoso"],
+      "sinonimos": [
+        "Cloruro de hidrógeno en disolución",
+        "HCl acuoso"
+      ],
       "cas": "7647-01-0",
       "ce": "231-595-7",
       "onu": "1789",
-      "peligrosidad": {
-        "clasificacion": ["Corrosivo para metales, categoría 1", "Corrosión cutánea, categoría 1B", "Lesiones oculares graves, categoría 1", "Toxicidad específica en órganos diana (exposición única), categoría 3"],
-        "pictogramas": ["GHS05", "GHS07"],
-        "frases_h": [
-          {"codigo": "H290", "texto": "Puede ser corrosivo para los metales."},
-          {"codigo": "H314", "texto": "Provoca quemaduras graves en la piel y lesiones oculares graves."},
-          {"codigo": "H335", "texto": "Puede irritar las vías respiratorias."}
-        ],
-        "significado": "Peligro principal: corrosión. Los vapores de HCl son irritantes y corrosivos para vías respiratorias, ojos y mucosas. El contacto con metales puede liberar hidrógeno inflamable."
-      },
-      "almacenamiento": "Almacenar en recipientes resistentes a ácidos, en zona bien ventilada y fresca. Separar de bases, metales en polvo, agentes oxidantes, cianuros y sulfitos. Usar bandejas de contención y materiales de construcción resistentes a la corrosión. No almacenar junto a hipocloritos (libera cloro gaseoso).",
-      "derrame": "Ventilar intensamente. Usar EPP: guantes de nitrilo o neopreno, gafas de seguridad y protección facial. Neutralizar con carbonato de sodio o cal, absorber con material inerte y recoger como residuo peligroso. No verter sin neutralizar. En contacto con piel o ojos, lavar con agua abundante al menos 15 minutos y acudir al médico.",
+      "formula": "HCl",
+      "usos": [
+        "Limpieza industrial (decapado)",
+        "Regulación de pH",
+        "Reactivo de laboratorio",
+        "Industria alimentaria (acidulante)"
+      ],
+      "concentracion": "37 % en agua (disolución concentrada)",
       "propiedades": {
-        "estado_fisico": "Líquido incoloro o ligeramente amarillento (disolución)",
-        "olor": "Picante, irritante",
-        "punto_de_ebullicion": "Depende de la concentración; azeótropo ~108 °C",
-        "densidad": "1,18 g/cm³ (37 %, 20 °C)",
-        "solubilidad_en_agua": "Muy soluble",
-        "ph": "< 1 (disolución concentrada)"
+        "Estado físico": "Líquido incoloro o amarillento",
+        "Color": "Incoloro a amarillo pálido",
+        "Olor": "Picante, irritante",
+        "pH": "< 1 (concentrado)",
+        "Punto de fusión": "-30 °C",
+        "Punto de ebullición": "≈ 108 °C (azeótropo)",
+        "Densidad": "1,18 g/cm³ (37 %, 20 °C)",
+        "Solubilidad en agua": "Muy soluble",
+        "Presión de vapor": "≈ 16 kPa (20 °C)"
+      },
+      "peligrosidad": {
+        "clasificacion": [
+          "Corrosivo para metales, categoría 1",
+          "Corrosión cutánea, categoría 1B",
+          "Lesiones oculares graves, categoría 1",
+          "STOT SE, categoría 3"
+        ],
+        "pictogramas": [
+          "GHS05",
+          "GHS07"
+        ],
+        "palabra": "Peligro",
+        "frases_h": [
+          {
+            "codigo": "H290",
+            "texto": "Puede ser corrosivo para los metales."
+          },
+          {
+            "codigo": "H314",
+            "texto": "Provoca quemaduras graves en la piel y lesiones oculares graves."
+          },
+          {
+            "codigo": "H335",
+            "texto": "Puede irritar las vías respiratorias."
+          }
+        ],
+        "frases_p": [
+          "P280 Usar guantes y gafas de protección.",
+          "P303+P361+P353 En contacto con la piel, lavar inmediatamente con agua abundante.",
+          "P305+P351+P338 En contacto con los ojos, enjuagar con agua abundante y acudir al médico."
+        ],
+        "significado": "Peligro principal: corrosión. Los vapores de HCl son irritantes y corrosivos para vías respiratorias, ojos y mucosas. El contacto con metales puede liberar hidrógeno inflamable.",
+        "otros_peligros": [
+          "La dilución es fuertemente exotérmica: añadir siempre el ácido sobre el agua."
+        ]
+      },
+      "primeros": {
+        "inhalacion": "Trasladar al aire libre. Si hay dificultad respiratoria, administrar oxígeno por personal cualificado y acudir al médico.",
+        "piel": "Retirar la ropa contaminada y lavar con agua abundante al menos 15 minutos. Acudir al médico.",
+        "ojos": "Enjuagar con agua abundante al menos 15 minutos manteniendo los párpados abiertos. Acudir urgentemente al oftalmólogo.",
+        "ingestion": "No provocar el vómito. Enjuagar la boca y beber agua pequeña cantidad si está consciente. Acudir al médico.",
+        "sintomas": [
+          "Quemaduras químicas",
+          "Dolor ocular y visión borrosa",
+          "Tos y dificultad respiratoria"
+        ]
+      },
+      "incendio": {
+        "descripcion": "No es inflamable, pero reacciona con metales liberando hidrógeno que puede inflamarse.",
+        "adecuados": [
+          "Polvo químico seco",
+          "CO2",
+          "Espuma resistente a ácidos"
+        ],
+        "inadecuados": [
+          "Agua directa sobre el ácido concentrado"
+        ],
+        "peligros": [
+          "Liberación de hidrógeno inflamable",
+          "Humos corrosivos de cloruro de hidrógeno"
+        ],
+        "equipo": [
+          "Aparato respiratorio autónomo",
+          "Traje de protección contra ácidos"
+        ]
+      },
+      "derrame": "Ventilar intensamente. Usar guantes de nitrilo o neopreno, gafas y protección facial. Neutralizar con carbonato de sodio o cal, absorber con material inerte y recoger como residuo peligroso. No verter sin neutralizar.",
+      "almacenamiento": "Almacenar en recipientes resistentes a ácidos, en zona ventilada y fresca, sobre bandejas de contención. Separar de bases, hipocloritos, cianuros, metales en polvo y agentes oxidantes.",
+      "manipulacion": [
+        "Manipular bajo campana de extracción",
+        "Añadir siempre ácido sobre agua",
+        "Evitar el contacto con lejía"
+      ],
+      "epp": [
+        "Gafas de seguridad y pantalla facial",
+        "Guantes de neopreno o nitrilo",
+        "Delantal resistente a ácidos",
+        "Protección respiratoria con filtro ácido"
+      ],
+      "tlv": "ACGIH TLV techo 5 ppm (consultar normativa local)",
+      "estabilidad": {
+        "texto": "Estable en recipientes cerrados. Absorbe humedad del ambiente.",
+        "evitar": [
+          "Hipocloritos",
+          "Bases",
+          "Metales en polvo",
+          "Humedad"
+        ],
+        "descomposicion": [
+          "Cloro gaseoso en contacto con oxidantes",
+          "Hidrógeno con metales"
+        ]
       },
       "interacciones": {
-        "incompatibilidades": ["Bases fuertes", "Hipoclorito de sodio (libera cloro)", "Cianuros (libera ácido cianhídrico)", "Metales en polvo", "Agentes oxidantes"],
-        "nota": "La mezcla con lejía (hipoclorito) genera gas cloro tóxico: nunca combinarlos."
+        "incompatibilidades": [
+          "Hipoclorito de sodio (libera cloro tóxico)",
+          "Bases fuertes",
+          "Cianuros (libera ácido cianhídrico)",
+          "Metales en polvo",
+          "Agentes oxidantes"
+        ],
+        "nota": "Nunca mezclar con lejía: se genera gas cloro tóxico."
       },
-      "fuentes": [
-        {"titulo": "Base de datos ICSC (OIT/OMS)", "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"},
-        {"titulo": "PubChem - Ácido clorhídrico (CAS 7647-01-0)", "url": "https://pubchem.ncbi.nlm.nih.gov/"}
+      "toxicologica": "Corrosivo severo por todas las vías. La exposición crónica a vapores puede dañar el esmalte dental y las vías respiratorias.",
+      "eta": "CL50 inhalación (rata, 1 h) aproximadamente 3124 ppm",
+      "ecotoxicologica": "Ácido fuerte: puede alterar el pH de aguas y suelos y afectar a organismos acuáticos.",
+      "acuatico": [
+        "Efecto por descenso del pH"
       ],
-      "estado": "demo"
+      "persistencia": [
+        "No persistente; se neutraliza en el ambiente"
+      ],
+      "bioacumulacion": [
+        "No aplicable"
+      ],
+      "eliminacion": [
+        "Neutralización controlada antes de eliminar",
+        "Entregar a gestor autorizado",
+        "No verter a desagües sin tratar"
+      ],
+      "designacion": "ÁCIDO CLORHÍDRICO",
+      "clase_transporte": "Clase 8 (corrosivos)",
+      "grupo_embalaje": "II",
+      "contaminante_marino": "No",
+      "reglamentacion": [
+        "REACH (CE) 1907/2006",
+        "CLP (CE) 1272/2008",
+        "SGA/GHS UNECE",
+        "ADR/RID/IMDG/IATA"
+      ],
+      "fuentes": [
+        {
+          "titulo": "Base de datos ICSC (OIT/OMS)",
+          "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"
+        },
+        {
+          "titulo": "PubChem - Ácido clorhídrico (CAS 7647-01-0)",
+          "url": "https://pubchem.ncbi.nlm.nih.gov/"
+        },
+        {
+          "titulo": "SGA/GHS, Anexo 4 - UNECE",
+          "url": "https://unece.org/transport/dangerous-goods/ghs-rev11-2025"
+        }
+      ],
+      "estado": "demo",
+      "secciones": [
+        {
+          "numero": 1,
+          "id": "identificacion",
+          "titulo": "Identificación del producto y del proveedor",
+          "texto": "Ácido clorhídrico es una sustancia química identificada internacionalmente mediante los números CAS, CE y ONU indicados. Se suministra para los usos profesionales e industriales descritos.",
+          "campos": [
+            {
+              "k": "Identificador SGA del producto",
+              "v": "Ácido clorhídrico"
+            },
+            {
+              "k": "Sinónimos",
+              "v": "Cloruro de hidrógeno en disolución, HCl acuoso"
+            },
+            {
+              "k": "Número CAS",
+              "v": "7647-01-0"
+            },
+            {
+              "k": "Número CE",
+              "v": "231-595-7"
+            },
+            {
+              "k": "Número ONU",
+              "v": "1789"
+            },
+            {
+              "k": "Fórmula molecular",
+              "v": "HCl"
+            },
+            {
+              "k": "Proveedor",
+              "v": "Información del fabricante en la etiqueta del envase"
+            },
+            {
+              "k": "Teléfono de emergencia",
+              "v": "Servicio de emergencias químicas local (112 / 911)"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Uso recomendado",
+              "items": [
+                "Limpieza industrial (decapado)",
+                "Regulación de pH",
+                "Reactivo de laboratorio",
+                "Industria alimentaria (acidulante)"
+              ]
+            }
+          ],
+          "notas": [
+            "El proveedor debe indicar en la etiqueta la identidad completa y los datos de contacto."
+          ]
+        },
+        {
+          "numero": 2,
+          "id": "peligros",
+          "titulo": "Identificación de los peligros",
+          "texto": "Peligro principal: corrosión. Los vapores de HCl son irritantes y corrosivos para vías respiratorias, ojos y mucosas. El contacto con metales puede liberar hidrógeno inflamable.",
+          "campos": [
+            {
+              "k": "Clasificación SGA",
+              "v": "Corrosivo para metales, categoría 1; Corrosión cutánea, categoría 1B; Lesiones oculares graves, categoría 1; STOT SE, categoría 3"
+            },
+            {
+              "k": "Pictogramas",
+              "v": "GHS05, GHS07"
+            },
+            {
+              "k": "Palabra de advertencia",
+              "v": "Peligro"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Indicaciones de peligro (H)",
+              "items": [
+                "H290 — Puede ser corrosivo para los metales.",
+                "H314 — Provoca quemaduras graves en la piel y lesiones oculares graves.",
+                "H335 — Puede irritar las vías respiratorias."
+              ]
+            },
+            {
+              "titulo": "Consejos de prudencia (P)",
+              "items": [
+                "P280 Usar guantes y gafas de protección.",
+                "P303+P361+P353 En contacto con la piel, lavar inmediatamente con agua abundante.",
+                "P305+P351+P338 En contacto con los ojos, enjuagar con agua abundante y acudir al médico."
+              ]
+            }
+          ],
+          "notas": [
+            "La dilución es fuertemente exotérmica: añadir siempre el ácido sobre el agua."
+          ]
+        },
+        {
+          "numero": 3,
+          "id": "composicion",
+          "titulo": "Composición / información sobre los componentes",
+          "texto": "Sustancia pura: Ácido clorhídrico. No se consideran impurezas que modifiquen la clasificación de peligro.",
+          "campos": [
+            {
+              "k": "Identidad química",
+              "v": "Ácido clorhídrico"
+            },
+            {
+              "k": "Número CAS",
+              "v": "7647-01-0"
+            },
+            {
+              "k": "Número CE",
+              "v": "231-595-7"
+            },
+            {
+              "k": "Concentración",
+              "v": "37 % en agua (disolución concentrada)"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Impurezas y aditivos",
+              "items": [
+                "No se declaran impurezas relevantes para la clasificación"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 4,
+          "id": "primeros_auxilios",
+          "titulo": "Primeros auxilios",
+          "texto": "Trasladar a la persona afectada a un lugar ventilado. Mantener la calma y llamar al servicio de emergencias si los síntomas persisten.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Inhalación",
+              "items": [
+                "Trasladar al aire libre. Si hay dificultad respiratoria, administrar oxígeno por personal cualificado y acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Contacto con la piel",
+              "items": [
+                "Retirar la ropa contaminada y lavar con agua abundante al menos 15 minutos. Acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Contacto con los ojos",
+              "items": [
+                "Enjuagar con agua abundante al menos 15 minutos manteniendo los párpados abiertos. Acudir urgentemente al oftalmólogo."
+              ]
+            },
+            {
+              "titulo": "Ingestión",
+              "items": [
+                "No provocar el vómito. Enjuagar la boca y beber agua pequeña cantidad si está consciente. Acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Síntomas más importantes",
+              "items": [
+                "Quemaduras químicas",
+                "Dolor ocular y visión borrosa",
+                "Tos y dificultad respiratoria"
+              ]
+            }
+          ],
+          "notas": [
+            "Nunca administrar agua ni leche a una persona inconsciente.",
+            "Llevar esta ficha o la etiqueta al centro médico."
+          ]
+        },
+        {
+          "numero": 5,
+          "id": "incendio",
+          "titulo": "Medidas de lucha contra incendios",
+          "texto": "No es inflamable, pero reacciona con metales liberando hidrógeno que puede inflamarse.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Medios de extinción adecuados",
+              "items": [
+                "Polvo químico seco",
+                "CO2",
+                "Espuma resistente a ácidos"
+              ]
+            },
+            {
+              "titulo": "Medios de extinción no adecuados",
+              "items": [
+                "Agua directa sobre el ácido concentrado"
+              ]
+            },
+            {
+              "titulo": "Peligros específicos",
+              "items": [
+                "Liberación de hidrógeno inflamable",
+                "Humos corrosivos de cloruro de hidrógeno"
+              ]
+            },
+            {
+              "titulo": "Equipo de protección",
+              "items": [
+                "Aparato respiratorio autónomo",
+                "Traje de protección contra ácidos"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 6,
+          "id": "derrame",
+          "titulo": "Medidas que deben tomarse en caso de vertido accidental",
+          "texto": "Ventilar intensamente. Usar guantes de nitrilo o neopreno, gafas y protección facial. Neutralizar con carbonato de sodio o cal, absorber con material inerte y recoger como residuo peligroso. No verter sin neutralizar.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Precauciones individuales",
+              "items": [
+                "Usar guantes, gafas de seguridad y ropa de protección",
+                "Eliminar fuentes de ignición y ventilar la zona"
+              ]
+            },
+            {
+              "titulo": "Precauciones medioambientales",
+              "items": [
+                "Evitar la entrada en alcantarillados, suelos y cursos de agua",
+                "Notificar a la autoridad ambiental si se produce una liberación importante"
+              ]
+            },
+            {
+              "titulo": "Métodos de limpieza",
+              "items": [
+                "Absorber con material inerte y recoger en recipientes cerrados",
+                "Limpiar la zona con agua y detergente, recogiendo los efluentes"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 7,
+          "id": "manipulacion",
+          "titulo": "Manipulación y almacenamiento",
+          "texto": "Almacenar en recipientes resistentes a ácidos, en zona ventilada y fresca, sobre bandejas de contención. Separar de bases, hipocloritos, cianuros, metales en polvo y agentes oxidantes.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Precauciones para una manipulación segura",
+              "items": [
+                "Manipular bajo campana de extracción",
+                "Añadir siempre ácido sobre agua",
+                "Evitar el contacto con lejía"
+              ]
+            },
+            {
+              "titulo": "Condiciones de almacenamiento seguro",
+              "items": [
+                "Mantener el envase cerrado y en lugar fresco",
+                "Proteger de la luz solar directa"
+              ]
+            }
+          ],
+          "notas": [
+            "Incompatibilidades: Hipoclorito de sodio (libera cloro tóxico); Bases fuertes; Cianuros (libera ácido cianhídrico); Metales en polvo; Agentes oxidantes"
+          ]
+        },
+        {
+          "numero": 8,
+          "id": "exposicion",
+          "titulo": "Controles de exposición / protección personal",
+          "texto": "Aplicar controles de ingeniería para mantener la concentración en el aire por debajo de los límites de exposición profesional vigentes en cada país.",
+          "campos": [
+            {
+              "k": "Límite de exposición (TLV-TWA)",
+              "v": "ACGIH TLV techo 5 ppm (consultar normativa local)"
+            },
+            {
+              "k": "Controles de ingeniería",
+              "v": "Ventilación general y, si procede, extracción localizada"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Equipo de protección personal (EPP)",
+              "items": [
+                "Gafas de seguridad y pantalla facial",
+                "Guantes de neopreno o nitrilo",
+                "Delantal resistente a ácidos",
+                "Protección respiratoria con filtro ácido"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 9,
+          "id": "propiedades",
+          "titulo": "Propiedades físicas y químicas",
+          "texto": "Los valores siguientes corresponden a condiciones normales de presión y temperatura salvo indicación contraria.",
+          "campos": [
+            {
+              "k": "Estado físico",
+              "v": "Líquido incoloro o amarillento"
+            },
+            {
+              "k": "Color",
+              "v": "Incoloro a amarillo pálido"
+            },
+            {
+              "k": "Olor",
+              "v": "Picante, irritante"
+            },
+            {
+              "k": "pH",
+              "v": "< 1 (concentrado)"
+            },
+            {
+              "k": "Punto de fusión",
+              "v": "-30 °C"
+            },
+            {
+              "k": "Punto de ebullición",
+              "v": "≈ 108 °C (azeótropo)"
+            },
+            {
+              "k": "Densidad",
+              "v": "1,18 g/cm³ (37 %, 20 °C)"
+            },
+            {
+              "k": "Solubilidad en agua",
+              "v": "Muy soluble"
+            },
+            {
+              "k": "Presión de vapor",
+              "v": "≈ 16 kPa (20 °C)"
+            }
+          ],
+          "listas": [],
+          "notas": []
+        },
+        {
+          "numero": 10,
+          "id": "estabilidad",
+          "titulo": "Estabilidad y reactividad",
+          "texto": "Estable en recipientes cerrados. Absorbe humedad del ambiente.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Condiciones que deben evitarse",
+              "items": [
+                "Hipocloritos",
+                "Bases",
+                "Metales en polvo",
+                "Humedad"
+              ]
+            },
+            {
+              "titulo": "Materiales incompatibles",
+              "items": [
+                "Hipoclorito de sodio (libera cloro tóxico)",
+                "Bases fuertes",
+                "Cianuros (libera ácido cianhídrico)",
+                "Metales en polvo",
+                "Agentes oxidantes"
+              ]
+            },
+            {
+              "titulo": "Productos de descomposición peligrosos",
+              "items": [
+                "Cloro gaseoso en contacto con oxidantes",
+                "Hidrógeno con metales"
+              ]
+            }
+          ],
+          "notas": [
+            "Nunca mezclar con lejía: se genera gas cloro tóxico."
+          ]
+        },
+        {
+          "numero": 11,
+          "id": "toxicologica",
+          "titulo": "Información toxicológica",
+          "texto": "Corrosivo severo por todas las vías. La exposición crónica a vapores puede dañar el esmalte dental y las vías respiratorias.",
+          "campos": [
+            {
+              "k": "Estimación de toxicidad aguda (ETA)",
+              "v": "CL50 inhalación (rata, 1 h) aproximadamente 3124 ppm"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Vías probables de exposición",
+              "items": [
+                "Inhalación de vapores",
+                "Contacto cutáneo",
+                "Contacto ocular",
+                "Ingestión accidental"
+              ]
+            },
+            {
+              "titulo": "Efectos agudos y crónicos",
+              "items": [
+                "Quemaduras químicas",
+                "Dolor ocular y visión borrosa",
+                "Tos y dificultad respiratoria"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 12,
+          "id": "ecotoxicologica",
+          "titulo": "Información ecotoxicológica",
+          "texto": "Ácido fuerte: puede alterar el pH de aguas y suelos y afectar a organismos acuáticos.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Efectos en el medio acuático",
+              "items": [
+                "Efecto por descenso del pH"
+              ]
+            },
+            {
+              "titulo": "Persistencia y degradabilidad",
+              "items": [
+                "No persistente; se neutraliza en el ambiente"
+              ]
+            },
+            {
+              "titulo": "Potencial de bioacumulación",
+              "items": [
+                "No aplicable"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 13,
+          "id": "eliminacion",
+          "titulo": "Información relativa a la eliminación de los productos",
+          "texto": "Eliminar el producto y los envases como residuo peligroso, de acuerdo con la normativa local vigente.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Métodos de eliminación",
+              "items": [
+                "Neutralización controlada antes de eliminar",
+                "Entregar a gestor autorizado",
+                "No verter a desagües sin tratar"
+              ]
+            },
+            {
+              "titulo": "Envases contaminados",
+              "items": [
+                "Vaciar completamente",
+                "No reutilizar para otros fines",
+                "Entregar al gestor autorizado"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 14,
+          "id": "transporte",
+          "titulo": "Información relativa al transporte",
+          "texto": "Transportar conforme a la Reglamentación Modelo de la ONU y al modo de transporte correspondiente (ADR/RID/IMDG/IATA).",
+          "campos": [
+            {
+              "k": "Número ONU",
+              "v": "1789"
+            },
+            {
+              "k": "Designación oficial de transporte",
+              "v": "ÁCIDO CLORHÍDRICO"
+            },
+            {
+              "k": "Clase de peligro en el transporte",
+              "v": "Clase 8 (corrosivos)"
+            },
+            {
+              "k": "Grupo de embalaje",
+              "v": "II"
+            },
+            {
+              "k": "Contaminante marino",
+              "v": "No"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Precauciones especiales",
+              "items": [
+                "Cerrar herméticamente los envases",
+                "Proteger de fuentes de ignición",
+                "Portar la documentación de transporte exigida"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 15,
+          "id": "reglamentacion",
+          "titulo": "Información sobre la reglamentación",
+          "texto": "Normativa aplicable a la sustancia. Verificar siempre las disposiciones específicas del país de uso.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Disposiciones aplicables",
+              "items": [
+                "REACH (CE) 1907/2006",
+                "CLP (CE) 1272/2008",
+                "SGA/GHS UNECE",
+                "ADR/RID/IMDG/IATA"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 16,
+          "id": "otras",
+          "titulo": "Otras informaciones",
+          "texto": "Esta ficha se ha elaborado con fines informativos a partir de fuentes públicas y debe ser validada por el proveedor antes de su uso.",
+          "campos": [
+            {
+              "k": "Versión",
+              "v": "1.0"
+            },
+            {
+              "k": "Fecha de revisión",
+              "v": "2026-11-18"
+            },
+            {
+              "k": "Estado",
+              "v": "Ficha de demostración — requiere validación"
+            },
+            {
+              "k": "Elaborada por",
+              "v": "Proyecto Sustancias Peligrosas"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Fuentes consultadas",
+              "items": [
+                "Base de datos ICSC (OIT/OMS)",
+                "PubChem - Ácido clorhídrico (CAS 7647-01-0)",
+                "SGA/GHS, Anexo 4 - UNECE"
+              ]
+            }
+          ],
+          "notas": [
+            "Las indicaciones de peligro y consejos de prudencia deben verificarse en la edición vigente del SGA."
+          ]
+        }
+      ],
+      "palabra_advertencia": "Peligro"
     },
     {
       "id": "amoniaco",
       "nombre": "Amoníaco",
-      "sinonimos": ["Amoniaco anhidro", "Trihidruro de nitrógeno"],
+      "sinonimos": [
+        "Amoniaco anhidro",
+        "Trihidruro de nitrógeno"
+      ],
       "cas": "7664-41-7",
       "ce": "231-441-9",
       "onu": "1005",
-      "peligrosidad": {
-        "clasificacion": ["Gas inflamable, categoría 2", "Toxicidad aguda por inhalación, categoría 3", "Corrosión cutánea, categoría 1B", "Peligro para el medio ambiente acuático, categoría 1"],
-        "pictogramas": ["GHS02", "GHS05", "GHS06", "GHS09"],
-        "frases_h": [
-          {"codigo": "H221", "texto": "Gas inflamable."},
-          {"codigo": "H331", "texto": "Tóxico en caso de inhalación."},
-          {"codigo": "H314", "texto": "Provoca quemaduras graves en la piel y lesiones oculares graves."},
-          {"codigo": "H400", "texto": "Muy tóxico para los organismos acuáticos."}
-        ],
-        "significado": "Peligro principal: toxicidad por inhalación y corrosión. El gas es más ligero que el aire pero puede acumularse en espacios cerrados. Su olor picante es detectable antes de alcanzar concentraciones peligrosas, aunque la fatiga olfativa puede enmascararlo."
-      },
-      "almacenamiento": "Almacenar en recipientes a presión certificados, en lugar fresco, seco y muy bien ventilado, lejos de fuentes de ignición. Proteger de la luz solar y de temperaturas elevadas. Separar de ácidos, halógenos, óxidos de metales y agentes oxidantes. Disponer de detectores de gas y duchas de emergencia.",
-      "derrame": "Evacuar y ventilar la zona. Usar EPP con protección respiratoria adecuada (máscara con filtro para amoníaco o aparato autónomo). Cerrar la fuga si es seguro. Disolver el gas en agua pulverizada desde zonas protegidas. No dirigir chorros directamente sobre la fuga. Evitar que entre en alcantarillado o cursos de agua.",
+      "formula": "NH3",
+      "usos": [
+        "Fertilizantes",
+        "Refrigeración industrial",
+        "Fabricación de productos químicos",
+        "Limpiadores (en disolución)"
+      ],
+      "concentracion": "≥ 99,5 % (anhidro)",
       "propiedades": {
-        "estado_fisico": "Gas incoloro (licuado a presión)",
-        "olor": "Picante, fuerte, característico",
-        "punto_de_inflamacion": "651 °C (temperatura de autoignición)",
-        "punto_de_ebullicion": "-33 °C",
-        "densidad_de_gas": "0,73 kg/m³ (más ligero que el aire)",
-        "solubilidad_en_agua": "Muy soluble (forma amoniaco acuoso)"
+        "Estado físico": "Gas incoloro licuado a presión",
+        "Color": "Incoloro",
+        "Olor": "Picante, fuerte y característico",
+        "pH": "Alcalino en disolución",
+        "Punto de fusión": "-78 °C",
+        "Punto de ebullición": "-33 °C",
+        "Temperatura de autoignición": "651 °C",
+        "Densidad de gas": "0,73 kg/m³ (más ligero que el aire)",
+        "Solubilidad en agua": "Muy soluble (forma amoniaco acuoso)"
+      },
+      "peligrosidad": {
+        "clasificacion": [
+          "Gas inflamable, categoría 2",
+          "Toxicidad aguda por inhalación, categoría 3",
+          "Corrosión cutánea, categoría 1B",
+          "Peligro acuático, categoría 1"
+        ],
+        "pictogramas": [
+          "GHS02",
+          "GHS05",
+          "GHS06",
+          "GHS09"
+        ],
+        "palabra": "Peligro",
+        "frases_h": [
+          {
+            "codigo": "H221",
+            "texto": "Gas inflamable."
+          },
+          {
+            "codigo": "H331",
+            "texto": "Tóxico en caso de inhalación."
+          },
+          {
+            "codigo": "H314",
+            "texto": "Provoca quemaduras graves en la piel y lesiones oculares graves."
+          },
+          {
+            "codigo": "H400",
+            "texto": "Muy tóxico para los organismos acuáticos."
+          }
+        ],
+        "frases_p": [
+          "P210 Mantener alejado de fuentes de ignición.",
+          "P260 No respirar el gas.",
+          "P280 Usar guantes y protección facial."
+        ],
+        "significado": "Peligro principal: toxicidad por inhalación y corrosión. El gas es más ligero que el aire pero puede acumularse en espacios cerrados. Su olor alerta antes de concentraciones peligrosas, aunque puede producirse fatiga olfativa.",
+        "otros_peligros": [
+          "Puede formar mezclas explosivas con el aire entre el 15 % y el 28 % en volumen."
+        ]
+      },
+      "primeros": {
+        "inhalacion": "Trasladar al aire libre de inmediato. Mantener vía aérea permeable. Administrar oxígeno si es necesario y acudir al médico.",
+        "piel": "Retirar ropa contaminada y lavar con agua abundante al menos 15 minutos. Si hay quemadura, acudir al médico.",
+        "ojos": "Enjuagar con agua abundante al menos 15-20 minutos. Acudir urgentemente al oftalmólogo.",
+        "ingestion": "No aplicable al gas. Si se ingiere amoniaco acuoso, no provocar el vómito y acudir al médico.",
+        "sintomas": [
+          "Irritación y quemadura respiratoria",
+          "Lagrimeo y dolor ocular",
+          "Tos y edema pulmonar retardado"
+        ]
+      },
+      "incendio": {
+        "descripcion": "Gas inflamable. En recipientes expuestos al calor puede aumentar la presión y ruptura violenta.",
+        "adecuados": [
+          "Polvo químico seco",
+          "CO2",
+          "Agua pulverizada para enfriar recipientes"
+        ],
+        "inadecuados": [
+          "Chorros directos de agua sobre la fuga"
+        ],
+        "peligros": [
+          "Mezcla explosiva con aire",
+          "Ruptura de recipientes por sobrepresión"
+        ],
+        "equipo": [
+          "Aparato respiratorio autónomo",
+          "Traje de protección química"
+        ]
+      },
+      "derrame": "Evacuar y ventilar la zona. Usar protección respiratoria. Cerrar la fuga si es seguro. Disolver el gas con agua pulverizada desde zonas protegidas, evitando que alcance alcantarillados o cursos de agua.",
+      "almacenamiento": "Recipientes a presión certificados, en lugar fresco, seco y muy ventilado. Proteger de la luz solar y del calor. Separar de ácidos, halógenos, hipocloritos y oxidantes. Disponer de detectores de gas y duchas de emergencia.",
+      "manipulacion": [
+        "Usar detectores de amoniaco",
+        "Ventilación forzada permanente",
+        "Evitar contacto con lejía"
+      ],
+      "epp": [
+        "Aparato respiratorio con filtro para amoníaco",
+        "Gafas herméticas",
+        "Guantes de neopreno",
+        "Traje de protección"
+      ],
+      "tlv": "ACGIH TLV 25 ppm / OSHA PEL 50 ppm (consultar normativa local)",
+      "estabilidad": {
+        "texto": "Estable en recipientes cerrados y frescos.",
+        "evitar": [
+          "Calor",
+          "Ácidos",
+          "Cloro e hipocloritos",
+          "Halógenos"
+        ],
+        "descomposicion": [
+          "Óxidos de nitrógeno en combustión"
+        ]
       },
       "interacciones": {
-        "incompatibilidades": ["Ácidos (forman sales amónicas)", "Cloro e hipocloritos (pueden formar cloraminas tóxicas)", "Halógenos", "Óxidos de metales", "Agentes oxidantes fuertes"],
-        "nota": "Nunca mezclar amoniaco con lejía: se generan cloraminas irritantes para el sistema respiratorio."
+        "incompatibilidades": [
+          "Ácidos (forman sales amónicas)",
+          "Hipocloritos y cloro (forman cloraminas tóxicas)",
+          "Halógenos",
+          "Óxidos de metales",
+          "Oxidantes fuertes"
+        ],
+        "nota": "Nunca mezclar con lejía: se generan cloraminas irritantes."
       },
-      "fuentes": [
-        {"titulo": "Base de datos ICSC (OIT/OMS)", "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"},
-        {"titulo": "PubChem - Amoníaco (CAS 7664-41-7)", "url": "https://pubchem.ncbi.nlm.nih.gov/"}
+      "toxicologica": "Tóxico por inhalación. La exposición a altas concentraciones puede causar edema pulmonar retardado, daño hepático y renal.",
+      "eta": "CL50 inhalación (rata, 1 h) aproximadamente 2000 ppm",
+      "ecotoxicologica": "Muy tóxico para organismos acuáticos. En suelos puede alterar el pH y afectar a la microbiota.",
+      "acuatico": [
+        "LC50 pez (96 h) < 1 mg/L"
       ],
-      "estado": "demo"
+      "persistencia": [
+        "Se volatiliza y se degrada en el ambiente"
+      ],
+      "bioacumulacion": [
+        "Bajo potencial"
+      ],
+      "eliminacion": [
+        "Neutralización controlada",
+        "Absorción en agua para su tratamiento",
+        "Entregar a gestor autorizado"
+      ],
+      "designacion": "AMONIACO ANHIDRO",
+      "clase_transporte": "Clase 2.3 (gas tóxico) + 2.1 (inflamable)",
+      "grupo_embalaje": "No aplicable",
+      "contaminante_marino": "Sí",
+      "reglamentacion": [
+        "REACH (CE) 1907/2006",
+        "CLP (CE) 1272/2008",
+        "SGA/GHS UNECE",
+        "ADR/RID/IMDG/IATA"
+      ],
+      "fuentes": [
+        {
+          "titulo": "Base de datos ICSC (OIT/OMS)",
+          "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"
+        },
+        {
+          "titulo": "PubChem - Amoníaco (CAS 7664-41-7)",
+          "url": "https://pubchem.ncbi.nlm.nih.gov/"
+        },
+        {
+          "titulo": "SGA/GHS, Anexo 4 - UNECE",
+          "url": "https://unece.org/transport/dangerous-goods/ghs-rev11-2025"
+        }
+      ],
+      "estado": "demo",
+      "secciones": [
+        {
+          "numero": 1,
+          "id": "identificacion",
+          "titulo": "Identificación del producto y del proveedor",
+          "texto": "Amoníaco es una sustancia química identificada internacionalmente mediante los números CAS, CE y ONU indicados. Se suministra para los usos profesionales e industriales descritos.",
+          "campos": [
+            {
+              "k": "Identificador SGA del producto",
+              "v": "Amoníaco"
+            },
+            {
+              "k": "Sinónimos",
+              "v": "Amoniaco anhidro, Trihidruro de nitrógeno"
+            },
+            {
+              "k": "Número CAS",
+              "v": "7664-41-7"
+            },
+            {
+              "k": "Número CE",
+              "v": "231-441-9"
+            },
+            {
+              "k": "Número ONU",
+              "v": "1005"
+            },
+            {
+              "k": "Fórmula molecular",
+              "v": "NH3"
+            },
+            {
+              "k": "Proveedor",
+              "v": "Información del fabricante en la etiqueta del envase"
+            },
+            {
+              "k": "Teléfono de emergencia",
+              "v": "Servicio de emergencias químicas local (112 / 911)"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Uso recomendado",
+              "items": [
+                "Fertilizantes",
+                "Refrigeración industrial",
+                "Fabricación de productos químicos",
+                "Limpiadores (en disolución)"
+              ]
+            }
+          ],
+          "notas": [
+            "El proveedor debe indicar en la etiqueta la identidad completa y los datos de contacto."
+          ]
+        },
+        {
+          "numero": 2,
+          "id": "peligros",
+          "titulo": "Identificación de los peligros",
+          "texto": "Peligro principal: toxicidad por inhalación y corrosión. El gas es más ligero que el aire pero puede acumularse en espacios cerrados. Su olor alerta antes de concentraciones peligrosas, aunque puede producirse fatiga olfativa.",
+          "campos": [
+            {
+              "k": "Clasificación SGA",
+              "v": "Gas inflamable, categoría 2; Toxicidad aguda por inhalación, categoría 3; Corrosión cutánea, categoría 1B; Peligro acuático, categoría 1"
+            },
+            {
+              "k": "Pictogramas",
+              "v": "GHS02, GHS05, GHS06, GHS09"
+            },
+            {
+              "k": "Palabra de advertencia",
+              "v": "Peligro"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Indicaciones de peligro (H)",
+              "items": [
+                "H221 — Gas inflamable.",
+                "H331 — Tóxico en caso de inhalación.",
+                "H314 — Provoca quemaduras graves en la piel y lesiones oculares graves.",
+                "H400 — Muy tóxico para los organismos acuáticos."
+              ]
+            },
+            {
+              "titulo": "Consejos de prudencia (P)",
+              "items": [
+                "P210 Mantener alejado de fuentes de ignición.",
+                "P260 No respirar el gas.",
+                "P280 Usar guantes y protección facial."
+              ]
+            }
+          ],
+          "notas": [
+            "Puede formar mezclas explosivas con el aire entre el 15 % y el 28 % en volumen."
+          ]
+        },
+        {
+          "numero": 3,
+          "id": "composicion",
+          "titulo": "Composición / información sobre los componentes",
+          "texto": "Sustancia pura: Amoníaco. No se consideran impurezas que modifiquen la clasificación de peligro.",
+          "campos": [
+            {
+              "k": "Identidad química",
+              "v": "Amoníaco"
+            },
+            {
+              "k": "Número CAS",
+              "v": "7664-41-7"
+            },
+            {
+              "k": "Número CE",
+              "v": "231-441-9"
+            },
+            {
+              "k": "Concentración",
+              "v": "≥ 99,5 % (anhidro)"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Impurezas y aditivos",
+              "items": [
+                "No se declaran impurezas relevantes para la clasificación"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 4,
+          "id": "primeros_auxilios",
+          "titulo": "Primeros auxilios",
+          "texto": "Trasladar a la persona afectada a un lugar ventilado. Mantener la calma y llamar al servicio de emergencias si los síntomas persisten.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Inhalación",
+              "items": [
+                "Trasladar al aire libre de inmediato. Mantener vía aérea permeable. Administrar oxígeno si es necesario y acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Contacto con la piel",
+              "items": [
+                "Retirar ropa contaminada y lavar con agua abundante al menos 15 minutos. Si hay quemadura, acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Contacto con los ojos",
+              "items": [
+                "Enjuagar con agua abundante al menos 15-20 minutos. Acudir urgentemente al oftalmólogo."
+              ]
+            },
+            {
+              "titulo": "Ingestión",
+              "items": [
+                "No aplicable al gas. Si se ingiere amoniaco acuoso, no provocar el vómito y acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Síntomas más importantes",
+              "items": [
+                "Irritación y quemadura respiratoria",
+                "Lagrimeo y dolor ocular",
+                "Tos y edema pulmonar retardado"
+              ]
+            }
+          ],
+          "notas": [
+            "Nunca administrar agua ni leche a una persona inconsciente.",
+            "Llevar esta ficha o la etiqueta al centro médico."
+          ]
+        },
+        {
+          "numero": 5,
+          "id": "incendio",
+          "titulo": "Medidas de lucha contra incendios",
+          "texto": "Gas inflamable. En recipientes expuestos al calor puede aumentar la presión y ruptura violenta.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Medios de extinción adecuados",
+              "items": [
+                "Polvo químico seco",
+                "CO2",
+                "Agua pulverizada para enfriar recipientes"
+              ]
+            },
+            {
+              "titulo": "Medios de extinción no adecuados",
+              "items": [
+                "Chorros directos de agua sobre la fuga"
+              ]
+            },
+            {
+              "titulo": "Peligros específicos",
+              "items": [
+                "Mezcla explosiva con aire",
+                "Ruptura de recipientes por sobrepresión"
+              ]
+            },
+            {
+              "titulo": "Equipo de protección",
+              "items": [
+                "Aparato respiratorio autónomo",
+                "Traje de protección química"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 6,
+          "id": "derrame",
+          "titulo": "Medidas que deben tomarse en caso de vertido accidental",
+          "texto": "Evacuar y ventilar la zona. Usar protección respiratoria. Cerrar la fuga si es seguro. Disolver el gas con agua pulverizada desde zonas protegidas, evitando que alcance alcantarillados o cursos de agua.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Precauciones individuales",
+              "items": [
+                "Usar guantes, gafas de seguridad y ropa de protección",
+                "Eliminar fuentes de ignición y ventilar la zona"
+              ]
+            },
+            {
+              "titulo": "Precauciones medioambientales",
+              "items": [
+                "Evitar la entrada en alcantarillados, suelos y cursos de agua",
+                "Notificar a la autoridad ambiental si se produce una liberación importante"
+              ]
+            },
+            {
+              "titulo": "Métodos de limpieza",
+              "items": [
+                "Absorber con material inerte y recoger en recipientes cerrados",
+                "Limpiar la zona con agua y detergente, recogiendo los efluentes"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 7,
+          "id": "manipulacion",
+          "titulo": "Manipulación y almacenamiento",
+          "texto": "Recipientes a presión certificados, en lugar fresco, seco y muy ventilado. Proteger de la luz solar y del calor. Separar de ácidos, halógenos, hipocloritos y oxidantes. Disponer de detectores de gas y duchas de emergencia.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Precauciones para una manipulación segura",
+              "items": [
+                "Usar detectores de amoniaco",
+                "Ventilación forzada permanente",
+                "Evitar contacto con lejía"
+              ]
+            },
+            {
+              "titulo": "Condiciones de almacenamiento seguro",
+              "items": [
+                "Mantener el envase cerrado y en lugar fresco",
+                "Proteger de la luz solar directa"
+              ]
+            }
+          ],
+          "notas": [
+            "Incompatibilidades: Ácidos (forman sales amónicas); Hipocloritos y cloro (forman cloraminas tóxicas); Halógenos; Óxidos de metales; Oxidantes fuertes"
+          ]
+        },
+        {
+          "numero": 8,
+          "id": "exposicion",
+          "titulo": "Controles de exposición / protección personal",
+          "texto": "Aplicar controles de ingeniería para mantener la concentración en el aire por debajo de los límites de exposición profesional vigentes en cada país.",
+          "campos": [
+            {
+              "k": "Límite de exposición (TLV-TWA)",
+              "v": "ACGIH TLV 25 ppm / OSHA PEL 50 ppm (consultar normativa local)"
+            },
+            {
+              "k": "Controles de ingeniería",
+              "v": "Ventilación general y, si procede, extracción localizada"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Equipo de protección personal (EPP)",
+              "items": [
+                "Aparato respiratorio con filtro para amoníaco",
+                "Gafas herméticas",
+                "Guantes de neopreno",
+                "Traje de protección"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 9,
+          "id": "propiedades",
+          "titulo": "Propiedades físicas y químicas",
+          "texto": "Los valores siguientes corresponden a condiciones normales de presión y temperatura salvo indicación contraria.",
+          "campos": [
+            {
+              "k": "Estado físico",
+              "v": "Gas incoloro licuado a presión"
+            },
+            {
+              "k": "Color",
+              "v": "Incoloro"
+            },
+            {
+              "k": "Olor",
+              "v": "Picante, fuerte y característico"
+            },
+            {
+              "k": "pH",
+              "v": "Alcalino en disolución"
+            },
+            {
+              "k": "Punto de fusión",
+              "v": "-78 °C"
+            },
+            {
+              "k": "Punto de ebullición",
+              "v": "-33 °C"
+            },
+            {
+              "k": "Temperatura de autoignición",
+              "v": "651 °C"
+            },
+            {
+              "k": "Densidad de gas",
+              "v": "0,73 kg/m³ (más ligero que el aire)"
+            },
+            {
+              "k": "Solubilidad en agua",
+              "v": "Muy soluble (forma amoniaco acuoso)"
+            }
+          ],
+          "listas": [],
+          "notas": []
+        },
+        {
+          "numero": 10,
+          "id": "estabilidad",
+          "titulo": "Estabilidad y reactividad",
+          "texto": "Estable en recipientes cerrados y frescos.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Condiciones que deben evitarse",
+              "items": [
+                "Calor",
+                "Ácidos",
+                "Cloro e hipocloritos",
+                "Halógenos"
+              ]
+            },
+            {
+              "titulo": "Materiales incompatibles",
+              "items": [
+                "Ácidos (forman sales amónicas)",
+                "Hipocloritos y cloro (forman cloraminas tóxicas)",
+                "Halógenos",
+                "Óxidos de metales",
+                "Oxidantes fuertes"
+              ]
+            },
+            {
+              "titulo": "Productos de descomposición peligrosos",
+              "items": [
+                "Óxidos de nitrógeno en combustión"
+              ]
+            }
+          ],
+          "notas": [
+            "Nunca mezclar con lejía: se generan cloraminas irritantes."
+          ]
+        },
+        {
+          "numero": 11,
+          "id": "toxicologica",
+          "titulo": "Información toxicológica",
+          "texto": "Tóxico por inhalación. La exposición a altas concentraciones puede causar edema pulmonar retardado, daño hepático y renal.",
+          "campos": [
+            {
+              "k": "Estimación de toxicidad aguda (ETA)",
+              "v": "CL50 inhalación (rata, 1 h) aproximadamente 2000 ppm"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Vías probables de exposición",
+              "items": [
+                "Inhalación de vapores",
+                "Contacto cutáneo",
+                "Contacto ocular",
+                "Ingestión accidental"
+              ]
+            },
+            {
+              "titulo": "Efectos agudos y crónicos",
+              "items": [
+                "Irritación y quemadura respiratoria",
+                "Lagrimeo y dolor ocular",
+                "Tos y edema pulmonar retardado"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 12,
+          "id": "ecotoxicologica",
+          "titulo": "Información ecotoxicológica",
+          "texto": "Muy tóxico para organismos acuáticos. En suelos puede alterar el pH y afectar a la microbiota.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Efectos en el medio acuático",
+              "items": [
+                "LC50 pez (96 h) < 1 mg/L"
+              ]
+            },
+            {
+              "titulo": "Persistencia y degradabilidad",
+              "items": [
+                "Se volatiliza y se degrada en el ambiente"
+              ]
+            },
+            {
+              "titulo": "Potencial de bioacumulación",
+              "items": [
+                "Bajo potencial"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 13,
+          "id": "eliminacion",
+          "titulo": "Información relativa a la eliminación de los productos",
+          "texto": "Eliminar el producto y los envases como residuo peligroso, de acuerdo con la normativa local vigente.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Métodos de eliminación",
+              "items": [
+                "Neutralización controlada",
+                "Absorción en agua para su tratamiento",
+                "Entregar a gestor autorizado"
+              ]
+            },
+            {
+              "titulo": "Envases contaminados",
+              "items": [
+                "Vaciar completamente",
+                "No reutilizar para otros fines",
+                "Entregar al gestor autorizado"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 14,
+          "id": "transporte",
+          "titulo": "Información relativa al transporte",
+          "texto": "Transportar conforme a la Reglamentación Modelo de la ONU y al modo de transporte correspondiente (ADR/RID/IMDG/IATA).",
+          "campos": [
+            {
+              "k": "Número ONU",
+              "v": "1005"
+            },
+            {
+              "k": "Designación oficial de transporte",
+              "v": "AMONIACO ANHIDRO"
+            },
+            {
+              "k": "Clase de peligro en el transporte",
+              "v": "Clase 2.3 (gas tóxico) + 2.1 (inflamable)"
+            },
+            {
+              "k": "Grupo de embalaje",
+              "v": "No aplicable"
+            },
+            {
+              "k": "Contaminante marino",
+              "v": "Sí"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Precauciones especiales",
+              "items": [
+                "Cerrar herméticamente los envases",
+                "Proteger de fuentes de ignición",
+                "Portar la documentación de transporte exigida"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 15,
+          "id": "reglamentacion",
+          "titulo": "Información sobre la reglamentación",
+          "texto": "Normativa aplicable a la sustancia. Verificar siempre las disposiciones específicas del país de uso.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Disposiciones aplicables",
+              "items": [
+                "REACH (CE) 1907/2006",
+                "CLP (CE) 1272/2008",
+                "SGA/GHS UNECE",
+                "ADR/RID/IMDG/IATA"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 16,
+          "id": "otras",
+          "titulo": "Otras informaciones",
+          "texto": "Esta ficha se ha elaborado con fines informativos a partir de fuentes públicas y debe ser validada por el proveedor antes de su uso.",
+          "campos": [
+            {
+              "k": "Versión",
+              "v": "1.0"
+            },
+            {
+              "k": "Fecha de revisión",
+              "v": "2026-11-18"
+            },
+            {
+              "k": "Estado",
+              "v": "Ficha de demostración — requiere validación"
+            },
+            {
+              "k": "Elaborada por",
+              "v": "Proyecto Sustancias Peligrosas"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Fuentes consultadas",
+              "items": [
+                "Base de datos ICSC (OIT/OMS)",
+                "PubChem - Amoníaco (CAS 7664-41-7)",
+                "SGA/GHS, Anexo 4 - UNECE"
+              ]
+            }
+          ],
+          "notas": [
+            "Las indicaciones de peligro y consejos de prudencia deben verificarse en la edición vigente del SGA."
+          ]
+        }
+      ],
+      "palabra_advertencia": "Peligro"
     },
     {
       "id": "acido-sulfurico",
       "nombre": "Ácido sulfúrico",
-      "sinonimos": ["Vitriolo", "H2SO4"],
+      "sinonimos": [
+        "Vitriolo",
+        "H2SO4"
+      ],
       "cas": "7664-93-9",
       "ce": "231-639-5",
       "onu": "1830",
-      "peligrosidad": {
-        "clasificacion": ["Corrosivo para metales, categoría 1", "Corrosión cutánea, categoría 1A"],
-        "pictogramas": ["GHS05"],
-        "frases_h": [
-          {"codigo": "H290", "texto": "Puede ser corrosivo para los metales."},
-          {"codigo": "H314", "texto": "Provoca quemaduras graves en la piel y lesiones oculares graves."}
-        ],
-        "significado": "Peligro principal: corrosión severa y reacción violenta con el agua. La dilución debe hacerse añadiendo siempre el ácido sobre el agua, nunca al revés, por el calor liberado."
-      },
-      "almacenamiento": "Conservar en recipientes de vidrio o acero recubierto, bien cerrados, en lugar fresco y seco. Separar de agua, bases, metales, agentes oxidantes y materiales orgánicos. Usar bandejas de contención resistentes al ácido. Proteger de la humedad.",
-      "derrame": "Ventilar y usar EPP completo. Neutralizar con carbonato de sodio, cal o bicarbonato. Absorber con material inerte y recoger como residuo peligroso. No añadir agua directamente sobre ácido concentrado. En contacto con piel, retirar la ropa contaminada y lavar con agua abundante al menos 15 minutos.",
+      "formula": "H2SO4",
+      "usos": [
+        "Fabricación de fertilizantes",
+        "Refinado de petróleo",
+        "Baterías de plomo-ácido",
+        "Procesos industriales"
+      ],
+      "concentracion": "≥ 98 % (concentrado)",
       "propiedades": {
-        "estado_fisico": "Líquido incoloro, aceitoso (concentrado)",
-        "olor": "Inodoro",
-        "punto_de_ebullicion": "337 °C (descompone)",
-        "densidad": "1,84 g/cm³ (98 %, 20 °C)",
-        "solubilidad_en_agua": "Miscible, con fuerte desprendimiento de calor",
-        "ph": "< 1"
+        "Estado físico": "Líquido incoloro, aceitoso",
+        "Color": "Incoloro",
+        "Olor": "Inodoro",
+        "pH": "< 1",
+        "Punto de fusión": "10 °C",
+        "Punto de ebullición": "337 °C (descompone)",
+        "Densidad": "1,84 g/cm³ (98 %, 20 °C)",
+        "Solubilidad en agua": "Miscible con fuerte exotermia",
+        "Presión de vapor": "< 0,001 kPa (20 °C)"
+      },
+      "peligrosidad": {
+        "clasificacion": [
+          "Corrosivo para metales, categoría 1",
+          "Corrosión cutánea, categoría 1A"
+        ],
+        "pictogramas": [
+          "GHS05"
+        ],
+        "palabra": "Peligro",
+        "frases_h": [
+          {
+            "codigo": "H290",
+            "texto": "Puede ser corrosivo para los metales."
+          },
+          {
+            "codigo": "H314",
+            "texto": "Provoca quemaduras graves en la piel y lesiones oculares graves."
+          }
+        ],
+        "frases_p": [
+          "P280 Usar guantes y protección facial.",
+          "P303+P361+P353 Lavar la piel con agua abundante.",
+          "P305+P351+P338 Enjuagar los ojos y acudir al médico."
+        ],
+        "significado": "Peligro principal: corrosión severa y reacción violenta con el agua. La dilución debe hacerse añadiendo siempre el ácido sobre el agua, nunca al revés, por el calor liberado.",
+        "otros_peligros": [
+          "Contacto con materiales orgánicos puede provocar incendio por carbonización."
+        ]
+      },
+      "primeros": {
+        "inhalacion": "Trasladar al aire libre. Los vapores y nieblas son corrosivos; acudir al médico.",
+        "piel": "Retirar ropa contaminada y lavar con agua abundante al menos 15-20 minutos. Acudir al médico.",
+        "ojos": "Enjuagar con agua abundante al menos 20 minutos. Acudir urgentemente al oftalmólogo.",
+        "ingestion": "No provocar el vómito. Enjuagar la boca. Acudir al médico de urgencia.",
+        "sintomas": [
+          "Quemaduras profundas",
+          "Dolor abdominal y náuseas",
+          "Daño respiratorio por nieblas"
+        ]
+      },
+      "incendio": {
+        "descripcion": "No inflamable, pero puede favorecer incendios por reacción con materiales orgánicos y liberar hidrógeno con metales.",
+        "adecuados": [
+          "CO2",
+          "Polvo químico seco",
+          "Espuma resistente a ácidos"
+        ],
+        "inadecuados": [
+          "Agua directa sobre ácido concentrado"
+        ],
+        "peligros": [
+          "Liberación de hidrógeno",
+          "Humos corrosivos (SOx)"
+        ],
+        "equipo": [
+          "Aparato respiratorio autónomo",
+          "Traje de protección contra ácidos"
+        ]
+      },
+      "derrame": "Ventilar. Usar EPP completo. Neutralizar con carbonato de sodio o cal, absorber con material inerte y recoger como residuo peligroso. Nunca añadir agua directamente sobre ácido concentrado.",
+      "almacenamiento": "Recipientes de vidrio o acero recubierto, bien cerrados, en lugar fresco y seco. Separar de agua, bases, metales, agentes oxidantes y materiales orgánicos. Usar bandejas de contención resistentes.",
+      "manipulacion": [
+        "Añadir siempre ácido sobre agua",
+        "Usar campana de extracción",
+        "Evitar contacto con azúcares y celulosa"
+      ],
+      "epp": [
+        "Gafas y pantalla facial",
+        "Guantes de neopreno",
+        "Delantal de PVC",
+        "Protección respiratoria con filtro ácido"
+      ],
+      "tlv": "ACGIH TLV 1 mg/m³ (niebla) (consultar normativa local)",
+      "estabilidad": {
+        "texto": "Estable en recipientes cerrados; fuertemente higroscópico.",
+        "evitar": [
+          "Agua",
+          "Bases",
+          "Metales",
+          "Materiales orgánicos"
+        ],
+        "descomposicion": [
+          "Óxidos de azufre a alta temperatura"
+        ]
       },
       "interacciones": {
-        "incompatibilidades": ["Agua (reacción exotérmica violenta)", "Bases fuertes", "Metales (liberan hidrógeno)", "Agentes oxidantes", "Materiales orgánicos y azúcares"],
-        "nota": "El contacto con azúcares o celulosa puede provocar carbonización e incendio."
+        "incompatibilidades": [
+          "Agua (reacción exotérmica violenta)",
+          "Bases fuertes",
+          "Metales (liberan hidrógeno)",
+          "Azúcares y celulosa (carbonización)",
+          "Oxidantes"
+        ],
+        "nota": "El contacto con azúcares o papel puede provocar incendio espontáneo."
       },
-      "fuentes": [
-        {"titulo": "Base de datos ICSC (OIT/OMS)", "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"},
-        {"titulo": "PubChem - Ácido sulfúrico (CAS 7664-93-9)", "url": "https://pubchem.ncbi.nlm.nih.gov/"}
+      "toxicologica": "Corrosivo severo. La inhalación de nieblas puede causar daño pulmonar crónico y erosión dental.",
+      "eta": "No disponible (corrosivo por mecanismo local)",
+      "ecotoxicologica": "Puede alterar fuertemente el pH de aguas y suelos, con efecto letal para organismos acuáticos.",
+      "acuatico": [
+        "Efecto por acidificación"
       ],
-      "estado": "demo"
+      "persistencia": [
+        "No persistente; se neutraliza"
+      ],
+      "bioacumulacion": [
+        "No aplicable"
+      ],
+      "eliminacion": [
+        "Neutralización controlada",
+        "Entrega a gestor autorizado",
+        "No verter sin tratar"
+      ],
+      "designacion": "ÁCIDO SULFÚRICO",
+      "clase_transporte": "Clase 8 (corrosivos)",
+      "grupo_embalaje": "II",
+      "contaminante_marino": "No",
+      "reglamentacion": [
+        "REACH (CE) 1907/2006",
+        "CLP (CE) 1272/2008",
+        "SGA/GHS UNECE",
+        "ADR/RID/IMDG/IATA"
+      ],
+      "fuentes": [
+        {
+          "titulo": "Base de datos ICSC (OIT/OMS)",
+          "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"
+        },
+        {
+          "titulo": "PubChem - Ácido sulfúrico (CAS 7664-93-9)",
+          "url": "https://pubchem.ncbi.nlm.nih.gov/"
+        },
+        {
+          "titulo": "SGA/GHS, Anexo 4 - UNECE",
+          "url": "https://unece.org/transport/dangerous-goods/ghs-rev11-2025"
+        }
+      ],
+      "estado": "demo",
+      "secciones": [
+        {
+          "numero": 1,
+          "id": "identificacion",
+          "titulo": "Identificación del producto y del proveedor",
+          "texto": "Ácido sulfúrico es una sustancia química identificada internacionalmente mediante los números CAS, CE y ONU indicados. Se suministra para los usos profesionales e industriales descritos.",
+          "campos": [
+            {
+              "k": "Identificador SGA del producto",
+              "v": "Ácido sulfúrico"
+            },
+            {
+              "k": "Sinónimos",
+              "v": "Vitriolo, H2SO4"
+            },
+            {
+              "k": "Número CAS",
+              "v": "7664-93-9"
+            },
+            {
+              "k": "Número CE",
+              "v": "231-639-5"
+            },
+            {
+              "k": "Número ONU",
+              "v": "1830"
+            },
+            {
+              "k": "Fórmula molecular",
+              "v": "H2SO4"
+            },
+            {
+              "k": "Proveedor",
+              "v": "Información del fabricante en la etiqueta del envase"
+            },
+            {
+              "k": "Teléfono de emergencia",
+              "v": "Servicio de emergencias químicas local (112 / 911)"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Uso recomendado",
+              "items": [
+                "Fabricación de fertilizantes",
+                "Refinado de petróleo",
+                "Baterías de plomo-ácido",
+                "Procesos industriales"
+              ]
+            }
+          ],
+          "notas": [
+            "El proveedor debe indicar en la etiqueta la identidad completa y los datos de contacto."
+          ]
+        },
+        {
+          "numero": 2,
+          "id": "peligros",
+          "titulo": "Identificación de los peligros",
+          "texto": "Peligro principal: corrosión severa y reacción violenta con el agua. La dilución debe hacerse añadiendo siempre el ácido sobre el agua, nunca al revés, por el calor liberado.",
+          "campos": [
+            {
+              "k": "Clasificación SGA",
+              "v": "Corrosivo para metales, categoría 1; Corrosión cutánea, categoría 1A"
+            },
+            {
+              "k": "Pictogramas",
+              "v": "GHS05"
+            },
+            {
+              "k": "Palabra de advertencia",
+              "v": "Peligro"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Indicaciones de peligro (H)",
+              "items": [
+                "H290 — Puede ser corrosivo para los metales.",
+                "H314 — Provoca quemaduras graves en la piel y lesiones oculares graves."
+              ]
+            },
+            {
+              "titulo": "Consejos de prudencia (P)",
+              "items": [
+                "P280 Usar guantes y protección facial.",
+                "P303+P361+P353 Lavar la piel con agua abundante.",
+                "P305+P351+P338 Enjuagar los ojos y acudir al médico."
+              ]
+            }
+          ],
+          "notas": [
+            "Contacto con materiales orgánicos puede provocar incendio por carbonización."
+          ]
+        },
+        {
+          "numero": 3,
+          "id": "composicion",
+          "titulo": "Composición / información sobre los componentes",
+          "texto": "Sustancia pura: Ácido sulfúrico. No se consideran impurezas que modifiquen la clasificación de peligro.",
+          "campos": [
+            {
+              "k": "Identidad química",
+              "v": "Ácido sulfúrico"
+            },
+            {
+              "k": "Número CAS",
+              "v": "7664-93-9"
+            },
+            {
+              "k": "Número CE",
+              "v": "231-639-5"
+            },
+            {
+              "k": "Concentración",
+              "v": "≥ 98 % (concentrado)"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Impurezas y aditivos",
+              "items": [
+                "No se declaran impurezas relevantes para la clasificación"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 4,
+          "id": "primeros_auxilios",
+          "titulo": "Primeros auxilios",
+          "texto": "Trasladar a la persona afectada a un lugar ventilado. Mantener la calma y llamar al servicio de emergencias si los síntomas persisten.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Inhalación",
+              "items": [
+                "Trasladar al aire libre. Los vapores y nieblas son corrosivos; acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Contacto con la piel",
+              "items": [
+                "Retirar ropa contaminada y lavar con agua abundante al menos 15-20 minutos. Acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Contacto con los ojos",
+              "items": [
+                "Enjuagar con agua abundante al menos 20 minutos. Acudir urgentemente al oftalmólogo."
+              ]
+            },
+            {
+              "titulo": "Ingestión",
+              "items": [
+                "No provocar el vómito. Enjuagar la boca. Acudir al médico de urgencia."
+              ]
+            },
+            {
+              "titulo": "Síntomas más importantes",
+              "items": [
+                "Quemaduras profundas",
+                "Dolor abdominal y náuseas",
+                "Daño respiratorio por nieblas"
+              ]
+            }
+          ],
+          "notas": [
+            "Nunca administrar agua ni leche a una persona inconsciente.",
+            "Llevar esta ficha o la etiqueta al centro médico."
+          ]
+        },
+        {
+          "numero": 5,
+          "id": "incendio",
+          "titulo": "Medidas de lucha contra incendios",
+          "texto": "No inflamable, pero puede favorecer incendios por reacción con materiales orgánicos y liberar hidrógeno con metales.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Medios de extinción adecuados",
+              "items": [
+                "CO2",
+                "Polvo químico seco",
+                "Espuma resistente a ácidos"
+              ]
+            },
+            {
+              "titulo": "Medios de extinción no adecuados",
+              "items": [
+                "Agua directa sobre ácido concentrado"
+              ]
+            },
+            {
+              "titulo": "Peligros específicos",
+              "items": [
+                "Liberación de hidrógeno",
+                "Humos corrosivos (SOx)"
+              ]
+            },
+            {
+              "titulo": "Equipo de protección",
+              "items": [
+                "Aparato respiratorio autónomo",
+                "Traje de protección contra ácidos"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 6,
+          "id": "derrame",
+          "titulo": "Medidas que deben tomarse en caso de vertido accidental",
+          "texto": "Ventilar. Usar EPP completo. Neutralizar con carbonato de sodio o cal, absorber con material inerte y recoger como residuo peligroso. Nunca añadir agua directamente sobre ácido concentrado.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Precauciones individuales",
+              "items": [
+                "Usar guantes, gafas de seguridad y ropa de protección",
+                "Eliminar fuentes de ignición y ventilar la zona"
+              ]
+            },
+            {
+              "titulo": "Precauciones medioambientales",
+              "items": [
+                "Evitar la entrada en alcantarillados, suelos y cursos de agua",
+                "Notificar a la autoridad ambiental si se produce una liberación importante"
+              ]
+            },
+            {
+              "titulo": "Métodos de limpieza",
+              "items": [
+                "Absorber con material inerte y recoger en recipientes cerrados",
+                "Limpiar la zona con agua y detergente, recogiendo los efluentes"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 7,
+          "id": "manipulacion",
+          "titulo": "Manipulación y almacenamiento",
+          "texto": "Recipientes de vidrio o acero recubierto, bien cerrados, en lugar fresco y seco. Separar de agua, bases, metales, agentes oxidantes y materiales orgánicos. Usar bandejas de contención resistentes.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Precauciones para una manipulación segura",
+              "items": [
+                "Añadir siempre ácido sobre agua",
+                "Usar campana de extracción",
+                "Evitar contacto con azúcares y celulosa"
+              ]
+            },
+            {
+              "titulo": "Condiciones de almacenamiento seguro",
+              "items": [
+                "Mantener el envase cerrado y en lugar fresco",
+                "Proteger de la luz solar directa"
+              ]
+            }
+          ],
+          "notas": [
+            "Incompatibilidades: Agua (reacción exotérmica violenta); Bases fuertes; Metales (liberan hidrógeno); Azúcares y celulosa (carbonización); Oxidantes"
+          ]
+        },
+        {
+          "numero": 8,
+          "id": "exposicion",
+          "titulo": "Controles de exposición / protección personal",
+          "texto": "Aplicar controles de ingeniería para mantener la concentración en el aire por debajo de los límites de exposición profesional vigentes en cada país.",
+          "campos": [
+            {
+              "k": "Límite de exposición (TLV-TWA)",
+              "v": "ACGIH TLV 1 mg/m³ (niebla) (consultar normativa local)"
+            },
+            {
+              "k": "Controles de ingeniería",
+              "v": "Ventilación general y, si procede, extracción localizada"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Equipo de protección personal (EPP)",
+              "items": [
+                "Gafas y pantalla facial",
+                "Guantes de neopreno",
+                "Delantal de PVC",
+                "Protección respiratoria con filtro ácido"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 9,
+          "id": "propiedades",
+          "titulo": "Propiedades físicas y químicas",
+          "texto": "Los valores siguientes corresponden a condiciones normales de presión y temperatura salvo indicación contraria.",
+          "campos": [
+            {
+              "k": "Estado físico",
+              "v": "Líquido incoloro, aceitoso"
+            },
+            {
+              "k": "Color",
+              "v": "Incoloro"
+            },
+            {
+              "k": "Olor",
+              "v": "Inodoro"
+            },
+            {
+              "k": "pH",
+              "v": "< 1"
+            },
+            {
+              "k": "Punto de fusión",
+              "v": "10 °C"
+            },
+            {
+              "k": "Punto de ebullición",
+              "v": "337 °C (descompone)"
+            },
+            {
+              "k": "Densidad",
+              "v": "1,84 g/cm³ (98 %, 20 °C)"
+            },
+            {
+              "k": "Solubilidad en agua",
+              "v": "Miscible con fuerte exotermia"
+            },
+            {
+              "k": "Presión de vapor",
+              "v": "< 0,001 kPa (20 °C)"
+            }
+          ],
+          "listas": [],
+          "notas": []
+        },
+        {
+          "numero": 10,
+          "id": "estabilidad",
+          "titulo": "Estabilidad y reactividad",
+          "texto": "Estable en recipientes cerrados; fuertemente higroscópico.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Condiciones que deben evitarse",
+              "items": [
+                "Agua",
+                "Bases",
+                "Metales",
+                "Materiales orgánicos"
+              ]
+            },
+            {
+              "titulo": "Materiales incompatibles",
+              "items": [
+                "Agua (reacción exotérmica violenta)",
+                "Bases fuertes",
+                "Metales (liberan hidrógeno)",
+                "Azúcares y celulosa (carbonización)",
+                "Oxidantes"
+              ]
+            },
+            {
+              "titulo": "Productos de descomposición peligrosos",
+              "items": [
+                "Óxidos de azufre a alta temperatura"
+              ]
+            }
+          ],
+          "notas": [
+            "El contacto con azúcares o papel puede provocar incendio espontáneo."
+          ]
+        },
+        {
+          "numero": 11,
+          "id": "toxicologica",
+          "titulo": "Información toxicológica",
+          "texto": "Corrosivo severo. La inhalación de nieblas puede causar daño pulmonar crónico y erosión dental.",
+          "campos": [
+            {
+              "k": "Estimación de toxicidad aguda (ETA)",
+              "v": "No disponible (corrosivo por mecanismo local)"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Vías probables de exposición",
+              "items": [
+                "Inhalación de vapores",
+                "Contacto cutáneo",
+                "Contacto ocular",
+                "Ingestión accidental"
+              ]
+            },
+            {
+              "titulo": "Efectos agudos y crónicos",
+              "items": [
+                "Quemaduras profundas",
+                "Dolor abdominal y náuseas",
+                "Daño respiratorio por nieblas"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 12,
+          "id": "ecotoxicologica",
+          "titulo": "Información ecotoxicológica",
+          "texto": "Puede alterar fuertemente el pH de aguas y suelos, con efecto letal para organismos acuáticos.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Efectos en el medio acuático",
+              "items": [
+                "Efecto por acidificación"
+              ]
+            },
+            {
+              "titulo": "Persistencia y degradabilidad",
+              "items": [
+                "No persistente; se neutraliza"
+              ]
+            },
+            {
+              "titulo": "Potencial de bioacumulación",
+              "items": [
+                "No aplicable"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 13,
+          "id": "eliminacion",
+          "titulo": "Información relativa a la eliminación de los productos",
+          "texto": "Eliminar el producto y los envases como residuo peligroso, de acuerdo con la normativa local vigente.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Métodos de eliminación",
+              "items": [
+                "Neutralización controlada",
+                "Entrega a gestor autorizado",
+                "No verter sin tratar"
+              ]
+            },
+            {
+              "titulo": "Envases contaminados",
+              "items": [
+                "Vaciar completamente",
+                "No reutilizar para otros fines",
+                "Entregar al gestor autorizado"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 14,
+          "id": "transporte",
+          "titulo": "Información relativa al transporte",
+          "texto": "Transportar conforme a la Reglamentación Modelo de la ONU y al modo de transporte correspondiente (ADR/RID/IMDG/IATA).",
+          "campos": [
+            {
+              "k": "Número ONU",
+              "v": "1830"
+            },
+            {
+              "k": "Designación oficial de transporte",
+              "v": "ÁCIDO SULFÚRICO"
+            },
+            {
+              "k": "Clase de peligro en el transporte",
+              "v": "Clase 8 (corrosivos)"
+            },
+            {
+              "k": "Grupo de embalaje",
+              "v": "II"
+            },
+            {
+              "k": "Contaminante marino",
+              "v": "No"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Precauciones especiales",
+              "items": [
+                "Cerrar herméticamente los envases",
+                "Proteger de fuentes de ignición",
+                "Portar la documentación de transporte exigida"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 15,
+          "id": "reglamentacion",
+          "titulo": "Información sobre la reglamentación",
+          "texto": "Normativa aplicable a la sustancia. Verificar siempre las disposiciones específicas del país de uso.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Disposiciones aplicables",
+              "items": [
+                "REACH (CE) 1907/2006",
+                "CLP (CE) 1272/2008",
+                "SGA/GHS UNECE",
+                "ADR/RID/IMDG/IATA"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 16,
+          "id": "otras",
+          "titulo": "Otras informaciones",
+          "texto": "Esta ficha se ha elaborado con fines informativos a partir de fuentes públicas y debe ser validada por el proveedor antes de su uso.",
+          "campos": [
+            {
+              "k": "Versión",
+              "v": "1.0"
+            },
+            {
+              "k": "Fecha de revisión",
+              "v": "2026-11-18"
+            },
+            {
+              "k": "Estado",
+              "v": "Ficha de demostración — requiere validación"
+            },
+            {
+              "k": "Elaborada por",
+              "v": "Proyecto Sustancias Peligrosas"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Fuentes consultadas",
+              "items": [
+                "Base de datos ICSC (OIT/OMS)",
+                "PubChem - Ácido sulfúrico (CAS 7664-93-9)",
+                "SGA/GHS, Anexo 4 - UNECE"
+              ]
+            }
+          ],
+          "notas": [
+            "Las indicaciones de peligro y consejos de prudencia deben verificarse en la edición vigente del SGA."
+          ]
+        }
+      ],
+      "palabra_advertencia": "Peligro"
     },
     {
       "id": "hidroxido-sodio",
       "nombre": "Hidróxido de sodio",
-      "sinonimos": ["Sosa cáustica", "NaOH"],
+      "sinonimos": [
+        "Sosa cáustica",
+        "NaOH"
+      ],
       "cas": "1310-73-2",
       "ce": "215-185-5",
       "onu": "1823",
-      "peligrosidad": {
-        "clasificacion": ["Corrosivo para metales, categoría 1", "Corrosión cutánea, categoría 1A", "Lesiones oculares graves, categoría 1"],
-        "pictogramas": ["GHS05"],
-        "frases_h": [
-          {"codigo": "H290", "texto": "Puede ser corrosivo para los metales."},
-          {"codigo": "H314", "texto": "Provoca quemaduras graves en la piel y lesiones oculares graves."}
-        ],
-        "significado": "Peligro principal: corrosión. Disuelve grasas y proteínas, por lo que las quemaduras son profundas y pueden no doler inicialmente. La disolución en agua es fuertemente exotérmica."
-      },
-      "almacenamiento": "Almacenar en recipientes secos y herméticos, en lugar fresco y bien ventilado. Proteger de la humedad y del CO2 del aire (absorbe ambos). Separar de ácidos, aluminio, zinc, estaño y otros metales anfóteros. Usar bandejas de contención.",
-      "derrame": "Usar EPP completo. No usar agua a presión directamente sobre sólido. Recoger el sólido con herramientas limpias, evitando el polvo, y disolverlo lentamente en agua fría para su neutralización controlada. Neutralizar con ácido diluido. No verter sin neutralizar. En contacto con ojos, lavar al menos 15 minutos y acudir al médico.",
+      "formula": "NaOH",
+      "usos": [
+        "Fabricación de jabón y detergentes",
+        "Tratamiento de aguas",
+        "Industria textil y papelera",
+        "Limpieza industrial"
+      ],
+      "concentracion": "≥ 98 % (sólido) o disolución al 50 %",
       "propiedades": {
-        "estado_fisico": "Sólido blanco, pellets o escamas (también en disolución)",
-        "olor": "Inodoro",
-        "punto_de_fusion": "318 °C",
-        "densidad": "2,13 g/cm³ (20 °C)",
-        "solubilidad_en_agua": "Muy soluble, con fuerte desprendimiento de calor",
-        "ph": "> 13 (disolución 1 %)"
+        "Estado físico": "Sólido blanco en pellets o escamas",
+        "Color": "Blanco",
+        "Olor": "Inodoro",
+        "pH": "> 13 (disolución al 1 %)",
+        "Punto de fusión": "318 °C",
+        "Punto de ebullición": "1390 °C",
+        "Densidad": "2,13 g/cm³ (20 °C)",
+        "Solubilidad en agua": "Muy soluble, con fuerte exotermia"
+      },
+      "peligrosidad": {
+        "clasificacion": [
+          "Corrosivo para metales, categoría 1",
+          "Corrosión cutánea, categoría 1A",
+          "Lesiones oculares graves, categoría 1"
+        ],
+        "pictogramas": [
+          "GHS05"
+        ],
+        "palabra": "Peligro",
+        "frases_h": [
+          {
+            "codigo": "H290",
+            "texto": "Puede ser corrosivo para los metales."
+          },
+          {
+            "codigo": "H314",
+            "texto": "Provoca quemaduras graves en la piel y lesiones oculares graves."
+          }
+        ],
+        "frases_p": [
+          "P280 Usar guantes y protección facial.",
+          "P303+P361+P353 Lavar la piel con agua abundante.",
+          "P305+P351+P338 Enjuagar los ojos y acudir al médico."
+        ],
+        "significado": "Peligro principal: corrosión. Disuelve grasas y proteínas, por lo que las quemaduras son profundas y pueden no doler inicialmente. La disolución en agua es fuertemente exotérmica.",
+        "otros_peligros": [
+          "El contacto con aluminio o zinc libera hidrógeno inflamable."
+        ]
+      },
+      "primeros": {
+        "inhalacion": "Trasladar al aire libre. El polvo es irritante; acudir al médico si persiste la tos.",
+        "piel": "Retirar ropa contaminada y lavar con agua abundante al menos 15 minutos. Acudir al médico.",
+        "ojos": "Enjuagar con agua abundante al menos 20 minutos. Acudir urgentemente al oftalmólogo.",
+        "ingestion": "No provocar el vómito. Enjuagar la boca y acudir al médico.",
+        "sintomas": [
+          "Quemaduras profundas indoloras inicialmente",
+          "Visión borrosa",
+          "Dolor abdominal"
+        ]
+      },
+      "incendio": {
+        "descripcion": "No inflamable, pero reacciona con metales liberando hidrógeno inflamable.",
+        "adecuados": [
+          "Polvo químico seco",
+          "CO2"
+        ],
+        "inadecuados": [
+          "Agua directa sobre el sólido"
+        ],
+        "peligros": [
+          "Liberación de hidrógeno con metales anfóteros"
+        ],
+        "equipo": [
+          "Aparato respiratorio autónomo",
+          "Traje de protección"
+        ]
+      },
+      "derrame": "Usar EPP completo. No usar agua a presión sobre el sólido. Recoger con herramientas limpias evitando el polvo y disolver lentamente en agua fría para su neutralización controlada. No verter sin neutralizar.",
+      "almacenamiento": "Recipientes secos y herméticos, en lugar fresco y ventilado. Proteger de la humedad y del CO2 del aire. Separar de ácidos, aluminio, zinc y estaño.",
+      "manipulacion": [
+        "Evitar generación de polvo",
+        "Añadir siempre el sólido sobre el agua",
+        "Usar campana de extracción"
+      ],
+      "epp": [
+        "Gafas y pantalla facial",
+        "Guantes de nitrilo o neopreno",
+        "Ropa de protección",
+        "Protección respiratoria con filtro P"
+      ],
+      "tlv": "ACGIH TLV 2 mg/m³ (consultar normativa local)",
+      "estabilidad": {
+        "texto": "Estable en recipientes secos y cerrados; absorbe humedad y CO2.",
+        "evitar": [
+          "Humedad",
+          "Ácidos",
+          "Aluminio, zinc, estaño"
+        ],
+        "descomposicion": [
+          "No se descompone en condiciones normales"
+        ]
       },
       "interacciones": {
-        "incompatibilidades": ["Ácidos (reacción violenta)", "Aluminio, zinc, estaño (liberan hidrógeno)", "Cloro", "Agua (exotérmica)"],
-        "nota": "El contacto con aluminio o zinc genera hidrógeno inflamable; peligro de incendio o explosión."
+        "incompatibilidades": [
+          "Ácidos (reacción violenta)",
+          "Aluminio, zinc y estaño (liberan hidrógeno)",
+          "Cloro",
+          "Agua (exotérmica)"
+        ],
+        "nota": "El contacto con aluminio o zinc genera hidrógeno inflamable."
       },
-      "fuentes": [
-        {"titulo": "Base de datos ICSC (OIT/OMS)", "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"},
-        {"titulo": "PubChem - Hidróxido de sodio (CAS 1310-73-2)", "url": "https://pubchem.ncbi.nlm.nih.gov/"}
+      "toxicologica": "Corrosivo severo por contacto e ingestión. Las quemaduras pueden ser profundas sin dolor inmediato.",
+      "eta": "DL50 oral (rata) aproximadamente 1400 mg/kg",
+      "ecotoxicologica": "Puede elevar el pH de aguas y suelos, afectando a organismos acuáticos.",
+      "acuatico": [
+        "Efecto por alcalinidad"
       ],
-      "estado": "demo"
+      "persistencia": [
+        "No persistente; se neutraliza"
+      ],
+      "bioacumulacion": [
+        "No aplicable"
+      ],
+      "eliminacion": [
+        "Neutralización controlada con ácido diluido",
+        "Entrega a gestor autorizado",
+        "No verter sin tratar"
+      ],
+      "designacion": "HIDRÓXIDO DE SODIO",
+      "clase_transporte": "Clase 8 (corrosivos)",
+      "grupo_embalaje": "II",
+      "contaminante_marino": "No",
+      "reglamentacion": [
+        "REACH (CE) 1907/2006",
+        "CLP (CE) 1272/2008",
+        "SGA/GHS UNECE",
+        "ADR/RID/IMDG/IATA"
+      ],
+      "fuentes": [
+        {
+          "titulo": "Base de datos ICSC (OIT/OMS)",
+          "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"
+        },
+        {
+          "titulo": "PubChem - Hidróxido de sodio (CAS 1310-73-2)",
+          "url": "https://pubchem.ncbi.nlm.nih.gov/"
+        },
+        {
+          "titulo": "SGA/GHS, Anexo 4 - UNECE",
+          "url": "https://unece.org/transport/dangerous-goods/ghs-rev11-2025"
+        }
+      ],
+      "estado": "demo",
+      "secciones": [
+        {
+          "numero": 1,
+          "id": "identificacion",
+          "titulo": "Identificación del producto y del proveedor",
+          "texto": "Hidróxido de sodio es una sustancia química identificada internacionalmente mediante los números CAS, CE y ONU indicados. Se suministra para los usos profesionales e industriales descritos.",
+          "campos": [
+            {
+              "k": "Identificador SGA del producto",
+              "v": "Hidróxido de sodio"
+            },
+            {
+              "k": "Sinónimos",
+              "v": "Sosa cáustica, NaOH"
+            },
+            {
+              "k": "Número CAS",
+              "v": "1310-73-2"
+            },
+            {
+              "k": "Número CE",
+              "v": "215-185-5"
+            },
+            {
+              "k": "Número ONU",
+              "v": "1823"
+            },
+            {
+              "k": "Fórmula molecular",
+              "v": "NaOH"
+            },
+            {
+              "k": "Proveedor",
+              "v": "Información del fabricante en la etiqueta del envase"
+            },
+            {
+              "k": "Teléfono de emergencia",
+              "v": "Servicio de emergencias químicas local (112 / 911)"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Uso recomendado",
+              "items": [
+                "Fabricación de jabón y detergentes",
+                "Tratamiento de aguas",
+                "Industria textil y papelera",
+                "Limpieza industrial"
+              ]
+            }
+          ],
+          "notas": [
+            "El proveedor debe indicar en la etiqueta la identidad completa y los datos de contacto."
+          ]
+        },
+        {
+          "numero": 2,
+          "id": "peligros",
+          "titulo": "Identificación de los peligros",
+          "texto": "Peligro principal: corrosión. Disuelve grasas y proteínas, por lo que las quemaduras son profundas y pueden no doler inicialmente. La disolución en agua es fuertemente exotérmica.",
+          "campos": [
+            {
+              "k": "Clasificación SGA",
+              "v": "Corrosivo para metales, categoría 1; Corrosión cutánea, categoría 1A; Lesiones oculares graves, categoría 1"
+            },
+            {
+              "k": "Pictogramas",
+              "v": "GHS05"
+            },
+            {
+              "k": "Palabra de advertencia",
+              "v": "Peligro"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Indicaciones de peligro (H)",
+              "items": [
+                "H290 — Puede ser corrosivo para los metales.",
+                "H314 — Provoca quemaduras graves en la piel y lesiones oculares graves."
+              ]
+            },
+            {
+              "titulo": "Consejos de prudencia (P)",
+              "items": [
+                "P280 Usar guantes y protección facial.",
+                "P303+P361+P353 Lavar la piel con agua abundante.",
+                "P305+P351+P338 Enjuagar los ojos y acudir al médico."
+              ]
+            }
+          ],
+          "notas": [
+            "El contacto con aluminio o zinc libera hidrógeno inflamable."
+          ]
+        },
+        {
+          "numero": 3,
+          "id": "composicion",
+          "titulo": "Composición / información sobre los componentes",
+          "texto": "Sustancia pura: Hidróxido de sodio. No se consideran impurezas que modifiquen la clasificación de peligro.",
+          "campos": [
+            {
+              "k": "Identidad química",
+              "v": "Hidróxido de sodio"
+            },
+            {
+              "k": "Número CAS",
+              "v": "1310-73-2"
+            },
+            {
+              "k": "Número CE",
+              "v": "215-185-5"
+            },
+            {
+              "k": "Concentración",
+              "v": "≥ 98 % (sólido) o disolución al 50 %"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Impurezas y aditivos",
+              "items": [
+                "No se declaran impurezas relevantes para la clasificación"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 4,
+          "id": "primeros_auxilios",
+          "titulo": "Primeros auxilios",
+          "texto": "Trasladar a la persona afectada a un lugar ventilado. Mantener la calma y llamar al servicio de emergencias si los síntomas persisten.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Inhalación",
+              "items": [
+                "Trasladar al aire libre. El polvo es irritante; acudir al médico si persiste la tos."
+              ]
+            },
+            {
+              "titulo": "Contacto con la piel",
+              "items": [
+                "Retirar ropa contaminada y lavar con agua abundante al menos 15 minutos. Acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Contacto con los ojos",
+              "items": [
+                "Enjuagar con agua abundante al menos 20 minutos. Acudir urgentemente al oftalmólogo."
+              ]
+            },
+            {
+              "titulo": "Ingestión",
+              "items": [
+                "No provocar el vómito. Enjuagar la boca y acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Síntomas más importantes",
+              "items": [
+                "Quemaduras profundas indoloras inicialmente",
+                "Visión borrosa",
+                "Dolor abdominal"
+              ]
+            }
+          ],
+          "notas": [
+            "Nunca administrar agua ni leche a una persona inconsciente.",
+            "Llevar esta ficha o la etiqueta al centro médico."
+          ]
+        },
+        {
+          "numero": 5,
+          "id": "incendio",
+          "titulo": "Medidas de lucha contra incendios",
+          "texto": "No inflamable, pero reacciona con metales liberando hidrógeno inflamable.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Medios de extinción adecuados",
+              "items": [
+                "Polvo químico seco",
+                "CO2"
+              ]
+            },
+            {
+              "titulo": "Medios de extinción no adecuados",
+              "items": [
+                "Agua directa sobre el sólido"
+              ]
+            },
+            {
+              "titulo": "Peligros específicos",
+              "items": [
+                "Liberación de hidrógeno con metales anfóteros"
+              ]
+            },
+            {
+              "titulo": "Equipo de protección",
+              "items": [
+                "Aparato respiratorio autónomo",
+                "Traje de protección"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 6,
+          "id": "derrame",
+          "titulo": "Medidas que deben tomarse en caso de vertido accidental",
+          "texto": "Usar EPP completo. No usar agua a presión sobre el sólido. Recoger con herramientas limpias evitando el polvo y disolver lentamente en agua fría para su neutralización controlada. No verter sin neutralizar.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Precauciones individuales",
+              "items": [
+                "Usar guantes, gafas de seguridad y ropa de protección",
+                "Eliminar fuentes de ignición y ventilar la zona"
+              ]
+            },
+            {
+              "titulo": "Precauciones medioambientales",
+              "items": [
+                "Evitar la entrada en alcantarillados, suelos y cursos de agua",
+                "Notificar a la autoridad ambiental si se produce una liberación importante"
+              ]
+            },
+            {
+              "titulo": "Métodos de limpieza",
+              "items": [
+                "Absorber con material inerte y recoger en recipientes cerrados",
+                "Limpiar la zona con agua y detergente, recogiendo los efluentes"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 7,
+          "id": "manipulacion",
+          "titulo": "Manipulación y almacenamiento",
+          "texto": "Recipientes secos y herméticos, en lugar fresco y ventilado. Proteger de la humedad y del CO2 del aire. Separar de ácidos, aluminio, zinc y estaño.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Precauciones para una manipulación segura",
+              "items": [
+                "Evitar generación de polvo",
+                "Añadir siempre el sólido sobre el agua",
+                "Usar campana de extracción"
+              ]
+            },
+            {
+              "titulo": "Condiciones de almacenamiento seguro",
+              "items": [
+                "Mantener el envase cerrado y en lugar fresco",
+                "Proteger de la luz solar directa"
+              ]
+            }
+          ],
+          "notas": [
+            "Incompatibilidades: Ácidos (reacción violenta); Aluminio, zinc y estaño (liberan hidrógeno); Cloro; Agua (exotérmica)"
+          ]
+        },
+        {
+          "numero": 8,
+          "id": "exposicion",
+          "titulo": "Controles de exposición / protección personal",
+          "texto": "Aplicar controles de ingeniería para mantener la concentración en el aire por debajo de los límites de exposición profesional vigentes en cada país.",
+          "campos": [
+            {
+              "k": "Límite de exposición (TLV-TWA)",
+              "v": "ACGIH TLV 2 mg/m³ (consultar normativa local)"
+            },
+            {
+              "k": "Controles de ingeniería",
+              "v": "Ventilación general y, si procede, extracción localizada"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Equipo de protección personal (EPP)",
+              "items": [
+                "Gafas y pantalla facial",
+                "Guantes de nitrilo o neopreno",
+                "Ropa de protección",
+                "Protección respiratoria con filtro P"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 9,
+          "id": "propiedades",
+          "titulo": "Propiedades físicas y químicas",
+          "texto": "Los valores siguientes corresponden a condiciones normales de presión y temperatura salvo indicación contraria.",
+          "campos": [
+            {
+              "k": "Estado físico",
+              "v": "Sólido blanco en pellets o escamas"
+            },
+            {
+              "k": "Color",
+              "v": "Blanco"
+            },
+            {
+              "k": "Olor",
+              "v": "Inodoro"
+            },
+            {
+              "k": "pH",
+              "v": "> 13 (disolución al 1 %)"
+            },
+            {
+              "k": "Punto de fusión",
+              "v": "318 °C"
+            },
+            {
+              "k": "Punto de ebullición",
+              "v": "1390 °C"
+            },
+            {
+              "k": "Densidad",
+              "v": "2,13 g/cm³ (20 °C)"
+            },
+            {
+              "k": "Solubilidad en agua",
+              "v": "Muy soluble, con fuerte exotermia"
+            }
+          ],
+          "listas": [],
+          "notas": []
+        },
+        {
+          "numero": 10,
+          "id": "estabilidad",
+          "titulo": "Estabilidad y reactividad",
+          "texto": "Estable en recipientes secos y cerrados; absorbe humedad y CO2.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Condiciones que deben evitarse",
+              "items": [
+                "Humedad",
+                "Ácidos",
+                "Aluminio, zinc, estaño"
+              ]
+            },
+            {
+              "titulo": "Materiales incompatibles",
+              "items": [
+                "Ácidos (reacción violenta)",
+                "Aluminio, zinc y estaño (liberan hidrógeno)",
+                "Cloro",
+                "Agua (exotérmica)"
+              ]
+            },
+            {
+              "titulo": "Productos de descomposición peligrosos",
+              "items": [
+                "No se descompone en condiciones normales"
+              ]
+            }
+          ],
+          "notas": [
+            "El contacto con aluminio o zinc genera hidrógeno inflamable."
+          ]
+        },
+        {
+          "numero": 11,
+          "id": "toxicologica",
+          "titulo": "Información toxicológica",
+          "texto": "Corrosivo severo por contacto e ingestión. Las quemaduras pueden ser profundas sin dolor inmediato.",
+          "campos": [
+            {
+              "k": "Estimación de toxicidad aguda (ETA)",
+              "v": "DL50 oral (rata) aproximadamente 1400 mg/kg"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Vías probables de exposición",
+              "items": [
+                "Inhalación de vapores",
+                "Contacto cutáneo",
+                "Contacto ocular",
+                "Ingestión accidental"
+              ]
+            },
+            {
+              "titulo": "Efectos agudos y crónicos",
+              "items": [
+                "Quemaduras profundas indoloras inicialmente",
+                "Visión borrosa",
+                "Dolor abdominal"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 12,
+          "id": "ecotoxicologica",
+          "titulo": "Información ecotoxicológica",
+          "texto": "Puede elevar el pH de aguas y suelos, afectando a organismos acuáticos.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Efectos en el medio acuático",
+              "items": [
+                "Efecto por alcalinidad"
+              ]
+            },
+            {
+              "titulo": "Persistencia y degradabilidad",
+              "items": [
+                "No persistente; se neutraliza"
+              ]
+            },
+            {
+              "titulo": "Potencial de bioacumulación",
+              "items": [
+                "No aplicable"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 13,
+          "id": "eliminacion",
+          "titulo": "Información relativa a la eliminación de los productos",
+          "texto": "Eliminar el producto y los envases como residuo peligroso, de acuerdo con la normativa local vigente.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Métodos de eliminación",
+              "items": [
+                "Neutralización controlada con ácido diluido",
+                "Entrega a gestor autorizado",
+                "No verter sin tratar"
+              ]
+            },
+            {
+              "titulo": "Envases contaminados",
+              "items": [
+                "Vaciar completamente",
+                "No reutilizar para otros fines",
+                "Entregar al gestor autorizado"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 14,
+          "id": "transporte",
+          "titulo": "Información relativa al transporte",
+          "texto": "Transportar conforme a la Reglamentación Modelo de la ONU y al modo de transporte correspondiente (ADR/RID/IMDG/IATA).",
+          "campos": [
+            {
+              "k": "Número ONU",
+              "v": "1823"
+            },
+            {
+              "k": "Designación oficial de transporte",
+              "v": "HIDRÓXIDO DE SODIO"
+            },
+            {
+              "k": "Clase de peligro en el transporte",
+              "v": "Clase 8 (corrosivos)"
+            },
+            {
+              "k": "Grupo de embalaje",
+              "v": "II"
+            },
+            {
+              "k": "Contaminante marino",
+              "v": "No"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Precauciones especiales",
+              "items": [
+                "Cerrar herméticamente los envases",
+                "Proteger de fuentes de ignición",
+                "Portar la documentación de transporte exigida"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 15,
+          "id": "reglamentacion",
+          "titulo": "Información sobre la reglamentación",
+          "texto": "Normativa aplicable a la sustancia. Verificar siempre las disposiciones específicas del país de uso.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Disposiciones aplicables",
+              "items": [
+                "REACH (CE) 1907/2006",
+                "CLP (CE) 1272/2008",
+                "SGA/GHS UNECE",
+                "ADR/RID/IMDG/IATA"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 16,
+          "id": "otras",
+          "titulo": "Otras informaciones",
+          "texto": "Esta ficha se ha elaborado con fines informativos a partir de fuentes públicas y debe ser validada por el proveedor antes de su uso.",
+          "campos": [
+            {
+              "k": "Versión",
+              "v": "1.0"
+            },
+            {
+              "k": "Fecha de revisión",
+              "v": "2026-11-18"
+            },
+            {
+              "k": "Estado",
+              "v": "Ficha de demostración — requiere validación"
+            },
+            {
+              "k": "Elaborada por",
+              "v": "Proyecto Sustancias Peligrosas"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Fuentes consultadas",
+              "items": [
+                "Base de datos ICSC (OIT/OMS)",
+                "PubChem - Hidróxido de sodio (CAS 1310-73-2)",
+                "SGA/GHS, Anexo 4 - UNECE"
+              ]
+            }
+          ],
+          "notas": [
+            "Las indicaciones de peligro y consejos de prudencia deben verificarse en la edición vigente del SGA."
+          ]
+        }
+      ],
+      "palabra_advertencia": "Peligro"
+    },
+    {
+      "id": "etanol",
+      "nombre": "Etanol",
+      "sinonimos": [
+        "Alcohol etílico",
+        "Etanol absoluto"
+      ],
+      "cas": "64-17-5",
+      "ce": "200-578-6",
+      "onu": "1170",
+      "formula": "C2H6O",
+      "usos": [
+        "Disolvente",
+        "Desinfectante",
+        "Bebidas alcohólicas (uso controlado)",
+        "Combustible"
+      ],
+      "concentracion": "≥ 99,5 % (absoluto)",
+      "propiedades": {
+        "Estado físico": "Líquido incoloro",
+        "Color": "Incoloro",
+        "Olor": "Alcohol, característico",
+        "pH": "No aplicable",
+        "Punto de fusión": "-114 °C",
+        "Punto de ebullición": "78 °C",
+        "Punto de inflamación": "12 °C (vaso cerrado)",
+        "Temperatura de autoignición": "363 °C",
+        "Densidad": "0,79 g/cm³ (20 °C)",
+        "Solubilidad en agua": "Miscible",
+        "Presión de vapor": "5,9 kPa (20 °C)"
+      },
+      "peligrosidad": {
+        "clasificacion": [
+          "Líquido inflamable, categoría 2",
+          "Irritación ocular, categoría 2"
+        ],
+        "pictogramas": [
+          "GHS02",
+          "GHS07"
+        ],
+        "palabra": "Peligro",
+        "frases_h": [
+          {
+            "codigo": "H225",
+            "texto": "Líquido y vapores muy inflamables."
+          },
+          {
+            "codigo": "H319",
+            "texto": "Provoca irritación ocular grave."
+          }
+        ],
+        "frases_p": [
+          "P210 Mantener alejado del calor y fuentes de ignición.",
+          "P233 Mantener el recipiente cerrado.",
+          "P305+P351+P338 Enjuagar los ojos con agua abundante."
+        ],
+        "significado": "Peligro principal: incendio. La llama de los alcoholes es casi invisible en ambientes iluminados y sus vapores pueden propagarse por el suelo.",
+        "otros_peligros": [
+          "Los vapores pueden formar mezclas explosivas con el aire."
+        ]
+      },
+      "primeros": {
+        "inhalacion": "Trasladar al aire libre. Si hay mareo, acudir al médico.",
+        "piel": "Lavar con agua y jabón.",
+        "ojos": "Enjuagar con agua abundante al menos 15 minutos. Acudir al médico si persiste.",
+        "ingestion": "No provocar el vómito. Acudir al médico si se ha ingerido una cantidad elevada.",
+        "sintomas": [
+          "Irritación ocular",
+          "Mareo y náuseas",
+          "Deshidratación en ingestión elevada"
+        ]
+      },
+      "incendio": {
+        "descripcion": "Líquido muy inflamable; la llama puede ser apenas visible.",
+        "adecuados": [
+          "Espuma resistente al alcohol",
+          "Polvo químico seco",
+          "CO2"
+        ],
+        "inadecuados": [
+          "Chorros directos de agua"
+        ],
+        "peligros": [
+          "Mezcla explosiva vapor-aire",
+          "Retroceso de llama"
+        ],
+        "equipo": [
+          "Aparato respiratorio autónomo",
+          "Traje de protección"
+        ]
+      },
+      "derrame": "Eliminar ignición, ventilar, absorber con material inerte y recoger en recipientes cerrados. No verter a desagües. En contacto ocular, lavar con agua abundante.",
+      "almacenamiento": "Conservar en recipientes bien cerrados, en lugar fresco y ventilado, lejos de fuentes de calor, chispas y llama abierta. Separar de oxidantes y metales alcalinos.",
+      "manipulacion": [
+        "Manipular en zona ventilada",
+        "Evitar contacto con oxidantes",
+        "Usar equipos antichispa"
+      ],
+      "epp": [
+        "Gafas de seguridad",
+        "Guantes de nitrilo",
+        "Ropa de protección"
+      ],
+      "tlv": "ACGIH TLV 1000 ppm (consultar normativa local)",
+      "estabilidad": {
+        "texto": "Estable en condiciones normales.",
+        "evitar": [
+          "Fuentes de ignición",
+          "Oxidantes",
+          "Sodio y potasio metálicos"
+        ],
+        "descomposicion": [
+          "Monóxido y dióxido de carbono en combustión"
+        ]
+      },
+      "interacciones": {
+        "incompatibilidades": [
+          "Agentes oxidantes fuertes",
+          "Sodio y potasio metálicos (liberan hidrógeno)",
+          "Ácidos fuertes"
+        ],
+        "nota": "Reacciona violentamente con metales alcalinos liberando hidrógeno inflamable."
+      },
+      "toxicologica": "De baja toxicidad aguda. El efecto principal es la depresión del sistema nervioso central en exposiciones elevadas.",
+      "eta": "DL50 oral (rata) aproximadamente 7060 mg/kg",
+      "ecotoxicologica": "Fácilmente biodegradable; baja toxicidad acuática a concentraciones ambientales.",
+      "acuatico": [
+        "LC50 pez (96 h) > 1000 mg/L"
+      ],
+      "persistencia": [
+        "Fácilmente biodegradable"
+      ],
+      "bioacumulacion": [
+        "Bajo potencial"
+      ],
+      "eliminacion": [
+        "Recuperación o incineración en instalación autorizada",
+        "No verter en grandes cantidades a desagües"
+      ],
+      "designacion": "ETANOL",
+      "clase_transporte": "Clase 3 (líquidos inflamables)",
+      "grupo_embalaje": "II",
+      "contaminante_marino": "No",
+      "reglamentacion": [
+        "REACH (CE) 1907/2006",
+        "CLP (CE) 1272/2008",
+        "SGA/GHS UNECE",
+        "ADR/RID/IMDG/IATA"
+      ],
+      "fuentes": [
+        {
+          "titulo": "Base de datos ICSC (OIT/OMS)",
+          "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"
+        },
+        {
+          "titulo": "PubChem - Etanol (CAS 64-17-5)",
+          "url": "https://pubchem.ncbi.nlm.nih.gov/"
+        },
+        {
+          "titulo": "SGA/GHS, Anexo 4 - UNECE",
+          "url": "https://unece.org/transport/dangerous-goods/ghs-rev11-2025"
+        }
+      ],
+      "estado": "demo",
+      "secciones": [
+        {
+          "numero": 1,
+          "id": "identificacion",
+          "titulo": "Identificación del producto y del proveedor",
+          "texto": "Etanol es una sustancia química identificada internacionalmente mediante los números CAS, CE y ONU indicados. Se suministra para los usos profesionales e industriales descritos.",
+          "campos": [
+            {
+              "k": "Identificador SGA del producto",
+              "v": "Etanol"
+            },
+            {
+              "k": "Sinónimos",
+              "v": "Alcohol etílico, Etanol absoluto"
+            },
+            {
+              "k": "Número CAS",
+              "v": "64-17-5"
+            },
+            {
+              "k": "Número CE",
+              "v": "200-578-6"
+            },
+            {
+              "k": "Número ONU",
+              "v": "1170"
+            },
+            {
+              "k": "Fórmula molecular",
+              "v": "C2H6O"
+            },
+            {
+              "k": "Proveedor",
+              "v": "Información del fabricante en la etiqueta del envase"
+            },
+            {
+              "k": "Teléfono de emergencia",
+              "v": "Servicio de emergencias químicas local (112 / 911)"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Uso recomendado",
+              "items": [
+                "Disolvente",
+                "Desinfectante",
+                "Bebidas alcohólicas (uso controlado)",
+                "Combustible"
+              ]
+            }
+          ],
+          "notas": [
+            "El proveedor debe indicar en la etiqueta la identidad completa y los datos de contacto."
+          ]
+        },
+        {
+          "numero": 2,
+          "id": "peligros",
+          "titulo": "Identificación de los peligros",
+          "texto": "Peligro principal: incendio. La llama de los alcoholes es casi invisible en ambientes iluminados y sus vapores pueden propagarse por el suelo.",
+          "campos": [
+            {
+              "k": "Clasificación SGA",
+              "v": "Líquido inflamable, categoría 2; Irritación ocular, categoría 2"
+            },
+            {
+              "k": "Pictogramas",
+              "v": "GHS02, GHS07"
+            },
+            {
+              "k": "Palabra de advertencia",
+              "v": "Peligro"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Indicaciones de peligro (H)",
+              "items": [
+                "H225 — Líquido y vapores muy inflamables.",
+                "H319 — Provoca irritación ocular grave."
+              ]
+            },
+            {
+              "titulo": "Consejos de prudencia (P)",
+              "items": [
+                "P210 Mantener alejado del calor y fuentes de ignición.",
+                "P233 Mantener el recipiente cerrado.",
+                "P305+P351+P338 Enjuagar los ojos con agua abundante."
+              ]
+            }
+          ],
+          "notas": [
+            "Los vapores pueden formar mezclas explosivas con el aire."
+          ]
+        },
+        {
+          "numero": 3,
+          "id": "composicion",
+          "titulo": "Composición / información sobre los componentes",
+          "texto": "Sustancia pura: Etanol. No se consideran impurezas que modifiquen la clasificación de peligro.",
+          "campos": [
+            {
+              "k": "Identidad química",
+              "v": "Etanol"
+            },
+            {
+              "k": "Número CAS",
+              "v": "64-17-5"
+            },
+            {
+              "k": "Número CE",
+              "v": "200-578-6"
+            },
+            {
+              "k": "Concentración",
+              "v": "≥ 99,5 % (absoluto)"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Impurezas y aditivos",
+              "items": [
+                "No se declaran impurezas relevantes para la clasificación"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 4,
+          "id": "primeros_auxilios",
+          "titulo": "Primeros auxilios",
+          "texto": "Trasladar a la persona afectada a un lugar ventilado. Mantener la calma y llamar al servicio de emergencias si los síntomas persisten.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Inhalación",
+              "items": [
+                "Trasladar al aire libre. Si hay mareo, acudir al médico."
+              ]
+            },
+            {
+              "titulo": "Contacto con la piel",
+              "items": [
+                "Lavar con agua y jabón."
+              ]
+            },
+            {
+              "titulo": "Contacto con los ojos",
+              "items": [
+                "Enjuagar con agua abundante al menos 15 minutos. Acudir al médico si persiste."
+              ]
+            },
+            {
+              "titulo": "Ingestión",
+              "items": [
+                "No provocar el vómito. Acudir al médico si se ha ingerido una cantidad elevada."
+              ]
+            },
+            {
+              "titulo": "Síntomas más importantes",
+              "items": [
+                "Irritación ocular",
+                "Mareo y náuseas",
+                "Deshidratación en ingestión elevada"
+              ]
+            }
+          ],
+          "notas": [
+            "Nunca administrar agua ni leche a una persona inconsciente.",
+            "Llevar esta ficha o la etiqueta al centro médico."
+          ]
+        },
+        {
+          "numero": 5,
+          "id": "incendio",
+          "titulo": "Medidas de lucha contra incendios",
+          "texto": "Líquido muy inflamable; la llama puede ser apenas visible.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Medios de extinción adecuados",
+              "items": [
+                "Espuma resistente al alcohol",
+                "Polvo químico seco",
+                "CO2"
+              ]
+            },
+            {
+              "titulo": "Medios de extinción no adecuados",
+              "items": [
+                "Chorros directos de agua"
+              ]
+            },
+            {
+              "titulo": "Peligros específicos",
+              "items": [
+                "Mezcla explosiva vapor-aire",
+                "Retroceso de llama"
+              ]
+            },
+            {
+              "titulo": "Equipo de protección",
+              "items": [
+                "Aparato respiratorio autónomo",
+                "Traje de protección"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 6,
+          "id": "derrame",
+          "titulo": "Medidas que deben tomarse en caso de vertido accidental",
+          "texto": "Eliminar ignición, ventilar, absorber con material inerte y recoger en recipientes cerrados. No verter a desagües. En contacto ocular, lavar con agua abundante.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Precauciones individuales",
+              "items": [
+                "Usar guantes, gafas de seguridad y ropa de protección",
+                "Eliminar fuentes de ignición y ventilar la zona"
+              ]
+            },
+            {
+              "titulo": "Precauciones medioambientales",
+              "items": [
+                "Evitar la entrada en alcantarillados, suelos y cursos de agua",
+                "Notificar a la autoridad ambiental si se produce una liberación importante"
+              ]
+            },
+            {
+              "titulo": "Métodos de limpieza",
+              "items": [
+                "Absorber con material inerte y recoger en recipientes cerrados",
+                "Limpiar la zona con agua y detergente, recogiendo los efluentes"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 7,
+          "id": "manipulacion",
+          "titulo": "Manipulación y almacenamiento",
+          "texto": "Conservar en recipientes bien cerrados, en lugar fresco y ventilado, lejos de fuentes de calor, chispas y llama abierta. Separar de oxidantes y metales alcalinos.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Precauciones para una manipulación segura",
+              "items": [
+                "Manipular en zona ventilada",
+                "Evitar contacto con oxidantes",
+                "Usar equipos antichispa"
+              ]
+            },
+            {
+              "titulo": "Condiciones de almacenamiento seguro",
+              "items": [
+                "Mantener el envase cerrado y en lugar fresco",
+                "Proteger de la luz solar directa"
+              ]
+            }
+          ],
+          "notas": [
+            "Incompatibilidades: Agentes oxidantes fuertes; Sodio y potasio metálicos (liberan hidrógeno); Ácidos fuertes"
+          ]
+        },
+        {
+          "numero": 8,
+          "id": "exposicion",
+          "titulo": "Controles de exposición / protección personal",
+          "texto": "Aplicar controles de ingeniería para mantener la concentración en el aire por debajo de los límites de exposición profesional vigentes en cada país.",
+          "campos": [
+            {
+              "k": "Límite de exposición (TLV-TWA)",
+              "v": "ACGIH TLV 1000 ppm (consultar normativa local)"
+            },
+            {
+              "k": "Controles de ingeniería",
+              "v": "Ventilación general y, si procede, extracción localizada"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Equipo de protección personal (EPP)",
+              "items": [
+                "Gafas de seguridad",
+                "Guantes de nitrilo",
+                "Ropa de protección"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 9,
+          "id": "propiedades",
+          "titulo": "Propiedades físicas y químicas",
+          "texto": "Los valores siguientes corresponden a condiciones normales de presión y temperatura salvo indicación contraria.",
+          "campos": [
+            {
+              "k": "Estado físico",
+              "v": "Líquido incoloro"
+            },
+            {
+              "k": "Color",
+              "v": "Incoloro"
+            },
+            {
+              "k": "Olor",
+              "v": "Alcohol, característico"
+            },
+            {
+              "k": "pH",
+              "v": "No aplicable"
+            },
+            {
+              "k": "Punto de fusión",
+              "v": "-114 °C"
+            },
+            {
+              "k": "Punto de ebullición",
+              "v": "78 °C"
+            },
+            {
+              "k": "Punto de inflamación",
+              "v": "12 °C (vaso cerrado)"
+            },
+            {
+              "k": "Temperatura de autoignición",
+              "v": "363 °C"
+            },
+            {
+              "k": "Densidad",
+              "v": "0,79 g/cm³ (20 °C)"
+            },
+            {
+              "k": "Solubilidad en agua",
+              "v": "Miscible"
+            },
+            {
+              "k": "Presión de vapor",
+              "v": "5,9 kPa (20 °C)"
+            }
+          ],
+          "listas": [],
+          "notas": []
+        },
+        {
+          "numero": 10,
+          "id": "estabilidad",
+          "titulo": "Estabilidad y reactividad",
+          "texto": "Estable en condiciones normales.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Condiciones que deben evitarse",
+              "items": [
+                "Fuentes de ignición",
+                "Oxidantes",
+                "Sodio y potasio metálicos"
+              ]
+            },
+            {
+              "titulo": "Materiales incompatibles",
+              "items": [
+                "Agentes oxidantes fuertes",
+                "Sodio y potasio metálicos (liberan hidrógeno)",
+                "Ácidos fuertes"
+              ]
+            },
+            {
+              "titulo": "Productos de descomposición peligrosos",
+              "items": [
+                "Monóxido y dióxido de carbono en combustión"
+              ]
+            }
+          ],
+          "notas": [
+            "Reacciona violentamente con metales alcalinos liberando hidrógeno inflamable."
+          ]
+        },
+        {
+          "numero": 11,
+          "id": "toxicologica",
+          "titulo": "Información toxicológica",
+          "texto": "De baja toxicidad aguda por vía oral en dérrmicos. ElSymptoms principal es la depresión del sistema nervioso central en exposiciones elevadas.",
+          "campos": [
+            {
+              "k": "Estimación de toxicidad aguda (ETA)",
+              "v": "DL50 oral (rata) aproximadamente 7060 mg/kg"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Vías probables de exposición",
+              "items": [
+                "Inhalación de vapores",
+                "Contacto cutáneo",
+                "Contacto ocular",
+                "Ingestión accidental"
+              ]
+            },
+            {
+              "titulo": "Efectos agudos y crónicos",
+              "items": [
+                "Irritación ocular",
+                "Mareo y náuseas",
+                "Deshidratación en ingestión elevada"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 12,
+          "id": "ecotoxicologica",
+          "titulo": "Información ecotoxicológica",
+          "texto": "Fácilmente biodegradable; baja toxicidad acuática a concentraciones ambientales.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Efectos en el medio acuático",
+              "items": [
+                "LC50 pez (96 h) > 1000 mg/L"
+              ]
+            },
+            {
+              "titulo": "Persistencia y degradabilidad",
+              "items": [
+                "Fácilmente biodegradable"
+              ]
+            },
+            {
+              "titulo": "Potencial de bioacumulación",
+              "items": [
+                "Bajo potencial"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 13,
+          "id": "eliminacion",
+          "titulo": "Información relativa a la eliminación de los productos",
+          "texto": "Eliminar el producto y los envases como residuo peligroso, de acuerdo con la normativa local vigente.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Métodos de eliminación",
+              "items": [
+                "Recuperación o incineración en instalación autorizada",
+                "No verter en grandes cantidades a desagües"
+              ]
+            },
+            {
+              "titulo": "Envases contaminados",
+              "items": [
+                "Vaciar completamente",
+                "No reutilizar para otros fines",
+                "Entregar al gestor autorizado"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 14,
+          "id": "transporte",
+          "titulo": "Información relativa al transporte",
+          "texto": "Transportar conforme a la Reglamentación Modelo de la ONU y al modo de transporte correspondiente (ADR/RID/IMDG/IATA).",
+          "campos": [
+            {
+              "k": "Número ONU",
+              "v": "1170"
+            },
+            {
+              "k": "Designación oficial de transporte",
+              "v": "ETANOL"
+            },
+            {
+              "k": "Clase de peligro en el transporte",
+              "v": "Clase 3 (líquidos inflamables)"
+            },
+            {
+              "k": "Grupo de embalaje",
+              "v": "II"
+            },
+            {
+              "k": "Contaminante marino",
+              "v": "No"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Precauciones especiales",
+              "items": [
+                "Cerrar herméticamente los envases",
+                "Proteger de fuentes de ignición",
+                "Portar la documentación de transporte exigida"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 15,
+          "id": "reglamentacion",
+          "titulo": "Información sobre la reglamentación",
+          "texto": "Normativa aplicable a la sustancia. Verificar siempre las disposiciones específicas del país de uso.",
+          "campos": [],
+          "listas": [
+            {
+              "titulo": "Disposiciones aplicables",
+              "items": [
+                "REACH (CE) 1907/2006",
+                "CLP (CE) 1272/2008",
+                "SGA/GHS UNECE",
+                "ADR/RID/IMDG/IATA"
+              ]
+            }
+          ],
+          "notas": []
+        },
+        {
+          "numero": 16,
+          "id": "otras",
+          "titulo": "Otras informaciones",
+          "texto": "Esta ficha se ha elaborado con fines informativos a partir de fuentes públicas y debe ser validada por el proveedor antes de su uso.",
+          "campos": [
+            {
+              "k": "Versión",
+              "v": "1.0"
+            },
+            {
+              "k": "Fecha de revisión",
+              "v": "2026-11-18"
+            },
+            {
+              "k": "Estado",
+              "v": "Ficha de demostración — requiere validación"
+            },
+            {
+              "k": "Elaborada por",
+              "v": "Proyecto Sustancias Peligrosas"
+            }
+          ],
+          "listas": [
+            {
+              "titulo": "Fuentes consultadas",
+              "items": [
+                "Base de datos ICSC (OIT/OMS)",
+                "PubChem - Etanol (CAS 64-17-5)",
+                "SGA/GHS, Anexo 4 - UNECE"
+              ]
+            }
+          ],
+          "notas": [
+            "Las indicaciones de peligro y consejos de prudencia deben verificarse en la edición vigente del SGA."
+          ]
+        }
+      ],
+      "palabra_advertencia": "Peligro"
     }
   ]
 }

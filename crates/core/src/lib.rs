@@ -108,6 +108,12 @@ pub struct Instrument {
     pub alternativas: Vec<String>,
     #[serde(default)]
     pub tipo: String,
+    #[serde(default)]
+    pub archivo_local: String,
+    #[serde(default)]
+    pub paginas: String,
+    #[serde(default)]
+    pub texto: String,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -173,6 +179,34 @@ pub struct Interacciones {
     pub nota: String,
 }
 
+#[derive(Debug, Clone, Default, Deserialize, Serialize)]
+pub struct FdsField {
+    pub k: String,
+    pub v: String,
+}
+
+#[derive(Debug, Clone, Default, Deserialize, Serialize)]
+pub struct FdsList {
+    pub titulo: String,
+    #[serde(default)]
+    pub items: Vec<String>,
+}
+
+#[derive(Debug, Clone, Default, Deserialize, Serialize)]
+pub struct FdsSection {
+    pub numero: u32,
+    pub id: String,
+    pub titulo: String,
+    #[serde(default)]
+    pub texto: String,
+    #[serde(default)]
+    pub campos: Vec<FdsField>,
+    #[serde(default)]
+    pub listas: Vec<FdsList>,
+    #[serde(default)]
+    pub notas: Vec<String>,
+}
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct Fuente {
     pub titulo: String,
@@ -205,11 +239,17 @@ pub struct Substance {
     pub fuentes: Vec<Fuente>,
     #[serde(default)]
     pub estado: String,
+    #[serde(default)]
+    pub palabra_advertencia: String,
+    #[serde(default)]
+    pub secciones: Vec<FdsSection>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct SubstancesDb {
     pub advertencia: String,
+    #[serde(default)]
+    pub estructura: String,
     pub sustancias: Vec<Substance>,
 }
 
@@ -327,16 +367,18 @@ pub fn topic_label(id: &str) -> String {
 pub fn verification_label(value: &str) -> &'static str {
     match value {
         "contenido_verificado" => "Verificado",
+        "documento_local_verificado" => "Documento local",
         "dominio_snippet" => "Dominio oficial",
         "portal_validar" => "Pendiente",
         "base_local_usuario" => "Base local",
+        "referencia_citada" => "Referencia",
         _ => "Sin verificar",
     }
 }
 
 /// Indica si una verificación se considera confirmada.
 pub fn is_verified(value: &str) -> bool {
-    value == "contenido_verificado"
+    value == "contenido_verificado" || value == "documento_local_verificado"
 }
 
 fn parse<T: for<'de> Deserialize<'de>>(json: &str) -> T {
@@ -371,10 +413,13 @@ mod tests {
     }
 
     #[test]
-    fn cuba_usa_base_local() {
+    fn cuba_tiene_normas_locales() {
         let instruments = instruments_for("cuba");
-        assert_eq!(instruments.len(), 1);
-        assert_eq!(instruments[0].verificacion, "base_local_usuario");
+        assert!(!instruments.is_empty());
+        assert!(instruments
+            .iter()
+            .any(|i| i.verificacion == "documento_local_verificado"));
+        assert!(instruments.iter().any(|i| i.id == "cu-res-253-2021"));
     }
 
     #[test]
