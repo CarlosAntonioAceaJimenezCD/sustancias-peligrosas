@@ -257,12 +257,48 @@ function abrirNorma(id) {
 
 /* --- Sustancias --------------------------------------------------------- */
 
+function levenshtein(a, b) {
+  const prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  const curr = new Array(b.length + 1).fill(0);
+  for (let i = 0; i < a.length; i++) {
+    curr[0] = i + 1;
+    for (let j = 0; j < b.length; j++) {
+      const cost = a[i] === b[j] ? 0 : 1;
+      curr[j + 1] = Math.min(prev[j + 1] + 1, curr[j] + 1, prev[j] + cost);
+    }
+    for (let j = 0; j <= b.length; j++) prev[j] = curr[j];
+  }
+  return prev[b.length];
+}
+
+function fuzzyTokens(text) {
+  return normalize(text)
+    .split(/[^a-z0-9]+/)
+    .filter(Boolean);
+}
+
+function fuzzyMatch(query, text) {
+  const stopwords = new Set(["de", "del", "la", "el", "los", "las", "y", "para", "con"]);
+  const q = fuzzyTokens(query).filter((w) => !stopwords.has(w));
+  if (!q.length) return false;
+  const hay = fuzzyTokens(text);
+  return q.every((token) =>
+    hay.some((word) => {
+      if (word.includes(token) || token.includes(word)) return true;
+      const max = token.length <= 5 ? 1 : 2;
+      return levenshtein(token, word) <= max;
+    })
+  );
+}
+
 function matchingSubstances(query) {
+  if (!query.trim()) return [];
   const q = normalize(query.trim());
-  if (!q) return [];
+  const numerico = /[0-9]/.test(q);
   return window.DATA.substances.filter((s) => {
     const fields = [s.nombre, (s.sinonimos || []).join(" "), s.cas, s.ce, s.onu];
-    return normalize(fields.join(" ")).includes(q);
+    const texto = fields.join(" ");
+    return numerico ? normalize(texto).includes(q) : fuzzyMatch(query, texto);
   });
 }
 
@@ -329,7 +365,78 @@ function renderFicha() {
   `;
 }
 
-/* --- Multi sustancia (en desarrollo) ------------------------------------ */
+/* --- Multi sustancia: análisis de reacciones ---------------------------- */
+
+function nivelInfo(nivel) {
+  const db = window.DATA.interactions || { niveles: {} };
+  const obj = db.niveles[nivel] || { etiqueta: nivel, descripcion: "" };
+  const cls = { alto: "badge-danger", moderado: "badge-warn", bajo: "badge-ok", nulo: "badge-suave" }[nivel] || "badge-suave";
+  return { ...obj, cls };
+}
+
+function analyzeInteractionsJS(ids) {
+  const db = window.DATA.interactions || { interacciones: [] };
+  const sustancias = window.DATA.substances;
+  const results = [];
+  for (let i = 0; i < ids.length; i++) {
+    for (let j = i + 1; j < ids.length; j++) {
+      const a = ids[i], b = ids[j];
+      if (a === b) continue;
+      const pair = [a, b].sort();
+      const found = (db.interacciones || []).find((it) => {
+        const s = [...it.sustancias].sort();
+        return s[0] === pair[0] && s[1] === pair[1];
+      });
+      const na = sustancias.find((s) => s.id === a)?.nombre || a;
+      const nb = sustancias.find((s) => s.id === b)?.nombre || b;
+      if (found) {
+        results.push({ ...found, nombre_a: na, nombre_b: nb, es_regla_general: false });
+      } else {
+        results.push({
+          nivel: "nulo",
+          tipo: "Sin reacción registrada",
+          descripcion: `No hay una interacción registrada entre ${na} y ${nb} en la base actual. No se debe asumir que son compatibles: verificar en las fichas de datos de seguridad antes de cualquier mezcla.`,
+          productos: [],
+          consecuencias: [],
+          acciones: ["No mezclar sin verificar la compatibilidad en fuentes oficiales"],
+          nombre_a: na,
+          nombre_b: nb,
+          es_regla_general: true,
+        });
+      }
+    }
+  }
+  return results;
+}
+
+function renderInteractions() {
+  const box = $("interacciones");
+  if (state.multi.length < 2) {
+    box.innerHTML = "";
+    $("multi-nota").textContent = "Selecciona al menos dos sustancias para analizar las reacciones entre todas las parejas.";
+    $("multi-badge").textContent = "ACTIVO";
+    return;
+  }
+  const results = analyzeInteractionsJS(state.multi);
+  $("multi-badge").textContent = `${results.length} parejas`;
+  $("multi-nota").textContent = window.DATA.interactions.advertencia;
+  box.innerHTML = results.map((r) => {
+    const info = nivelInfo(r.nivel);
+    return `
+      <div class="interaccion">
+        <div class="interaccion-cabecera">
+          <strong>${esc(r.nombre_a)} + ${esc(r.nombre_b)}</strong>
+          <span class="badge ${info.cls}">${esc(info.etiqueta)}</span>
+        </div>
+        <div class="interaccion-tipo">${esc(r.tipo)}</div>
+        <p>${esc(r.descripcion)}</p>
+        ${r.productos && r.productos.length ? `<p class="interaccion-productos"><b>Productos:</b> ${r.productos.map((x) => esc(x)).join(", ")}</p>` : ""}
+        ${r.consecuencias && r.consecuencias.length ? `<p class="lista-titulo">Consecuencias</p><ul class="lista">${r.consecuencias.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+        ${r.acciones && r.acciones.length ? `<p class="lista-titulo">Acciones recomendadas</p><ul class="lista">${r.acciones.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>` : ""}
+        ${r.es_regla_general ? `<p class="multi-nota">Regla general: la compatibilidad debe verificarse en fuentes oficiales.</p>` : ""}
+      </div>`;
+  }).join("");
+}
 
 function renderMulti() {
   $("multi-chips").innerHTML = state.multi
@@ -338,6 +445,7 @@ function renderMulti() {
       return s ? `<span class="multi-chip">${esc(s.nombre)}</span>` : "";
     })
     .join("");
+  renderInteractions();
 }
 
 /* --- Arranque ----------------------------------------------------------- */

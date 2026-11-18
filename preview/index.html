@@ -154,15 +154,16 @@
       <div class="multi">
         <div class="multi-cabecera">
           <span class="multi-titulo"><svg class="ico"><use href="#i-layers"/></svg><strong>Comparación de varias sustancias</strong></span>
-          <span class="badge badge-dev">EN DESARROLLO</span>
+          <span id="multi-badge" class="badge badge-ok">ACTIVO</span>
         </div>
         <div class="multi-anadir">
           <input type="text" id="multi-input" placeholder="Añadir otra sustancia…" autocomplete="off">
           <button id="multi-boton" class="boton"><svg class="ico"><use href="#i-plus"/></svg>Añadir</button>
         </div>
         <div id="multi-chips" class="multi-chips"></div>
-        <p class="multi-nota">
-          Esta función permitirá analizar las interacciones entre sustancias. Actualmente solo muestra la lista de elementos seleccionados.
+        <div id="interacciones" class="interacciones"></div>
+        <p class="multi-nota" id="multi-nota">
+          Selecciona al menos dos sustancias para analizar las reacciones entre todas las parejas.
         </p>
       </div>
 

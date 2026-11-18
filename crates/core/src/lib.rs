@@ -13,6 +13,7 @@ const TOPICS_JSON: &str = include_str!("../../../data/topics.json");
 const SOURCES_JSON: &str = include_str!("../../../data/sources.json");
 const LEGISLATION_JSON: &str = include_str!("../../../data/legislation.json");
 const SUBSTANCES_JSON: &str = include_str!("../../../data/substances.json");
+const INTERACTIONS_JSON: &str = include_str!("../../../data/interactions.json");
 
 // ---------------------------------------------------------------------------
 // Modelos
@@ -253,6 +254,55 @@ pub struct SubstancesDb {
     pub sustancias: Vec<Substance>,
 }
 
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct InteractionLevel {
+    pub etiqueta: String,
+    #[serde(default)]
+    pub descripcion: String,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct Interaction {
+    pub sustancias: Vec<String>,
+    pub nivel: String,
+    pub tipo: String,
+    #[serde(default)]
+    pub descripcion: String,
+    #[serde(default)]
+    pub productos: Vec<String>,
+    #[serde(default)]
+    pub consecuencias: Vec<String>,
+    #[serde(default)]
+    pub acciones: Vec<String>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct InteractionsDb {
+    pub version: String,
+    #[serde(default)]
+    pub advertencia: String,
+    #[serde(default)]
+    pub niveles: HashMap<String, InteractionLevel>,
+    #[serde(default)]
+    pub interacciones: Vec<Interaction>,
+}
+
+#[derive(Debug, Clone)]
+pub struct PairAnalysis {
+    pub id_a: String,
+    pub id_b: String,
+    pub nombre_a: String,
+    pub nombre_b: String,
+    pub nivel: String,
+    pub etiqueta: String,
+    pub tipo: String,
+    pub descripcion: String,
+    pub productos: Vec<String>,
+    pub consecuencias: Vec<String>,
+    pub acciones: Vec<String>,
+    pub es_regla_general: bool,
+}
+
 // ---------------------------------------------------------------------------
 // Carga de datos
 // ---------------------------------------------------------------------------
@@ -308,6 +358,102 @@ pub fn instruments_for(country_id: &str) -> Vec<Instrument> {
         .unwrap_or_default()
 }
 
+/// Base de interacciones entre sustancias.
+pub fn interactions_db() -> InteractionsDb {
+    parse::<InteractionsDb>(INTERACTIONS_JSON)
+}
+
+/// Advertencia sobre el uso de las interacciones.
+pub fn interactions_warning() -> String {
+    interactions_db().advertencia
+}
+
+/// Etiqueta legible de un nivel de peligro.
+pub fn level_label(level: &str) -> String {
+    interactions_db()
+        .niveles
+        .get(level)
+        .map(|l| l.etiqueta.clone())
+        .unwrap_or_else(|| level.to_string())
+}
+
+/// Analiza todas las parejas de una lista de sustancias.
+///
+/// Busca una regla explícita para cada par. Si no existe, devuelve una regla
+/// general de "sin reacción conocida" para no dar una respuesta vacía.
+pub fn analyze_interactions(ids: &[String]) -> Vec<PairAnalysis> {
+    let db = interactions_db();
+    let all = substances();
+    let mut results = Vec::new();
+
+    for i in 0..ids.len() {
+        for j in (i + 1)..ids.len() {
+            let a = &ids[i];
+            let b = &ids[j];
+            if a == b {
+                continue;
+            }
+            let mut pair = vec![a.clone(), b.clone()];
+            pair.sort();
+
+            let nombre_a = all
+                .iter()
+                .find(|s| &s.id == a)
+                .map(|s| s.nombre.clone())
+                .unwrap_or_else(|| a.clone());
+            let nombre_b = all
+                .iter()
+                .find(|s| &s.id == b)
+                .map(|s| s.nombre.clone())
+                .unwrap_or_else(|| b.clone());
+
+            let found = db.interacciones.iter().find(|it| {
+                let mut sorted = it.sustancias.clone();
+                sorted.sort();
+                sorted == pair
+            });
+
+            let analysis = match found {
+                Some(it) => PairAnalysis {
+                    id_a: a.clone(),
+                    id_b: b.clone(),
+                    nombre_a: nombre_a.clone(),
+                    nombre_b: nombre_b.clone(),
+                    nivel: it.nivel.clone(),
+                    etiqueta: level_label(&it.nivel),
+                    tipo: it.tipo.clone(),
+                    descripcion: it.descripcion.clone(),
+                    productos: it.productos.clone(),
+                    consecuencias: it.consecuencias.clone(),
+                    acciones: it.acciones.clone(),
+                    es_regla_general: false,
+                },
+                None => PairAnalysis {
+                    id_a: a.clone(),
+                    id_b: b.clone(),
+                    nombre_a: nombre_a.clone(),
+                    nombre_b: nombre_b.clone(),
+                    nivel: "nulo".to_string(),
+                    etiqueta: level_label("nulo"),
+                    tipo: "Sin reacción registrada".to_string(),
+                    descripcion: format!(
+                        "No hay una interacción registrada entre {} y {} en la base actual. No se debe asumir que son compatibles: verificar en las fichas de datos de seguridad antes de cualquier mezcla.",
+                        nombre_a, nombre_b
+                    ),
+                    productos: Vec::new(),
+                    consecuencias: Vec::new(),
+                    acciones: vec![
+                        "No mezclar sin verificar la compatibilidad en fuentes oficiales".to_string(),
+                    ],
+                    es_regla_general: true,
+                },
+            };
+            results.push(analysis);
+        }
+    }
+    results
+}
+
 /// Advertencia sobre el carácter de las fichas de demostración.
 pub fn substances_warning() -> String {
     parse::<SubstancesDb>(SUBSTANCES_JSON).advertencia
@@ -341,7 +487,11 @@ pub fn search_substances(query: &str) -> Vec<Substance> {
                 s.onu.clone(),
             ]
             .join(" ");
-            normalize(&haystack).contains(&q)
+            if q.chars().any(|c| c.is_ascii_digit()) {
+                normalize(&haystack).contains(&q)
+            } else {
+                fuzzy_match(&q, &haystack)
+            }
         })
         .collect()
 }
@@ -383,6 +533,58 @@ pub fn is_verified(value: &str) -> bool {
 
 fn parse<T: for<'de> Deserialize<'de>>(json: &str) -> T {
     serde_json::from_str(json).expect("los datos incluidos en el binario son JSON válido")
+}
+
+/// Comparación tolerante a acentos y errores tipográficos menores.
+/// Cada token de la búsqueda debe coincidir con alguna palabra del texto,
+/// bien por substring, bien con distancia de edición 1 o 2.
+fn fuzzy_match(query: &str, text: &str) -> bool {
+    let stopwords = ["de", "del", "la", "el", "los", "las", "y", "para", "con"];
+    let query_tokens: Vec<String> = words(query)
+        .into_iter()
+        .filter(|w| !stopwords.contains(&w.as_str()))
+        .collect();
+    if query_tokens.is_empty() {
+        return false;
+    }
+    let text_words = words(text);
+    query_tokens.iter().all(|token| {
+        text_words.iter().any(|word| {
+            if word.contains(token) || token.contains(word) {
+                return true;
+            }
+            let max_dist = if token.len() <= 5 { 1 } else { 2 };
+            levenshtein(token, word) <= max_dist
+        })
+    })
+}
+
+/// Extrae palabras normalizadas (sin acentos, solo alfanuméricas).
+fn words(value: &str) -> Vec<String> {
+    normalize(value)
+        .split(|c: char| !c.is_ascii_alphanumeric())
+        .filter(|w| !w.is_empty())
+        .map(|w| w.to_string())
+        .collect()
+}
+
+/// Distancia de edición de Levenshtein entre dos cadenas.
+fn levenshtein(a: &str, b: &str) -> usize {
+    let a: Vec<char> = a.chars().collect();
+    let b: Vec<char> = b.chars().collect();
+    let mut prev: Vec<usize> = (0..=b.len()).collect();
+    let mut curr = vec![0usize; b.len() + 1];
+    for (i, ca) in a.iter().enumerate() {
+        curr[0] = i + 1;
+        for (j, cb) in b.iter().enumerate() {
+            let cost = if ca == cb { 0 } else { 1 };
+            curr[j + 1] = (prev[j + 1] + 1)
+                .min(curr[j] + 1)
+                .min(prev[j] + cost);
+        }
+        std::mem::swap(&mut prev, &mut curr);
+    }
+    prev[b.len()]
 }
 
 fn normalize(value: &str) -> String {
@@ -427,6 +629,43 @@ mod tests {
         assert_eq!(search_substances("67-64-1").len(), 1);
         assert_eq!(search_substances("acido clorhidrico").len(), 1);
         assert_eq!(search_substances("ACETONA").len(), 1);
+    }
+
+    #[test]
+    fn busca_con_errores_y_sin_acentos() {
+        assert_eq!(search_substances("acetna").len(), 1);
+        assert_eq!(search_substances("acido clorhidrco").len(), 1);
+        assert_eq!(search_substances("hidroxido sodio").len(), 1);
+        assert_eq!(search_substances("amoniaco").len(), 1);
+    }
+
+    #[test]
+    fn interacciones_cubren_todas_las_parejas() {
+        let db = interactions_db();
+        assert_eq!(db.interacciones.len(), 15);
+        assert_eq!(db.niveles.len(), 4);
+    }
+
+    #[test]
+    fn neutralizacion_es_peligro_alto() {
+        let ids = vec![
+            "acido-clorhidrico".to_string(),
+            "hidroxido-sodio".to_string(),
+        ];
+        let result = analyze_interactions(&ids);
+        assert_eq!(result.len(), 1);
+        assert_eq!(result[0].nivel, "alto");
+        assert_eq!(result[0].etiqueta, "Peligro alto");
+        assert!(!result[0].es_regla_general);
+    }
+
+    #[test]
+    fn pareja_desconocida_usa_regla_general() {
+        let ids = vec!["acetona".to_string(), "desconocida".to_string()];
+        let result = analyze_interactions(&ids);
+        assert_eq!(result.len(), 1);
+        assert!(result[0].es_regla_general);
+        assert_eq!(result[0].nivel, "nulo");
     }
 
     #[test]

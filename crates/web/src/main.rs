@@ -138,6 +138,14 @@ font-size:11px;line-height:1.55;color:#b9c3ce;margin:0 0 14px}
 .norma-modal .boton{align-self:flex-start;text-decoration:none}
 .leer-norma{margin-top:8px;background:var(--card-alt);color:var(--accent);border:1px solid var(--line)}
 .leer-norma:hover{border-color:var(--accent)}
+.badge-danger{background:rgba(248,81,73,.12);color:#ff7b72;border-color:rgba(248,81,73,.35)}
+.interacciones{display:flex;flex-direction:column;gap:9px;margin-top:12px}
+.interaccion{border:1px solid var(--line);border-left:3px solid #484f58;border-radius:6px;padding:10px 12px;background:var(--card)}
+.interaccion-cabecera{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.interaccion-cabecera strong{font-size:12px;color:#e6edf3}
+.interaccion-tipo{font-size:11px;color:var(--accent);margin:5px 0 7px;font-weight:600}
+.interaccion p{margin:0 0 7px;font-size:11px;line-height:1.55;color:#b9c3ce}
+.interaccion .lista{margin-bottom:6px}.interaccion-productos b{color:var(--purple)}
 .movil-tabs{display:none}
 @media(max-width:900px){
 .cabecera{padding:12px 16px}.marca-icono{width:32px;height:32px}.marca strong{font-size:14px}.marca small{font-size:10px}
@@ -262,6 +270,7 @@ fn App() -> Element {
         .iter()
         .filter(|i| filter() == "todos" || i.tema == filter())
         .collect();
+    let interactions = core::analyze_interactions(&multi_ids());
 
     let rsx_countries = |_modal: bool| {
         countries.iter().map(move |c| {
@@ -468,7 +477,11 @@ fn App() -> Element {
                             dangerous_inner_html: "{icon(\"layers\", \"ico\")}",
                             strong { "Comparación de varias sustancias" }
                         }
-                        span { class: "badge badge-dev", "EN DESARROLLO" }
+                        if interactions.is_empty() {
+                            span { class: "badge badge-ok", "ACTIVO" }
+                        } else {
+                            span { class: "badge badge-ok", "{interactions.len()} parejas" }
+                        }
                     }
                     div { class: "multi-anadir",
                         input {
@@ -498,9 +511,48 @@ fn App() -> Element {
                             }
                         }
                     }
-                    p { class: "multi-nota",
-                        "Esta función permitirá analizar las interacciones entre sustancias. Actualmente solo muestra la lista de elementos seleccionados."
+                    div { class: "interacciones",
+                        for r in interactions.iter() {
+                            div { class: "interaccion",
+                                div { class: "interaccion-cabecera",
+                                    strong { "{r.nombre_a} + {r.nombre_b}" }
+                                    span {
+                                        class: match r.nivel.as_str() {
+                                            "alto" => "badge badge-danger",
+                                            "moderado" => "badge badge-warn",
+                                            "bajo" => "badge badge-ok",
+                                            _ => "badge badge-suave",
+                                        },
+                                        "{r.etiqueta}"
+                                    }
+                                }
+                                div { class: "interaccion-tipo", "{r.tipo}" }
+                                p { "{r.descripcion}" }
+                                if !r.productos.is_empty() {
+                                    p { class: "interaccion-productos",
+                                        b { "Productos: " }
+                                        "{r.productos.join(\", \")}"
+                                    }
+                                }
+                                if !r.consecuencias.is_empty() {
+                                    p { class: "lista-titulo", "Consecuencias" }
+                                    ul { class: "lista",
+                                        for x in r.consecuencias.iter() { li { "{x}" } }
+                                    }
+                                }
+                                if !r.acciones.is_empty() {
+                                    p { class: "lista-titulo", "Acciones recomendadas" }
+                                    ul { class: "lista",
+                                        for x in r.acciones.iter() { li { "{x}" } }
+                                    }
+                                }
+                                if r.es_regla_general {
+                                    p { class: "multi-nota", "Regla general: verificar compatibilidad en fuentes oficiales." }
+                                }
+                            }
+                        }
                     }
+                    p { class: "multi-nota", "{core::interactions_warning()}" }
                 }
 
                 div { class: "ficha",

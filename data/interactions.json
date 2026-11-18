@@ -1,0 +1,160 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-11-18",
+  "advertencia": "Las interacciones son una orientación basada en las propiedades de las sustancias. No sustituyen la evaluación de un profesional ni la ficha del fabricante. No mezclar sustancias fuera de un entorno controlado.",
+  "niveles": {
+    "alto": {
+      "etiqueta": "Peligro alto",
+      "descripcion": "Reacción violenta o exotérmica con riesgo de incendio, explosión, liberación de gas tóxico o salpicaduras corrosivas."
+    },
+    "moderado": {
+      "etiqueta": "Precaución",
+      "descripcion": "Reacción o efecto apreciable que requiere controles y procedimientos específicos."
+    },
+    "bajo": {
+      "etiqueta": "Bajo riesgo",
+      "descripcion": "Sin reacción química significativa en condiciones normales, pero puede existir riesgo físico compartido."
+    },
+    "nulo": {
+      "etiqueta": "Sin reacción",
+      "descripcion": "No se espera reacción entre las sustancias en condiciones normales de manipulación."
+    }
+  },
+  "interacciones": [
+    {
+      "sustancias": ["acetona", "etanol"],
+      "nivel": "bajo",
+      "tipo": "Mezcla de disolventes inflamables",
+      "descripcion": "No se espera una reacción química entre ambos disolventes en condiciones normales. El riesgo principal es el compartido: punto de inflamación bajo y vapores que pueden formar mezclas explosivas con el aire.",
+      "productos": [],
+      "consecuencias": ["Aumento del riesgo de incendio si hay fuente de ignición", "Mayor volatilidad de la mezcla"],
+      "acciones": ["Mantener alejado de fuentes de ignición", "Ventilar y usar equipos antichispa", "Almacenar en recipientes cerrados y conectados a tierra"]
+    },
+    {
+      "sustancias": ["acetona", "acido-clorhidrico"],
+      "nivel": "moderado",
+      "tipo": "Reacción ácido-catalizada",
+      "descripcion": "El ácido puede catalizar reacciones de la cetona y favorecer la formación de derivados clorados en presencia de humedad o impurezas. No es una reacción inmediata a temperatura ambiente, pero requiere control.",
+      "productos": ["Posibles derivados clorados"],
+      "consecuencias": ["Desprendimiento de calor", "Formación de vapores irritantes"],
+      "acciones": ["No mezclar sin procedimiento validado", "Manipular bajo campana de extracción", "Ventilar y usar protección respiratoria"]
+    },
+    {
+      "sustancias": ["acetona", "amoniaco"],
+      "nivel": "bajo",
+      "tipo": "Condensación lenta",
+      "descripcion": "En condiciones controladas pueden formarse iminas por condensación, pero a temperatura ambiente la reacción es lenta y no representa un peligro inmediato. Predomina el riesgo por la inflamabilidad de la acetona y la toxicidad del amoniaco.",
+      "productos": ["Posibles productos de condensación"],
+      "consecuencias": ["Libertad de reacción lenta", "Riesgo combinado por inflamabilidad y toxicidad"],
+      "acciones": ["Evitar mezclas innecesarias", "Ventilación y control de fuentes de ignición"]
+    },
+    {
+      "sustancias": ["acetona", "acido-sulfurico"],
+      "nivel": "alto",
+      "tipo": "Deshidratación y polimerización exotérmica",
+      "descripcion": "El ácido sulfúrico concentrado actúa como deshidratante y puede provocar la polimerización exotérmica de la acetona, con riesgo de incendio y liberación de vapores inflamables.",
+      "productos": ["Productos de condensación y polimerización"],
+      "consecuencias": ["Liberación intensa de calor", "Riesgo de ignición", "Vapores tóxicos e inflamables"],
+      "acciones": ["No mezclar bajo ninguna circunstancia sin control técnico", "Si hay contacto, aislar y enfriar la mezcla", "Tener extintores de espuma resistente al alcohol y CO2"]
+    },
+    {
+      "sustancias": ["acetona", "hidroxido-sodio"],
+      "nivel": "moderado",
+      "tipo": "Condensación aldólica en medio básico",
+      "descripcion": "La base fuerte puede catalizar la condensación de la acetona, generando calor y productos de mayor masa molecular. La reacción puede acelerarse si aumenta la temperatura.",
+      "productos": ["Productos de condensación aldólica"],
+      "consecuencias": ["Desprendimiento de calor", "Aumento de viscosidad de la mezcla"],
+      "acciones": ["Evitar el contacto involuntario", "Controlar la temperatura", "Lavar la piel expuesta con agua abundante"]
+    },
+    {
+      "sustancias": ["etanol", "acido-clorhidrico"],
+      "nivel": "moderado",
+      "tipo": "Sustitución y formación de cloroetano",
+      "descripcion": "En presencia de ácido clorhídrico y dependiendo de la concentración y temperatura, el etanol puede transformarse en cloroetano. La reactividad es baja sin catalizadores, pero no debe descartarse.",
+      "productos": ["Cloroetano", "Agua"],
+      "consecuencias": ["Liberación de gases irritantes", "Riesgo de presión en recipientes cerrados"],
+      "acciones": ["Manipular en campana de extracción", "No cerrar herméticamente mezclas en reacción", "Usar protección respiratoria"]
+    },
+    {
+      "sustancias": ["etanol", "amoniaco"],
+      "nivel": "bajo",
+      "tipo": "Sin reacción química significativa",
+      "descripcion": "No se espera reacción apreciable entre el etanol y el amoniaco en condiciones normales. El riesgo es la suma de la inflamabilidad del alcohol y la toxicidad del gas.",
+      "productos": [],
+      "consecuencias": ["Riesgo compartido por inflamabilidad y toxicidad"],
+      "acciones": ["Ventilación y control de fuentes de ignición", "Evitar la inhalación de vapores"]
+    },
+    {
+      "sustancias": ["etanol", "acido-sulfurico"],
+      "nivel": "alto",
+      "tipo": "Deshidratación exotérmica",
+      "descripcion": "El ácido sulfúrico concentrado deshidrata el etanol de forma exotérmica, pudiendo formar etileno o éter dietílico, ambos inflamables. La mezcla puede alcanzar alta temperatura.",
+      "productos": ["Etileno o éter dietílico", "Agua"],
+      "consecuencias": ["Desprendimiento intenso de calor", "Riesgo de incendio o explosión", "Vapores inflamables"],
+      "acciones": ["No mezclar sin control técnico", "Enfriar y aislar la mezcla", "Prohibir fuentes de ignición"]
+    },
+    {
+      "sustancias": ["etanol", "hidroxido-sodio"],
+      "nivel": "bajo",
+      "tipo": "Sin reacción química significativa",
+      "descripcion": "La disolución de hidróxido de sodio en etanol puede generar un calor moderado, pero no se produce una reacción química relevante a temperatura ambiente.",
+      "productos": [],
+      "consecuencias": ["Calor moderado al disolver", "Riesgo corrosivo de la base"],
+      "acciones": ["Añadir la base lentamente sobre el alcohol", "Usar guantes y gafas de protección"]
+    },
+    {
+      "sustancias": ["acido-clorhidrico", "amoniaco"],
+      "nivel": "alto",
+      "tipo": "Formación de cloruro de amonio",
+      "descripcion": "El ácido clorhídrico y el amoniaco reaccionan de forma rápida y exotérmica formando cloruro de amonio, con aparición de humos blancos densos e irritantes.",
+      "productos": ["Cloruro de amonio (NH4Cl)"],
+      "consecuencias": ["Liberación de humos irritantes", "Desprendimiento de calor", "Riesgo para vías respiratorias y ojos"],
+      "acciones": ["No mezclar fuera de campana de extracción", "Usar protección respiratoria con filtro para gases ácidos", "Ventilar la zona"]
+    },
+    {
+      "sustancias": ["acido-clorhidrico", "acido-sulfurico"],
+      "nivel": "moderado",
+      "tipo": "Mezcla de ácidos fuertes",
+      "descripcion": "No se produce una reacción química nueva relevante, pero la mezcla aumenta la corrosividad y puede liberar calor y vapores de cloruro de hidrógeno, especialmente si el ácido sulfúrico está concentrado.",
+      "productos": [],
+      "consecuencias": ["Aumento de la corrosividad", "Posible desprendimiento de calor y vapores ácidos"],
+      "acciones": ["Manipular bajo campana de extracción", "Usar EPP contra ácidos", "Evitar el contacto con agua y metales"]
+    },
+    {
+      "sustancias": ["acido-clorhidrico", "hidroxido-sodio"],
+      "nivel": "alto",
+      "tipo": "Neutralización exotérmica",
+      "descripcion": "Ácido fuerte y base fuerte reaccionan violentamente formando sal y agua. La reacción libera una cantidad importante de calor que puede provocar salpicaduras y quemaduras.",
+      "productos": ["Cloruro de sodio", "Agua"],
+      "consecuencias": ["Desprendimiento intenso de calor", "Salpicaduras corrosivas", "Posible ebullición de la disolución"],
+      "acciones": ["Añadir siempre el ácido sobre la disolución de base, lentamente y con agitación", "Enfriar el recipiente si es necesario", "Usar pantalla facial y guantes resistentes a ácidos/bases"]
+    },
+    {
+      "sustancias": ["amoniaco", "acido-sulfurico"],
+      "nivel": "alto",
+      "tipo": "Neutralización violenta",
+      "descripcion": "El amoniaco reacciona con el ácido sulfúrico formando sulfato de amonio. La reacción es muy exotérmica y puede proyectar material corrosivo si no se controla.",
+      "productos": ["Sulfato de amonio ((NH4)2SO4)"],
+      "consecuencias": ["Liberación intensa de calor", "Riesgo de salpicaduras", "Humos irritantes"],
+      "acciones": ["No mezclar sin procedimiento controlado", "Usar protección respiratoria y facial", "Enfriar y ventilar la zona"]
+    },
+    {
+      "sustancias": ["amoniaco", "hidroxido-sodio"],
+      "nivel": "moderado",
+      "tipo": "Desplazamiento del equilibrio y liberación de gas",
+      "descripcion": "Ambas sustancias son básicas, pero una disolución concentrada de hidróxido de sodio reduce la solubilidad del amoniaco en agua y puede desplazarlo al aire, aumentando la concentración de gas tóxico.",
+      "productos": ["Amoniaco gaseoso"],
+      "consecuencias": ["Liberación de gas amoniaco", "Riesgo de irritación respiratoria"],
+      "acciones": ["Evitar mezclar disoluciones concentradas", "Ventilar y usar detector de amoniaco", "Protección respiratoria adecuada"]
+    },
+    {
+      "sustancias": ["acido-sulfurico", "hidroxido-sodio"],
+      "nivel": "alto",
+      "tipo": "Neutralización muy exotérmica",
+      "descripcion": "La neutralización entre ácido sulfúrico e hidróxido de sodio libera una gran cantidad de calor, pudiendo llegar a la ebullición y proyectar disolución corrosiva.",
+      "productos": ["Sulfato de sodio", "Agua"],
+      "consecuencias": ["Desprendimiento muy intenso de calor", "Riesgo de salpicaduras y quemaduras graves"],
+      "acciones": ["Añadir el ácido lentamente sobre la base en disolución y con agitación", "Usar baño de enfriamiento", "Pantalla facial, guantes y delantal resistentes"]
+    }
+  ]
+}

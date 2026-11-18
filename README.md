@@ -99,7 +99,8 @@ SQLite se compila incluida (`bundled`) y el frontend se compila a WebAssembly, d
 2. El idioma y el banner cambian al instante; el selector queda abajo a la derecha.
 3. El panel izquierdo muestra el marco legal filtrable por apartado.
 4. El panel derecho busca sustancias por nombre, CAS, CE u ONU y muestra la ficha completa.
-5. El bloque multi-sustancia está marcado como **en desarrollo**.
+5. El bloque multi-sustancia permite añadir varias sustancias y analiza **todas las parejas**: muestra nivel de peligro, tipo de reacción, productos, consecuencias y acciones recomendadas (`data/interactions.json`). Las parejas sin regla explícita usan una regla general de "sin reacción registrada".
+6. El buscador tolera ausencia de acentos y errores tipográficos menores (distancia de edición 1–2); los identificadores CAS/CE/ONU se buscan de forma exacta.
 
 ## Países incluidos
 
@@ -158,5 +159,4 @@ Opcional: `wasm-opt` (Binaryen) para optimizar el bundle WASM, y `wasm-bindgen` 
 - Sustituir las fichas de demostración por fichas verificadas en fuentes oficiales.
 - Validar en navegador los enlaces con `verificacion: portal_validar`.
 - Importar la base de legislación cubana del usuario y definir su formato.
-- Implementar la comparación multi-sustancia (actualmente solo lista elementos).
 - Generar los paquetes Dioxus para escritorio y móvil. Las compilaciones de iOS/macOS requieren macOS + Xcode.

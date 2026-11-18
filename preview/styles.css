@@ -296,6 +296,21 @@ body {
   font-weight: 600;
 }
 .multi-nota { margin: 6px 0 0; font-size: 11px; color: var(--muted); }
+.badge-danger { background: rgba(248,81,73,.12); color: #ff7b72; border-color: rgba(248,81,73,.35); }
+.interacciones { display: flex; flex-direction: column; gap: 9px; margin-top: 12px; }
+.interaccion {
+  border: 1px solid var(--line);
+  border-left: 3px solid #484f58;
+  border-radius: 6px;
+  padding: 10px 12px;
+  background: var(--card);
+}
+.interaccion-cabecera { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+.interaccion-cabecera strong { font-size: 12px; color: #e6edf3; }
+.interaccion-tipo { font-size: 11px; color: var(--accent); margin: 5px 0 7px; font-weight: 600; }
+.interaccion p { margin: 0 0 7px; font-size: 11px; line-height: 1.55; color: #b9c3ce; }
+.interaccion .lista { margin-bottom: 6px; }
+.interaccion-productos b { color: var(--purple); }
 
 /* Ficha ------------------------------------------------------------------- */
 .ficha { margin-top: 8px; }
