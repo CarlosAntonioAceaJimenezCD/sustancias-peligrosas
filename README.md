@@ -164,6 +164,32 @@ La comparación multi-sustancia acepta sustancias en línea: cada resultado de P
 
 Si en el futuro se incorpora una FDS verificada en PDF, el modelo sigue admitiendo `pdf_url` y `pdf_nombre` para mostrar **"Descargar FDS en PDF"**, y `estado: "verificado"` para la insignia verde.
 
+## Descargas y caché sin conexión (nativo)
+
+El comportamiento depende de la plataforma:
+
+| Versión | Qué hace al descargar |
+|---|---|
+| **Web (WASM)** | Descarga directamente al directorio de descargas del navegador/sistema. **No guarda nada** en la app. |
+| **Nativa (escritorio/móvil)** | 1) Guarda el PDF en el directorio de datos de la aplicación; 2) lo copia al directorio de descargas del sistema. Ambas cosas se pueden configurar. |
+
+El módulo `crates/storage` implementa:
+
+- `offline_cache`: guardar normas y fichas en `<datos del usuario>/sustancias-peligrosas/documents/` con un índice `index.json`, para consultarlas sin internet.
+- `copy_to_downloads`: copiar además el archivo a `Descargas`.
+- `downloads_dir`: directorio de descargas personalizado; vacío = el del sistema (`dirs::download_dir()`).
+- Indexación, lectura, borrado y saneamiento de nombres de archivo.
+
+Estas opciones aparecen en el panel **"Documentos sin conexión"**, que solo se muestra en la versión nativa (la web no incluye el módulo de almacenamiento ni el cliente HTTP).
+
+Compilación nativa:
+
+```bash
+cargo build -p sustancias-web --features desktop --release
+```
+
+Requiere las dependencias de WebView de tu sistema (WebKitGTK en Linux, WebView2 en Windows, WKWebView en macOS). La compilación de iOS/macOS exige macOS + Xcode. La compilación web (`wasm32-unknown-unknown`) no incluye este módulo.
+
 ## Bases de datos oficiales en línea
 
 La aplicación ya no se limita a los datos embebidos:

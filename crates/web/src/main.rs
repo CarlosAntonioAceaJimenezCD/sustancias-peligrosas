@@ -167,6 +167,14 @@ font-size:11px;line-height:1.55;color:#b9c3ce;margin:0 0 14px}
 .boton-secundario:hover{border-color:#6e7681}
 .documentos-acciones{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .documentos-acciones .boton{text-decoration:none}
+.offline-panel{max-width:1180px;margin:20px auto;width:calc(100% - 40px)}
+.opciones{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.opcion{display:flex;align-items:center;gap:9px;font-size:12px;color:#b9c3ce;flex-wrap:wrap}
+.opcion input[type=checkbox]{width:16px;height:16px;accent-color:#238636}
+.opcion input[type=text]{flex:1;min-width:220px;background:#0d1117;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:7px 10px;font-size:12px}
+.estado-descarga{font-size:11px;color:var(--ok);margin:6px 0}
+.doc-guardado{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:6px;background:var(--card-alt);padding:9px 11px;margin-bottom:6px}
+.doc-guardado strong{font-size:12px;color:#e6edf3;display:block}
 @media print{body{background:#fff!important;color:#000!important}
 .cabecera,.banner,#panel-legal,.multi,.movil-tabs,.pie,.flotante,.fds-index,.documentos,.overlay{display:none!important}
 .contenido{display:block;margin:0;padding:0}#panel-sustancia{border:0;box-shadow:none;padding:0}
@@ -239,6 +247,136 @@ fn js_descargar(url: &str, nombre: &str) -> String {
     )
 }
 
+#[cfg(not(target_arch = "wasm32"))]
+fn ahora() -> String {
+    use std::time::{SystemTime, UNIX_EPOCH};
+    SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map(|d| d.as_secs().to_string())
+        .unwrap_or_default()
+}
+
+/// En nativo: descarga los bytes, los guarda en la app y los copia a Descargas.
+#[cfg(not(target_arch = "wasm32"))]
+async fn descargar_nativo(
+    url: String,
+    titulo: String,
+    filename: String,
+    kind: sustancias_storage::DocumentKind,
+    opciones: AppOptions,
+) -> Result<(), String> {
+    let opciones = sustancias_storage::Options {
+        offline_cache: opciones.offline_cache,
+        copy_to_downloads: opciones.copy_to_downloads,
+        downloads_dir: if opciones.downloads_dir.trim().is_empty() {
+            None
+        } else {
+            Some(std::path::PathBuf::from(&opciones.downloads_dir))
+        },
+    };
+    let respuesta = reqwest::get(&url)
+        .await
+        .map_err(|e| format!("Error de red: {e}"))?;
+    let bytes = respuesta
+        .bytes()
+        .await
+        .map_err(|e| format!("Error al leer el archivo: {e}"))?;
+    let documento = sustancias_storage::SavedDocument {
+        id: url,
+        titulo,
+        kind,
+        filename,
+        saved_at: ahora(),
+        size: bytes.len() as u64,
+    };
+    sustancias_storage::store_and_export(&documento, &bytes, &opciones)
+        .map(|_| ())
+        .map_err(|e| format!("Error al guardar: {e}"))
+}
+
+/// Tipos neutrales (existen en web y nativo) para no condicionar el RSX.
+#[derive(Clone, Debug)]
+struct AppOptions {
+    offline_cache: bool,
+    copy_to_downloads: bool,
+    downloads_dir: String,
+}
+
+impl Default for AppOptions {
+    fn default() -> Self {
+        Self {
+            offline_cache: true,
+            copy_to_downloads: true,
+            downloads_dir: String::new(),
+        }
+    }
+}
+
+#[derive(Clone, Debug)]
+struct SavedDocView {
+    id: String,
+    titulo: String,
+    kind: String,
+    filename: String,
+    size: u64,
+    saved_at: String,
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+fn cargar_opciones() -> AppOptions {
+    let o = sustancias_storage::load_options();
+    AppOptions {
+        offline_cache: o.offline_cache,
+        copy_to_downloads: o.copy_to_downloads,
+        downloads_dir: o
+            .downloads_dir
+            .map(|p| p.to_string_lossy().to_string())
+            .unwrap_or_default(),
+    }
+}
+
+#[cfg(target_arch = "wasm32")]
+fn cargar_opciones() -> AppOptions {
+    AppOptions::default()
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+fn cargar_guardados() -> Vec<SavedDocView> {
+    sustancias_storage::list_documents()
+        .into_iter()
+        .map(|d| SavedDocView {
+            id: d.id,
+            titulo: d.titulo,
+            kind: format!("{:?}", d.kind),
+            filename: d.filename,
+            size: d.size,
+            saved_at: d.saved_at,
+        })
+        .collect()
+}
+
+#[cfg(target_arch = "wasm32")]
+fn cargar_guardados() -> Vec<SavedDocView> {
+    Vec::new()
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+fn guardar_opciones(o: &AppOptions) {
+    let opciones = sustancias_storage::Options {
+        offline_cache: o.offline_cache,
+        copy_to_downloads: o.copy_to_downloads,
+        downloads_dir: if o.downloads_dir.trim().is_empty() {
+            None
+        } else {
+            Some(std::path::PathBuf::from(&o.downloads_dir))
+        },
+    };
+    let _ = sustancias_storage::save_options(&opciones);
+}
+
+#[cfg(target_arch = "wasm32")]
+fn guardar_opciones(_o: &AppOptions) {}
+
 fn txt(key: &str, lang: &str) -> &'static str {
     match (lang, key) {
         ("en", "select_country") => "Select your country",
@@ -289,6 +427,10 @@ fn App() -> Element {
     let mut online_cargando: Signal<bool> = use_signal(|| false);
     let mut boe_resultados: Signal<Vec<core::BoeNorm>> = use_signal(Vec::new);
     let mut boe_cargando: Signal<bool> = use_signal(|| false);
+    let mut opciones: Signal<AppOptions> = use_signal(cargar_opciones);
+    let mut guardados: Signal<Vec<SavedDocView>> = use_signal(cargar_guardados);
+    #[allow(unused_mut)]
+    let mut estado_descarga: Signal<String> = use_signal(String::new);
 
     let country = selected_id()
         .and_then(|id| core::country_by_id(&id))
@@ -835,10 +977,32 @@ fn App() -> Element {
                                         onclick: {
                                             let url = s.pdf_url.clone();
                                             let nombre = core::pdf_filename(&s.pdf_url, &s.pdf_nombre);
-                                            move |_| {
+                                            #[cfg(target_arch = "wasm32")]
+                                            let handler = move |_| {
                                                 let js = js_descargar(&url, &nombre);
                                                 dioxus::document::eval(&js);
-                                            }
+                                            };
+                                            #[cfg(not(target_arch = "wasm32"))]
+                                            let handler = move |_| {
+                                                let u = url.clone();
+                                                let n = nombre.clone();
+                                                let t = s.nombre.clone();
+                                                let o = opciones();
+                                                spawn(async move {
+                                                    match descargar_nativo(
+                                                        u, t, n,
+                                                        sustancias_storage::DocumentKind::Substance,
+                                                        o,
+                                                    ).await {
+                                                        Ok(_) => {
+                                                            guardados.set(cargar_guardados());
+                                                            estado_descarga.set("Guardado sin conexión y copiado a Descargas".to_string());
+                                                        }
+                                                        Err(e) => estado_descarga.set(e),
+                                                    }
+                                                });
+                                            };
+                                            handler
                                         },
                                         dangerous_inner_html: "{icon(\"download\", \"ico\")}",
                                         "Descargar FDS en PDF"
@@ -886,9 +1050,33 @@ fn App() -> Element {
                         }
                         button {
                             class: "boton boton-descargar",
-                            onclick: move |_| {
-                                let js = js_descargar(&url, &nombre_pdf);
-                                dioxus::document::eval(&js);
+                            onclick: {
+                                #[cfg(target_arch = "wasm32")]
+                                let handler = move |_| {
+                                    let js = js_descargar(&url, &nombre_pdf);
+                                    dioxus::document::eval(&js);
+                                };
+                                #[cfg(not(target_arch = "wasm32"))]
+                                let handler = move |_| {
+                                    let u = url.clone();
+                                    let n = nombre_pdf.clone();
+                                    let t = titulo.clone();
+                                    let o = opciones();
+                                    spawn(async move {
+                                        match descargar_nativo(
+                                            u, t, n,
+                                            sustancias_storage::DocumentKind::Legislation,
+                                            o,
+                                        ).await {
+                                            Ok(_) => {
+                                                guardados.set(cargar_guardados());
+                                                estado_descarga.set("Guardado sin conexión y copiado a Descargas".to_string());
+                                            }
+                                            Err(e) => estado_descarga.set(e),
+                                        }
+                                    });
+                                };
+                                handler
                             },
                             dangerous_inner_html: "{icon(\"download\", \"ico\")}",
                             "Descargar PDF"
@@ -911,6 +1099,92 @@ fn App() -> Element {
                 onclick: move |_| movil_tab.set("ficha"),
                 dangerous_inner_html: "{icon(\"flask\", \"ico\")}",
                 span { "Ficha técnica" }
+            }
+        }
+
+        if !cfg!(target_arch = "wasm32") {
+            section { class: "panel offline-panel",
+                div { class: "panel-cabecera",
+                    div { class: "panel-titulo",
+                        span { class: "panel-icono", dangerous_inner_html: "{icon(\"download\", \"ico ico-lg\")}" }
+                        div {
+                            h3 { "Documentos sin conexión" }
+                            p { "Solo en la aplicación nativa. La versión web no almacena archivos." }
+                        }
+                    }
+                }
+                div { class: "opciones",
+                    label { class: "opcion",
+                        input {
+                            r#type: "checkbox",
+                            checked: opciones().offline_cache,
+                            onchange: move |e| {
+                                let mut o = opciones();
+                                o.offline_cache = e.checked();
+                                guardar_opciones(&o);
+                                opciones.set(o);
+                            },
+                        }
+                        "Guardar documentos en la app para consultarlos sin internet"
+                    }
+                    label { class: "opcion",
+                        input {
+                            r#type: "checkbox",
+                            checked: opciones().copy_to_downloads,
+                            onchange: move |e| {
+                                let mut o = opciones();
+                                o.copy_to_downloads = e.checked();
+                                guardar_opciones(&o);
+                                opciones.set(o);
+                            },
+                        }
+                        "Copiar automáticamente al directorio de descargas del sistema"
+                    }
+                    label { class: "opcion",
+                        "Directorio de descargas personalizado (vacío = el del sistema)"
+                        input {
+                            r#type: "text",
+                            value: opciones().downloads_dir.clone(),
+                            onchange: move |e| {
+                                let mut o = opciones();
+                                o.downloads_dir = e.value();
+                                guardar_opciones(&o);
+                                opciones.set(o);
+                            },
+                        }
+                    }
+                }
+                if !estado_descarga().is_empty() {
+                    p { class: "estado-descarga", "{estado_descarga()}" }
+                }
+                h4 { "Documentos guardados" }
+                if guardados().is_empty() {
+                    p { class: "vacio", "Todavía no has guardado ningún documento." }
+                } else {
+                    for d in guardados().iter() {
+                        div { class: "doc-guardado",
+                            div {
+                                strong { "{d.titulo}" }
+                                span { class: "online-meta", "{d.kind} · {d.filename} · {d.size} bytes · {d.saved_at}" }
+                            }
+                            button {
+                                class: "boton boton-secundario",
+                                onclick: {
+                                    #[allow(unused_variables)]
+                                    let id = d.id.clone();
+                                    move |_| {
+                                        #[cfg(not(target_arch = "wasm32"))]
+                                        {
+                                            let _ = sustancias_storage::delete_document(&id);
+                                        }
+                                        guardados.set(cargar_guardados());
+                                    }
+                                },
+                                "Eliminar"
+                            }
+                        }
+                    }
+                }
             }
         }
 
