@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sustancias Peligrosas · Vista previa</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Selección inicial de país -->
+  <div id="pais-overlay" class="overlay">
+    <div class="overlay-card">
+      <div class="overlay-logo">⚗️</div>
+      <h1 id="overlay-titulo">Selecciona tu país</h1>
+      <p id="overlay-subtitulo">El marco legal y el idioma del sitio se adaptarán a tu elección.</p>
+      <div id="pais-grid-inicial" class="pais-grid"></div>
+    </div>
+  </div>
+
+  <!-- Modal para cambiar de país sin recargar -->
+  <div id="pais-modal" class="overlay oculto">
+    <div class="overlay-card compacta">
+      <button id="cerrar-modal" class="cerrar" aria-label="Cerrar">✕</button>
+      <h2 id="modal-titulo">Cambiar de país</h2>
+      <p id="modal-subtitulo">El banner y el marco legal se actualizarán al instante.</p>
+      <div id="pais-grid-modal" class="pais-grid"></div>
+    </div>
+  </div>
+
+  <header class="cabecera">
+    <div class="marca">
+      <span class="marca-icono">⚗️</span>
+      <span>
+        <strong>Sustancias Peligrosas</strong>
+        <small id="cabecera-sub">Marco legal y fichas técnicas · VISTA PREVIA</small>
+      </span>
+    </div>
+    <span id="idioma-badge" class="badge badge-suave">ES</span>
+  </header>
+
+  <section id="banner" class="banner oculto">
+    <div class="banner-bandera" id="banner-bandera">🌐</div>
+    <div class="banner-texto">
+      <h2 id="banner-saludo">Bienvenido</h2>
+      <p id="banner-descripcion"></p>
+    </div>
+    <div class="banner-pais" id="banner-pais"></div>
+  </section>
+
+  <main id="contenido" class="contenido oculto">
+
+    <!-- Apartado 1: marco legal -->
+    <section class="panel" id="panel-legal">
+      <div class="panel-cabecera">
+        <div class="panel-titulo">
+          <span class="panel-icono">⚖️</span>
+          <div>
+            <h3 id="legal-titulo">Verificación del marco legal</h3>
+            <p id="legal-subtitulo">Normativa aplicable al país seleccionado</p>
+          </div>
+        </div>
+        <span id="legal-contador" class="badge">0 normas</span>
+      </div>
+      <div id="legal-filtros" class="filtros"></div>
+      <div id="legal-lista" class="legal-lista">
+        <p class="vacio">Selecciona un país para ver su marco legal.</p>
+      </div>
+    </section>
+
+    <!-- Apartado 2: carta técnica -->
+    <section class="panel" id="panel-sustancia">
+      <div class="panel-cabecera">
+        <div class="panel-titulo">
+          <span class="panel-icono">🧪</span>
+          <div>
+            <h3 id="sustancia-titulo">Carta técnica de la sustancia</h3>
+            <p id="sustancia-subtitulo">Busca por nombre, CAS, CE o número ONU</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="aviso-demo" class="aviso"></div>
+
+      <div class="buscador">
+        <span class="buscador-icono">🔍</span>
+        <input type="search" id="buscador-sustancias"
+               placeholder="Ej. Acetona, 67-64-1, ácido clorhídrico…" autocomplete="off">
+      </div>
+      <div id="resultados" class="resultados"></div>
+
+      <div class="multi">
+        <div class="multi-cabecera">
+          <span>⚗️ <strong>Comparación de varias sustancias</strong></span>
+          <span class="badge badge-dev">EN DESARROLLO</span>
+        </div>
+        <div class="multi-anadir">
+          <input type="text" id="multi-input" placeholder="Añadir otra sustancia…" autocomplete="off">
+          <button id="multi-boton" class="boton">Añadir</button>
+        </div>
+        <div id="multi-chips" class="multi-chips"></div>
+        <p class="multi-nota">
+          Esta función permitirá analizar las interacciones entre sustancias. Actualmente solo muestra la lista de elementos seleccionados.
+        </p>
+      </div>
+
+      <div id="ficha" class="ficha"></div>
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    <p id="pie-advertencia"></p>
+    <p>Fuentes normativas: UNECE · OMI · OIT · INSST · BOE · DOF · SINIA · Asamblea Nacional</p>
+  </footer>
+
+  <button id="flotante-pais" class="flotante oculto" title="Cambiar de país">
+    <span id="flotante-bandera">🌐</span>
+    <span id="flotante-nombre">País</span>
+    <span class="flotante-cambiar">↻</span>
+  </button>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

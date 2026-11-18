@@ -366,7 +366,7 @@
           "id": "cu-base-local",
           "titulo": "Base local de legislacion cubana (proporcionada por el usuario)",
           "tema": "legislacion",
-          "url": null,
+          "url": "",
           "verificacion": "base_local_usuario",
           "nota": "No se realizan busquedas web. La base se importara al repositorio cuando se defina su formato."
         }

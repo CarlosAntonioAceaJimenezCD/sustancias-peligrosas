@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "updated": "2026-11-17",
   "descripcion": "Paises disponibles para seleccionar el marco legal. El flujo de la aplicacion es: pais -> apartado/tema -> sustancia.",
   "paises": [
@@ -8,6 +8,9 @@
       "nombre": "Marco internacional",
       "codigo": "INT",
       "tipo": "global",
+      "idioma": "es",
+      "bandera": "🌐",
+      "saludo": "Bienvenido al marco internacional",
       "descripcion": "SGA/GHS, convenios de la ONU y Reglamentacion Modelo para el Transporte de Mercancias Peligrosas. Aplica como base comun a todos los paises."
     },
     {
@@ -15,6 +18,9 @@
       "nombre": "Colombia",
       "codigo": "CO",
       "tipo": "nacional",
+      "idioma": "es",
+      "bandera": "🇨🇴",
+      "saludo": "Bienvenido a Colombia",
       "descripcion": "Marco legal colombiano de sustancias peligrosas, residuos y transporte."
     },
     {
@@ -23,6 +29,9 @@
       "codigo": "ES",
       "tipo": "nacional",
       "bloque": "union_europea",
+      "idioma": "es",
+      "bandera": "🇪🇸",
+      "saludo": "Bienvenido a España",
       "descripcion": "Legislacion espanola de riesgos quimicos, PRL, REACH-CLP y transporte de mercancias peligrosas."
     },
     {
@@ -30,6 +39,9 @@
       "nombre": "México",
       "codigo": "MX",
       "tipo": "nacional",
+      "idioma": "es",
+      "bandera": "🇲🇽",
+      "saludo": "Bienvenido a México",
       "descripcion": "Normas Oficiales Mexicanas de la STPS y la SEMARNAT."
     },
     {
@@ -37,6 +49,9 @@
       "nombre": "Perú",
       "codigo": "PE",
       "tipo": "nacional",
+      "idioma": "es",
+      "bandera": "🇵🇪",
+      "saludo": "Bienvenido al Perú",
       "descripcion": "Normativa del MINAM sobre materiales y residuos peligrosos y su transporte terrestre."
     },
     {
@@ -44,6 +59,9 @@
       "nombre": "Venezuela",
       "codigo": "VE",
       "tipo": "nacional",
+      "idioma": "es",
+      "bandera": "🇻🇪",
+      "saludo": "Bienvenido a Venezuela",
       "descripcion": "Ley sobre Sustancias, Materiales y Desechos Peligrosos y normativa tecnica de transporte."
     },
     {
@@ -53,6 +71,9 @@
       "tipo": "nacional",
       "origen_legislacion": "base_local_usuario",
       "estado": "pendiente_importacion",
+      "idioma": "es",
+      "bandera": "🇨🇺",
+      "saludo": "Bienvenido a Cuba",
       "descripcion": "El usuario dispone de la legislacion cubana completa en una base local. No se realizan busquedas web para este pais; la base se importara cuando se defina su formato."
     },
     {
@@ -61,6 +82,9 @@
       "codigo": "US",
       "tipo": "referencia",
       "aplicable": false,
+      "idioma": "en",
+      "bandera": "🇺🇸",
+      "saludo": "Welcome to the United States",
       "descripcion": "Referencia complementaria (OSHA). No es marco aplicable en los paises del proyecto."
     }
   ]

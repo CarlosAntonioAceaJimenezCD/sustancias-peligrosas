@@ -1,0 +1,229 @@
+{
+  "version": "0.1.0-demo",
+  "updated": "2026-11-17",
+  "advertencia": "FICHAS DE DEMOSTRACION. Los datos son de ejemplo y deben verificarse en las fuentes oficiales antes de cualquier uso real. Cada ficha enlaza a su fuente.",
+  "sustancias": [
+    {
+      "id": "acetona",
+      "nombre": "Acetona",
+      "sinonimos": ["Propanona", "Propano-2-ona"],
+      "cas": "67-64-1",
+      "ce": "200-662-2",
+      "onu": "1090",
+      "peligrosidad": {
+        "clasificacion": ["Líquido inflamable, categoría 2", "Irritación ocular, categoría 2", "Toxicidad específica en órganos diana (exposición única), categoría 3"],
+        "pictogramas": ["GHS02", "GHS07"],
+        "frases_h": [
+          {"codigo": "H225", "texto": "Líquido y vapores muy inflamables."},
+          {"codigo": "H319", "texto": "Provoca irritación ocular grave."},
+          {"codigo": "H336", "texto": "Puede provocar somnolencia o vértigo."}
+        ],
+        "significado": "Peligro principal: incendio. Sus vapores son más pesados que el aire, pueden desplazarse por el suelo e inflamarse a distancia de la fuente. La exposición prolongada puede afectar al sistema nervioso central."
+      },
+      "almacenamiento": "Almacenar en lugar fresco, bien ventilado y alejado de fuentes de ignición, chispas y llama abierta. Mantener el recipiente herméticamente cerrado. Proteger de la luz solar directa. Separar de agentes oxidantes fuertes, ácidos fuertes y bases fuertes. Zona con ventilación exhaustiva y conexión a tierra de los recipientes para evitar electricidad estática.",
+      "derrame": "Eliminar fuentes de ignición y ventilar la zona. Usar ropa de protección y guantes resistentes a disolventes. No vertir al alcantarillado. Absorber con material inerte (arena, vermiculita o aglutinante universal) y recoger en recipientes cerrados para residuo peligroso. Si entra en contacto con ojos, enjuagar con agua abundante al menos 15 minutos y acudir al médico.",
+      "propiedades": {
+        "estado_fisico": "Líquido incoloro",
+        "olor": "Dulce, característico (a acetona)",
+        "punto_de_inflamacion": "-18 °C (vaso cerrado)",
+        "punto_de_ebullicion": "56 °C",
+        "densidad": "0,79 g/cm³ (20 °C)",
+        "solubilidad_en_agua": "Miscible",
+        "presion_de_vapor": "24 kPa (20 °C)"
+      },
+      "interacciones": {
+        "incompatibilidades": ["Agentes oxidantes fuertes (peróxidos, permanganatos)", "Ácidos fuertes", "Bases fuertes", "Materiales plásticos no resistentes a disolventes"],
+        "nota": "Puede formar mezclas explosivas con el aire. El contacto con oxidantes fuertes puede provocar incendio o explosión."
+      },
+      "fuentes": [
+        {"titulo": "Base de datos ICSC (OIT/OMS)", "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"},
+        {"titulo": "PubChem - Acetona (CAS 67-64-1)", "url": "https://pubchem.ncbi.nlm.nih.gov/"}
+      ],
+      "estado": "demo"
+    },
+    {
+      "id": "etanol",
+      "nombre": "Etanol",
+      "sinonimos": ["Alcohol etílico", "Etanol absoluto"],
+      "cas": "64-17-5",
+      "ce": "200-578-6",
+      "onu": "1170",
+      "peligrosidad": {
+        "clasificacion": ["Líquido inflamable, categoría 2", "Irritación ocular, categoría 2"],
+        "pictogramas": ["GHS02", "GHS07"],
+        "frases_h": [
+          {"codigo": "H225", "texto": "Líquido y vapores muy inflamables."},
+          {"codigo": "H319", "texto": "Provoca irritación ocular grave."}
+        ],
+        "significado": "Peligro principal: incendio. La llama de los alcoholes es casi invisible en ambientes iluminados y sus vapores pueden propagarse por el suelo."
+      },
+      "almacenamiento": "Conservar en recipientes bien cerrados, en lugar fresco y ventilado, lejos de fuentes de calor, chispas y llama abierta. Mantener separado de agentes oxidantes, ácidos y metales alcalinos. Usar material antichispa y conexión a tierra.",
+      "derrame": "Eliminar ignición, ventilar y absorber el líquido con material inerte. Recoger en recipientes cerrados. No verter a desagües. En caso de contacto ocular, lavar con agua abundante.",
+      "propiedades": {
+        "estado_fisico": "Líquido incoloro",
+        "olor": "Alcohol, característico",
+        "punto_de_inflamacion": "12 °C (vaso cerrado)",
+        "punto_de_ebullicion": "78 °C",
+        "densidad": "0,79 g/cm³ (20 °C)",
+        "solubilidad_en_agua": "Miscible",
+        "presion_de_vapor": "5,9 kPa (20 °C)"
+      },
+      "interacciones": {
+        "incompatibilidades": ["Agentes oxidantes fuertes", "Sodio y potasio metálicos", "Ácidos fuertes"],
+        "nota": "Reacciona violentamente con metales alcalinos liberando hidrógeno inflamable."
+      },
+      "fuentes": [
+        {"titulo": "Base de datos ICSC (OIT/OMS)", "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"},
+        {"titulo": "PubChem - Etanol (CAS 64-17-5)", "url": "https://pubchem.ncbi.nlm.nih.gov/"}
+      ],
+      "estado": "demo"
+    },
+    {
+      "id": "acido-clorhidrico",
+      "nombre": "Ácido clorhídrico",
+      "sinonimos": ["Cloruro de hidrógeno en disolución", "HCl acuoso"],
+      "cas": "7647-01-0",
+      "ce": "231-595-7",
+      "onu": "1789",
+      "peligrosidad": {
+        "clasificacion": ["Corrosivo para metales, categoría 1", "Corrosión cutánea, categoría 1B", "Lesiones oculares graves, categoría 1", "Toxicidad específica en órganos diana (exposición única), categoría 3"],
+        "pictogramas": ["GHS05", "GHS07"],
+        "frases_h": [
+          {"codigo": "H290", "texto": "Puede ser corrosivo para los metales."},
+          {"codigo": "H314", "texto": "Provoca quemaduras graves en la piel y lesiones oculares graves."},
+          {"codigo": "H335", "texto": "Puede irritar las vías respiratorias."}
+        ],
+        "significado": "Peligro principal: corrosión. Los vapores de HCl son irritantes y corrosivos para vías respiratorias, ojos y mucosas. El contacto con metales puede liberar hidrógeno inflamable."
+      },
+      "almacenamiento": "Almacenar en recipientes resistentes a ácidos, en zona bien ventilada y fresca. Separar de bases, metales en polvo, agentes oxidantes, cianuros y sulfitos. Usar bandejas de contención y materiales de construcción resistentes a la corrosión. No almacenar junto a hipocloritos (libera cloro gaseoso).",
+      "derrame": "Ventilar intensamente. Usar EPP: guantes de nitrilo o neopreno, gafas de seguridad y protección facial. Neutralizar con carbonato de sodio o cal, absorber con material inerte y recoger como residuo peligroso. No verter sin neutralizar. En contacto con piel o ojos, lavar con agua abundante al menos 15 minutos y acudir al médico.",
+      "propiedades": {
+        "estado_fisico": "Líquido incoloro o ligeramente amarillento (disolución)",
+        "olor": "Picante, irritante",
+        "punto_de_ebullicion": "Depende de la concentración; azeótropo ~108 °C",
+        "densidad": "1,18 g/cm³ (37 %, 20 °C)",
+        "solubilidad_en_agua": "Muy soluble",
+        "ph": "< 1 (disolución concentrada)"
+      },
+      "interacciones": {
+        "incompatibilidades": ["Bases fuertes", "Hipoclorito de sodio (libera cloro)", "Cianuros (libera ácido cianhídrico)", "Metales en polvo", "Agentes oxidantes"],
+        "nota": "La mezcla con lejía (hipoclorito) genera gas cloro tóxico: nunca combinarlos."
+      },
+      "fuentes": [
+        {"titulo": "Base de datos ICSC (OIT/OMS)", "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"},
+        {"titulo": "PubChem - Ácido clorhídrico (CAS 7647-01-0)", "url": "https://pubchem.ncbi.nlm.nih.gov/"}
+      ],
+      "estado": "demo"
+    },
+    {
+      "id": "amoniaco",
+      "nombre": "Amoníaco",
+      "sinonimos": ["Amoniaco anhidro", "Trihidruro de nitrógeno"],
+      "cas": "7664-41-7",
+      "ce": "231-441-9",
+      "onu": "1005",
+      "peligrosidad": {
+        "clasificacion": ["Gas inflamable, categoría 2", "Toxicidad aguda por inhalación, categoría 3", "Corrosión cutánea, categoría 1B", "Peligro para el medio ambiente acuático, categoría 1"],
+        "pictogramas": ["GHS02", "GHS05", "GHS06", "GHS09"],
+        "frases_h": [
+          {"codigo": "H221", "texto": "Gas inflamable."},
+          {"codigo": "H331", "texto": "Tóxico en caso de inhalación."},
+          {"codigo": "H314", "texto": "Provoca quemaduras graves en la piel y lesiones oculares graves."},
+          {"codigo": "H400", "texto": "Muy tóxico para los organismos acuáticos."}
+        ],
+        "significado": "Peligro principal: toxicidad por inhalación y corrosión. El gas es más ligero que el aire pero puede acumularse en espacios cerrados. Su olor picante es detectable antes de alcanzar concentraciones peligrosas, aunque la fatiga olfativa puede enmascararlo."
+      },
+      "almacenamiento": "Almacenar en recipientes a presión certificados, en lugar fresco, seco y muy bien ventilado, lejos de fuentes de ignición. Proteger de la luz solar y de temperaturas elevadas. Separar de ácidos, halógenos, óxidos de metales y agentes oxidantes. Disponer de detectores de gas y duchas de emergencia.",
+      "derrame": "Evacuar y ventilar la zona. Usar EPP con protección respiratoria adecuada (máscara con filtro para amoníaco o aparato autónomo). Cerrar la fuga si es seguro. Disolver el gas en agua pulverizada desde zonas protegidas. No dirigir chorros directamente sobre la fuga. Evitar que entre en alcantarillado o cursos de agua.",
+      "propiedades": {
+        "estado_fisico": "Gas incoloro (licuado a presión)",
+        "olor": "Picante, fuerte, característico",
+        "punto_de_inflamacion": "651 °C (temperatura de autoignición)",
+        "punto_de_ebullicion": "-33 °C",
+        "densidad_de_gas": "0,73 kg/m³ (más ligero que el aire)",
+        "solubilidad_en_agua": "Muy soluble (forma amoniaco acuoso)"
+      },
+      "interacciones": {
+        "incompatibilidades": ["Ácidos (forman sales amónicas)", "Cloro e hipocloritos (pueden formar cloraminas tóxicas)", "Halógenos", "Óxidos de metales", "Agentes oxidantes fuertes"],
+        "nota": "Nunca mezclar amoniaco con lejía: se generan cloraminas irritantes para el sistema respiratorio."
+      },
+      "fuentes": [
+        {"titulo": "Base de datos ICSC (OIT/OMS)", "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"},
+        {"titulo": "PubChem - Amoníaco (CAS 7664-41-7)", "url": "https://pubchem.ncbi.nlm.nih.gov/"}
+      ],
+      "estado": "demo"
+    },
+    {
+      "id": "acido-sulfurico",
+      "nombre": "Ácido sulfúrico",
+      "sinonimos": ["Vitriolo", "H2SO4"],
+      "cas": "7664-93-9",
+      "ce": "231-639-5",
+      "onu": "1830",
+      "peligrosidad": {
+        "clasificacion": ["Corrosivo para metales, categoría 1", "Corrosión cutánea, categoría 1A"],
+        "pictogramas": ["GHS05"],
+        "frases_h": [
+          {"codigo": "H290", "texto": "Puede ser corrosivo para los metales."},
+          {"codigo": "H314", "texto": "Provoca quemaduras graves en la piel y lesiones oculares graves."}
+        ],
+        "significado": "Peligro principal: corrosión severa y reacción violenta con el agua. La dilución debe hacerse añadiendo siempre el ácido sobre el agua, nunca al revés, por el calor liberado."
+      },
+      "almacenamiento": "Conservar en recipientes de vidrio o acero recubierto, bien cerrados, en lugar fresco y seco. Separar de agua, bases, metales, agentes oxidantes y materiales orgánicos. Usar bandejas de contención resistentes al ácido. Proteger de la humedad.",
+      "derrame": "Ventilar y usar EPP completo. Neutralizar con carbonato de sodio, cal o bicarbonato. Absorber con material inerte y recoger como residuo peligroso. No añadir agua directamente sobre ácido concentrado. En contacto con piel, retirar la ropa contaminada y lavar con agua abundante al menos 15 minutos.",
+      "propiedades": {
+        "estado_fisico": "Líquido incoloro, aceitoso (concentrado)",
+        "olor": "Inodoro",
+        "punto_de_ebullicion": "337 °C (descompone)",
+        "densidad": "1,84 g/cm³ (98 %, 20 °C)",
+        "solubilidad_en_agua": "Miscible, con fuerte desprendimiento de calor",
+        "ph": "< 1"
+      },
+      "interacciones": {
+        "incompatibilidades": ["Agua (reacción exotérmica violenta)", "Bases fuertes", "Metales (liberan hidrógeno)", "Agentes oxidantes", "Materiales orgánicos y azúcares"],
+        "nota": "El contacto con azúcares o celulosa puede provocar carbonización e incendio."
+      },
+      "fuentes": [
+        {"titulo": "Base de datos ICSC (OIT/OMS)", "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"},
+        {"titulo": "PubChem - Ácido sulfúrico (CAS 7664-93-9)", "url": "https://pubchem.ncbi.nlm.nih.gov/"}
+      ],
+      "estado": "demo"
+    },
+    {
+      "id": "hidroxido-sodio",
+      "nombre": "Hidróxido de sodio",
+      "sinonimos": ["Sosa cáustica", "NaOH"],
+      "cas": "1310-73-2",
+      "ce": "215-185-5",
+      "onu": "1823",
+      "peligrosidad": {
+        "clasificacion": ["Corrosivo para metales, categoría 1", "Corrosión cutánea, categoría 1A", "Lesiones oculares graves, categoría 1"],
+        "pictogramas": ["GHS05"],
+        "frases_h": [
+          {"codigo": "H290", "texto": "Puede ser corrosivo para los metales."},
+          {"codigo": "H314", "texto": "Provoca quemaduras graves en la piel y lesiones oculares graves."}
+        ],
+        "significado": "Peligro principal: corrosión. Disuelve grasas y proteínas, por lo que las quemaduras son profundas y pueden no doler inicialmente. La disolución en agua es fuertemente exotérmica."
+      },
+      "almacenamiento": "Almacenar en recipientes secos y herméticos, en lugar fresco y bien ventilado. Proteger de la humedad y del CO2 del aire (absorbe ambos). Separar de ácidos, aluminio, zinc, estaño y otros metales anfóteros. Usar bandejas de contención.",
+      "derrame": "Usar EPP completo. No usar agua a presión directamente sobre sólido. Recoger el sólido con herramientas limpias, evitando el polvo, y disolverlo lentamente en agua fría para su neutralización controlada. Neutralizar con ácido diluido. No verter sin neutralizar. En contacto con ojos, lavar al menos 15 minutos y acudir al médico.",
+      "propiedades": {
+        "estado_fisico": "Sólido blanco, pellets o escamas (también en disolución)",
+        "olor": "Inodoro",
+        "punto_de_fusion": "318 °C",
+        "densidad": "2,13 g/cm³ (20 °C)",
+        "solubilidad_en_agua": "Muy soluble, con fuerte desprendimiento de calor",
+        "ph": "> 13 (disolución 1 %)"
+      },
+      "interacciones": {
+        "incompatibilidades": ["Ácidos (reacción violenta)", "Aluminio, zinc, estaño (liberan hidrógeno)", "Cloro", "Agua (exotérmica)"],
+        "nota": "El contacto con aluminio o zinc genera hidrógeno inflamable; peligro de incendio o explosión."
+      },
+      "fuentes": [
+        {"titulo": "Base de datos ICSC (OIT/OMS)", "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es"},
+        {"titulo": "PubChem - Hidróxido de sodio (CAS 1310-73-2)", "url": "https://pubchem.ncbi.nlm.nih.gov/"}
+      ],
+      "estado": "demo"
+    }
+  ]
+}
