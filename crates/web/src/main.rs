@@ -138,6 +138,10 @@ font-size:11px;line-height:1.55;color:#b9c3ce;margin:0 0 14px}
 .norma-modal .boton{align-self:flex-start;text-decoration:none}
 .leer-norma{margin-top:8px;background:var(--card-alt);color:var(--accent);border:1px solid var(--line)}
 .leer-norma:hover{border-color:var(--accent)}
+.boe-buscar{border:1px solid var(--line);border-radius:6px;padding:4px 10px 10px;margin:10px 0;background:var(--card-alt)}
+.boe-input-wrap{margin:8px 0}
+.boe-atribucion{font-size:10px!important;color:var(--muted)!important;margin:8px 0 0!important;line-height:1.5!important}
+.boe-atribucion a{color:var(--accent)}
 .portales{border:1px solid var(--line);border-radius:6px;padding:10px 12px;background:var(--card-alt);margin-bottom:4px}
 .portales a{display:flex;align-items:center;gap:6px;color:var(--accent);font-size:11px;text-decoration:none;margin-top:5px}
 .portales a:hover{text-decoration:underline}
@@ -283,6 +287,8 @@ fn App() -> Element {
     let mut online_resultados: Signal<Vec<core::PubChemCompound>> = use_signal(Vec::new);
     let mut online_ficha: Signal<Option<core::Substance>> = use_signal(|| None);
     let mut online_cargando: Signal<bool> = use_signal(|| false);
+    let mut boe_resultados: Signal<Vec<core::BoeNorm>> = use_signal(Vec::new);
+    let mut boe_cargando: Signal<bool> = use_signal(|| false);
 
     let country = selected_id()
         .and_then(|id| core::country_by_id(&id))
@@ -328,6 +334,9 @@ fn App() -> Element {
                         selected_substance.set(None);
                         query.set(String::new());
                         filter.set("todos".to_string());
+                        boe_resultados.set(Vec::new());
+                        online_resultados.set(Vec::new());
+                        online_ficha.set(None);
                     },
                     span { class: "bandera", "{codigo}" }
                     span {
@@ -413,6 +422,66 @@ fn App() -> Element {
                                 class: if filter() == t.id { "chip activo" } else { "chip" },
                                 onclick: { let id = t.id.clone(); move |_| filter.set(id.clone()) },
                                 "{t.nombre}"
+                            }
+                        }
+                    }
+                }
+                if country.id == "espana" {
+                    div { class: "boe-buscar",
+                        div { class: "buscador boe-input-wrap",
+                            span { class: "buscador-icono", dangerous_inner_html: "{icon(\"search\", \"ico\")}" }
+                            input {
+                                placeholder: "Buscar normas en el BOE (España)…",
+                                oninput: move |e| {
+                                    let value = e.value();
+                                    if value.trim().len() < 3 {
+                                        boe_resultados.set(Vec::new());
+                                        return;
+                                    }
+                                    boe_cargando.set(true);
+                                    let js = format!(
+                                        r#"(async()=>{{try{{const q={{query:{{query_string:{{query:{q:?}}}}},sort:[]}};const r=await fetch('https://www.boe.es/datosabiertos/api/legislacion-consolidada?query='+encodeURIComponent(JSON.stringify(q))+'&limit=8',{{headers:{{Accept:'application/json'}}}});const j=await r.json();return JSON.stringify(j.data||[]);}}catch(e){{return '[]';}}}})()"#,
+                                        q = format!("titulo:{}", value.trim())
+                                    );
+                                    let mut ev = dioxus::document::eval(&js);
+                                    spawn(async move {
+                                        if let Ok(texto) = ev.recv::<String>().await {
+                                            let parsed: Vec<core::BoeNorm> =
+                                                serde_json::from_str(&texto).unwrap_or_default();
+                                            boe_resultados.set(parsed);
+                                            boe_cargando.set(false);
+                                        }
+                                    });
+                                },
+                            }
+                        }
+                        div { class: "boe-resultados",
+                            if boe_cargando() {
+                                p { class: "vacio", "Consultando la API de datos abiertos del BOE…" }
+                            } else if !boe_resultados().is_empty() {
+                                for n in boe_resultados().iter() {
+                                    div { class: "norma",
+                                        h4 { "{n.titulo}" }
+                                        div { class: "norma-meta",
+                                            span { class: "badge", "{n.identificador}" }
+                                            if let Some(dep) = &n.departamento {
+                                                span { class: "badge badge-suave", "{dep.texto}" }
+                                            }
+                                            span { class: "badge badge-warn", "Texto consolidado informativo" }
+                                        }
+                                        a { href: "{n.url()}", target: "_blank",
+                                            dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
+                                        a { href: "{n.url()}", target: "_blank", "Ver en el BOE" }
+                                    }
+                                }
+                                p { class: "boe-atribucion",
+                                    "Fuente de los datos: "
+                                    a { href: "https://www.boe.es", target: "_blank", "Agencia Estatal Boletín Oficial del Estado" }
+                                    ". Texto consolidado de carácter meramente informativo."
+                                    if !boe_resultados()[0].fecha_formateada().is_empty() {
+                                        " Última actualización: {boe_resultados()[0].fecha_formateada()}."
+                                    }
+                                }
                             }
                         }
                     }

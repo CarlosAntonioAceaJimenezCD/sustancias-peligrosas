@@ -191,6 +191,10 @@ body {
 }
 .legal-lista::-webkit-scrollbar { width: 8px; }
 .legal-lista::-webkit-scrollbar-thumb { background: #30363d; border-radius: 8px; }
+.boe-buscar { border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px 10px; margin: 10px 0; background: var(--card-alt); }
+.boe-input-wrap { margin: 8px 0; }
+.boe-atribucion { font-size: 10px !important; color: var(--muted) !important; margin: 8px 0 0 !important; line-height: 1.5 !important; }
+.boe-atribucion a { color: var(--accent); }
 .portales { border: 1px solid var(--line); border-radius: 6px; padding: 10px 12px; background: var(--card-alt); margin-bottom: 4px; }
 .portales a { display: flex; align-items: center; gap: 6px; color: var(--accent); font-size: 11px; text-decoration: none; margin-top: 5px; }
 .portales a:hover { text-decoration: underline; }

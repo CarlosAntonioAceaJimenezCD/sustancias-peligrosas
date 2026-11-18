@@ -149,6 +149,8 @@ function selectCountry(id) {
   $("multi-input").value = "";
   $("resultados-online").innerHTML = "";
   sustanciaOnline = null;
+  $("boe-buscar").classList.toggle("oculto", id !== "espana");
+  $("boe-resultados").innerHTML = "";
 
   renderAll();
 }
@@ -288,6 +290,49 @@ function abrirNorma(id) {
     descargar.classList.add("oculto");
   }
   $("norma-modal").classList.remove("oculto");
+}
+
+/* --- BOE: API de datos abiertos (España) --------------------------------- */
+
+let temporizadorBOE = null;
+
+async function buscarBOE(texto) {
+  const caja = $("boe-resultados");
+  const q = texto.trim();
+  if (q.length < 3) {
+    caja.innerHTML = "";
+    return;
+  }
+  caja.innerHTML = `<p class="vacio">Consultando la API de datos abiertos del BOE…</p>`;
+  const consulta = { query: { query_string: { query: `titulo:${q}` } }, sort: [] };
+  const url = "https://www.boe.es/datosabiertos/api/legislacion-consolidada?query=" +
+    encodeURIComponent(JSON.stringify(consulta)) + "&limit=8";
+  try {
+    const respuesta = await fetch(url, { headers: { Accept: "application/json" } });
+    const datos = await respuesta.json();
+    const normas = datos.data || [];
+    if (!normas.length) {
+      caja.innerHTML = `<p class="vacio">Sin resultados en el BOE para ese título.</p>`;
+      return;
+    }
+    const fecha = (normas[0].fecha_actualizacion || "").slice(0, 8);
+    const fechaFmt = fecha.length === 8
+      ? `${fecha.slice(0, 4)}-${fecha.slice(4, 6)}-${fecha.slice(6, 8)}`
+      : "";
+    caja.innerHTML = normas.map((n) => `
+      <div class="norma">
+        <h4>${esc(n.titulo)}</h4>
+        <div class="norma-meta">
+          <span class="badge">${esc(n.identificador)}</span>
+          <span class="badge badge-suave">${esc(n.departamento?.texto || "")}</span>
+          <span class="badge badge-warn">Texto consolidado informativo</span>
+        </div>
+        <a href="https://www.boe.es/buscar/act.php?id=${encodeURIComponent(n.identificador)}" target="_blank" rel="noopener">${icon("link")}<span>Ver en el BOE</span></a>
+      </div>`).join("") + `
+      <p class="boe-atribucion">Fuente de los datos: <a href="https://www.boe.es" target="_blank" rel="noopener">Agencia Estatal Boletín Oficial del Estado</a>. Texto consolidado de carácter meramente informativo.${fechaFmt ? ` Última actualización: ${fechaFmt}.` : ""}</p>`;
+  } catch (error) {
+    caja.innerHTML = `<p class="vacio">No se pudo consultar el BOE. Verifica la conexión.</p>`;
+  }
 }
 
 /* --- Bases de datos oficiales en línea (PubChem / NIH) ------------------- */
@@ -703,6 +748,11 @@ function init() {
 
   $("flotante-pais").addEventListener("click", () => {
     $("pais-modal").classList.remove("oculto");
+  });
+
+  $("boe-input").addEventListener("input", (e) => {
+    clearTimeout(temporizadorBOE);
+    temporizadorBOE = setTimeout(() => buscarBOE(e.target.value), 500);
   });
 
   $("buscador-sustancias").addEventListener("input", (e) => {

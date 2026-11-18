@@ -368,6 +368,37 @@ pub fn instruments_for(country_id: &str) -> Vec<Instrument> {
         .unwrap_or_default()
 }
 
+/// Norma devuelta por la API de datos abiertos del BOE.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct BoeNorm {
+    pub identificador: String,
+    pub titulo: String,
+    #[serde(default)]
+    pub fecha_actualizacion: String,
+    #[serde(default)]
+    pub departamento: Option<BoeDepartamento>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct BoeDepartamento {
+    #[serde(default)]
+    pub texto: String,
+}
+
+impl BoeNorm {
+    pub fn url(&self) -> String {
+        format!("https://www.boe.es/buscar/act.php?id={}", self.identificador)
+    }
+    pub fn fecha_formateada(&self) -> String {
+        let f = &self.fecha_actualizacion;
+        if f.len() >= 8 {
+            format!("{}-{}-{}", &f[0..4], &f[4..6], &f[6..8])
+        } else {
+            String::new()
+        }
+    }
+}
+
 /// Compuesto devuelto por la API PUG REST de PubChem (NIH).
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct PubChemCompound {
