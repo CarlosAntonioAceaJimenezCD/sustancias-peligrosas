@@ -94,16 +94,25 @@ El usuario dispone de la **base de legislación cubana completa en local**. No s
 |---|---|---|
 | OSHA (EE. UU.) | Ejemplo de Hoja de Datos de Seguridad | https://www.osha.gov/sites/default/files/2022-01/Ejemplo%20de%20Hoja%20de%20Datos%20de%20Seguridad.pdf |
 
-## Fuentes de referencia (decisión del usuario)
+## Fuentes de datos de sustancias (decisión del usuario)
 
-Aunque son agregadores comerciales, el usuario decidió aceptarlos **como referencia de datos**. No se usan como fuente normativa oficial.
+El usuario aceptó estas fuentes como **fuente de datos de sustancias y FDS**. Las que no son gubernamentales **no se usan como fuente normativa oficial**.
 
-| Fuente | Contenido | URL | Verificación |
+| Fuente | Naturaleza | URL | Verificación |
 |---|---|---|---|
-| Chemical Safety | Buscador de FDS de múltiples fabricantes | https://chemicalsafety.com/es/sds-search-page-es/ | `dominio_snippet` — acceso fallido por timeout en esta sesión; reintentar |
-| SDS Manager | Biblioteca online de FDS, búsqueda por CAS y código de barras | https://sdsmanager.es/search/ | `contenido_verificado` — HTTP 200 con scraper |
+| PubChem (NIH, EE. UU.) | Gobierno | https://pubchem.ncbi.nlm.nih.gov/ | `dominio_snippet` |
+| ChemSpider (Royal Society of Chemistry) | Institución científica reconocida | https://www.chemspider.com/ | `dominio_snippet` |
+| Chemical Safety | Agregador comercial | https://chemicalsafety.com/es/sds-search-page-es/ | `dominio_snippet` — timeout en esta sesión |
+| SDS Manager | Agregador comercial | https://sdsmanager.es/search/ | `contenido_verificado` — HTTP 200 con scraper |
+| ChemBlink | Agregador comercial | https://www.chemblink.com/ | `dominio_snippet` |
+| VWR (Avantor) | Fabricante/distribuidor | https://us.vwr.com/store/search/searchMSDS.jsp | `dominio_snippet` |
+| Fisher Scientific (Thermo Fisher) | Fabricante/distribuidor | https://www.fishersci.com/us/en/catalog/search/sdshome.html | `dominio_snippet` |
+| TCI Chemicals | Fabricante | https://www.tcichemicals.com/US/en/sds/ | `dominio_snippet` |
+| Fluorochem | Fabricante | http://www.fluorochem.co.uk/ | `dominio_snippet` |
 
-También se usa como referencia `find_sds` (https://github.com/khoivan88/find_sds): consulta por CAS a ChemBlink, VWR, Fisher Scientific, TCI Chemicals, ChemicalSafety y Fluorochem. No incluye base de datos propia; descarga los PDF a una carpeta local.
+`find_sds` (https://github.com/khoivan88/find_sds) es la herramienta de referencia que consulta por CAS a ChemBlink, VWR, Fisher Scientific, TCI Chemicals, ChemicalSafety y Fluorochem. No incluye base de datos propia: descarga los PDF a una carpeta local.
+
+Los seis repositorios clonados se mantienen en `referencias/`, carpeta excluida de git mediante `.gitignore`. Ninguno contiene una base de datos de sustancias; solo plantillas (sdsforge), esquemas XSD (esdscom), reglas embebidas (x3-sds-reader) o documentación (SGAcopilot).
 
 ## Fuentes rechazadas
 
@@ -116,15 +125,17 @@ También se usa como referencia `find_sds` (https://github.com/khoivan88/find_sd
 | Wikipedia | No oficial | — |
 | Prezi, Scribd | Repositorios de presentaciones | — |
 | preciocombustible, simcoconsulting, sparxlogistics, Savino Del Bene, DSV, terminal98 | Blogs y empresas de logística | — |
-| chemicalsafety.com, sdsmanager.es | Agregadores comerciales de FDS | Aceptados como referencia por decisión del usuario (ver sección "Fuentes de referencia") |
+| chemicalsafety.com, sdsmanager.es | Agregadores comerciales de FDS | Aceptados por decisión del usuario como fuentes de datos (ver sección "Fuentes de datos de sustancias") |
 
 ## Limitaciones de la búsqueda
 
 Durante la ampliación de búsqueda los motores bloquearon el acceso automatizado:
 
-- **DuckDuckGo**: desafío CAPTCHA (`html.duckduckgo.com` y `lite.duckduckgo.com`).
+- **DuckDuckGo**: desafío CAPTCHA con `webfetch`, pero **accesible mediante el scraper local** (`scrapling`/`curl_cffi`) con impersonación `chrome120`. Ya se pudo buscar normativa (p. ej., localizar el RD 97/2014 en BOE).
 - **Bing**: devolvió "sin resultados" o resultados sin relación con la consulta.
 - **Brave Search y Mojeek**: HTTP 403 / desafío JavaScript.
 - **Herramienta `websearch` integrada**: error de ejecución.
 
-Por ello, los portales marcados como `portal_validar` son URLs canónicas conocidas de los organismos oficiales, **no resultados confirmados en esta sesión**. Deben validarse en navegador antes de publicarse en la aplicación. No se han inventado números de norma ni enlaces directos a instrumentos no verificados; cuando no se obtuvo una URL directa, se enlaza al portal oficial y se indica la búsqueda a realizar.
+Con el scraper local se logró acceso real a DOF, Asamblea Nacional, ICSC (OIT), sdsmanager.es y DuckDuckGo. UNECE, SINIA-MINAM y ECHA siguen devolviendo 403 (Cloudflare / Azure WAF), y chemicalsafety.com dio timeout de conexión.
+
+Los portales marcados como `portal_validar` son URLs canónicas conocidas de los organismos oficiales, **no resultados confirmados en esta sesión**. Deben validarse en navegador antes de publicarse en la aplicación. No se han inventado números de norma ni enlaces directos a instrumentos no verificados; cuando no se obtuvo una URL directa, se enlaza al portal oficial y se indica la búsqueda a realizar.
