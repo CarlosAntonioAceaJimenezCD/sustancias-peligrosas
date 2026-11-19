@@ -193,6 +193,14 @@ cargo build -p sustancias-web --features desktop --release
 
 Requiere las dependencias de WebView de tu sistema (WebKitGTK en Linux, WebView2 en Windows, WKWebView en macOS). La compilación de iOS/macOS exige macOS + Xcode. La compilación web (`wasm32-unknown-unknown`) no incluye este módulo.
 
+## Optimizaciones
+
+- **Caché estática**: `crates/core` parsea cada JSON una sola vez con `OnceLock` en lugar de hacerlo en cada render de la interfaz. Esto elimina el coste de deserializar ~322 KB de legislación y ~310 KB de texto de leyes en cada actualización de pantalla.
+- **Búsqueda difusa eficiente**: distancia de Levenshtein con dos filas y salida temprana; tokens con stopwords; los identificadores numéricos (CAS/CE/ONU) se comparan por substring exacto, sin fuzzy.
+- **Perfil de release**: `opt-level = "z"`, `lto = "thin"`, `codegen-units = 1`, `strip = true` y `panic = "abort"` para reducir el tamaño del binario y del WASM.
+- **Límites de API**: *debounce* de 450 ms en PubChem (≈2 req/s, por debajo del límite de 5 req/s) y 500 ms en el BOE.
+- **Datos embebidos en la vista previa**: `preview/data.js` evita peticiones `fetch` locales y hace que la maqueta funcione abriendo el HTML directamente.
+
 ## Bases de datos oficiales en línea
 
 La aplicación ya no se limita a los datos embebidos:

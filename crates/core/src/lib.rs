@@ -7,6 +7,7 @@
 
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
+use std::sync::OnceLock;
 
 const COUNTRIES_JSON: &str = include_str!("../../../data/countries.json");
 const TOPICS_JSON: &str = include_str!("../../../data/topics.json");
@@ -317,37 +318,45 @@ pub struct PairAnalysis {
 // Carga de datos
 // ---------------------------------------------------------------------------
 
-/// Carga y devuelve todos los países disponibles.
+/// Carga y devuelve todos los países disponibles (datos cacheados).
 pub fn countries() -> Vec<Country> {
-    parse::<CountriesDb>(COUNTRIES_JSON).paises
+    static CACHE: OnceLock<CountriesDb> = OnceLock::new();
+    CACHE.get_or_init(|| parse(COUNTRIES_JSON)).paises.clone()
 }
 
-/// Carga y devuelve todos los apartados/temas.
+/// Carga y devuelve todos los apartados/temas (datos cacheados).
 pub fn topics() -> Vec<Topic> {
-    parse::<TopicsDb>(TOPICS_JSON).temas
+    static CACHE: OnceLock<TopicsDb> = OnceLock::new();
+    CACHE.get_or_init(|| parse(TOPICS_JSON)).temas.clone()
 }
 
-/// Carga y devuelve todas las fuentes.
+/// Carga y devuelve todas las fuentes (datos cacheados).
 pub fn sources() -> Vec<Source> {
-    parse::<SourcesDb>(SOURCES_JSON).fuentes
+    static CACHE: OnceLock<SourcesDb> = OnceLock::new();
+    CACHE.get_or_init(|| parse(SOURCES_JSON)).fuentes.clone()
 }
 
-/// Devuelve las fuentes aplicables a un país (o todas si es "internacional").
+/// Devuelve las fuentes aplicables a un país.
 pub fn sources_for(country_id: &str) -> Vec<Source> {
-    sources()
-        .into_iter()
+    static CACHE: OnceLock<SourcesDb> = OnceLock::new();
+    CACHE
+        .get_or_init(|| parse(SOURCES_JSON))
+        .fuentes
+        .iter()
         .filter(|s| {
             country_id == "internacional"
                 || s.pais == country_id
                 || (country_id == "espana" && s.pais == "espana")
                 || (country_id == "eeuu" && s.pais == "eeuu")
         })
+        .cloned()
         .collect()
 }
 
-/// Carga y devuelve la base legislativa completa.
-pub fn legislation_db() -> LegislationDb {
-    parse::<LegislationDb>(LEGISLATION_JSON)
+/// Base legislativa completa, cacheada (evita parsear 322 KB en cada render).
+pub fn legislation_db() -> &'static LegislationDb {
+    static CACHE: OnceLock<LegislationDb> = OnceLock::new();
+    CACHE.get_or_init(|| parse(LEGISLATION_JSON))
 }
 
 /// Devuelve los portales oficiales de un país.
@@ -534,8 +543,9 @@ pub fn substance_from_pubchem(p: &PubChemCompound) -> Substance {
 }
 
 /// Base de interacciones entre sustancias.
-pub fn interactions_db() -> InteractionsDb {
-    parse::<InteractionsDb>(INTERACTIONS_JSON)
+pub fn interactions_db() -> &'static InteractionsDb {
+    static CACHE: OnceLock<InteractionsDb> = OnceLock::new();
+    CACHE.get_or_init(|| parse(INTERACTIONS_JSON))
 }
 
 /// Nombre de archivo sugerido para descargar un PDF.
@@ -559,7 +569,7 @@ pub fn substance_is_verified(s: &Substance) -> bool {
 
 /// Advertencia sobre el uso de las interacciones.
 pub fn interactions_warning() -> String {
-    interactions_db().advertencia
+    interactions_db().advertencia.clone()
 }
 
 /// Etiqueta legible de un nivel de peligro.
@@ -658,56 +668,80 @@ pub fn analyze_interactions_named(
     results
 }
 
+/// Devuelve la base de sustancias cacheada.
+fn substances_db() -> &'static SubstancesDb {
+    static CACHE: OnceLock<SubstancesDb> = OnceLock::new();
+    CACHE.get_or_init(|| parse(SUBSTANCES_JSON))
+}
+
 /// Advertencia sobre el carácter de las fichas de demostración.
 pub fn substances_warning() -> String {
-    parse::<SubstancesDb>(SUBSTANCES_JSON).advertencia
+    substances_db().advertencia.clone()
 }
 
 /// Carga y devuelve todas las sustancias.
 pub fn substances() -> Vec<Substance> {
-    parse::<SubstancesDb>(SUBSTANCES_JSON).sustancias
+    substances_db().sustancias.clone()
 }
 
 /// Busca una sustancia por identificador.
 pub fn substance_by_id(id: &str) -> Option<Substance> {
-    substances().into_iter().find(|s| s.id == id)
+    substances_db()
+        .sustancias
+        .iter()
+        .find(|s| s.id == id)
+        .cloned()
 }
 
-/// Busca sustancias por nombre, sinónimo, CAS, CE u ONU. La búsqueda ignora
-/// mayúsculas y acentos para que "acido" encuentre "Ácido".
+/// Busca sustancias por nombre, sinónimo, CAS, CE u ONU (insensible a acentos).
 pub fn search_substances(query: &str) -> Vec<Substance> {
     let q = normalize(query);
     if q.is_empty() {
         return Vec::new();
     }
-    substances()
-        .into_iter()
+    let numerico = q.chars().any(|c| c.is_ascii_digit());
+    substances_db()
+        .sustancias
+        .iter()
         .filter(|s| {
-            let haystack = [
-                s.nombre.clone(),
+            let haystack = format!(
+                "{} {} {} {} {}",
+                s.nombre,
                 s.sinonimos.join(" "),
-                s.cas.clone(),
-                s.ce.clone(),
-                s.onu.clone(),
-            ]
-            .join(" ");
-            if q.chars().any(|c| c.is_ascii_digit()) {
+                s.cas,
+                s.ce,
+                s.onu
+            );
+            if numerico {
                 normalize(&haystack).contains(&q)
             } else {
                 fuzzy_match(&q, &haystack)
             }
         })
+        .cloned()
         .collect()
 }
 
 /// Devuelve el país por su identificador.
 pub fn country_by_id(id: &str) -> Option<Country> {
-    countries().into_iter().find(|c| c.id == id)
+    static CACHE: OnceLock<CountriesDb> = OnceLock::new();
+    CACHE
+        .get_or_init(|| parse(COUNTRIES_JSON))
+        .paises
+        .iter()
+        .find(|c| c.id == id)
+        .cloned()
 }
 
 /// Devuelve el tema por su identificador.
 pub fn topic_by_id(id: &str) -> Option<Topic> {
-    topics().into_iter().find(|t| t.id == id)
+    static CACHE: OnceLock<TopicsDb> = OnceLock::new();
+    CACHE
+        .get_or_init(|| parse(TOPICS_JSON))
+        .temas
+        .iter()
+        .find(|t| t.id == id)
+        .cloned()
 }
 
 /// Etiqueta legible de un tema.

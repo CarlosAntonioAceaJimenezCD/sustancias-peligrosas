@@ -137,12 +137,12 @@ fn build(conn: &Connection) -> Result<()> {
     let mut port_stmt = conn.prepare(
         "INSERT INTO portals (id, pais, institucion, url, data) VALUES (?1, ?2, ?3, ?4, ?5)",
     )?;
-    for (pais, country) in db.paises {
-        for p in country.portales_oficiales {
+    for (pais, country) in &db.paises {
+        for p in &country.portales_oficiales {
             let data = serde_json::to_string(&p).unwrap();
             port_stmt.execute(params![p.id, pais, p.institucion, p.url, data])?;
         }
-        for i in country.instrumentos {
+        for i in &country.instrumentos {
             let data = serde_json::to_string(&i).unwrap();
             ins_stmt.execute(params![
                 i.id, pais, i.tema, i.titulo, i.url, i.verificacion, data
