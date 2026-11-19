@@ -34,7 +34,9 @@ sudo pacman -S webkit2gtk-4.1 base-devel curl wget file openssl \
   appmenu-gtk-module libappindicator-gtk3 librsvg xdotool
 ```
 
-`xdotool` aporta `libxdo.so`, necesario en el enlazado (Dioxus desktop usa atajos globales). Sin él, `cargo check` pasa pero `cargo build` falla con `unable to find library -lxdo`.
+En Arch, el paquete es **`xdotool`** (no `libxdo`): aporta `/usr/lib/libxdo.so`, necesario en el enlazado (Dioxus desktop usa atajos globales). Sin él, `cargo check` pasa pero `cargo build` falla con `unable to find library -lxdo`.
+
+Para Windows desde Arch: `sudo pacman -S mingw-w64-toolchain` aporta `x86_64-w64-mingw32-dlltool`, que falta en la imagen Docker de `cross`.
 
 Debian/Ubuntu:
 
@@ -118,11 +120,12 @@ No se puede compilar desde Linux.
 |---|---|---|
 | Web (WASM) | `cargo check --target wasm32-unknown-unknown` | ✅ OK |
 | Nativo Linux | `cargo check --features desktop` | ✅ OK |
-| Nativo Linux (binario) | `cargo build --features desktop --release` | ❌ falla al enlazar: falta `libxdo.so` (paquete `xdotool`). No se puede instalar: `sudo` requiere contraseña |
+| Nativo Linux (binario) | `cargo build --features desktop --release` | ✅ **Compilado**: ELF x86-64 de 13 MB en `target/release/sustancias-web` (`xdotool` ya estaba instalado y aporta `libxdo.so`) |
 | Android (targets) | `rustup target add ...` | ✅ 4 targets instalados |
 | Android (check) | `cargo check --features mobile --target aarch64-linux-android` | ❌ falta `aarch64-linux-android-clang` (NDK) |
 | Android (APK) | — | ❌ sin `ANDROID_HOME`/NDK ni `cargo-ndk` |
-| Windows | — | ❌ sin MSVC ni `mingw-w64` (`x86_64-w64-mingw32-gcc` no presente) |
+| Windows (`cross` + Docker) | `cross build --target x86_64-pc-windows-gnu --release` | ❌ la imagen de `cross` no trae `x86_64-w64-mingw32-dlltool` |
+| Windows (mingw local) | `cargo build --target x86_64-pc-windows-gnu --release` | ⏳ pendiente: instalar `sudo pacman -S mingw-w64-toolchain` |
 | Apple | — | ❌ requiere macOS + Xcode |
 
 Los targets instalados son: `aarch64-linux-android`, `armv7-linux-androideabi`, `i686-linux-android`, `x86_64-linux-android`, `wasm32-unknown-unknown`, `x86_64-unknown-linux-gnu`.

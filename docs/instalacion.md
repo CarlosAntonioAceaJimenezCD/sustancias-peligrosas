@@ -33,7 +33,17 @@ sudo pacman -S --needed \
   appmenu-gtk-module libappindicator-gtk3 librsvg xdotool
 ```
 
-`xdotool` aporta `libxdo.so`. Sin él el enlazado falla con `unable to find library -lxdo`.
+En Arch el paquete correcto es **`xdotool`** (no existe `libxdo` como paquete suelto): aporta `/usr/lib/libxdo.so`. Sin él el enlazado falla con `unable to find library -lxdo`.
+
+Para compilar Windows desde esta máquina:
+
+```bash
+sudo pacman -S mingw-w64-toolchain
+rustup target add x86_64-pc-windows-gnu
+cargo build -p sustancias-web --features desktop --target x86_64-pc-windows-gnu --release
+```
+
+El grupo `mingw-w64-toolchain` incluye `mingw-w64-binutils` (necesario para `x86_64-w64-mingw32-dlltool`), `mingw-w64-gcc`, headers, crt y winpthreads.
 
 Verificación:
 
