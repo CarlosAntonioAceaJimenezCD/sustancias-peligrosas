@@ -56,7 +56,11 @@ Esta máquina ya tiene `webkit2gtk-4.1`, por lo que el build de Linux es viable 
 
 ## Windows
 
-Se recomienda **compilar en Windows** (MSVC + WebView2):
+### Instalador que compila en destino (recomendado)
+
+Como la compilación cruzada desde Linux es problemática, existe `installers/windows/Instalar.bat`: al ejecutarlo en el equipo Windows instala Rust/MSVC/WebView2 si faltan, obtiene el código, ejecuta `cargo build --release --features desktop` y copia el `.exe` a `%LOCALAPPDATA%` con acceso directo. Ver `installers/windows/README.md`.
+
+### Compilación manual en Windows (MSVC + WebView2):
 
 ```powershell
 cargo build -p sustancias-web --features desktop --release
@@ -125,7 +129,8 @@ No se puede compilar desde Linux.
 | Android (check) | `cargo check --features mobile --target aarch64-linux-android` | ❌ falta `aarch64-linux-android-clang` (NDK) |
 | Android (APK) | — | ❌ sin `ANDROID_HOME`/NDK ni `cargo-ndk` |
 | Windows (`cross` + Docker) | `cross build --target x86_64-pc-windows-gnu --release` | ❌ la imagen de `cross` no trae `x86_64-w64-mingw32-dlltool` |
-| Windows (mingw local) | `cargo build --target x86_64-pc-windows-gnu --release` | ⏳ pendiente: instalar `sudo pacman -S mingw-w64-toolchain` |
+| Windows (mingw local) | `cargo build --target x86_64-pc-windows-gnu --release` | ⏳ mingw-w64 instalado por el usuario; build cancelado por reinicio del servidor |
+| Windows (instalador) | `installers/windows/Instalar.bat` | ✅ Creado (compila en el equipo destino; no probado en Windows) |
 | Apple | — | ❌ requiere macOS + Xcode |
 
 Los targets instalados son: `aarch64-linux-android`, `armv7-linux-androideabi`, `i686-linux-android`, `x86_64-linux-android`, `wasm32-unknown-unknown`, `x86_64-unknown-linux-gnu`.
