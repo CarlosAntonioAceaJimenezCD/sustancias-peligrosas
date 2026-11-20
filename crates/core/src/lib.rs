@@ -413,7 +413,7 @@ impl BoeNorm {
 pub struct PubChemCompound {
     #[serde(rename = "CID")]
     pub cid: u64,
-    #[serde(default)]
+    #[serde(rename = "Title", default)]
     pub title: String,
     #[serde(rename = "MolecularFormula", default)]
     pub molecular_formula: String,
