@@ -1,3 +1,4 @@
+/* Generado automaticamente desde data/*.json. No editar a mano. */
 window.DATA = {
   "countries": [
     {
@@ -8,7 +9,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "🌐",
       "saludo": "Bienvenido al marco internacional",
-      "descripcion": "SGA/GHS, convenios de la ONU y Reglamentacion Modelo para el Transporte de Mercancias Peligrosas. Aplica como base comun a todos los paises."
+      "descripcion": "SGA/GHS, convenios de la ONU y Reglamentacion Modelo para el Transporte de Mercancias Peligrosas. Aplica como base comun a todos los paises.",
+      "continente": "Marco internacional"
     },
     {
       "id": "albania",
@@ -18,7 +20,8 @@ window.DATA = {
       "idioma": "sq",
       "bandera": "",
       "saludo": "Bienvenido a Albania",
-      "descripcion": "Se han identificado los portales oficiales de Albania. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de Albania. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "Europa"
     },
     {
       "id": "alemania",
@@ -28,7 +31,8 @@ window.DATA = {
       "idioma": "de",
       "bandera": "",
       "saludo": "Bienvenido a Alemania",
-      "descripcion": "Marco legal de Alemania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Alemania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "andorra",
@@ -38,7 +42,8 @@ window.DATA = {
       "idioma": "ca",
       "bandera": "",
       "saludo": "Bienvenido a Andorra",
-      "descripcion": "Se han identificado los portales oficiales de Andorra. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de Andorra. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "Europa"
     },
     {
       "id": "angola",
@@ -48,7 +53,8 @@ window.DATA = {
       "idioma": "pt",
       "bandera": "",
       "saludo": "Bienvenido a Angola",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Angola con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Angola con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "antigua-y-barbuda",
@@ -58,7 +64,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Antigua Y Barbuda",
-      "descripcion": "Marco legal de Antigua Y Barbuda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Antigua Y Barbuda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "arabia-saudita",
@@ -68,7 +75,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Arabia Saudita",
-      "descripcion": "Marco legal de Arabia Saudita aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Arabia Saudita aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "argelia",
@@ -78,7 +86,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Argelia",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Argelia con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Argelia con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "argentina",
@@ -88,7 +97,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a Argentina",
-      "descripcion": "Marco legal de Argentina aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Argentina aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "armenia",
@@ -98,7 +108,8 @@ window.DATA = {
       "idioma": "hy",
       "bandera": "",
       "saludo": "Bienvenido a Armenia",
-      "descripcion": "Marco legal de Armenia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Armenia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "australia",
@@ -108,7 +119,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Australia",
-      "descripcion": "Marco legal de Australia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Australia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Oceania"
     },
     {
       "id": "austria",
@@ -118,7 +130,8 @@ window.DATA = {
       "idioma": "de",
       "bandera": "",
       "saludo": "Bienvenido a Austria",
-      "descripcion": "Marco legal de Austria aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Austria aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "azerbaiyan",
@@ -128,7 +141,8 @@ window.DATA = {
       "idioma": "az",
       "bandera": "",
       "saludo": "Bienvenido a Azerbaiyán",
-      "descripcion": "Marco legal de Azerbaiyán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Azerbaiyán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "bahamas",
@@ -138,7 +152,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Bahamas",
-      "descripcion": "Marco legal de Bahamas aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Bahamas aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "bangladesh",
@@ -148,7 +163,8 @@ window.DATA = {
       "idioma": "bn",
       "bandera": "",
       "saludo": "Bienvenido a Bangladés",
-      "descripcion": "Marco legal de Bangladés aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Bangladés aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "barbados",
@@ -158,7 +174,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Barbados",
-      "descripcion": "Marco legal de Barbados aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Barbados aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "barein",
@@ -168,7 +185,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Baréin",
-      "descripcion": "Marco legal de Baréin aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Baréin aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "belice",
@@ -178,7 +196,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Belice",
-      "descripcion": "Marco legal de Belice aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Belice aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "benin",
@@ -188,7 +207,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Benín",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Benín con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Benín con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "bielorrusia",
@@ -198,7 +218,8 @@ window.DATA = {
       "idioma": "be",
       "bandera": "",
       "saludo": "Bienvenido a Bielorrusia",
-      "descripcion": "Marco legal de Bielorrusia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Bielorrusia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "bolivia",
@@ -208,7 +229,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a Bolivia",
-      "descripcion": "Marco legal de Bolivia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Bolivia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "bosnia-y-herzegovina",
@@ -218,7 +240,8 @@ window.DATA = {
       "idioma": "bs",
       "bandera": "",
       "saludo": "Bienvenido a Bosnia Y Herzegovina",
-      "descripcion": "Se han identificado los portales oficiales de Bosnia Y Herzegovina. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de Bosnia Y Herzegovina. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "Europa"
     },
     {
       "id": "botsuana",
@@ -228,7 +251,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Botsuana",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Botsuana con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Botsuana con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "brasil",
@@ -238,7 +262,8 @@ window.DATA = {
       "idioma": "pt",
       "bandera": "",
       "saludo": "Bienvenido a Brasil",
-      "descripcion": "Marco legal de Brasil aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Brasil aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "brunei",
@@ -248,7 +273,8 @@ window.DATA = {
       "idioma": "ms",
       "bandera": "",
       "saludo": "Bienvenido a Brunei",
-      "descripcion": "Marco legal de Brunei aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Brunei aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "bulgaria",
@@ -258,7 +284,8 @@ window.DATA = {
       "idioma": "bg",
       "bandera": "",
       "saludo": "Bienvenido a Bulgaria",
-      "descripcion": "Marco legal de Bulgaria aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Bulgaria aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "burkina-faso",
@@ -268,7 +295,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Burkina Faso",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Burkina Faso con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Burkina Faso con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "burundi",
@@ -278,7 +306,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Burundi",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Burundi con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Burundi con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "belgica",
@@ -288,7 +317,8 @@ window.DATA = {
       "idioma": "nl",
       "bandera": "",
       "saludo": "Bienvenido a Bélgica",
-      "descripcion": "Marco legal de Bélgica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Bélgica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "cabo-verde",
@@ -298,7 +328,8 @@ window.DATA = {
       "idioma": "pt",
       "bandera": "",
       "saludo": "Bienvenido a Cabo Verde",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Cabo Verde con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Cabo Verde con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "camboya",
@@ -308,7 +339,8 @@ window.DATA = {
       "idioma": "km",
       "bandera": "",
       "saludo": "Bienvenido a Camboya",
-      "descripcion": "Marco legal de Camboya aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Camboya aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "camerun",
@@ -318,7 +350,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Camerún",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Camerún con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Camerún con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "chad",
@@ -328,7 +361,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Chad",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Chad con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Chad con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "chequia",
@@ -338,7 +372,8 @@ window.DATA = {
       "idioma": "cs",
       "bandera": "",
       "saludo": "Bienvenido a Chequia",
-      "descripcion": "Marco legal de Chequia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Chequia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "chile",
@@ -348,7 +383,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a Chile",
-      "descripcion": "Marco legal de Chile aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Chile aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "china",
@@ -358,7 +394,8 @@ window.DATA = {
       "idioma": "zh",
       "bandera": "",
       "saludo": "Bienvenido a China",
-      "descripcion": "Marco legal de China aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de China aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "chipre",
@@ -368,7 +405,8 @@ window.DATA = {
       "idioma": "el",
       "bandera": "",
       "saludo": "Bienvenido a Chipre",
-      "descripcion": "Marco legal de Chipre aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Chipre aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "colombia",
@@ -378,7 +416,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "🇨🇴",
       "saludo": "Bienvenido a Colombia",
-      "descripcion": "Marco legal colombiano de sustancias peligrosas, residuos y transporte."
+      "descripcion": "Marco legal colombiano de sustancias peligrosas, residuos y transporte.",
+      "continente": "America"
     },
     {
       "id": "comoras",
@@ -388,7 +427,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Comoras",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Comoras con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Comoras con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "congo",
@@ -398,7 +438,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Congo",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Congo con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Congo con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "corea-del-sur",
@@ -408,7 +449,8 @@ window.DATA = {
       "idioma": "ko",
       "bandera": "",
       "saludo": "Bienvenido a Corea Del Sur",
-      "descripcion": "Marco legal de Corea Del Sur aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Corea Del Sur aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "costa-de-marfil",
@@ -418,7 +460,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Costa De Marfil",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Costa De Marfil con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Costa De Marfil con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "costa-rica",
@@ -428,7 +471,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a Costa Rica",
-      "descripcion": "Marco legal de Costa Rica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Costa Rica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "croacia",
@@ -438,7 +482,8 @@ window.DATA = {
       "idioma": "hr",
       "bandera": "",
       "saludo": "Bienvenido a Croacia",
-      "descripcion": "Marco legal de Croacia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Croacia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "cuba",
@@ -450,7 +495,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "🇨🇺",
       "saludo": "Bienvenido a Cuba",
-      "descripcion": "El usuario dispone de la legislacion cubana completa en una base local. No se realizan busquedas web para este pais; la base se importara cuando se defina su formato."
+      "descripcion": "El usuario dispone de la legislacion cubana completa en una base local. No se realizan busquedas web para este pais; la base se importara cuando se defina su formato.",
+      "continente": "America"
     },
     {
       "id": "dinamarca",
@@ -460,7 +506,8 @@ window.DATA = {
       "idioma": "da",
       "bandera": "",
       "saludo": "Bienvenido a Dinamarca",
-      "descripcion": "Marco legal de Dinamarca aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Dinamarca aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "dominica",
@@ -470,7 +517,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Dominica",
-      "descripcion": "Marco legal de Dominica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Dominica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "ecuador",
@@ -480,7 +528,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a Ecuador",
-      "descripcion": "Marco legal de Ecuador aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Ecuador aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "egipto",
@@ -490,7 +539,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Egipto",
-      "descripcion": "Marco legal de Egipto aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Egipto aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "el-salvador",
@@ -500,7 +550,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a El Salvador",
-      "descripcion": "Marco legal de El Salvador aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de El Salvador aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "emiratos-arabes-unidos",
@@ -510,7 +561,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Emiratos Árabes Unidos",
-      "descripcion": "Marco legal de Emiratos Árabes Unidos aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Emiratos Árabes Unidos aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "eritrea",
@@ -520,7 +572,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Eritrea",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Eritrea con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Eritrea con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "eslovaquia",
@@ -530,7 +583,8 @@ window.DATA = {
       "idioma": "sk",
       "bandera": "",
       "saludo": "Bienvenido a Eslovaquia",
-      "descripcion": "Marco legal de Eslovaquia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Eslovaquia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "eslovenia",
@@ -540,7 +594,8 @@ window.DATA = {
       "idioma": "sl",
       "bandera": "",
       "saludo": "Bienvenido a Eslovenia",
-      "descripcion": "Marco legal de Eslovenia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Eslovenia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "espana",
@@ -551,7 +606,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "🇪🇸",
       "saludo": "Bienvenido a España",
-      "descripcion": "Legislacion espanola de riesgos quimicos, PRL, REACH-CLP y transporte de mercancias peligrosas."
+      "descripcion": "Legislacion espanola de riesgos quimicos, PRL, REACH-CLP y transporte de mercancias peligrosas.",
+      "continente": "Europa"
     },
     {
       "id": "eeuu",
@@ -562,7 +618,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "🇺🇸",
       "saludo": "Welcome to the United States",
-      "descripcion": "Referencia complementaria (OSHA). No es marco aplicable en los paises del proyecto."
+      "descripcion": "Referencia complementaria (OSHA). No es marco aplicable en los paises del proyecto.",
+      "continente": "America"
     },
     {
       "id": "estonia",
@@ -572,7 +629,8 @@ window.DATA = {
       "idioma": "et",
       "bandera": "",
       "saludo": "Bienvenido a Estonia",
-      "descripcion": "Marco legal de Estonia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Estonia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "eswatini",
@@ -582,7 +640,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Esuatini",
-      "descripcion": "Se han identificado los portales oficiales de Esuatini. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de Esuatini. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "Africa"
     },
     {
       "id": "etiopia",
@@ -592,7 +651,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Etiopía",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Etiopía con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Etiopía con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "filipinas",
@@ -602,7 +662,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Filipinas",
-      "descripcion": "Marco legal de Filipinas aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Filipinas aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "finlandia",
@@ -612,7 +673,8 @@ window.DATA = {
       "idioma": "fi",
       "bandera": "",
       "saludo": "Bienvenido a Finlandia",
-      "descripcion": "Marco legal de Finlandia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Finlandia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "francia",
@@ -622,7 +684,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Francia",
-      "descripcion": "Marco legal de Francia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Francia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "gabon",
@@ -632,7 +695,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Gabón",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Gabón con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Gabón con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "gambia",
@@ -642,7 +706,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Gambia",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Gambia con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Gambia con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "georgia",
@@ -652,7 +717,8 @@ window.DATA = {
       "idioma": "ka",
       "bandera": "",
       "saludo": "Bienvenido a Georgia",
-      "descripcion": "Marco legal de Georgia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Georgia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "ghana",
@@ -662,7 +728,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Ghana",
-      "descripcion": "Marco legal de Ghana aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Ghana aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "granada",
@@ -672,7 +739,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Granada",
-      "descripcion": "Marco legal de Granada aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Granada aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "grecia",
@@ -682,7 +750,8 @@ window.DATA = {
       "idioma": "el",
       "bandera": "",
       "saludo": "Bienvenido a Grecia",
-      "descripcion": "Marco legal de Grecia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Grecia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "guatemala",
@@ -692,7 +761,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a Guatemala",
-      "descripcion": "Marco legal de Guatemala aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Guatemala aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "guinea",
@@ -702,7 +772,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Guinea",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Guinea con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Guinea con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "guinea-ecuatorial",
@@ -712,7 +783,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a Guinea Ecuatorial",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Guinea Ecuatorial con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Guinea Ecuatorial con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "guinea-bisau",
@@ -722,7 +794,8 @@ window.DATA = {
       "idioma": "pt",
       "bandera": "",
       "saludo": "Bienvenido a Guinea-Bisáu",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Guinea-Bisáu con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Guinea-Bisáu con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "guyana",
@@ -732,7 +805,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Guyana",
-      "descripcion": "Marco legal de Guyana aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Guyana aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "haiti",
@@ -742,7 +816,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Haití",
-      "descripcion": "Se han identificado los portales oficiales de Haití. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de Haití. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "America"
     },
     {
       "id": "honduras",
@@ -752,7 +827,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a Honduras",
-      "descripcion": "Marco legal de Honduras aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Honduras aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "hong-kong",
@@ -762,7 +838,8 @@ window.DATA = {
       "idioma": "zh",
       "bandera": "",
       "saludo": "Bienvenido a Hong Kong",
-      "descripcion": "Marco legal de Hong Kong aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Hong Kong aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "hungria",
@@ -772,7 +849,8 @@ window.DATA = {
       "idioma": "hu",
       "bandera": "",
       "saludo": "Bienvenido a Hungría",
-      "descripcion": "Marco legal de Hungría aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Hungría aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "india",
@@ -782,7 +860,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a India",
-      "descripcion": "Marco legal de India aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de India aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "indonesia",
@@ -792,7 +871,8 @@ window.DATA = {
       "idioma": "id",
       "bandera": "",
       "saludo": "Bienvenido a Indonesia",
-      "descripcion": "Marco legal de Indonesia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Indonesia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "irlanda",
@@ -802,7 +882,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Irlanda",
-      "descripcion": "Marco legal de Irlanda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Irlanda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "iran",
@@ -812,7 +893,8 @@ window.DATA = {
       "idioma": "fa",
       "bandera": "",
       "saludo": "Bienvenido a Irán",
-      "descripcion": "Marco legal de Irán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Irán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "islandia",
@@ -822,7 +904,8 @@ window.DATA = {
       "idioma": "is",
       "bandera": "",
       "saludo": "Bienvenido a Islandia",
-      "descripcion": "Marco legal de Islandia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Islandia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "israel",
@@ -832,7 +915,8 @@ window.DATA = {
       "idioma": "he",
       "bandera": "",
       "saludo": "Bienvenido a Israel",
-      "descripcion": "Marco legal de Israel aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Israel aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "italia",
@@ -842,7 +926,8 @@ window.DATA = {
       "idioma": "it",
       "bandera": "",
       "saludo": "Bienvenido a Italia",
-      "descripcion": "Marco legal de Italia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Italia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "jamaica",
@@ -852,7 +937,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Jamaica",
-      "descripcion": "Marco legal de Jamaica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Jamaica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "japon",
@@ -862,7 +948,8 @@ window.DATA = {
       "idioma": "ja",
       "bandera": "",
       "saludo": "Bienvenido a Japón",
-      "descripcion": "Marco legal de Japón aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Japón aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "jordania",
@@ -872,7 +959,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Jordania",
-      "descripcion": "Marco legal de Jordania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Jordania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "kazajistan",
@@ -882,7 +970,8 @@ window.DATA = {
       "idioma": "kk",
       "bandera": "",
       "saludo": "Bienvenido a Kazajistán",
-      "descripcion": "Marco legal de Kazajistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Kazajistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "kenia",
@@ -892,7 +981,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Kenia",
-      "descripcion": "Marco legal de Kenia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Kenia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "kirguistan",
@@ -902,7 +992,8 @@ window.DATA = {
       "idioma": "ky",
       "bandera": "",
       "saludo": "Bienvenido a Kirguistán",
-      "descripcion": "Marco legal de Kirguistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Kirguistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "kosovo",
@@ -912,7 +1003,8 @@ window.DATA = {
       "idioma": "sq",
       "bandera": "",
       "saludo": "Bienvenido a Kosovo",
-      "descripcion": "Se han identificado los portales oficiales de Kosovo. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de Kosovo. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "Europa"
     },
     {
       "id": "kuwait",
@@ -922,7 +1014,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Kuwait",
-      "descripcion": "Marco legal de Kuwait aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Kuwait aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "laos",
@@ -932,7 +1025,8 @@ window.DATA = {
       "idioma": "lo",
       "bandera": "",
       "saludo": "Bienvenido a Laos",
-      "descripcion": "Marco legal de Laos aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Laos aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "lesoto",
@@ -942,7 +1036,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Lesoto",
-      "descripcion": "Se han identificado los portales oficiales de Lesoto. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de Lesoto. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "Africa"
     },
     {
       "id": "letonia",
@@ -952,7 +1047,8 @@ window.DATA = {
       "idioma": "lv",
       "bandera": "",
       "saludo": "Bienvenido a Letonia",
-      "descripcion": "Marco legal de Letonia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Letonia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "liberia",
@@ -962,7 +1058,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Liberia",
-      "descripcion": "Se han identificado los portales oficiales de Liberia. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de Liberia. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "Africa"
     },
     {
       "id": "libia",
@@ -972,7 +1069,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Libia",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Libia con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Libia con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "liechtenstein",
@@ -982,7 +1080,8 @@ window.DATA = {
       "idioma": "de",
       "bandera": "",
       "saludo": "Bienvenido a Liechtenstein",
-      "descripcion": "Marco legal de Liechtenstein aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Liechtenstein aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "lituania",
@@ -992,7 +1091,8 @@ window.DATA = {
       "idioma": "lt",
       "bandera": "",
       "saludo": "Bienvenido a Lituania",
-      "descripcion": "Marco legal de Lituania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Lituania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "luxemburgo",
@@ -1002,7 +1102,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Luxemburgo",
-      "descripcion": "Marco legal de Luxemburgo aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Luxemburgo aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "libano",
@@ -1012,7 +1113,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Líbano",
-      "descripcion": "Marco legal de Líbano aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Líbano aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "macedonia-del-norte",
@@ -1022,7 +1124,8 @@ window.DATA = {
       "idioma": "mk",
       "bandera": "",
       "saludo": "Bienvenido a Macedonia Del Norte",
-      "descripcion": "Se han identificado los portales oficiales de Macedonia Del Norte. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de Macedonia Del Norte. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "Europa"
     },
     {
       "id": "madagascar",
@@ -1032,7 +1135,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Madagascar",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Madagascar con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Madagascar con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "malasia",
@@ -1042,7 +1146,8 @@ window.DATA = {
       "idioma": "ms",
       "bandera": "",
       "saludo": "Bienvenido a Malasia",
-      "descripcion": "Marco legal de Malasia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Malasia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "malaui",
@@ -1052,7 +1157,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Malaui",
-      "descripcion": "Marco legal de Malaui aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Malaui aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "malta",
@@ -1062,7 +1168,8 @@ window.DATA = {
       "idioma": "mt",
       "bandera": "",
       "saludo": "Bienvenido a Malta",
-      "descripcion": "Marco legal de Malta aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Malta aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "mali",
@@ -1072,7 +1179,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Malí",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Malí con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Malí con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "marruecos",
@@ -1082,7 +1190,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Marruecos",
-      "descripcion": "Marco legal de Marruecos aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Marruecos aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "mauricio",
@@ -1092,7 +1201,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Mauricio",
-      "descripcion": "Marco legal de Mauricio aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Mauricio aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "mauritania",
@@ -1102,7 +1212,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Mauritania",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Mauritania con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Mauritania con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "mongolia",
@@ -1112,7 +1223,8 @@ window.DATA = {
       "idioma": "mn",
       "bandera": "",
       "saludo": "Bienvenido a Mongolia",
-      "descripcion": "Marco legal de Mongolia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Mongolia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "montenegro",
@@ -1122,7 +1234,8 @@ window.DATA = {
       "idioma": "sr",
       "bandera": "",
       "saludo": "Bienvenido a Montenegro",
-      "descripcion": "Se han identificado los portales oficiales de Montenegro. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de Montenegro. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "Europa"
     },
     {
       "id": "mozambique",
@@ -1132,7 +1245,8 @@ window.DATA = {
       "idioma": "pt",
       "bandera": "",
       "saludo": "Bienvenido a Mozambique",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Mozambique con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Mozambique con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "myanmar",
@@ -1142,7 +1256,8 @@ window.DATA = {
       "idioma": "my",
       "bandera": "",
       "saludo": "Bienvenido a Myanmar",
-      "descripcion": "Marco legal de Myanmar aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Myanmar aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "mexico",
@@ -1152,7 +1267,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "🇲🇽",
       "saludo": "Bienvenido a México",
-      "descripcion": "Normas Oficiales Mexicanas de la STPS y la SEMARNAT."
+      "descripcion": "Normas Oficiales Mexicanas de la STPS y la SEMARNAT.",
+      "continente": "America"
     },
     {
       "id": "monaco",
@@ -1162,7 +1278,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Mónaco",
-      "descripcion": "Se han identificado los portales oficiales de Mónaco. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de Mónaco. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "Europa"
     },
     {
       "id": "namibia",
@@ -1172,7 +1289,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Namibia",
-      "descripcion": "Marco legal de Namibia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Namibia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "nepal",
@@ -1182,7 +1300,8 @@ window.DATA = {
       "idioma": "ne",
       "bandera": "",
       "saludo": "Bienvenido a Nepal",
-      "descripcion": "Marco legal de Nepal aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Nepal aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "nicaragua",
@@ -1192,7 +1311,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a Nicaragua",
-      "descripcion": "Marco legal de Nicaragua aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Nicaragua aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "nigeria",
@@ -1202,7 +1322,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Nigeria",
-      "descripcion": "Marco legal de Nigeria aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Nigeria aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "noruega",
@@ -1212,7 +1333,8 @@ window.DATA = {
       "idioma": "no",
       "bandera": "",
       "saludo": "Bienvenido a Noruega",
-      "descripcion": "Marco legal de Noruega aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Noruega aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "nueva-zelanda",
@@ -1222,7 +1344,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Nueva Zelanda",
-      "descripcion": "Marco legal de Nueva Zelanda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Nueva Zelanda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Oceania"
     },
     {
       "id": "niger",
@@ -1232,7 +1355,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Níger",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Níger con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Níger con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "oman",
@@ -1242,7 +1366,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Omán",
-      "descripcion": "Marco legal de Omán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Omán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "pakistan",
@@ -1252,7 +1377,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Pakistán",
-      "descripcion": "Marco legal de Pakistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Pakistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "panama",
@@ -1262,7 +1388,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a Panamá",
-      "descripcion": "Marco legal de Panamá aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Panamá aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "paraguay",
@@ -1272,7 +1399,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a Paraguay",
-      "descripcion": "Marco legal de Paraguay aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Paraguay aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "paises-bajos",
@@ -1282,7 +1410,8 @@ window.DATA = {
       "idioma": "nl",
       "bandera": "",
       "saludo": "Bienvenido a Países Bajos",
-      "descripcion": "Marco legal de Países Bajos aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Países Bajos aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "peru",
@@ -1292,7 +1421,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "🇵🇪",
       "saludo": "Bienvenido al Perú",
-      "descripcion": "Normativa del MINAM sobre materiales y residuos peligrosos y su transporte terrestre."
+      "descripcion": "Normativa del MINAM sobre materiales y residuos peligrosos y su transporte terrestre.",
+      "continente": "America"
     },
     {
       "id": "polonia",
@@ -1302,7 +1432,8 @@ window.DATA = {
       "idioma": "pl",
       "bandera": "",
       "saludo": "Bienvenido a Polonia",
-      "descripcion": "Marco legal de Polonia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Polonia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "portugal",
@@ -1312,7 +1443,8 @@ window.DATA = {
       "idioma": "pt",
       "bandera": "",
       "saludo": "Bienvenido a Portugal",
-      "descripcion": "Marco legal de Portugal aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Portugal aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "qatar",
@@ -1322,7 +1454,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Qatar",
-      "descripcion": "Marco legal de Qatar aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Qatar aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "reino-unido",
@@ -1332,7 +1465,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Reino Unido",
-      "descripcion": "Marco legal de Reino Unido aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Reino Unido aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "republica-centroafricana",
@@ -1342,7 +1476,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a República Centroafricana",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de República Centroafricana con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de República Centroafricana con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "republica-democratica-del-congo",
@@ -1352,7 +1487,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a República Democrática Del Congo",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de República Democrática Del Congo con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de República Democrática Del Congo con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "republica-dominicana",
@@ -1362,7 +1498,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a República Dominicana",
-      "descripcion": "Marco legal de República Dominicana aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de República Dominicana aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "ruanda",
@@ -1372,7 +1509,8 @@ window.DATA = {
       "idioma": "rw",
       "bandera": "",
       "saludo": "Bienvenido a Ruanda",
-      "descripcion": "Marco legal de Ruanda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Ruanda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "rumania",
@@ -1382,7 +1520,8 @@ window.DATA = {
       "idioma": "ro",
       "bandera": "",
       "saludo": "Bienvenido a Rumanía",
-      "descripcion": "Marco legal de Rumanía aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Rumanía aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "rusia",
@@ -1392,7 +1531,8 @@ window.DATA = {
       "idioma": "ru",
       "bandera": "",
       "saludo": "Bienvenido a Rusia",
-      "descripcion": "Marco legal de Rusia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Rusia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "san-cristobal-y-nieves",
@@ -1402,7 +1542,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a San Cristóbal Y Nieves",
-      "descripcion": "Se han identificado los portales oficiales de San Cristóbal Y Nieves. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de San Cristóbal Y Nieves. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "America"
     },
     {
       "id": "san-marino",
@@ -1412,7 +1553,8 @@ window.DATA = {
       "idioma": "it",
       "bandera": "",
       "saludo": "Bienvenido a San Marino",
-      "descripcion": "Se han identificado los portales oficiales de San Marino. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de San Marino. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "Europa"
     },
     {
       "id": "san-vicente-y-las-granadinas",
@@ -1422,7 +1564,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a San Vicente Y Las Granadinas",
-      "descripcion": "Marco legal de San Vicente Y Las Granadinas aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de San Vicente Y Las Granadinas aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "santa-lucia",
@@ -1432,7 +1575,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Santa Lucía",
-      "descripcion": "Marco legal de Santa Lucía aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Santa Lucía aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "santo-tome-principe",
@@ -1442,7 +1586,8 @@ window.DATA = {
       "idioma": "pt",
       "bandera": "",
       "saludo": "Bienvenido a Santo Tomé Y Príncipe",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Santo Tomé Y Príncipe con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Santo Tomé Y Príncipe con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "senegal",
@@ -1452,7 +1597,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Senegal",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Senegal con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Senegal con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "serbia",
@@ -1462,7 +1608,8 @@ window.DATA = {
       "idioma": "sr",
       "bandera": "",
       "saludo": "Bienvenido a Serbia",
-      "descripcion": "Marco legal de Serbia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Serbia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "seychelles",
@@ -1472,7 +1619,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Seychelles",
-      "descripcion": "Marco legal de Seychelles aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Seychelles aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "sierra-leona",
@@ -1482,7 +1630,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Sierra Leona",
-      "descripcion": "Se han identificado los portales oficiales de Sierra Leona. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente."
+      "descripcion": "Se han identificado los portales oficiales de Sierra Leona. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
+      "continente": "Africa"
     },
     {
       "id": "singapur",
@@ -1492,7 +1641,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Singapur",
-      "descripcion": "Marco legal de Singapur aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Singapur aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "somalia",
@@ -1502,7 +1652,8 @@ window.DATA = {
       "idioma": "so",
       "bandera": "",
       "saludo": "Bienvenido a Somalia",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Somalia con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Somalia con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "sri-lanka",
@@ -1512,7 +1663,8 @@ window.DATA = {
       "idioma": "si",
       "bandera": "",
       "saludo": "Bienvenido a Sri Lanka",
-      "descripcion": "Marco legal de Sri Lanka aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Sri Lanka aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "sudafrica",
@@ -1522,7 +1674,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Sudáfrica",
-      "descripcion": "Marco legal de Sudáfrica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Sudáfrica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "sudan",
@@ -1532,7 +1685,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Sudán",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Sudán con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Sudán con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "suecia",
@@ -1542,7 +1696,8 @@ window.DATA = {
       "idioma": "sv",
       "bandera": "",
       "saludo": "Bienvenido a Suecia",
-      "descripcion": "Marco legal de Suecia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Suecia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "suiza",
@@ -1552,7 +1707,8 @@ window.DATA = {
       "idioma": "de",
       "bandera": "",
       "saludo": "Bienvenido a Suiza",
-      "descripcion": "Marco legal de Suiza aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Suiza aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "surinam",
@@ -1562,7 +1718,8 @@ window.DATA = {
       "idioma": "nl",
       "bandera": "",
       "saludo": "Bienvenido a Surinam",
-      "descripcion": "Marco legal de Surinam aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Surinam aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "tailandia",
@@ -1572,7 +1729,8 @@ window.DATA = {
       "idioma": "th",
       "bandera": "",
       "saludo": "Bienvenido a Tailandia",
-      "descripcion": "Marco legal de Tailandia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Tailandia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "taiwan",
@@ -1582,7 +1740,8 @@ window.DATA = {
       "idioma": "zh",
       "bandera": "",
       "saludo": "Bienvenido a Taiwán",
-      "descripcion": "Marco legal de Taiwán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Taiwán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "tanzania",
@@ -1592,7 +1751,8 @@ window.DATA = {
       "idioma": "sw",
       "bandera": "",
       "saludo": "Bienvenido a Tanzania",
-      "descripcion": "Marco legal de Tanzania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Tanzania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "tayikistan",
@@ -1602,7 +1762,8 @@ window.DATA = {
       "idioma": "tg",
       "bandera": "",
       "saludo": "Bienvenido a Tayikistán",
-      "descripcion": "Marco legal de Tayikistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Tayikistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "togo",
@@ -1612,7 +1773,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Togo",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Togo con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Togo con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "trinidad-y-tobago",
@@ -1622,7 +1784,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Trinidad Y Tobago",
-      "descripcion": "Marco legal de Trinidad Y Tobago aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Trinidad Y Tobago aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "turkmenistan",
@@ -1632,7 +1795,8 @@ window.DATA = {
       "idioma": "tk",
       "bandera": "",
       "saludo": "Bienvenido a Turkmenistán",
-      "descripcion": "Marco legal de Turkmenistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Turkmenistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "turquia",
@@ -1642,7 +1806,8 @@ window.DATA = {
       "idioma": "tr",
       "bandera": "",
       "saludo": "Bienvenido a Turquía",
-      "descripcion": "Marco legal de Turquía aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Turquía aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "tunez",
@@ -1652,7 +1817,8 @@ window.DATA = {
       "idioma": "ar",
       "bandera": "",
       "saludo": "Bienvenido a Túnez",
-      "descripcion": "Marco legal de Túnez aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Túnez aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "ucrania",
@@ -1662,7 +1828,8 @@ window.DATA = {
       "idioma": "uk",
       "bandera": "",
       "saludo": "Bienvenido a Ucrania",
-      "descripcion": "Marco legal de Ucrania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Ucrania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "uganda",
@@ -1672,7 +1839,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Uganda",
-      "descripcion": "Marco legal de Uganda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Uganda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "union-europea",
@@ -1682,7 +1850,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Unión Europea",
-      "descripcion": "Marco legal de Unión Europea aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Unión Europea aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Europa"
     },
     {
       "id": "uruguay",
@@ -1692,7 +1861,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "",
       "saludo": "Bienvenido a Uruguay",
-      "descripcion": "Marco legal de Uruguay aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Uruguay aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "America"
     },
     {
       "id": "uzbekistan",
@@ -1702,7 +1872,8 @@ window.DATA = {
       "idioma": "uz",
       "bandera": "",
       "saludo": "Bienvenido a Uzbekistán",
-      "descripcion": "Marco legal de Uzbekistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Uzbekistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "venezuela",
@@ -1712,7 +1883,8 @@ window.DATA = {
       "idioma": "es",
       "bandera": "🇻🇪",
       "saludo": "Bienvenido a Venezuela",
-      "descripcion": "Ley sobre Sustancias, Materiales y Desechos Peligrosos y normativa tecnica de transporte."
+      "descripcion": "Ley sobre Sustancias, Materiales y Desechos Peligrosos y normativa tecnica de transporte.",
+      "continente": "America"
     },
     {
       "id": "vietnam",
@@ -1722,7 +1894,8 @@ window.DATA = {
       "idioma": "vi",
       "bandera": "",
       "saludo": "Bienvenido a Vietnam",
-      "descripcion": "Marco legal de Vietnam aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Vietnam aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Asia"
     },
     {
       "id": "yibuti",
@@ -1732,7 +1905,8 @@ window.DATA = {
       "idioma": "fr",
       "bandera": "",
       "saludo": "Bienvenido a Yibuti",
-      "descripcion": "No se ha identificado un portal legal oficial en línea de Yibuti con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país."
+      "descripcion": "No se ha identificado un portal legal oficial en línea de Yibuti con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
+      "continente": "Africa"
     },
     {
       "id": "zambia",
@@ -1742,7 +1916,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Zambia",
-      "descripcion": "Marco legal de Zambia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Zambia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     },
     {
       "id": "zimbabue",
@@ -1752,7 +1927,8 @@ window.DATA = {
       "idioma": "en",
       "bandera": "",
       "saludo": "Bienvenido a Zimbabue",
-      "descripcion": "Marco legal de Zimbabue aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales."
+      "descripcion": "Marco legal de Zimbabue aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
+      "continente": "Africa"
     }
   ],
   "topics": [
@@ -7056,5 +7232,342 @@ window.DATA = {
     }
   },
   "substances": [],
-  "warning": " No se almacenan fichas técnicas en este repositorio. Las sustancias se consultan en vivo en bases de datos oficiales (PubChem / NIH) y se marcan como DATOS EN LÍNEA. Verifica siempre la peligrosidad y el transporte en la FDS del fabricante."
+  "warning": " No se almacenan fichas técnicas en este repositorio. Las sustancias se consultan en vivo en bases de datos oficiales (PubChem / NIH) y se marcan como DATOS EN LÍNEA. Verifica siempre la peligrosidad y el transporte en la FDS del fabricante.",
+  "interactions": {
+    "version": "1.0.0",
+    "updated": "2026-11-18",
+    "advertencia": "Las interacciones son una orientación basada en las propiedades de las sustancias. No sustituyen la evaluación de un profesional ni la ficha del fabricante. No mezclar sustancias fuera de un entorno controlado.",
+    "niveles": {
+      "alto": {
+        "etiqueta": "Peligro alto",
+        "descripcion": "Reacción violenta o exotérmica con riesgo de incendio, explosión, liberación de gas tóxico o salpicaduras corrosivas."
+      },
+      "moderado": {
+        "etiqueta": "Precaución",
+        "descripcion": "Reacción o efecto apreciable que requiere controles y procedimientos específicos."
+      },
+      "bajo": {
+        "etiqueta": "Bajo riesgo",
+        "descripcion": "Sin reacción química significativa en condiciones normales, pero puede existir riesgo físico compartido."
+      },
+      "nulo": {
+        "etiqueta": "Sin reacción",
+        "descripcion": "No se espera reacción entre las sustancias en condiciones normales de manipulación."
+      }
+    },
+    "interacciones": [
+      {
+        "sustancias": [
+          "acetona",
+          "etanol"
+        ],
+        "nivel": "bajo",
+        "tipo": "Mezcla de disolventes inflamables",
+        "descripcion": "No se espera una reacción química entre ambos disolventes en condiciones normales. El riesgo principal es el compartido: punto de inflamación bajo y vapores que pueden formar mezclas explosivas con el aire.",
+        "productos": [],
+        "consecuencias": [
+          "Aumento del riesgo de incendio si hay fuente de ignición",
+          "Mayor volatilidad de la mezcla"
+        ],
+        "acciones": [
+          "Mantener alejado de fuentes de ignición",
+          "Ventilar y usar equipos antichispa",
+          "Almacenar en recipientes cerrados y conectados a tierra"
+        ]
+      },
+      {
+        "sustancias": [
+          "acetona",
+          "acido-clorhidrico"
+        ],
+        "nivel": "moderado",
+        "tipo": "Reacción ácido-catalizada",
+        "descripcion": "El ácido puede catalizar reacciones de la cetona y favorecer la formación de derivados clorados en presencia de humedad o impurezas. No es una reacción inmediata a temperatura ambiente, pero requiere control.",
+        "productos": [
+          "Posibles derivados clorados"
+        ],
+        "consecuencias": [
+          "Desprendimiento de calor",
+          "Formación de vapores irritantes"
+        ],
+        "acciones": [
+          "No mezclar sin procedimiento validado",
+          "Manipular bajo campana de extracción",
+          "Ventilar y usar protección respiratoria"
+        ]
+      },
+      {
+        "sustancias": [
+          "acetona",
+          "amoniaco"
+        ],
+        "nivel": "bajo",
+        "tipo": "Condensación lenta",
+        "descripcion": "En condiciones controladas pueden formarse iminas por condensación, pero a temperatura ambiente la reacción es lenta y no representa un peligro inmediato. Predomina el riesgo por la inflamabilidad de la acetona y la toxicidad del amoniaco.",
+        "productos": [
+          "Posibles productos de condensación"
+        ],
+        "consecuencias": [
+          "Libertad de reacción lenta",
+          "Riesgo combinado por inflamabilidad y toxicidad"
+        ],
+        "acciones": [
+          "Evitar mezclas innecesarias",
+          "Ventilación y control de fuentes de ignición"
+        ]
+      },
+      {
+        "sustancias": [
+          "acetona",
+          "acido-sulfurico"
+        ],
+        "nivel": "alto",
+        "tipo": "Deshidratación y polimerización exotérmica",
+        "descripcion": "El ácido sulfúrico concentrado actúa como deshidratante y puede provocar la polimerización exotérmica de la acetona, con riesgo de incendio y liberación de vapores inflamables.",
+        "productos": [
+          "Productos de condensación y polimerización"
+        ],
+        "consecuencias": [
+          "Liberación intensa de calor",
+          "Riesgo de ignición",
+          "Vapores tóxicos e inflamables"
+        ],
+        "acciones": [
+          "No mezclar bajo ninguna circunstancia sin control técnico",
+          "Si hay contacto, aislar y enfriar la mezcla",
+          "Tener extintores de espuma resistente al alcohol y CO2"
+        ]
+      },
+      {
+        "sustancias": [
+          "acetona",
+          "hidroxido-sodio"
+        ],
+        "nivel": "moderado",
+        "tipo": "Condensación aldólica en medio básico",
+        "descripcion": "La base fuerte puede catalizar la condensación de la acetona, generando calor y productos de mayor masa molecular. La reacción puede acelerarse si aumenta la temperatura.",
+        "productos": [
+          "Productos de condensación aldólica"
+        ],
+        "consecuencias": [
+          "Desprendimiento de calor",
+          "Aumento de viscosidad de la mezcla"
+        ],
+        "acciones": [
+          "Evitar el contacto involuntario",
+          "Controlar la temperatura",
+          "Lavar la piel expuesta con agua abundante"
+        ]
+      },
+      {
+        "sustancias": [
+          "etanol",
+          "acido-clorhidrico"
+        ],
+        "nivel": "moderado",
+        "tipo": "Sustitución y formación de cloroetano",
+        "descripcion": "En presencia de ácido clorhídrico y dependiendo de la concentración y temperatura, el etanol puede transformarse en cloroetano. La reactividad es baja sin catalizadores, pero no debe descartarse.",
+        "productos": [
+          "Cloroetano",
+          "Agua"
+        ],
+        "consecuencias": [
+          "Liberación de gases irritantes",
+          "Riesgo de presión en recipientes cerrados"
+        ],
+        "acciones": [
+          "Manipular en campana de extracción",
+          "No cerrar herméticamente mezclas en reacción",
+          "Usar protección respiratoria"
+        ]
+      },
+      {
+        "sustancias": [
+          "etanol",
+          "amoniaco"
+        ],
+        "nivel": "bajo",
+        "tipo": "Sin reacción química significativa",
+        "descripcion": "No se espera reacción apreciable entre el etanol y el amoniaco en condiciones normales. El riesgo es la suma de la inflamabilidad del alcohol y la toxicidad del gas.",
+        "productos": [],
+        "consecuencias": [
+          "Riesgo compartido por inflamabilidad y toxicidad"
+        ],
+        "acciones": [
+          "Ventilación y control de fuentes de ignición",
+          "Evitar la inhalación de vapores"
+        ]
+      },
+      {
+        "sustancias": [
+          "etanol",
+          "acido-sulfurico"
+        ],
+        "nivel": "alto",
+        "tipo": "Deshidratación exotérmica",
+        "descripcion": "El ácido sulfúrico concentrado deshidrata el etanol de forma exotérmica, pudiendo formar etileno o éter dietílico, ambos inflamables. La mezcla puede alcanzar alta temperatura.",
+        "productos": [
+          "Etileno o éter dietílico",
+          "Agua"
+        ],
+        "consecuencias": [
+          "Desprendimiento intenso de calor",
+          "Riesgo de incendio o explosión",
+          "Vapores inflamables"
+        ],
+        "acciones": [
+          "No mezclar sin control técnico",
+          "Enfriar y aislar la mezcla",
+          "Prohibir fuentes de ignición"
+        ]
+      },
+      {
+        "sustancias": [
+          "etanol",
+          "hidroxido-sodio"
+        ],
+        "nivel": "bajo",
+        "tipo": "Sin reacción química significativa",
+        "descripcion": "La disolución de hidróxido de sodio en etanol puede generar un calor moderado, pero no se produce una reacción química relevante a temperatura ambiente.",
+        "productos": [],
+        "consecuencias": [
+          "Calor moderado al disolver",
+          "Riesgo corrosivo de la base"
+        ],
+        "acciones": [
+          "Añadir la base lentamente sobre el alcohol",
+          "Usar guantes y gafas de protección"
+        ]
+      },
+      {
+        "sustancias": [
+          "acido-clorhidrico",
+          "amoniaco"
+        ],
+        "nivel": "alto",
+        "tipo": "Formación de cloruro de amonio",
+        "descripcion": "El ácido clorhídrico y el amoniaco reaccionan de forma rápida y exotérmica formando cloruro de amonio, con aparición de humos blancos densos e irritantes.",
+        "productos": [
+          "Cloruro de amonio (NH4Cl)"
+        ],
+        "consecuencias": [
+          "Liberación de humos irritantes",
+          "Desprendimiento de calor",
+          "Riesgo para vías respiratorias y ojos"
+        ],
+        "acciones": [
+          "No mezclar fuera de campana de extracción",
+          "Usar protección respiratoria con filtro para gases ácidos",
+          "Ventilar la zona"
+        ]
+      },
+      {
+        "sustancias": [
+          "acido-clorhidrico",
+          "acido-sulfurico"
+        ],
+        "nivel": "moderado",
+        "tipo": "Mezcla de ácidos fuertes",
+        "descripcion": "No se produce una reacción química nueva relevante, pero la mezcla aumenta la corrosividad y puede liberar calor y vapores de cloruro de hidrógeno, especialmente si el ácido sulfúrico está concentrado.",
+        "productos": [],
+        "consecuencias": [
+          "Aumento de la corrosividad",
+          "Posible desprendimiento de calor y vapores ácidos"
+        ],
+        "acciones": [
+          "Manipular bajo campana de extracción",
+          "Usar EPP contra ácidos",
+          "Evitar el contacto con agua y metales"
+        ]
+      },
+      {
+        "sustancias": [
+          "acido-clorhidrico",
+          "hidroxido-sodio"
+        ],
+        "nivel": "alto",
+        "tipo": "Neutralización exotérmica",
+        "descripcion": "Ácido fuerte y base fuerte reaccionan violentamente formando sal y agua. La reacción libera una cantidad importante de calor que puede provocar salpicaduras y quemaduras.",
+        "productos": [
+          "Cloruro de sodio",
+          "Agua"
+        ],
+        "consecuencias": [
+          "Desprendimiento intenso de calor",
+          "Salpicaduras corrosivas",
+          "Posible ebullición de la disolución"
+        ],
+        "acciones": [
+          "Añadir siempre el ácido sobre la disolución de base, lentamente y con agitación",
+          "Enfriar el recipiente si es necesario",
+          "Usar pantalla facial y guantes resistentes a ácidos/bases"
+        ]
+      },
+      {
+        "sustancias": [
+          "amoniaco",
+          "acido-sulfurico"
+        ],
+        "nivel": "alto",
+        "tipo": "Neutralización violenta",
+        "descripcion": "El amoniaco reacciona con el ácido sulfúrico formando sulfato de amonio. La reacción es muy exotérmica y puede proyectar material corrosivo si no se controla.",
+        "productos": [
+          "Sulfato de amonio ((NH4)2SO4)"
+        ],
+        "consecuencias": [
+          "Liberación intensa de calor",
+          "Riesgo de salpicaduras",
+          "Humos irritantes"
+        ],
+        "acciones": [
+          "No mezclar sin procedimiento controlado",
+          "Usar protección respiratoria y facial",
+          "Enfriar y ventilar la zona"
+        ]
+      },
+      {
+        "sustancias": [
+          "amoniaco",
+          "hidroxido-sodio"
+        ],
+        "nivel": "moderado",
+        "tipo": "Desplazamiento del equilibrio y liberación de gas",
+        "descripcion": "Ambas sustancias son básicas, pero una disolución concentrada de hidróxido de sodio reduce la solubilidad del amoniaco en agua y puede desplazarlo al aire, aumentando la concentración de gas tóxico.",
+        "productos": [
+          "Amoniaco gaseoso"
+        ],
+        "consecuencias": [
+          "Liberación de gas amoniaco",
+          "Riesgo de irritación respiratoria"
+        ],
+        "acciones": [
+          "Evitar mezclar disoluciones concentradas",
+          "Ventilar y usar detector de amoniaco",
+          "Protección respiratoria adecuada"
+        ]
+      },
+      {
+        "sustancias": [
+          "acido-sulfurico",
+          "hidroxido-sodio"
+        ],
+        "nivel": "alto",
+        "tipo": "Neutralización muy exotérmica",
+        "descripcion": "La neutralización entre ácido sulfúrico e hidróxido de sodio libera una gran cantidad de calor, pudiendo llegar a la ebullición y proyectar disolución corrosiva.",
+        "productos": [
+          "Sulfato de sodio",
+          "Agua"
+        ],
+        "consecuencias": [
+          "Desprendimiento muy intenso de calor",
+          "Riesgo de salpicaduras y quemaduras graves"
+        ],
+        "acciones": [
+          "Añadir el ácido lentamente sobre la base en disolución y con agitación",
+          "Usar baño de enfriamiento",
+          "Pantalla facial, guantes y delantal resistentes"
+        ]
+      }
+    ]
+  }
 };

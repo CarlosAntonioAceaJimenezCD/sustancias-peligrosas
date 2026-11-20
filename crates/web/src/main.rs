@@ -134,6 +134,9 @@ max-width:860px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.
 .overlay-card h1,.overlay-card h2{margin:10px 0 6px;font-size:20px;color:#f0f6fc;font-weight:600}
 .overlay-card p{color:var(--muted);font-size:13px;margin:0 0 22px}
 .pais-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:9px}
+.continente-titulo{grid-column:1/-1;margin:12px 0 0;font-size:11px;color:var(--accent);
+text-transform:uppercase;letter-spacing:.9px;font-weight:700}
+.pais-grid .continente-titulo:first-child{margin-top:0}
 .pais-boton{display:flex;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);
 background:var(--card-alt);border-radius:6px;padding:12px;cursor:pointer;color:var(--ink);transition:.12s}
 .pais-boton:hover{border-color:var(--accent);background:var(--accent-soft)}
@@ -599,34 +602,39 @@ fn App() -> Element {
         });
     };
 
-    let rsx_countries = |_modal: bool| {
-        countries.iter().map(move |c| {
-            let id = c.id.clone();
-            let id_bandera = c.id.clone();
-            let codigo = c.codigo.clone();
-            let nombre = c.nombre.clone();
-            rsx! {
-                button {
-                    class: "pais-boton",
-                    onclick: move |_| {
-                        selected_id.set(Some(id.clone()));
-                        modal_open.set(false);
-                        selected_substance.set(None);
-                        query.set(String::new());
-                        filter.set("todos".to_string());
-                        boe_resultados.set(Vec::new());
-                        online_resultados.set(Vec::new());
-                        online_ficha.set(None);
-                        multi_ids.set(Vec::new());
-                    },
-                    span { class: "bandera", dangerous_inner_html: "{flag_svg(&id_bandera, \"flag\")}" }
-                    span {
-                        span { class: "nombre", "{nombre}" }
-                        span { class: "codigo", "{codigo}" }
+    let continentes = vec![
+        "Marco internacional", "America", "Europa", "Africa", "Asia", "Oceania",
+    ];
+    let rsx_countries = |_modal: bool| -> Element {
+        rsx! {
+            for cont in continentes.iter() {
+                h4 { class: "continente-titulo", "{cont}" }
+                for c in countries.iter().filter(|c| c.continente.as_str() == *cont) {
+                    button {
+                        class: "pais-boton",
+                        onclick: {
+                            let id = c.id.clone();
+                            move |_| {
+                                selected_id.set(Some(id.clone()));
+                                modal_open.set(false);
+                                selected_substance.set(None);
+                                query.set(String::new());
+                                filter.set("todos".to_string());
+                                boe_resultados.set(Vec::new());
+                                online_resultados.set(Vec::new());
+                                online_ficha.set(None);
+                                multi_ids.set(Vec::new());
+                            }
+                        },
+                        span { class: "bandera", dangerous_inner_html: "{flag_svg(&c.id, \"flag\")}" }
+                        span {
+                            span { class: "nombre", "{c.nombre}" }
+                            span { class: "codigo", "{c.codigo}" }
+                        }
                     }
                 }
             }
-        })
+        }
     };
 
     rsx! {

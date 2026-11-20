@@ -37,6 +37,8 @@ pub struct Country {
     pub descripcion: String,
     #[serde(default)]
     pub aplicable: bool,
+    #[serde(default)]
+    pub continente: String,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
