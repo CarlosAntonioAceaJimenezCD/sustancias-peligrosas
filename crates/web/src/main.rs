@@ -118,6 +118,17 @@ font-size:10px;font-weight:600;color:var(--muted);font-family:ui-monospace,SFMon
 .lista li{margin:2px 0}.lista-titulo{margin:8px 0 3px!important;font-size:11px!important;font-weight:700;color:#d0d7de!important}
 .nota{display:flex;gap:6px;align-items:flex-start;font-size:11px!important;color:#d29922!important}
 .fuentes a{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--accent);text-decoration:none;margin-top:5px}
+.feedback-panel,.redes-panel{max-width:1180px;width:calc(100% - 40px);margin:0 auto 16px}
+.feedback-panel summary{display:flex;align-items:center;gap:10px;cursor:pointer;font-weight:600;color:#f0f6fc;list-style:none}
+.feedback-panel summary::-webkit-details-marker{display:none}
+.formulario{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.formulario .opcion{display:flex;flex-direction:column;align-items:stretch;gap:5px}
+.formulario input,.formulario select,.formulario textarea{background:#0d1117;color:var(--ink);border:1px solid var(--line);
+border-radius:6px;padding:8px 10px;font-size:12px;font-family:inherit}
+.formulario textarea{min-height:90px;resize:vertical}
+.redes{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px}
+.redes a{display:flex;align-items:center;gap:6px;color:var(--accent);text-decoration:none;font-size:12px}
+.redes a:hover{text-decoration:underline}
 .pie{text-align:center;padding:20px;color:var(--muted);font-size:11px;border-top:1px solid var(--line)}
 .link-feedback{color:var(--accent);text-decoration:none;border-bottom:1px dashed rgba(88,166,255,.5)}
 .link-feedback:hover{text-decoration:underline}
@@ -136,12 +147,16 @@ max-width:860px;width:100%;max-height:90vh;overflow-y:auto;text-align:center;box
 .overlay-card.compacta{max-width:740px;position:relative}.overlay-logo{color:var(--accent)}
 .overlay-card h1,.overlay-card h2{margin:10px 0 6px;font-size:20px;color:#f0f6fc;font-weight:600}
 .overlay-card p{color:var(--muted);font-size:13px;margin:0 0 22px}
-.pais-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:9px}
-.continente-titulo{grid-column:1/-1;margin:12px 0 0;font-size:11px;color:var(--accent);
-text-transform:uppercase;letter-spacing:.9px;font-weight:700;display:flex;align-items:center;gap:8px}
+.pais-grid{display:flex;flex-direction:column;gap:8px}
+.continente-carpeta{border:1px solid var(--line);border-radius:8px;background:var(--card-alt)}
+.continente-titulo{margin:0;padding:10px 12px;cursor:pointer;list-style:none;display:flex;align-items:center;
+gap:9px;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.9px;font-weight:700}
+.continente-titulo::-webkit-details-marker{display:none}
+.continente-titulo .badge{margin-left:auto}
+.continente-carpeta[open] .continente-titulo{border-bottom:1px solid var(--line)}
 .continente-icono{display:grid;place-items:center;background:#fff;border-radius:4px;padding:2px}
 .continente-silueta{width:20px;height:20px;display:block}
-.pais-grid .continente-titulo:first-child{margin-top:0}
+.paises-carpeta{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px;padding:10px}
 .pais-boton{display:flex;align-items:center;gap:10px;text-align:left;border:1px solid var(--line);
 background:var(--card-alt);border-radius:6px;padding:12px;cursor:pointer;color:var(--ink);transition:.12s}
 .pais-boton:hover{border-color:var(--accent);background:var(--accent-soft)}
@@ -166,6 +181,7 @@ font-size:11px;line-height:1.55;color:#b9c3ce;margin:0 0 14px}
 .boe-input-wrap{margin:8px 0}
 .boe-atribucion{font-size:10px!important;color:var(--muted)!important;margin:8px 0 0!important;line-height:1.5!important}
 .boe-atribucion a{color:var(--accent)}
+.leyenda-grupo{margin:14px 0 6px;font-size:10px;text-transform:uppercase;letter-spacing:.9px;color:var(--muted)}
 .portales{border:1px solid var(--line);border-radius:6px;padding:10px 12px;background:var(--card-alt);margin-bottom:4px}
 .portales a{display:flex;align-items:center;gap:6px;color:var(--accent);font-size:11px;text-decoration:none;margin-top:5px}
 .portales a:hover{text-decoration:underline}
@@ -397,6 +413,24 @@ fn guardar_opciones(o: &AppOptions) {
 #[cfg(target_arch = "wasm32")]
 fn guardar_opciones(_o: &AppOptions) {}
 
+/// Abre el issue de GitHub con el reporte ya redactado (web).
+#[cfg(target_arch = "wasm32")]
+fn abrir_issue(titulo: &str, cuerpo: &str) {
+    let url = format!(
+        "https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas/issues/new?title={}&body={}",
+        urlencoding::encode(titulo),
+        urlencoding::encode(cuerpo)
+    );
+    let js = format!("window.open({:?}, '_blank');", url);
+    dioxus::document::eval(&js);
+}
+
+/// Abre el issue de GitHub con el reporte ya redactado (nativo).
+#[cfg(not(target_arch = "wasm32"))]
+fn abrir_issue(titulo: &str, cuerpo: &str) {
+    abrir_feedback(titulo, cuerpo);
+}
+
 /// Siluetas de los continentes en negro (derivadas de un mapa GeoJSON público).
 fn continent_svg(name: &str, class: &str) -> String {
     let d = match name {
@@ -504,6 +538,9 @@ fn App() -> Element {
     let mut boe_resultados: Signal<Vec<core::BoeNorm>> = use_signal(Vec::new);
     let mut boe_cargando: Signal<bool> = use_signal(|| false);
     let mut output_lang: Signal<String> = use_signal(|| "es".to_string());
+    let mut feedback_tipo: Signal<String> = use_signal(|| "Sugerencia".to_string());
+    let mut feedback_titulo: Signal<String> = use_signal(String::new);
+    let mut feedback_texto: Signal<String> = use_signal(String::new);
     let mut opciones: Signal<AppOptions> = use_signal(cargar_opciones);
     let mut guardados: Signal<Vec<SavedDocView>> = use_signal(cargar_guardados);
     #[allow(unused_mut)]
@@ -533,6 +570,14 @@ fn App() -> Element {
         .cloned()
         .collect();
     let portals = core::portals_for(&country.id);
+    let ue_sources: Vec<core::Source> = if core::es_union_europea(&country.codigo) {
+        core::fuentes_ue()
+            .into_iter()
+            .filter(|s| filter() == "todos" || s.tema == filter())
+            .collect()
+    } else {
+        Vec::new()
+    };
     let visible_instruments: Vec<&core::Instrument> = instruments
         .iter()
         .filter(|i| filter() == "todos" || i.tema == filter())
@@ -632,31 +677,36 @@ fn App() -> Element {
     let rsx_countries = |_modal: bool| -> Element {
         rsx! {
             for cont in continentes.iter() {
-                h4 { class: "continente-titulo",
-                    span { class: "continente-icono", dangerous_inner_html: "{continent_svg(*cont, \"continente-silueta\")}" }
-                    "{cont}"
-                }
-                for c in countries.iter().filter(|c| c.continente.as_str() == *cont) {
-                    button {
-                        class: "pais-boton",
-                        onclick: {
-                            let id = c.id.clone();
-                            move |_| {
-                                selected_id.set(Some(id.clone()));
-                                modal_open.set(false);
-                                selected_substance.set(None);
-                                query.set(String::new());
-                                filter.set("todos".to_string());
-                                boe_resultados.set(Vec::new());
-                                online_resultados.set(Vec::new());
-                                online_ficha.set(None);
-                                multi_ids.set(Vec::new());
+                details { class: "continente-carpeta",
+                    summary { class: "continente-titulo",
+                        span { class: "continente-icono", dangerous_inner_html: "{continent_svg(*cont, \"continente-silueta\")}" }
+                        span { "{cont}" }
+                        span { class: "badge badge-suave", "{countries.iter().filter(|c| c.continente.as_str() == *cont).count()}" }
+                    }
+                    div { class: "paises-carpeta",
+                        for c in countries.iter().filter(|c| c.continente.as_str() == *cont) {
+                            button {
+                                class: "pais-boton",
+                                onclick: {
+                                    let id = c.id.clone();
+                                    move |_| {
+                                        selected_id.set(Some(id.clone()));
+                                        modal_open.set(false);
+                                        selected_substance.set(None);
+                                        query.set(String::new());
+                                        filter.set("todos".to_string());
+                                        boe_resultados.set(Vec::new());
+                                        online_resultados.set(Vec::new());
+                                        online_ficha.set(None);
+                                        multi_ids.set(Vec::new());
+                                    }
+                                },
+                                span { class: "bandera", dangerous_inner_html: "{flag_svg(&c.id, \"flag\")}" }
+                                span {
+                                    span { class: "nombre", "{c.nombre}" }
+                                    span { class: "codigo", "{c.codigo}" }
+                                }
                             }
-                        },
-                        span { class: "bandera", dangerous_inner_html: "{flag_svg(&c.id, \"flag\")}" }
-                        span {
-                            span { class: "nombre", "{c.nombre}" }
-                            span { class: "codigo", "{c.codigo}" }
                         }
                     }
                 }
@@ -718,7 +768,7 @@ fn App() -> Element {
                 summary {
                     span { class: "panel-icono", dangerous_inner_html: "{icon(\"book\", \"ico ico-lg\")}" }
                     span { "Documentación legal y marco normativo" }
-                    span { class: "badge", "{visible_instruments.len() + international_sources.len()} normas" }
+                    span { class: "badge", "{visible_instruments.len() + international_sources.len() + ue_sources.len()} normas" }
                 }
                 div { class: "panel-cabecera",
                     div { class: "panel-titulo",
@@ -728,7 +778,7 @@ fn App() -> Element {
                             p { "{txt(\"legal_sub\", lang)}" }
                         }
                     }
-                    span { class: "badge", "{visible_instruments.len() + international_sources.len()} normas" }
+                    span { class: "badge", "{visible_instruments.len() + international_sources.len() + ue_sources.len()} normas" }
                 }
                 div { class: "filtros-wrap",
                     span { class: "filtro-icono", dangerous_inner_html: "{icon(\"filter\", \"ico\")}" }
@@ -825,6 +875,7 @@ fn App() -> Element {
                             }
                         }
                     }
+                    h4 { class: "leyenda-grupo", "Marco internacional (ONU y convenciones)" }
                     for s in international_sources.iter().filter(|s| filter() == "todos" || s.tema == filter()) {
                         div { class: "norma",
                             h4 { "{s.titulo}" }
@@ -841,6 +892,22 @@ fn App() -> Element {
                             a { href: "{s.url}", target: "_blank", "{s.url}" }
                         }
                     }
+                    if !ue_sources.is_empty() {
+                        h4 { class: "leyenda-grupo", "Unión Europea" }
+                        for u in ue_sources.iter() {
+                            div { class: "norma",
+                                h4 { "{u.titulo}" }
+                                div { class: "norma-meta",
+                                    span { class: "badge", "{core::topic_label(&u.tema)}" }
+                                    span { class: "badge badge-suave", "Unión Europea" }
+                                }
+                                a { href: "{u.url}", target: "_blank",
+                                    dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
+                                a { href: "{u.url}", target: "_blank", "{u.url}" }
+                            }
+                        }
+                    }
+                    h4 { class: "leyenda-grupo", "Legislación nacional · {country.nombre}" }
                     for i in visible_instruments.iter() {
                         div { class: "norma",
                             h4 { "{i.titulo}" }
@@ -1397,6 +1464,76 @@ fn App() -> Element {
                         }
                     }
                 }
+            }
+        }
+
+        details { class: "panel feedback-panel",
+            summary {
+                span { class: "panel-icono", dangerous_inner_html: "{icon(\"info\", \"ico ico-lg\")}" }
+                span { "Enviar feedback / reportar un bug" }
+            }
+            p { class: "multi-nota", "Completa el formulario: el reporte se estructuran automáticamente y se abre como issue en el repositorio." }
+            div { class: "formulario",
+                label { class: "opcion",
+                    "Tipo"
+                    select {
+                        value: "{feedback_tipo()}",
+                        onchange: move |e| feedback_tipo.set(e.value()),
+                        option { value: "Sugerencia", "Sugerencia" }
+                        option { value: "Bug", "Bug" }
+                        option { value: "Datos", "Datos incorrectos" }
+                    }
+                }
+                label { class: "opcion",
+                    "Título"
+                    input {
+                        r#type: "text",
+                        value: "{feedback_titulo()}",
+                        placeholder: "Resumen breve",
+                        oninput: move |e| feedback_titulo.set(e.value()),
+                    }
+                }
+                label { class: "opcion",
+                    "Detalles"
+                    textarea {
+                        value: "{feedback_texto()}",
+                        placeholder: "Qué ocurrió, qué esperabas, pasos para reproducirlo…",
+                        oninput: move |e| feedback_texto.set(e.value()),
+                    }
+                }
+                button {
+                    class: "boton",
+                    onclick: move |_| {
+                        let tipo = feedback_tipo();
+                        let titulo = feedback_titulo().trim().to_string();
+                        let detalles = feedback_texto().trim().to_string();
+                        if titulo.is_empty() || detalles.is_empty() { return; }
+                        let cuerpo = format!(
+                            "## Tipo\n{}\n\n## Descripción\n{}\n\n## Contexto automatico\n- Pais: {}\n- Idioma interfaz: {}\n- Busqueda actual: {}\n- Plataforma: {}\n\n---\nReporte generado automaticamente por Sustancias Peligrosas.",
+                            tipo, detalles, country.nombre, lang, query(),
+                            if cfg!(target_arch = "wasm32") { "Web" } else { "Nativa" }
+                        );
+                        abrir_issue(&format!("[{}] {}", tipo, titulo), &cuerpo);
+                        feedback_titulo.set(String::new());
+                        feedback_texto.set(String::new());
+                    },
+                    "Enviar reporte estructurado"
+                }
+            }
+        }
+
+        section { class: "panel redes-panel",
+            h3 { "Redes y enlaces" }
+            div { class: "redes",
+                a { href: "https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas", target: "_blank",
+                    dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
+                    "GitHub"
+                a { href: "https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas/issues", target: "_blank",
+                    dangerous_inner_html: "{icon(\"info\", \"ico\")}" }
+                    "Issues"
+                a { href: "https://www.linkedin.com/", target: "_blank",
+                    dangerous_inner_html: "{icon(\"globe\", \"ico\")}" }
+                    "LinkedIn"
             }
         }
 

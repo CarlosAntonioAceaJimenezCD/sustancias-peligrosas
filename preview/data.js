@@ -2575,6 +2575,51 @@ window.DATA = {
       "categoria": "organismo_internacional",
       "aplicable": true,
       "nota": "Organización internacional de aerolíneas; texto íntegro de pago, pero información oficial pública."
+    },
+    {
+      "id": "ue-reach",
+      "pais": "union_europea",
+      "institucion": "Agencia Europea de Sustancias y Mezclas Quimicas (ECHA)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "legislacion",
+      "titulo": "Reglamento (CE) 1907/2006 REACH",
+      "url": "https://echa.europa.eu/es/regulations/reach/understanding-reach",
+      "descripcion": "Registro, evaluacion, autorizacion y restriccion de sustancias quimicas en la UE.",
+      "verificacion": "dominio_snippet",
+      "oficial": true,
+      "categoria": "normativa",
+      "aplicable": true,
+      "nota": ""
+    },
+    {
+      "id": "ue-clp",
+      "pais": "union_europea",
+      "institucion": "ECHA / Union Europea",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "sga",
+      "titulo": "Reglamento (CE) 1272/2008 CLP",
+      "url": "https://echa.europa.eu/es/regulations/clp/understanding-clp",
+      "descripcion": "Clasificacion, etiquetado y envasado de sustancias y mezclas en la UE.",
+      "verificacion": "dominio_snippet",
+      "oficial": true,
+      "categoria": "normativa",
+      "aplicable": true,
+      "nota": ""
+    },
+    {
+      "id": "ue-directiva-2008-68",
+      "pais": "union_europea",
+      "institucion": "EUR-Lex (Union Europea)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "transporte",
+      "titulo": "Directiva 2008/68/CE - transporte terrestre de mercancias peligrosas",
+      "url": "https://eur-lex.europa.eu/eli/dir/2008/68/oj",
+      "descripcion": "Armonizacion del transporte de mercancias peligrosas en la UE.",
+      "verificacion": "dominio_snippet",
+      "oficial": true,
+      "categoria": "normativa",
+      "aplicable": true,
+      "nota": ""
     }
   ],
   "legislation": {

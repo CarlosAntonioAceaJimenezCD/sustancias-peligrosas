@@ -355,6 +355,24 @@ pub fn sources_for(country_id: &str) -> Vec<Source> {
         .collect()
 }
 
+/// Indica si el código ISO pertenece a un Estado miembro de la UE.
+pub fn es_union_europea(codigo: &str) -> bool {
+    matches!(
+        codigo,
+        "AT" | "BE" | "BG" | "HR" | "CY" | "CZ" | "DK" | "EE" | "FI" | "FR"
+            | "DE" | "GR" | "HU" | "IE" | "IT" | "LV" | "LT" | "LU" | "MT" | "NL"
+            | "PL" | "PT" | "RO" | "SK" | "SI" | "ES" | "SE"
+    )
+}
+
+/// Fuentes normativas de la Unión Europea.
+pub fn fuentes_ue() -> Vec<Source> {
+    sources()
+        .into_iter()
+        .filter(|s| s.pais == "union_europea")
+        .collect()
+}
+
 /// Base legislativa completa, cacheada (evita parsear 322 KB en cada render).
 pub fn legislation_db() -> &'static LegislationDb {
     static CACHE: OnceLock<LegislationDb> = OnceLock::new();
