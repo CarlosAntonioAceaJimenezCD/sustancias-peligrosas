@@ -2579,13 +2579,13 @@ window.DATA = {
     {
       "id": "ue-reach",
       "pais": "union_europea",
-      "institucion": "Agencia Europea de Sustancias y Mezclas Quimicas (ECHA)",
+      "institucion": "Unión Europea (EUR-Lex)",
       "tipo_institucion": "organismo_internacional",
       "tema": "legislacion",
       "titulo": "Reglamento (CE) 1907/2006 REACH",
-      "url": "https://echa.europa.eu/es/regulations/reach/understanding-reach",
-      "descripcion": "Registro, evaluacion, autorizacion y restriccion de sustancias quimicas en la UE.",
-      "verificacion": "dominio_snippet",
+      "url": "https://eur-lex.europa.eu/eli/reg/2006/1907/oj",
+      "descripcion": "Registro, evaluación, autorización y restricción de sustancias químicas en la UE. Texto consolidado en EUR-Lex.",
+      "verificacion": "contenido_verificado",
       "oficial": true,
       "categoria": "normativa",
       "aplicable": true,
@@ -2594,13 +2594,13 @@ window.DATA = {
     {
       "id": "ue-clp",
       "pais": "union_europea",
-      "institucion": "ECHA / Union Europea",
+      "institucion": "Unión Europea (EUR-Lex)",
       "tipo_institucion": "organismo_internacional",
       "tema": "sga",
       "titulo": "Reglamento (CE) 1272/2008 CLP",
-      "url": "https://echa.europa.eu/es/regulations/clp/understanding-clp",
-      "descripcion": "Clasificacion, etiquetado y envasado de sustancias y mezclas en la UE.",
-      "verificacion": "dominio_snippet",
+      "url": "https://eur-lex.europa.eu/eli/reg/2008/1272/oj",
+      "descripcion": "Clasificación, etiquetado y envasado de sustancias y mezclas en la UE. Texto consolidado en EUR-Lex.",
+      "verificacion": "contenido_verificado",
       "oficial": true,
       "categoria": "normativa",
       "aplicable": true,
@@ -2609,13 +2609,43 @@ window.DATA = {
     {
       "id": "ue-directiva-2008-68",
       "pais": "union_europea",
-      "institucion": "EUR-Lex (Union Europea)",
+      "institucion": "Unión Europea (EUR-Lex)",
       "tipo_institucion": "organismo_internacional",
       "tema": "transporte",
-      "titulo": "Directiva 2008/68/CE - transporte terrestre de mercancias peligrosas",
+      "titulo": "Directiva 2008/68/CE - transporte terrestre de mercancías peligrosas",
       "url": "https://eur-lex.europa.eu/eli/dir/2008/68/oj",
-      "descripcion": "Armonizacion del transporte de mercancias peligrosas en la UE.",
-      "verificacion": "dominio_snippet",
+      "descripcion": "Armonización del transporte de mercancías peligrosas por carretera, ferrocarril y vía navegable en la UE.",
+      "verificacion": "contenido_verificado",
+      "oficial": true,
+      "categoria": "normativa",
+      "aplicable": true,
+      "nota": ""
+    },
+    {
+      "id": "can-decision-602",
+      "pais": "comunidad_andina",
+      "institucion": "Comunidad Andina (CAN)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "legislacion",
+      "titulo": "Decisión 602 - Norma Andina para el control de sustancias químicas",
+      "url": "https://www.comunidadandina.org/StaticFiles/DocOf/DEC602.pdf",
+      "descripcion": "Control de sustancias químicas utilizadas en la fabricación ilícita de estupefacientes y psicotrópicos; lista comunitaria básica y notificaciones previas de exportación.",
+      "verificacion": "contenido_verificado",
+      "oficial": true,
+      "categoria": "normativa",
+      "aplicable": true,
+      "nota": ""
+    },
+    {
+      "id": "can-decision-547",
+      "pais": "comunidad_andina",
+      "institucion": "Comunidad Andina (CAN)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "sga",
+      "titulo": "Decisión 547 - Instrumento Andino de Seguridad y Salud en el Trabajo",
+      "url": "https://www.comunidadandina.org/StaticFiles/DocOf/DEC547.pdf",
+      "descripcion": "Normas fundamentales de seguridad y salud en el trabajo para los Países Miembros de la Comunidad Andina.",
+      "verificacion": "contenido_verificado",
       "oficial": true,
       "categoria": "normativa",
       "aplicable": true,
@@ -7614,5 +7644,53 @@ window.DATA = {
         ]
       }
     ]
-  }
+  },
+  "organizations": [
+    {
+      "id": "ue",
+      "nombre": "Unión Europea",
+      "miembros": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE"
+      ],
+      "fuente_pais": "union_europea"
+    },
+    {
+      "id": "comunidad_andina",
+      "nombre": "Comunidad Andina",
+      "miembros": [
+        "BO",
+        "CO",
+        "EC",
+        "PE",
+        "VE"
+      ],
+      "fuente_pais": "comunidad_andina"
+    }
+  ]
 };

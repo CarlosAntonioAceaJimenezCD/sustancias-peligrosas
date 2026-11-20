@@ -15,6 +15,7 @@ const SOURCES_JSON: &str = include_str!("../../../data/sources.json");
 const LEGISLATION_JSON: &str = include_str!("../../../data/legislation.json");
 const SUBSTANCES_JSON: &str = include_str!("../../../data/substances.json");
 const INTERACTIONS_JSON: &str = include_str!("../../../data/interactions.json");
+const ORGANIZATIONS_JSON: &str = include_str!("../../../data/organizations.json");
 
 // ---------------------------------------------------------------------------
 // Modelos
@@ -85,6 +86,21 @@ pub struct Source {
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct SourcesDb {
     pub fuentes: Vec<Source>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct Organization {
+    pub id: String,
+    pub nombre: String,
+    #[serde(default)]
+    pub miembros: Vec<String>,
+    #[serde(default)]
+    pub fuente_pais: String,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct OrganizationsDb {
+    pub organizaciones: Vec<Organization>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -355,21 +371,42 @@ pub fn sources_for(country_id: &str) -> Vec<Source> {
         .collect()
 }
 
-/// Indica si el código ISO pertenece a un Estado miembro de la UE.
-pub fn es_union_europea(codigo: &str) -> bool {
-    matches!(
-        codigo,
-        "AT" | "BE" | "BG" | "HR" | "CY" | "CZ" | "DK" | "EE" | "FI" | "FR"
-            | "DE" | "GR" | "HU" | "IE" | "IT" | "LV" | "LT" | "LU" | "MT" | "NL"
-            | "PL" | "PT" | "RO" | "SK" | "SI" | "ES" | "SE"
-    )
+/// Carga y devuelve todas las organizaciones regionales (datos cacheados).
+pub fn organizations() -> Vec<Organization> {
+    static CACHE: OnceLock<OrganizationsDb> = OnceLock::new();
+    CACHE
+        .get_or_init(|| parse(ORGANIZATIONS_JSON))
+        .organizaciones
+        .clone()
 }
 
-/// Fuentes normativas de la Unión Europea.
-pub fn fuentes_ue() -> Vec<Source> {
+/// Indica si una fuente es normativa oficial, verificada y con enlace directo.
+fn es_normativa_oficial(s: &Source) -> bool {
+    s.oficial && s.categoria == "normativa" && is_verified(&s.verificacion) && !s.url.is_empty()
+}
+
+/// Devuelve las organizaciones regionales aplicables al código ISO de un país.
+///
+/// Solo se incluyen organizaciones con marco legal relevante y verificado:
+/// una organización sin normativa oficial comprobable no se tiene en cuenta.
+pub fn organizations_for(codigo_iso: &str) -> Vec<Organization> {
+    let fuentes = sources();
+    organizations()
+        .into_iter()
+        .filter(|o| {
+            o.miembros.iter().any(|m| m == codigo_iso)
+                && fuentes
+                    .iter()
+                    .any(|s| s.pais == o.fuente_pais && es_normativa_oficial(s))
+        })
+        .collect()
+}
+
+/// Normativa verificada de una organización regional, para el país seleccionado.
+pub fn organization_sources(fuente_pais: &str) -> Vec<Source> {
     sources()
         .into_iter()
-        .filter(|s| s.pais == "union_europea")
+        .filter(|s| s.pais == fuente_pais && es_normativa_oficial(s))
         .collect()
 }
 
@@ -1321,5 +1358,37 @@ mod tests {
         assert!(instruments_for("espana")
             .iter()
             .any(|i| i.id == "es-rd-97-2014"));
+    }
+
+    #[test]
+    fn organizaciones_solo_con_marco_legal_verificado() {
+        let alemania = organizations_for("DE");
+        assert_eq!(alemania.len(), 1);
+        assert_eq!(alemania[0].id, "ue");
+
+        let colombia = organizations_for("CO");
+        assert_eq!(colombia.len(), 1);
+        assert_eq!(colombia[0].id, "comunidad_andina");
+
+        // MERCOSUR se descartó: sus normas están tras Cloudflare y no hay
+        // enlaces directos verificables al texto legal.
+        assert!(organizations_for("BR").is_empty());
+        assert!(organizations_for("US").is_empty());
+    }
+
+    #[test]
+    fn normativa_de_organizaciones_tiene_enlace_directo_verificado() {
+        for org in organizations() {
+            let normas = organization_sources(&org.fuente_pais);
+            assert!(!normas.is_empty(), "{} sin normativa verificada", org.nombre);
+            for s in normas {
+                assert!(
+                    s.url.starts_with("https://"),
+                    "{}: enlace no directo",
+                    s.id
+                );
+                assert!(is_verified(&s.verificacion), "{}: sin verificar", s.id);
+            }
+        }
     }
 }

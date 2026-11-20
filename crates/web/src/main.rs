@@ -570,14 +570,19 @@ fn App() -> Element {
         .cloned()
         .collect();
     let portals = core::portals_for(&country.id);
-    let ue_sources: Vec<core::Source> = if core::es_union_europea(&country.codigo) {
-        core::fuentes_ue()
-            .into_iter()
-            .filter(|s| filter() == "todos" || s.tema == filter())
-            .collect()
-    } else {
-        Vec::new()
-    };
+    // Organizaciones regionales del país: solo se incluyen si tienen normativa
+    // oficial verificada (p. ej. UE o Comunidad Andina).
+    let org_blocks: Vec<(core::Organization, Vec<core::Source>)> = core::organizations_for(&country.codigo)
+        .into_iter()
+        .map(|o| {
+            let normas = core::organization_sources(&o.fuente_pais)
+                .into_iter()
+                .filter(|s| filter() == "todos" || s.tema == filter())
+                .collect();
+            (o, normas)
+        })
+        .collect();
+    let org_count: usize = org_blocks.iter().map(|(_, normas)| normas.len()).sum();
     let visible_instruments: Vec<&core::Instrument> = instruments
         .iter()
         .filter(|i| filter() == "todos" || i.tema == filter())
@@ -768,7 +773,7 @@ fn App() -> Element {
                 summary {
                     span { class: "panel-icono", dangerous_inner_html: "{icon(\"book\", \"ico ico-lg\")}" }
                     span { "Documentación legal y marco normativo" }
-                    span { class: "badge", "{visible_instruments.len() + international_sources.len() + ue_sources.len()} normas" }
+                    span { class: "badge", "{visible_instruments.len() + international_sources.len() + org_count} normas" }
                 }
                 div { class: "panel-cabecera",
                     div { class: "panel-titulo",
@@ -778,7 +783,7 @@ fn App() -> Element {
                             p { "{txt(\"legal_sub\", lang)}" }
                         }
                     }
-                    span { class: "badge", "{visible_instruments.len() + international_sources.len() + ue_sources.len()} normas" }
+                    span { class: "badge", "{visible_instruments.len() + international_sources.len() + org_count} normas" }
                 }
                 div { class: "filtros-wrap",
                     span { class: "filtro-icono", dangerous_inner_html: "{icon(\"filter\", \"ico\")}" }
@@ -892,18 +897,21 @@ fn App() -> Element {
                             a { href: "{s.url}", target: "_blank", "{s.url}" }
                         }
                     }
-                    if !ue_sources.is_empty() {
-                        h4 { class: "leyenda-grupo", "Unión Europea" }
-                        for u in ue_sources.iter() {
-                            div { class: "norma",
-                                h4 { "{u.titulo}" }
-                                div { class: "norma-meta",
-                                    span { class: "badge", "{core::topic_label(&u.tema)}" }
-                                    span { class: "badge badge-suave", "Unión Europea" }
+                    for bloque in org_blocks.iter() {
+                        if !bloque.1.is_empty() {
+                            h4 { class: "leyenda-grupo", "{bloque.0.nombre}" }
+                            for u in bloque.1.iter() {
+                                div { class: "norma",
+                                    h4 { "{u.titulo}" }
+                                    div { class: "norma-meta",
+                                        span { class: "badge", "{core::topic_label(&u.tema)}" }
+                                        span { class: "badge badge-suave", "{bloque.0.nombre}" }
+                                        span { class: "badge badge-ok", "Verificado" }
+                                    }
+                                    a { href: "{u.url}", target: "_blank",
+                                        dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
+                                    a { href: "{u.url}", target: "_blank", "{u.url}" }
                                 }
-                                a { href: "{u.url}", target: "_blank",
-                                    dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
-                                a { href: "{u.url}", target: "_blank", "{u.url}" }
                             }
                         }
                     }

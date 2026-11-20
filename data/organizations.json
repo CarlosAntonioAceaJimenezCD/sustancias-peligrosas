@@ -1,0 +1,50 @@
+{
+  "organizaciones": [
+    {
+      "id": "ue",
+      "nombre": "Unión Europea",
+      "miembros": [
+        "AT",
+        "BE",
+        "BG",
+        "HR",
+        "CY",
+        "CZ",
+        "DK",
+        "EE",
+        "FI",
+        "FR",
+        "DE",
+        "GR",
+        "HU",
+        "IE",
+        "IT",
+        "LV",
+        "LT",
+        "LU",
+        "MT",
+        "NL",
+        "PL",
+        "PT",
+        "RO",
+        "SK",
+        "SI",
+        "ES",
+        "SE"
+      ],
+      "fuente_pais": "union_europea"
+    },
+    {
+      "id": "comunidad_andina",
+      "nombre": "Comunidad Andina",
+      "miembros": [
+        "BO",
+        "CO",
+        "EC",
+        "PE",
+        "VE"
+      ],
+      "fuente_pais": "comunidad_andina"
+    }
+  ]
+}

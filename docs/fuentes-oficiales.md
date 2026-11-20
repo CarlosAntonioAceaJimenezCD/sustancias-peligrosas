@@ -74,6 +74,17 @@ Quedan como portal los casos sin identificador público estable: Italia (Normatt
 
 > LATU es la única fuente no gubernamental conservada: es un ente público uruguayo, centro coordinador del Convenio de Basilea y centro regional del Convenio de Estocolmo para América Latina y el Caribe. Si se desea un filtro estrictamente `.gob/.gov`, sustituir por los documentos en español de UNECE.
 
+### Organizaciones regionales
+
+El marco legal se presenta en tres capas: **marco internacional** (para todos los países), **organizaciones regionales** (solo si el país es miembro y la organización tiene normativa oficial verificada con enlace directo) y **legislación nacional**.
+
+| Organización | Miembros incluidos | Normativa verificada (enlace directo) |
+|---|---|---|
+| Unión Europea | 27 Estados miembros | [REACH — Reglamento (CE) 1907/2006](https://eur-lex.europa.eu/eli/reg/2006/1907/oj), [CLP — Reglamento (CE) 1272/2008](https://eur-lex.europa.eu/eli/reg/2008/1272/oj), [Directiva 2008/68/CE](https://eur-lex.europa.eu/eli/dir/2008/68/oj) |
+| Comunidad Andina | Bolivia, Colombia, Ecuador, Perú y Venezuela | [Decisión 602 — control de sustancias químicas](https://www.comunidadandina.org/StaticFiles/DocOf/DEC602.pdf), [Decisión 547 — seguridad y salud en el trabajo](https://www.comunidadandina.org/StaticFiles/DocOf/DEC547.pdf) |
+
+> MERCOSUR no se incluye: su sistema normativo (`normas.mercosur.int`) devuelve HTTP 403 por Cloudflare y no fue posible verificar enlaces directos al texto legal. La función `organizations_for()` excluye automáticamente cualquier organización que no tenga al menos una norma oficial, verificada y con URL directa, aunque aparezca en `data/organizations.json`.
+
 ### España
 
 | Institución | Contenido | URL |
