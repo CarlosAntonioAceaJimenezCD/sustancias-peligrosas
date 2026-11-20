@@ -5058,6 +5058,7 @@ dependencies = [
  "sustancias-core",
  "sustancias-storage",
  "urlencoding",
+ "webbrowser",
 ]
 
 [[package]]

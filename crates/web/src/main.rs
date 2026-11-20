@@ -29,6 +29,8 @@ border:1px solid rgba(56,139,253,.3);white-space:nowrap}
 .banner{margin:20px auto 0;max-width:1180px;padding:22px 26px;border-radius:8px;display:flex;
 align-items:center;gap:20px;background:linear-gradient(110deg,#12213a,#1b2140 70%,#241d42);
 border:1px solid #2d4373;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.flag{width:30px;height:20px;display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.15)}
+.flag-lg{width:54px;height:36px;border-radius:4px}
 .banner-pais-grande{display:grid;place-items:center;width:62px;height:62px;border-radius:8px;
 background:rgba(88,166,255,.12);border:1px solid rgba(88,166,255,.35);color:#79c0ff;
 font-size:21px;font-weight:700;letter-spacing:1px;flex:none}
@@ -36,8 +38,18 @@ font-size:21px;font-weight:700;letter-spacing:1px;flex:none}
 .banner-texto p{margin:0;color:#a9b6c6;font-size:13px;max-width:760px}
 .banner-pais{font-size:11px;font-weight:600;letter-spacing:.8px;padding:5px 12px;border-radius:2em;
 color:#a9b6c6;border:1px solid #3b4a63;white-space:nowrap}
-.contenido{max-width:1180px;margin:20px auto 90px;padding:0 20px;display:grid;
-grid-template-columns:1fr 1fr;gap:20px}
+.contenido{max-width:1180px;margin:20px auto 90px;padding:0 20px;display:flex;
+flex-direction:column;gap:20px}
+.panel-sustancia{order:1}
+.panel-legal{order:2}
+.panel-legal summary{display:flex;align-items:center;gap:10px;cursor:pointer;font-size:15px;
+font-weight:600;color:#f0f6fc;list-style:none;padding:4px 0}
+.panel-legal summary::-webkit-details-marker{display:none}
+.panel-legal summary .badge{margin-left:auto}
+.panel-legal[open] summary{margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.resultados-online{max-height:260px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#30363d transparent}
+.resultados-online::-webkit-scrollbar{width:8px}
+.resultados-online::-webkit-scrollbar-thumb{background:#30363d;border-radius:8px}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px;
 box-shadow:0 3px 12px rgba(0,0,0,.18)}
 .panel-cabecera{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;
@@ -105,6 +117,8 @@ font-size:10px;font-weight:600;color:var(--muted);font-family:ui-monospace,SFMon
 .nota{display:flex;gap:6px;align-items:flex-start;font-size:11px!important;color:#d29922!important}
 .fuentes a{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--accent);text-decoration:none;margin-top:5px}
 .pie{text-align:center;padding:20px;color:var(--muted);font-size:11px;border-top:1px solid var(--line)}
+.link-feedback{color:var(--accent);text-decoration:none;border-bottom:1px dashed rgba(88,166,255,.5)}
+.link-feedback:hover{text-decoration:underline}
 .pie p{margin:4px 0}
 .flotante{position:fixed;right:20px;bottom:20px;z-index:40;display:flex;align-items:center;gap:9px;
 background:#21262d;color:var(--ink);border:1px solid #444c56;border-radius:6px;padding:9px 13px;
@@ -178,30 +192,22 @@ font-size:11px;line-height:1.55;color:#b9c3ce;margin:0 0 14px}
 .doc-guardado{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:6px;background:var(--card-alt);padding:9px 11px;margin-bottom:6px}
 .doc-guardado strong{font-size:12px;color:#e6edf3;display:block}
 @media print{body{background:#fff!important;color:#000!important}
-.cabecera,.banner,#panel-legal,.multi,.movil-tabs,.pie,.flotante,.fds-index,.documentos,.overlay{display:none!important}
+.cabecera,.banner,#panel-legal,.multi,.pie,.flotante,.fds-index,.documentos,.overlay{display:none!important}
 .contenido{display:block;margin:0;padding:0}#panel-sustancia{border:0;box-shadow:none;padding:0}
 .seccion{break-inside:avoid}.seccion h5{color:#0550ae}.prop,.interaccion{background:#fff;border-color:#ccc}}
-.movil-tabs{display:none}
 @media(max-width:900px){
 .cabecera{padding:12px 16px}.marca-icono{width:32px;height:32px}.marca strong{font-size:14px}.marca small{font-size:10px}
 .banner{margin:12px 12px 0;padding:15px 16px;gap:12px;flex-wrap:wrap}
 .banner-pais-grande{width:46px;height:46px;font-size:16px}.banner-texto h2{font-size:18px}
 .banner-texto p{font-size:12px}.banner-pais{width:100%;text-align:center}
-.contenido{grid-template-columns:1fr;margin:14px 12px 140px;padding:0;gap:14px}
-.panel{display:none;padding:14px}.panel.movil-activo{display:block}
+.contenido{margin:14px 12px 90px;padding:0;gap:14px}
+.panel{padding:14px}
 .panel h3{font-size:14px}.prop-grid{grid-template-columns:1fr}.legal-lista{max-height:none}
 .buscador{padding:12px}.buscador input,.multi input{font-size:16px}
 .resultado,.chip,.boton{padding:10px 14px;font-size:13px}
 .flotante{bottom:74px;right:12px;padding:10px 12px}
-.movil-tabs{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:45;background:var(--card);
-border-top:1px solid var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
-.movil-tabs .tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:transparent;
-border:0;border-radius:6px;color:var(--muted);font-size:11px;font-weight:600;padding:8px 4px;cursor:pointer}
-.movil-tabs .tab.activo{color:var(--accent);background:var(--accent-soft)}
-.movil-tabs .tab .ico{width:20px;height:20px}
 .pie{padding-bottom:100px}
 }
-@media(min-width:901px){.panel{display:block!important}}
 @media(max-width:480px){.overlay-card{padding:20px 14px}.pais-grid{grid-template-columns:1fr 1fr}
 .pais-boton{flex-direction:column;align-items:flex-start;gap:6px}.fds-index a{font-size:9px}}
 "#;
@@ -263,6 +269,7 @@ async fn descargar_nativo(
         } else {
             Some(std::path::PathBuf::from(&opciones.downloads_dir))
         },
+        auto_report: opciones.auto_report,
     };
     let respuesta = reqwest::get(&url)
         .await
@@ -284,12 +291,24 @@ async fn descargar_nativo(
         .map_err(|e| format!("Error al guardar: {e}"))
 }
 
+/// Abre GitHub Issues con un reporte precargado (solo en nativo).
+#[cfg(not(target_arch = "wasm32"))]
+fn abrir_feedback(titulo: &str, cuerpo: &str) {
+    let url = format!(
+        "https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas/issues/new?title={}&body={}",
+        urlencoding::encode(titulo),
+        urlencoding::encode(cuerpo)
+    );
+    let _ = webbrowser::open(&url);
+}
+
 /// Tipos neutrales (existen en web y nativo) para no condicionar el RSX.
 #[derive(Clone, Debug)]
 struct AppOptions {
     offline_cache: bool,
     copy_to_downloads: bool,
     downloads_dir: String,
+    auto_report: bool,
 }
 
 impl Default for AppOptions {
@@ -298,6 +317,7 @@ impl Default for AppOptions {
             offline_cache: true,
             copy_to_downloads: true,
             downloads_dir: String::new(),
+            auto_report: false,
         }
     }
 }
@@ -322,6 +342,7 @@ fn cargar_opciones() -> AppOptions {
             .downloads_dir
             .map(|p| p.to_string_lossy().to_string())
             .unwrap_or_default(),
+        auto_report: o.auto_report,
     }
 }
 
@@ -360,12 +381,51 @@ fn guardar_opciones(o: &AppOptions) {
         } else {
             Some(std::path::PathBuf::from(&o.downloads_dir))
         },
+        auto_report: o.auto_report,
     };
     let _ = sustancias_storage::save_options(&opciones);
 }
 
 #[cfg(target_arch = "wasm32")]
 fn guardar_opciones(_o: &AppOptions) {}
+
+/// Cliente HTTP común: gloo-net en WASM, reqwest en nativo.
+#[cfg(target_arch = "wasm32")]
+async fn http_get_json(url: &str) -> Result<serde_json::Value, String> {
+    gloo_net::http::Request::get(url)
+        .header("Accept", "application/json")
+        .send()
+        .await
+        .map_err(|e| e.to_string())?
+        .json::<serde_json::Value>()
+        .await
+        .map_err(|e| e.to_string())
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+async fn http_get_json(url: &str) -> Result<serde_json::Value, String> {
+    reqwest::get(url)
+        .await
+        .map_err(|e| e.to_string())?
+        .json::<serde_json::Value>()
+        .await
+        .map_err(|e| e.to_string())
+}
+
+/// Banderas SVG (sin emojis) para el selector de países y el banner.
+fn flag_svg(id: &str, class: &str) -> String {
+    let body = match id {
+        "colombia" => r##"<rect width="30" height="10" fill="#fcd116"/><rect y="10" width="30" height="5" fill="#003893"/><rect y="15" width="30" height="5" fill="#ce1126"/>"##,
+        "espana" => r##"<rect width="30" height="20" fill="#c60b1e"/><rect y="5" width="30" height="10" fill="#ffc400"/>"##,
+        "mexico" => r##"<rect width="10" height="20" fill="#006847"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#ce1126"/>"##,
+        "peru" => r##"<rect width="10" height="20" fill="#d91023"/><rect x="10" width="10" height="20" fill="#fff"/><rect x="20" width="10" height="20" fill="#d91023"/>"##,
+        "venezuela" => r##"<rect width="30" height="10" fill="#ffcc00"/><rect y="10" width="30" height="5" fill="#002b7f"/><rect y="15" width="30" height="5" fill="#c8102e"/><circle cx="6" cy="5" r="1" fill="#002b7f"/><circle cx="12" cy="5" r="1" fill="#002b7f"/><circle cx="18" cy="5" r="1" fill="#002b7f"/>"##,
+        "cuba" => r##"<rect width="30" height="20" fill="#002590"/><rect y="5" width="30" height="3" fill="#fff"/><rect y="12" width="30" height="3" fill="#fff"/><polygon points="0,0 14,10 0,20" fill="#c8102e"/><circle cx="4" cy="10" r="1.6" fill="#fff"/>"##,
+        "eeuu" => r##"<rect width="30" height="20" fill="#fff"/><rect y="3" width="30" height="3" fill="#b22234"/><rect y="9" width="30" height="3" fill="#b22234"/><rect y="15" width="30" height="3" fill="#b22234"/><rect width="14" height="11" fill="#3c3b6e"/><circle cx="3" cy="3" r="0.7" fill="#fff"/><circle cx="7" cy="3" r="0.7" fill="#fff"/><circle cx="11" cy="3" r="0.7" fill="#fff"/><circle cx="3" cy="8" r="0.7" fill="#fff"/><circle cx="7" cy="8" r="0.7" fill="#fff"/><circle cx="11" cy="8" r="0.7" fill="#fff"/>"##,
+        _ => r##"<rect width="30" height="20" rx="3" fill="#0d419d"/><circle cx="15" cy="10" r="6" fill="none" stroke="#fff" stroke-width="1"/><path d="M9 10h12M15 4v12" stroke="#fff" stroke-width="1"/>"##,
+    };
+    format!("<svg class=\"{}\" viewBox=\"0 0 30 20\">{}</svg>", class, body)
+}
 
 fn txt(key: &str, lang: &str) -> &'static str {
     match (lang, key) {
@@ -410,7 +470,6 @@ fn App() -> Element {
     let mut selected_substance: Signal<Option<String>> = use_signal(|| None);
     let mut multi_input: Signal<String> = use_signal(String::new);
     let mut multi_ids: Signal<Vec<(String, String)>> = use_signal(Vec::new);
-    let mut movil_tab: Signal<&'static str> = use_signal(|| "legal");
     let mut norma: Signal<Option<(String, String, String, String, String)>> = use_signal(|| None);
     let mut online_resultados: Signal<Vec<core::PubChemCompound>> = use_signal(Vec::new);
     let mut online_ficha: Signal<Option<core::Substance>> = use_signal(|| None);
@@ -467,24 +526,33 @@ fn App() -> Element {
         online_cargando.set(true);
         spawn(async move {
             let base = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound";
-            let cid_url = format!(
-                "{}/name/{}/cids/JSON?language=all",
-                base,
-                urlencoding::encode(texto.trim())
-            );
-            let cids: Vec<u64> = match gloo_net::http::Request::get(&cid_url).send().await {
-                Ok(resp) => match resp.json::<serde_json::Value>().await {
-                    Ok(v) => serde_json::from_value(
-                        v.get("IdentifierList")
-                            .and_then(|x| x.get("CID"))
-                            .cloned()
-                            .unwrap_or_default(),
-                    )
-                    .unwrap_or_default(),
-                    Err(_) => Vec::new(),
-                },
-                Err(_) => Vec::new(),
-            };
+            let mut cids: Vec<u64> = Vec::new();
+            for variante in core::search_variants(&texto) {
+                for modo in ["?language=all", "?name_type=word"] {
+                    let cid_url = format!(
+                        "{}/name/{}/cids/JSON{}",
+                        base,
+                        urlencoding::encode(&variante),
+                        modo
+                    );
+                    if let Ok(v) = http_get_json(&cid_url).await {
+                        let encontrados: Vec<u64> = serde_json::from_value(
+                            v.get("IdentifierList")
+                                .and_then(|x| x.get("CID"))
+                                .cloned()
+                                .unwrap_or_default(),
+                        )
+                        .unwrap_or_default();
+                        if !encontrados.is_empty() {
+                            cids = encontrados;
+                            break;
+                        }
+                    }
+                }
+                if !cids.is_empty() {
+                    break;
+                }
+            }
 
             let mut resultados = Vec::new();
             for cid in cids.into_iter().take(3) {
@@ -495,37 +563,30 @@ fn App() -> Element {
                 let syn_url = format!("{}/cid/{}/synonyms/JSON?language=all", base, cid);
 
                 let compuesto: Option<core::PubChemCompound> =
-                    match gloo_net::http::Request::get(&prop_url).send().await {
-                        Ok(resp) => match resp.json::<serde_json::Value>().await {
-                            Ok(v) => serde_json::from_value(
-                                v.get("PropertyTable")
-                                    .and_then(|t| t.get("Properties"))
-                                    .and_then(|p| p.get(0))
-                                    .cloned()
-                                    .unwrap_or_default(),
-                            )
-                            .ok(),
-                            Err(_) => None,
-                        },
+                    match http_get_json(&prop_url).await {
+                        Ok(v) => serde_json::from_value(
+                            v.get("PropertyTable")
+                                .and_then(|t| t.get("Properties"))
+                                .and_then(|p| p.get(0))
+                                .cloned()
+                                .unwrap_or_default(),
+                        )
+                        .ok(),
                         Err(_) => None,
                     };
 
-                let sinonimos: Vec<String> =
-                    match gloo_net::http::Request::get(&syn_url).send().await {
-                        Ok(resp) => match resp.json::<serde_json::Value>().await {
-                            Ok(v) => serde_json::from_value(
-                                v.get("InformationList")
-                                    .and_then(|x| x.get("Information"))
-                                    .and_then(|x| x.get(0))
-                                    .and_then(|x| x.get("Synonym"))
-                                    .cloned()
-                                    .unwrap_or_default(),
-                            )
+                let sinonimos: Vec<String> = match http_get_json(&syn_url).await {
+                    Ok(v) => serde_json::from_value(
+                        v.get("InformationList")
+                            .and_then(|x| x.get("Information"))
+                            .and_then(|x| x.get(0))
+                            .and_then(|x| x.get("Synonym"))
+                            .cloned()
                             .unwrap_or_default(),
-                            Err(_) => Vec::new(),
-                        },
-                        Err(_) => Vec::new(),
-                    };
+                    )
+                    .unwrap_or_default(),
+                    Err(_) => Vec::new(),
+                };
 
                 if let Some(mut c) = compuesto {
                     c.synonyms = sinonimos;
@@ -541,6 +602,7 @@ fn App() -> Element {
     let rsx_countries = |_modal: bool| {
         countries.iter().map(move |c| {
             let id = c.id.clone();
+            let id_bandera = c.id.clone();
             let codigo = c.codigo.clone();
             let nombre = c.nombre.clone();
             rsx! {
@@ -557,7 +619,7 @@ fn App() -> Element {
                         online_ficha.set(None);
                         multi_ids.set(Vec::new());
                     },
-                    span { class: "bandera", "{codigo}" }
+                    span { class: "bandera", dangerous_inner_html: "{flag_svg(&id_bandera, \"flag\")}" }
                     span {
                         span { class: "nombre", "{nombre}" }
                         span { class: "codigo", "{codigo}" }
@@ -605,7 +667,7 @@ fn App() -> Element {
         }
 
         section { class: "banner",
-            div { class: "banner-pais-grande", "{country.codigo}" }
+            div { class: "banner-pais-grande", dangerous_inner_html: "{flag_svg(&country.id, \"flag flag-lg\")}" }
             div { class: "banner-texto",
                 h2 { "{country.saludo}" }
                 p { "{country.descripcion}" }
@@ -615,9 +677,14 @@ fn App() -> Element {
 
         main { class: "contenido",
 
-            section {
-                class: if movil_tab() == "legal" { "panel movil-activo" } else { "panel" },
+            details {
+                class: "panel panel-legal",
                 id: "panel-legal",
+                summary {
+                    span { class: "panel-icono", dangerous_inner_html: "{icon(\"book\", \"ico ico-lg\")}" }
+                    span { "Documentación legal y marco normativo" }
+                    span { class: "badge", "{visible_instruments.len() + international_sources.len()} normas" }
+                }
                 div { class: "panel-cabecera",
                     div { class: "panel-titulo",
                         span { class: "panel-icono", dangerous_inner_html: "{icon(\"scale\", \"ico ico-lg\")}" }
@@ -669,17 +736,10 @@ fn App() -> Element {
                                             urlencoding::encode(&query.to_string())
                                         );
                                         let parsed: Vec<core::BoeNorm> =
-                                            match gloo_net::http::Request::get(&url)
-                                                .header("Accept", "application/json")
-                                                .send()
-                                                .await
-                                            {
-                                                Ok(resp) => match resp.json::<serde_json::Value>().await {
-                                                    Ok(v) => serde_json::from_value(
-                                                        v.get("data").cloned().unwrap_or_default()
-                                                    ).unwrap_or_default(),
-                                                    Err(_) => Vec::new(),
-                                                },
+                                            match http_get_json(&url).await {
+                                                Ok(v) => serde_json::from_value(
+                                                    v.get("data").cloned().unwrap_or_default()
+                                                ).unwrap_or_default(),
                                                 Err(_) => Vec::new(),
                                             };
                                         boe_resultados.set(parsed);
@@ -788,7 +848,7 @@ fn App() -> Element {
                 }            }
 
             section {
-                class: if movil_tab() == "ficha" { "panel movil-activo" } else { "panel" },
+                class: "panel panel-sustancia",
                 id: "panel-sustancia",
                 div { class: "panel-cabecera",
                     div { class: "panel-titulo",
@@ -1072,6 +1132,7 @@ fn App() -> Element {
                                                 let n = nombre.clone();
                                                 let t = s.nombre.clone();
                                                 let o = opciones();
+                                                let auto = o.auto_report;
                                                 spawn(async move {
                                                     match descargar_nativo(
                                                         u, t, n,
@@ -1082,7 +1143,12 @@ fn App() -> Element {
                                                             guardados.set(cargar_guardados());
                                                             estado_descarga.set("Guardado sin conexión y copiado a Descargas".to_string());
                                                         }
-                                                        Err(e) => estado_descarga.set(e),
+                                                        Err(e) => {
+                                                            if auto {
+                                                                abrir_feedback("Error al descargar documento", &e);
+                                                            }
+                                                            estado_descarga.set(e);
+                                                        }
                                                     }
                                                 });
                                             };
@@ -1146,6 +1212,7 @@ fn App() -> Element {
                                     let n = nombre_pdf.clone();
                                     let t = titulo.clone();
                                     let o = opciones();
+                                    let auto = o.auto_report;
                                     spawn(async move {
                                         match descargar_nativo(
                                             u, t, n,
@@ -1156,7 +1223,12 @@ fn App() -> Element {
                                                 guardados.set(cargar_guardados());
                                                 estado_descarga.set("Guardado sin conexión y copiado a Descargas".to_string());
                                             }
-                                            Err(e) => estado_descarga.set(e),
+                                            Err(e) => {
+                                                if auto {
+                                                    abrir_feedback("Error al descargar documento", &e);
+                                                }
+                                                estado_descarga.set(e);
+                                            }
                                         }
                                     });
                                 };
@@ -1167,22 +1239,6 @@ fn App() -> Element {
                         }
                     }
                 }
-            }
-        }
-
-        nav { class: "movil-tabs",
-            button {
-                class: if movil_tab() == "legal" { "tab activo" } else { "tab" },
-                onclick: move |_| movil_tab.set("legal"),
-                span { dangerous_inner_html: "{icon(\"scale\", \"ico\")}" }
-                span { "Marco legal" }
-
-            }
-            button {
-                class: if movil_tab() == "ficha" { "tab activo" } else { "tab" },
-                onclick: move |_| movil_tab.set("ficha"),
-                span { dangerous_inner_html: "{icon(\"flask\", \"ico\")}" }
-                span { "Ficha técnica" }
             }
         }
 
@@ -1223,6 +1279,29 @@ fn App() -> Element {
                             },
                         }
                         "Copiar automáticamente al directorio de descargas del sistema"
+                    }
+                    label { class: "opcion",
+                        input {
+                            r#type: "checkbox",
+                            checked: opciones().auto_report,
+                            onchange: move |e| {
+                                let mut o = opciones();
+                                o.auto_report = e.checked();
+                                guardar_opciones(&o);
+                                opciones.set(o);
+                            },
+                        }
+                        "Enviar automáticamente feedback y reportes de errores"
+                    }
+                    if !cfg!(target_arch = "wasm32") {
+                        button {
+                            class: "boton boton-secundario",
+                            onclick: move |_| {
+                                #[cfg(not(target_arch = "wasm32"))]
+                                abrir_feedback("Feedback sobre Sustancias Peligrosas", "Cuéntanos qué funciona mal o qué te gustaría mejorar:");
+                            },
+                            "Enviar feedback / reportar un bug"
+                        }
                     }
                     label { class: "opcion",
                         "Directorio de descargas personalizado (vacío = el del sistema)"
@@ -1275,6 +1354,14 @@ fn App() -> Element {
         footer { class: "pie",
             p { "{core::substances_warning()}" }
             p { "Fuentes normativas: UNECE · OMI · OIT · INSST · BOE · DOF · SINIA · Gaceta Oficial de Cuba" }
+            p {
+                a {
+                    href: "https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas/issues/new",
+                    target: "_blank",
+                    class: "link-feedback",
+                    "Enviar feedback / reportar un bug"
+                }
+            }
         }
 
         if chosen {

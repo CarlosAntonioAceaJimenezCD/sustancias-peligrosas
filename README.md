@@ -34,7 +34,7 @@ Cada fuente lleva un campo `verificacion`:
 
 | Archivo | Contenido |
 |---|---|
-| `data/countries.json` | Países del proyecto: internacional, Colombia, España, México, Perú, Venezuela, Cuba y EE. UU. (referencia). |
+| `data/countries.json` | 175 jurisdicciones: marco internacional, 167 países con fuentes verificadas, más los 7 países originales y EE. UU. (referencia). |
 | `data/topics.json` | Apartados disponibles: SGA, FDS, convenios, transporte y legislación nacional. |
 | `data/sources.json` | Registro de fuentes oficiales con institución, URL, tema y verificación. |
 | `data/legislation.json` | Portales e instrumentos normativos por país. Cuba se alimenta de la base local del usuario. |
@@ -104,16 +104,27 @@ SQLite se compila incluida (`bundled`) y el frontend se compila a WebAssembly, d
 5. El bloque multi-sustancia permite añadir varias sustancias y analiza **todas las parejas**: muestra nivel de peligro, tipo de reacción, productos, consecuencias y acciones recomendadas (`data/interactions.json`). Las parejas sin regla explícita usan una regla general de "sin reacción registrada".
 6. El buscador tolera ausencia de acentos y errores tipográficos menores (distancia de edición 1–2); los identificadores CAS/CE/ONU se buscan de forma exacta.
 
-## Países incluidos
+## Jurisdicciones incluidas
 
-- **Marco internacional** — SGA/GHS, convenios y Reglamentación Modelo de la ONU.
-- **Colombia** — MinAmbiente, DAPRE, DIMAR.
-- **España** — INSST, BOE, MITECO, MITMA, ECHA.
-- **México** — DOF/STPS, SEMARNAT, SCT.
-- **Perú** — SINIA-MINAM, El Peruano, MTC.
-- **Venezuela** — Asamblea Nacional, MINEC, INTT, SENCAMER, RESQUIMC.
-- **Cuba** — normas de la Gaceta Oficial localizadas en la base del usuario e incluidas en `data/leyes/cuba/`.
-- **Estados Unidos** — referencia complementaria (OSHA), no marco aplicable.
+La app cubre **175 jurisdicciones** con fuentes oficiales (167 incorporadas en la ampliación + las 7 originales + marco internacional y EE. UU. como referencia). Solo se incluye normativa relevante para sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, convenios químicos, transporte de mercancías peligrosas, residuos peligrosos y seguridad química laboral.
+
+| Región | Jurisdicciones | Ejemplos |
+|---|---|---|
+| Marco internacional y supranacional | 2 | ONU/UNECE/OMI/OIT, Unión Europea (EUR-Lex, REACH, CLP) |
+| América Latina y Caribe | 29 | Argentina, Brasil, Chile, Costa Rica, México, Perú, Cuba, Uruguay, República Dominicana |
+| Europa | 44 | Alemania, Francia, Italia, Reino Unido, Suiza, Polonia, Suecia, Ucrania, Turquía |
+| Asia, Pacífico y Medio Oriente | 42 | China, Japón, India, Corea del Sur, Australia, Nueva Zelanda, Israel, Arabia Saudita |
+| África | 52 | Sudáfrica, Nigeria, Kenia, Ghana, Egipto, Marruecos, Tanzania, Zambia |
+
+El detalle varía según el país:
+
+- **Cobertura plena** (portales + instrumentos concretos): Reino Unido, Alemania, Italia, Francia, España, Unión Europea, Chile, México, Perú, Colombia, Venezuela, Cuba, Brasil, Argentina, Costa Rica, Australia, Nueva Zelanda, Japón, India, Corea del Sur, Sudáfrica, Kenia, Nigeria, Ghana, Egipto y Marruecos, entre otros.
+- **Cobertura de portales**: en jurisdicciones donde no se identificó un texto normativo concreto y verificable, se listan únicamente el diario oficial y el ministerio competente; la descripción del país lo indica explícitamente.
+- **Estados Unidos** sigue siendo referencia complementaria (OSHA), no marco aplicable.
+
+Los tratados globales (Basilea, Róterdam, Estocolmo, Minamata, UNECE, OMI) se muestran una sola vez como fuentes internacionales para **todas** los países; no se repiten en cada jurisdicción.
+
+La auditoría de URLs, los niveles de verificación y las fuentes rechazadas están documentados en [`docs/fuentes-oficiales.md`](docs/fuentes-oficiales.md).
 
 ## Publicación en GitHub Pages
 
@@ -197,7 +208,7 @@ Requiere las dependencias de WebView de tu sistema (WebKitGTK en Linux, WebView2
 
 ## Optimizaciones
 
-- **Caché estática**: `crates/core` parsea cada JSON una sola vez con `OnceLock` en lugar de hacerlo en cada render de la interfaz. Esto elimina el coste de deserializar ~322 KB de legislación y ~310 KB de texto de leyes en cada actualización de pantalla.
+- **Caché estática**: `crates/core` parsea cada JSON una sola vez con `OnceLock` en lugar de hacerlo en cada render de la interfaz. Esto elimina el coste de deserializar ~477 KB de legislación y ~310 KB de texto de leyes en cada actualización de pantalla.
 - **Búsqueda difusa eficiente**: distancia de Levenshtein con dos filas y salida temprana; tokens con stopwords; los identificadores numéricos (CAS/CE/ONU) se comparan por substring exacto, sin fuzzy.
 - **Perfil de release**: `opt-level = "z"`, `lto = "thin"` y `codegen-units = 1`. **No se usa `strip = true`**: elimina la sección `target_features` del WASM y rompe `wasm-bindgen` durante el despliegue.
 - **Límites de API**: *debounce* de 450 ms en PubChem (≈2 req/s, por debajo del límite de 5 req/s) y 500 ms en el BOE.

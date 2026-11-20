@@ -21,6 +21,39 @@ Se rechazan empresas privadas, consultoras, blogs, agregadores comerciales, enci
 | `portal_validar` | URL canónica del organismo, pendiente de confirmación manual. |
 | `base_local_usuario` | Fuente proporcionada por el usuario, pendiente de importación. |
 
+## Cobertura de jurisdicciones
+
+La ampliación incorporó **167 jurisdicciones** a `data/countries.json` y `data/legislation.json`, con **230 instrumentos** y **341 portales oficiales**. De los instrumentos, **104 enlazan a un documento o sección concreta** y **126 siguen apuntando al portal** del organismo (el usuario debe buscar la norma allí). El criterio de inclusión fue estricto: solo normativa sobre SGA/GHS, fichas de datos de seguridad, convenios químicos, transporte de mercancías peligrosas, gestión de residuos peligrosos y seguridad química laboral. Quedaron fuera constituciones, leyes generales y normativa sin relación con el tema.
+
+### Niveles de cobertura
+
+- **Cobertura plena**: portales oficiales e instrumentos concretos con URL verificada (por ejemplo Reino Unido, Alemania, Italia, Unión Europea, Chile, México, Perú, Australia, Japón, India, Sudáfrica, Kenia).
+- **Solo portales**: jurisdicciones donde no se identificó un texto normativo concreto y verificable. Se listan el diario oficial y el ministerio competente, y la descripción del país lo señala. Es el caso de varios Estados pequeños y de jurisdicciones con legislación no digitalizada.
+- **Sin fuente propia**: 26 jurisdicciones conservan su entrada pero no tienen portales ni instrumentos; su descripción indica que solo se muestran las fuentes internacionales. Se prefirió mantenerlas visibles antes que ocultar la falta de información.
+- **Referencia**: EE. UU. (OSHA) sigue marcado como `aplicable: false`.
+
+### Tratados globales, sin duplicados
+
+Los textos de Basilea, Róterdam, Estocolmo y Minamata, la Reglamentación Modelo de la ONU, ADR/RID/ADN, el Código IMDG y las Instrucciones Técnicas de la OACI están en `sources.json` con `pais: "internacional"`. La interfaz los muestra para **todos** los países, por lo que no se repiten como instrumentos nacionales. Se añadieron además: Convención de Basilea, Convención de Estocolmo, Convención de Minamata, PNUMA, OACI e IATA.
+
+### Método de verificación de URLs
+
+1. Se recopilaron las URLs de cada jurisdicción desde fuentes gubernamentales y de instituciones públicas reconocidas (diarios oficiales, ministerios de ambiente, autoridades de transporte). Los *Legal Information Institute* del Commonwealth (KenyaLII, GhaLII, NigeriaLII, ULII, ZambiaLII, TanzLII, SAFLII, entre otros) se aceptan como instituciones legales públicas.
+2. Se comprobó cada URL de forma concurrente. Un `200` confirma el portal; en instrumentos solo se marca `contenido_verificado` si la URL apunta a un documento concreto, no a la homepage del organismo.
+3. Los códigos `401/403/406/429` se marcan `dominio_snippet`: el sitio es oficial pero bloquea al lector automático.
+4. Los errores de red o `5xx` se dejan como `portal_validar`: pueden ser problemas temporales de conectividad, no pruebas de que el enlace esté caído.
+5. Solo los `404/410` confirmados se descartan. Tras este filtro se eliminó Irak, que no conservaba ninguna fuente válida.
+
+### Profundización de enlaces
+
+Se hizo una pasada específica para sustituir homepages por enlaces directos al texto normativo en jurisdicciones con identificadores estables: Portugal (DRE), Austria (RIS), Polonia (ISAP), Suiza (Fedlex/ELI), Irlanda (Irish Statute Book), Argentina (normativa.gob.ar), Australia (Federal Register), Nueva Zelanda (legislation.govt.nz), Costa Rica (SINALEVI) y Noruega (Lovdata). En total **15 enlaces pasaron de homepage a documento concreto** (13 sustituciones y 2 normas irlandesas recuperadas que se habían perdido por duplicado de URL).
+
+Los títulos se corrigieron donde el enlace original era engañoso: `au-legislacion` es la *Industrial Chemicals Act 2019* (no "AICIS Act"), `ie-clp` es el *S.I. 196/2015* que deroga las normas antiguas de clasificación (el CLP se aplica por reglamento UE directo) y `no-clp` incluye el número de forskrift.
+
+Quedan como portal los casos sin identificador público estable: Italia (Normattiva redirige la URN a otra norma), Países Bajos, Dinamarca, Suecia, Finlandia, Chequia, Brasil y varios más. En esos países el enlace abre la base legal y el usuario debe buscar la norma.
+
+> Los enlaces marcados `portal_validar` o `dominio_snippet` deben revisarse en un navegador normal antes de darlos por definitivos.
+
 ## Fuentes aceptadas
 
 ### Internacionales

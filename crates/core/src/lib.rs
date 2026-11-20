@@ -436,6 +436,99 @@ pub struct PubChemCompound {
     pub lang: String,
 }
 
+/// Genera variantes de búsqueda para no depender del idioma del usuario.
+/// PubChem indexa mejor los nombres en inglés, así que normalizamos acentos,
+/// eliminamos la palabra "ácido" en varios idiomas y traducimos las raíces
+/// químicas más habituales.
+pub fn search_variants(query: &str) -> Vec<String> {
+    let base = normalize(query);
+    let mut variantes = vec![base.clone()];
+
+    // Raíces químicas en español, francés, alemán, italiano y portugués.
+    let traducciones: &[(&str, &str)] = &[
+        // Ácidos
+        ("citrico", "citric"), ("citrique", "citric"), ("zitronensaure", "citric"), ("citrico", "citric"),
+        ("clorhidrico", "hydrochloric"), ("chlorhydrique", "hydrochloric"), ("chlorwasserstoffsaure", "hydrochloric"),
+        ("sulfurico", "sulfuric"), ("sulfurique", "sulfuric"), ("schwefelsaure", "sulfuric"), ("solfurico", "sulfuric"),
+        ("nitrico", "nitric"), ("nitrique", "nitric"), ("salpetersaure", "nitric"), ("nitrico", "nitric"),
+        ("acetico", "acetic"), ("acetique", "acetic"), ("essigsaure", "acetic"), ("acetico", "acetic"),
+        ("ascorbico", "ascorbic"), ("ascorbique", "ascorbic"), ("askorbinsaure", "ascorbic"), ("ascorbico", "ascorbic"),
+        ("lactico", "lactic"), ("lactique", "lactic"), ("milchsaure", "lactic"), ("latico", "lactic"),
+        ("benzoico", "benzoic"), ("benzoique", "benzoic"), ("benzoesaure", "benzoic"), ("benzoico", "benzoic"),
+        ("fosforico", "phosphoric"), ("phosphorique", "phosphoric"), ("phosphorsaure", "phosphoric"), ("fosforico", "phosphoric"),
+        ("carbonico", "carbonic"), ("carbonique", "carbonic"), ("kohlensaure", "carbonic"), ("carbonico", "carbonic"),
+        ("acetilsalicilico", "acetylsalicylic"), ("acetylsalicylique", "acetylsalicylic"), ("aspirina", "aspirin"),
+        ("tartarico", "tartaric"), ("tartarique", "tartaric"), ("weinsaure", "tartaric"),
+        ("maleico", "maleic"), ("maleique", "maleic"), ("maleinsaure", "maleic"),
+        ("oxalico", "oxalic"), ("oxalique", "oxalic"), ("oxalsaure", "oxalic"),
+        ("salicilico", "salicylic"), ("salicylique", "salicylic"), ("salizylsaure", "salicylic"),
+        ("nicotinico", "nicotinic"), ("nicotinique", "nicotinic"), ("nikotinsaure", "nicotinic"),
+        ("pantotenico", "pantothenic"), ("pantothenique", "pantothenic"), ("pantothensaure", "pantothenic"),
+        ("folico", "folic"), ("folique", "folic"), ("folgsaure", "folic"),
+        ("hialuronico", "hyaluronic"), ("hyaluronique", "hyaluronic"), ("hyaluronsaure", "hyaluronic"),
+        ("glicolico", "glycolic"), ("glycolique", "glycolic"), ("glykolsaure", "glycolic"),
+        ("formico", "formic"), ("formique", "formic"), ("ameisensaure", "formic"),
+        ("propionico", "propionic"), ("propionique", "propionic"), ("propionsaure", "propionic"),
+        ("butirico", "butyric"), ("butyrique", "butyric"), ("buttersaure", "butyric"),
+        ("sorbico", "sorbic"), ("sorbique", "sorbic"), ("sorbinsaure", "sorbic"),
+        ("glutamico", "glutamic"), ("glutamique", "glutamic"), ("glutaminsaure", "glutamic"),
+        ("aspartico", "aspartic"), ("aspartique", "aspartic"), ("asparaginsaure", "aspartic"),
+        // Bases y sales
+        ("amoniaco", "ammonia"), ("ammoniaque", "ammonia"), ("ammoniak", "ammonia"), ("amoniaco", "ammonia"),
+        ("hidroxido", "hydroxide"), ("hydroxyde", "hydroxide"), ("hydroxid", "hydroxide"),
+        ("sodio", "sodium"), ("sodium", "sodium"), ("natrium", "sodium"),
+        ("potasio", "potassium"), ("potassium", "potassium"), ("kalium", "potassium"),
+        ("calcio", "calcium"), ("calcium", "calcium"), ("magnesio", "magnesium"), ("magnesium", "magnesium"),
+        ("amonio", "ammonium"), ("ammonium", "ammonium"),
+        ("bicarbonato", "bicarbonate"), ("bicarbonate", "bicarbonate"), ("carbonato", "carbonate"), ("carbonate", "carbonate"),
+        ("sulfato", "sulfate"), ("sulfate", "sulfate"), ("cloruro", "chloride"), ("chlorure", "chloride"),
+        // Disolventes y compuestos comunes
+        ("etanol", "ethanol"), ("ethanol", "ethanol"), ("alcohol etilico", "ethanol"), ("alcool ethylique", "ethanol"),
+        ("metanol", "methanol"), ("methanol", "methanol"), ("acetona", "acetone"), ("acetone", "acetone"),
+        ("cafeina", "caffeine"), ("cafeine", "caffeine"), ("koffein", "caffeine"), ("caffeina", "caffeine"),
+        ("ibuprofeno", "ibuprofen"), ("ibuprofene", "ibuprofen"), ("ibuprofen", "ibuprofen"),
+        ("paracetamol", "paracetamol"), ("acetaminofen", "acetaminophen"), ("acetaminophene", "acetaminophen"),
+        ("dipirona", "metamizole"), ("novalgina", "metamizole"),
+        ("agua", "water"), ("eau", "water"), ("wasser", "water"), ("acqua", "water"),
+        ("cloro", "chlorine"), ("chlore", "chlorine"), ("chlor", "chlorine"),
+        ("hidrogeno", "hydrogen"), ("hydrogene", "hydrogen"), ("wasserstoff", "hydrogen"),
+        ("oxigeno", "oxygen"), ("oxygene", "oxygen"), ("sauerstoff", "oxygen"),
+        ("nitrogeno", "nitrogen"), ("azote", "nitrogen"), ("stickstoff", "nitrogen"),
+        ("glucosa", "glucose"), ("glucose", "glucose"), ("sacarosa", "sucrose"), ("saccharose", "sucrose"),
+        ("almidon", "starch"), ("amidon", "starch"), ("staerke", "starch"),
+        ("aceite", "oil"), ("huile", "oil"), ("oel", "oil"),
+    ];
+
+    let acidos: &[&str] = &["acido", "acide", "acid", "saure", "saur", "acidos", "acides"];
+    let tokens: Vec<&str> = base.split_whitespace().collect();
+    let tiene_acido = tokens.iter().any(|t| acidos.contains(t));
+
+    let mut mapeados: Vec<String> = Vec::new();
+    for token in tokens {
+        if acidos.contains(&token) {
+            continue;
+        }
+        let convertido = traducciones
+            .iter()
+            .find(|(origen, _)| *origen == token)
+            .map(|(_, destino)| destino.to_string())
+            .unwrap_or_else(|| token.to_string());
+        mapeados.push(convertido);
+    }
+
+    if !mapeados.is_empty() {
+        let mut frase = mapeados.join(" ");
+        if tiene_acido && !frase.contains("acid") {
+            frase = format!("{} acid", frase);
+        }
+        if frase != base {
+            variantes.push(frase);
+        }
+    }
+    variantes.dedup();
+    variantes
+}
+
 /// Devuelve un sinónimo localizado a partir de las etiquetas que PubChem
 /// añade a algunos nombres, por ejemplo `[INN-Spanish]` o `[French]`.
 pub fn localized_name(synonyms: &[String], lang: &str) -> Option<String> {
@@ -931,6 +1024,15 @@ mod tests {
         assert_eq!(ficha.secciones.len(), 16);
         assert_eq!(ficha.estado, "online");
         assert!(ficha.fuentes[0].url.contains("3672"));
+    }
+
+    #[test]
+    fn variantes_de_busqueda_multilingues() {
+        let v = search_variants("Ácido cítrico");
+        assert!(v.contains(&"acido citrico".to_string()));
+        assert!(v.contains(&"citric acid".to_string()));
+        let v2 = search_variants("acide citrique");
+        assert!(v2.contains(&"citric acid".to_string()));
     }
 
     #[test]

@@ -44,6 +44,8 @@ pub struct Options {
     pub copy_to_downloads: bool,
     /// Directorio de descargas personalizado (None = el del sistema).
     pub downloads_dir: Option<PathBuf>,
+    /// Abrir automáticamente un issue de GitHub al detectar un error.
+    pub auto_report: bool,
 }
 
 impl Default for Options {
@@ -52,6 +54,7 @@ impl Default for Options {
             offline_cache: true,
             copy_to_downloads: true,
             downloads_dir: None,
+            auto_report: false,
         }
     }
 }

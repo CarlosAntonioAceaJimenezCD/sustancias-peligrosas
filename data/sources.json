@@ -154,7 +154,6 @@
       "oficial": true,
       "nota": "Unica fuente no gubernamental conservada: LATU es ente publico uruguayo, centro coordinador del Convenio de Basilea y centro regional del Convenio de Estocolmo para America Latina y el Caribe."
     },
-
     {
       "id": "insst-normativa-quimicos",
       "pais": "espana",
@@ -227,7 +226,6 @@
       "verificacion": "dominio_snippet",
       "oficial": true
     },
-
     {
       "id": "minambiente-clasificacion-sga",
       "pais": "colombia",
@@ -279,7 +277,6 @@
       "verificacion": "dominio_snippet",
       "oficial": true
     },
-
     {
       "id": "dof-nom-005",
       "pais": "mexico",
@@ -304,7 +301,6 @@
       "verificacion": "dominio_snippet",
       "oficial": true
     },
-
     {
       "id": "sinia-ley-28256",
       "pais": "peru",
@@ -331,7 +327,6 @@
       "oficial": true,
       "nota": "El sitio devuelve 403 al lector automatico."
     },
-
     {
       "id": "asamblea-ley-55",
       "pais": "venezuela",
@@ -393,7 +388,6 @@
       "verificacion": "dominio_snippet",
       "oficial": true
     },
-
     {
       "id": "chemicalsafety-com",
       "pais": "internacional",
@@ -542,6 +536,96 @@
       "oficial": true,
       "aplicable": false,
       "nota": "Referencia complementaria. No es norma aplicable en los paises de este proyecto."
+    },
+    {
+      "id": "basel-convention",
+      "pais": "internacional",
+      "institucion": "Convención de Basilea (UNEP)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "convenios",
+      "titulo": "Convención de Basilea sobre el Control de los Movimientos Transfronterizos de Desechos Peligrosos",
+      "url": "https://www.basel.int/",
+      "descripcion": "Texto oficial, decisiones, orientaciones y registro de legislación nacional de las Partes.",
+      "verificacion": "contenido_verificado",
+      "oficial": true,
+      "categoria": "convenio",
+      "aplicable": true,
+      "nota": ""
+    },
+    {
+      "id": "stockholm-convention",
+      "pais": "internacional",
+      "institucion": "Convención de Estocolmo (UNEP)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "convenios",
+      "titulo": "Convención de Estocolmo sobre Contaminantes Orgánicos Persistentes",
+      "url": "https://www.pops.int/",
+      "descripcion": "Anexos, decisiones y planes nacionales de aplicación de los contaminantes orgánicos persistentes.",
+      "verificacion": "contenido_verificado",
+      "oficial": true,
+      "categoria": "convenio",
+      "aplicable": true,
+      "nota": ""
+    },
+    {
+      "id": "minamata-convention",
+      "pais": "internacional",
+      "institucion": "Convención de Minamata (UNEP)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "convenios",
+      "titulo": "Convención de Minamata sobre el Mercurio",
+      "url": "https://www.minamataconvention.org/",
+      "descripcion": "Texto oficial, anexos y orientaciones sobre el mercurio y sus compuestos.",
+      "verificacion": "contenido_verificado",
+      "oficial": true,
+      "categoria": "convenio",
+      "aplicable": true,
+      "nota": ""
+    },
+    {
+      "id": "unep-chemicals-waste",
+      "pais": "internacional",
+      "institucion": "PNUMA (UNEP)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "convenios",
+      "titulo": "PNUMA - Químicos y contaminación",
+      "url": "https://www.unep.org/explore-topics/chemicals-waste",
+      "descripcion": "Portal del PNUMA sobre gestión ambientalmente racional de químicos y desechos.",
+      "verificacion": "contenido_verificado",
+      "oficial": true,
+      "categoria": "organismo_internacional",
+      "aplicable": true,
+      "nota": ""
+    },
+    {
+      "id": "icao-dangerous-goods",
+      "pais": "internacional",
+      "institucion": "OACI (ICAO)",
+      "tipo_institucion": "organismo_internacional",
+      "tema": "transporte",
+      "titulo": "OACI - Instrucciones Técnicas para el Transporte Seguro de Mercancías Peligrosas por Aire",
+      "url": "https://www.icao.int/safety/dangerousgoods",
+      "descripcion": "Instrucciones Técnicas (Doc 9284) y novedades sobre mercancías peligrosas en aviación.",
+      "verificacion": "contenido_verificado",
+      "oficial": true,
+      "categoria": "organismo_internacional",
+      "aplicable": true,
+      "nota": ""
+    },
+    {
+      "id": "iata-dgr",
+      "pais": "internacional",
+      "institucion": "IATA",
+      "tipo_institucion": "organizacion_internacional",
+      "tema": "transporte",
+      "titulo": "IATA - Dangerous Goods Regulations (DGR)",
+      "url": "https://www.iata.org/en/programs/cargo/dgr/",
+      "descripcion": "Reglamentación de mercancías peligrosas de la Asociación de Transporte Aéreo Internacional.",
+      "verificacion": "contenido_verificado",
+      "oficial": true,
+      "categoria": "organismo_internacional",
+      "aplicable": true,
+      "nota": "Organización internacional de aerolíneas; texto íntegro de pago, pero información oficial pública."
     }
   ]
 }
