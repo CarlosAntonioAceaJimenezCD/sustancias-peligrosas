@@ -129,7 +129,8 @@ border-radius:4px;padding:2px 6px;font-size:10px;letter-spacing:.5px}.flotante-c
 .overlay{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
 background:rgba(1,4,9,.82);padding:20px}
 .overlay-card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:30px;
-max-width:860px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+max-width:860px;width:100%;max-height:90vh;overflow-y:auto;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.overlay-card::-webkit-scrollbar{width:8px}.overlay-card::-webkit-scrollbar-thumb{background:#30363d;border-radius:8px}
 .overlay-card.compacta{max-width:740px;position:relative}.overlay-logo{color:var(--accent)}
 .overlay-card h1,.overlay-card h2{margin:10px 0 6px;font-size:20px;color:#f0f6fc;font-weight:600}
 .overlay-card p{color:var(--muted);font-size:13px;margin:0 0 22px}
