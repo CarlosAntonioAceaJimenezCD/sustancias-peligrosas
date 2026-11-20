@@ -2,6 +2,8 @@
 
 Base de conocimiento sobre sustancias peligrosas: marco legal por país, SGA/GHS, fichas de datos de seguridad, convenios internacionales y regulación del transporte.
 
+**Sitio web (GitHub Pages): https://carlosantonioaceajimenezcd.github.io/sustancias-peligrosas/**
+
 Repositorio: https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas
 
 ## Estado actual
