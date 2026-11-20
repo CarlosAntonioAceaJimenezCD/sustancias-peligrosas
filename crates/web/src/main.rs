@@ -589,16 +589,30 @@ fn App() -> Element {
                                         return;
                                     }
                                     boe_cargando.set(true);
-                                    let js = format!(
-                                        r#"try{{const q={{query:{{query_string:{{query:{q:?}}}}},sort:[]}};const r=await fetch('https://www.boe.es/datosabiertos/api/legislacion-consolidada?query='+encodeURIComponent(JSON.stringify(q))+'&limit=8',{{headers:{{Accept:'application/json'}}}});const j=await r.json();return j.data||[];}}catch(e){{return [];}}"#,
-                                        q = format!("titulo:{}", value.trim())
-                                    );
-                                    let ev = dioxus::document::eval(&js);
+                                    let consulta = format!("titulo:{}", value.trim());
                                     spawn(async move {
-                                        let parsed: Vec<core::BoeNorm> = match ev.await {
-                                            Ok(valor) => serde_json::from_value(valor).unwrap_or_default(),
-                                            Err(_) => Vec::new(),
-                                        };
+                                        let query = serde_json::json!({
+                                            "query": { "query_string": { "query": consulta } },
+                                            "sort": []
+                                        });
+                                        let url = format!(
+                                            "https://www.boe.es/datosabiertos/api/legislacion-consolidada?query={}&limit=8",
+                                            urlencoding::encode(&query.to_string())
+                                        );
+                                        let parsed: Vec<core::BoeNorm> =
+                                            match gloo_net::http::Request::get(&url)
+                                                .header("Accept", "application/json")
+                                                .send()
+                                                .await
+                                            {
+                                                Ok(resp) => match resp.json::<serde_json::Value>().await {
+                                                    Ok(v) => serde_json::from_value(
+                                                        v.get("data").cloned().unwrap_or_default()
+                                                    ).unwrap_or_default(),
+                                                    Err(_) => Vec::new(),
+                                                },
+                                                Err(_) => Vec::new(),
+                                            };
                                         boe_resultados.set(parsed);
                                         boe_cargando.set(false);
                                     });
@@ -739,13 +753,20 @@ fn App() -> Element {
                                 "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{}/property/Title,MolecularFormula,MolecularWeight,InChIKey,XLogP,ExactMass,HeavyAtomCount,Complexity/JSON",
                                 url_encode(value.trim())
                             );
-                            let js = format!(r#"try{{const r=await fetch({url:?});if(!r.ok)return [];const j=await r.json();return j.PropertyTable?.Properties||[];}}catch(e){{return [];}}"#);
-                            let ev = dioxus::document::eval(&js);
                             spawn(async move {
-                                let parsed: Vec<core::PubChemCompound> = match ev.await {
-                                    Ok(valor) => serde_json::from_value(valor).unwrap_or_default(),
-                                    Err(_) => Vec::new(),
-                                };
+                                let parsed: Vec<core::PubChemCompound> =
+                                    match gloo_net::http::Request::get(&url).send().await {
+                                        Ok(resp) => match resp.json::<serde_json::Value>().await {
+                                            Ok(v) => serde_json::from_value(
+                                                v.get("PropertyTable")
+                                                    .and_then(|t| t.get("Properties"))
+                                                    .cloned()
+                                                    .unwrap_or_default()
+                                            ).unwrap_or_default(),
+                                            Err(_) => Vec::new(),
+                                        },
+                                        Err(_) => Vec::new(),
+                                    };
                                 online_resultados.set(parsed);
                                 online_cargando.set(false);
                             });
