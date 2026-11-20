@@ -690,10 +690,7 @@ fn dedup_lineas(lineas: Vec<String>) -> Vec<String> {
     let mut vistas = std::collections::HashSet::new();
     lineas
         .into_iter()
-        .filter(|l| {
-            let clave = l.split(':').next().unwrap_or(l).trim().to_string();
-            vistas.insert(clave)
-        })
+        .filter(|l| vistas.insert(l.trim().to_string()))
         .collect()
 }
 
