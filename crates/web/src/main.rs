@@ -1,6 +1,8 @@
 use dioxus::prelude::*;
 use sustancias_core as core;
 
+mod flags_extra;
+
 const CSS: &str = r#"
 :root{--bg:#0d1117;--card:#161b22;--card-alt:#1c2128;--ink:#c9d1d9;--muted:#8b949e;
 --line:#30363d;--accent:#58a6ff;--accent-soft:rgba(56,139,253,.15);--purple:#a371f7;
@@ -442,7 +444,12 @@ fn flag_svg(id: &str, class: &str) -> String {
         "venezuela" => r##"<rect width="30" height="10" fill="#ffcc00"/><rect y="10" width="30" height="5" fill="#002b7f"/><rect y="15" width="30" height="5" fill="#c8102e"/><circle cx="6" cy="5" r="1" fill="#002b7f"/><circle cx="12" cy="5" r="1" fill="#002b7f"/><circle cx="18" cy="5" r="1" fill="#002b7f"/>"##,
         "cuba" => r##"<rect width="30" height="20" fill="#002590"/><rect y="5" width="30" height="3" fill="#fff"/><rect y="12" width="30" height="3" fill="#fff"/><polygon points="0,0 14,10 0,20" fill="#c8102e"/><circle cx="4" cy="10" r="1.6" fill="#fff"/>"##,
         "eeuu" => r##"<rect width="30" height="20" fill="#fff"/><rect y="3" width="30" height="3" fill="#b22234"/><rect y="9" width="30" height="3" fill="#b22234"/><rect y="15" width="30" height="3" fill="#b22234"/><rect width="14" height="11" fill="#3c3b6e"/><circle cx="3" cy="3" r="0.7" fill="#fff"/><circle cx="7" cy="3" r="0.7" fill="#fff"/><circle cx="11" cy="3" r="0.7" fill="#fff"/><circle cx="3" cy="8" r="0.7" fill="#fff"/><circle cx="7" cy="8" r="0.7" fill="#fff"/><circle cx="11" cy="8" r="0.7" fill="#fff"/>"##,
-        _ => r##"<rect width="30" height="20" rx="3" fill="#0d419d"/><circle cx="15" cy="10" r="6" fill="none" stroke="#fff" stroke-width="1"/><path d="M9 10h12M15 4v12" stroke="#fff" stroke-width="1"/>"##,
+        _ => {
+            if let Some(uri) = flags_extra::flag_img(id) {
+                return format!("<img class=\"{}\" src=\"{}\" alt=\"\">", class, uri);
+            }
+            r##"<rect width="30" height="20" rx="3" fill="#0d419d"/><circle cx="15" cy="10" r="6" fill="none" stroke="#fff" stroke-width="1"/><path d="M9 10h12M15 4v12" stroke="#fff" stroke-width="1"/>"##
+        }
     };
     format!("<svg class=\"{}\" viewBox=\"0 0 30 20\">{}</svg>", class, body)
 }

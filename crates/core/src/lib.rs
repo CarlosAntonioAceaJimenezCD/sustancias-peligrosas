@@ -685,6 +685,18 @@ pub fn substance_from_pubchem(p: &PubChemCompound) -> Substance {
     }
 }
 
+/// Elimina líneas repetidas manteniendo el orden.
+fn dedup_lineas(lineas: Vec<String>) -> Vec<String> {
+    let mut vistas = std::collections::HashSet::new();
+    lineas
+        .into_iter()
+        .filter(|l| {
+            let clave = l.split(':').next().unwrap_or(l).trim().to_string();
+            vistas.insert(clave)
+        })
+        .collect()
+}
+
 /// Busca una sección por su encabezado dentro del árbol de PUG View.
 fn encontrar_seccion<'a>(secciones: &'a [serde_json::Value], titulo: &str) -> Option<&'a serde_json::Value> {
     for sec in secciones {
@@ -798,9 +810,10 @@ pub fn substance_from_pubchem_view(
             v
         }),
         seccion(2, "peligros", "Identificación de los peligros", {
-            let mut v = items("Hazards Identification");
-            v.extend(lineas_seccion(safety, 4));
-            v
+            let mut v = lineas_seccion(buscar("GHS Classification"), 60);
+            v.extend(items("Hazards Identification"));
+            v.extend(lineas_seccion(safety, 8));
+            dedup_lineas(v)
         }),
         seccion(3, "composicion", "Composición / información sobre los componentes", {
             let mut v = vec![format!("Fórmula molecular: {}", base.molecular_formula)];
@@ -845,7 +858,7 @@ pub fn substance_from_pubchem_view(
     // Evitar secciones duplicadas por nombres repetidos (p. ej. "CAS" dentro de nombres)
     for s in secciones.iter_mut() {
         s.listas.iter_mut().for_each(|l| {
-            l.items.dedup();
+            l.items = dedup_lineas(std::mem::take(&mut l.items));
         });
     }
 
