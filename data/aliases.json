@@ -13,7 +13,9 @@
         "etil eter",
         "eter etilico"
       ],
-      "cids": [3283],
+      "cids": [
+        3283
+      ],
       "nota": "«Éter» designa una familia de compuestos; se muestra el dietiléter (etoxyetano), el disolvente habitual al que suele referirse este nombre."
     },
     {
@@ -31,8 +33,79 @@
         "alcohol ethoxylate",
         "alcohol ethoxylates"
       ],
-      "cids": [76459, 76457],
+      "cids": [
+        76459,
+        76457
+      ],
       "nota": "Los alcoholes etoxilados (AEO) son mezclas industriales. Se muestran compuestos representantes: heptaethylene glycol dodecyl ether (C12E7, 7 unidades de óxido de etileno) y laureth-2."
+    },
+    {
+      "id": "triton-x-100",
+      "terminos": [
+        "triton x-100",
+        "triton x 100",
+        "tx-100",
+        "tx 100",
+        "triton"
+      ],
+      "cids": [
+        5590
+      ],
+      "nota": "«TX-100» es el código comercial del Triton X-100, un tensioactivo no iónico (octilfenol etoxilado)."
+    },
+    {
+      "id": "lauril-sulfato-sodio",
+      "terminos": [
+        "sds",
+        "sls",
+        "sodium dodecyl sulfate",
+        "sodium lauryl sulfate",
+        "lauril sulfato de sodio",
+        "dodecilsulfato de sodio"
+      ],
+      "cids": [
+        3423265
+      ],
+      "nota": "«SDS» y «SLS» designan el laurilsulfato sódico, el tensioactivo aniónico más habitual."
+    },
+    {
+      "id": "edta",
+      "terminos": [
+        "edta",
+        "acido etilendiaminotetraacetico",
+        "acido etilendiaminotetraacetico",
+        "ethylenediaminetetraacetic acid"
+      ],
+      "cids": [
+        6049
+      ],
+      "nota": "«EDTA» es el ácido etilendiaminotetraacético, agente quelante de uso habitual."
+    },
+    {
+      "id": "bht",
+      "terminos": [
+        "bht",
+        "hidroxitolueno butilado",
+        "butilhidroxitolueno",
+        "butylated hydroxytoluene"
+      ],
+      "cids": [
+        31404
+      ],
+      "nota": "«BHT» es el 2,6-di-terc-butil-4-metilfenol, antioxidante industrial."
+    },
+    {
+      "id": "trietanolamina",
+      "terminos": [
+        "tea",
+        "trietanolamina",
+        "triethanolamine",
+        "trolamina"
+      ],
+      "cids": [
+        7618
+      ],
+      "nota": "En este contexto «TEA» significa trietanolamina; se descartan otros significados del acrónimo."
     }
   ]
 }

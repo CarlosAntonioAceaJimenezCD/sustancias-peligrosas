@@ -604,33 +604,79 @@ fn App() -> Element {
         online_cargando.set(true);
         spawn(async move {
             let base = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound";
+            fn cids_de(v: serde_json::Value) -> Vec<u64> {
+                serde_json::from_value(
+                    v.get("IdentifierList")
+                        .and_then(|x| x.get("CID"))
+                        .cloned()
+                        .unwrap_or_default(),
+                )
+                .unwrap_or_default()
+            }
+
+            // La capa `query` decide si la consulta es CAS, fórmula, código de
+            // producto o nombre; los nombres se traducen al inglés.
+            let clase = core::classify(&texto);
             let alias = core::alias_for(&texto);
             let mut cids: Vec<u64> = alias.map(|a| a.cids.clone()).unwrap_or_default();
+            let mut nota = alias.map(|a| a.nota.clone()).unwrap_or_default();
+
             if cids.is_empty() {
-                for variante in core::search_variants(&texto) {
-                    for modo in ["?language=all", "?name_type=word"] {
-                        let cid_url = format!(
-                            "{}/name/{}/cids/JSON{}",
+                match &clase {
+                    core::QueryKind::Cas(cas) => {
+                        for modo in ["?language=all", "?name_type=word"] {
+                            let url = format!(
+                                "{}/name/{}/cids/JSON{}",
+                                base,
+                                urlencoding::encode(cas),
+                                modo
+                            );
+                            if let Ok(v) = http_get_json(&url).await {
+                                cids = cids_de(v);
+                                if !cids.is_empty() {
+                                    break;
+                                }
+                            }
+                        }
+                        if !cids.is_empty() {
+                            nota = format!("Búsqueda por número CAS {cas}.");
+                        }
+                    }
+                    core::QueryKind::Formula(formula) => {
+                        let url = format!(
+                            "{}/fastformula/{}/cids/JSON",
                             base,
-                            urlencoding::encode(&variante),
-                            modo
+                            urlencoding::encode(formula)
                         );
-                        if let Ok(v) = http_get_json(&cid_url).await {
-                            let encontrados: Vec<u64> = serde_json::from_value(
-                                v.get("IdentifierList")
-                                    .and_then(|x| x.get("CID"))
-                                    .cloned()
-                                    .unwrap_or_default(),
-                            )
-                            .unwrap_or_default();
-                            if !encontrados.is_empty() {
-                                cids = encontrados;
+                        if let Ok(v) = http_get_json(&url).await {
+                            cids = cids_de(v);
+                        }
+                        if !cids.is_empty() {
+                            nota = format!(
+                                "Búsqueda por fórmula molecular {formula}: se muestran los primeros compuestos con esa fórmula."
+                            );
+                        }
+                    }
+                    _ => {
+                        for variante in core::name_variants(&texto) {
+                            for modo in ["?language=all", "?name_type=word"] {
+                                let url = format!(
+                                    "{}/name/{}/cids/JSON{}",
+                                    base,
+                                    urlencoding::encode(&variante),
+                                    modo
+                                );
+                                if let Ok(v) = http_get_json(&url).await {
+                                    cids = cids_de(v);
+                                    if !cids.is_empty() {
+                                        break;
+                                    }
+                                }
+                            }
+                            if !cids.is_empty() {
                                 break;
                             }
                         }
-                    }
-                    if !cids.is_empty() {
-                        break;
                     }
                 }
             }
@@ -672,9 +718,7 @@ fn App() -> Element {
                 if let Some(mut c) = compuesto {
                     c.synonyms = sinonimos;
                     c.lang = lang.clone();
-                    if let Some(a) = alias {
-                        c.nota = a.nota.clone();
-                    }
+                    c.nota = nota.clone();
                     resultados.push(c);
                 }
             }
