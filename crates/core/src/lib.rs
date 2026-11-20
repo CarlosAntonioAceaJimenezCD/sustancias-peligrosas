@@ -490,6 +490,10 @@ pub fn search_variants(query: &str) -> Vec<String> {
         ("cafeina", "caffeine"), ("cafeine", "caffeine"), ("koffein", "caffeine"), ("caffeina", "caffeine"),
         ("ibuprofeno", "ibuprofen"), ("ibuprofene", "ibuprofen"), ("ibuprofen", "ibuprofen"),
         ("paracetamol", "paracetamol"), ("acetaminofen", "acetaminophen"), ("acetaminophene", "acetaminophen"),
+        ("estearico", "stearic"), ("stearique", "stearic"), ("stearinsaure", "stearic"),
+        ("palmitico", "palmitic"), ("palmitique", "palmitic"), ("palmitinsaure", "palmitic"),
+        ("oleico", "oleic"), ("oleique", "oleic"), ("olsaure", "oleic"),
+        ("linoleico", "linoleic"), ("linoleique", "linoleic"),
         ("dipirona", "metamizole"), ("novalgina", "metamizole"),
         ("agua", "water"), ("eau", "water"), ("wasser", "water"), ("acqua", "water"),
         ("cloro", "chlorine"), ("chlore", "chlorine"), ("chlor", "chlorine"),
@@ -670,6 +674,198 @@ pub fn substance_from_pubchem(p: &PubChemCompound) -> Substance {
         fuentes: vec![
             Fuente { titulo: format!("PubChem - {} (CID {})", p.title, p.cid), url: online_url },
             Fuente { titulo: "ICSC - OIT/OMS".to_string(), url: icsc.to_string() },
+        ],
+        estado: "online".to_string(),
+        verificado_por: String::new(),
+        fecha_verificacion: String::new(),
+        pdf_url: String::new(),
+        pdf_nombre: String::new(),
+        palabra_advertencia: "Consultar FDS".to_string(),
+        secciones,
+    }
+}
+
+/// Busca una sección por su encabezado dentro del árbol de PUG View.
+fn encontrar_seccion<'a>(secciones: &'a [serde_json::Value], titulo: &str) -> Option<&'a serde_json::Value> {
+    for sec in secciones {
+        if sec.get("TOCHeading").and_then(|v| v.as_str()) == Some(titulo) {
+            return Some(sec);
+        }
+        if let Some(hijos) = sec.get("Section").and_then(|v| v.as_array()) {
+            if let Some(hallado) = encontrar_seccion(hijos, titulo) {
+                return Some(hallado);
+            }
+        }
+    }
+    None
+}
+
+/// Extrae líneas legibles de una sección de PUG View (incluye subsecciones).
+fn lineas_seccion(sec: Option<&serde_json::Value>, maximo: usize) -> Vec<String> {
+    let Some(sec) = sec else { return Vec::new() };
+    let mut lineas = Vec::new();
+    if let Some(info) = sec.get("Information").and_then(|v| v.as_array()) {
+        for item in info.iter().take(maximo) {
+            let nombre = item.get("Name").and_then(|v| v.as_str()).unwrap_or("");
+            let valor = item.get("Value");
+            let mut textos = Vec::new();
+            if let Some(cadenas) = valor
+                .and_then(|v| v.get("StringWithMarkup"))
+                .and_then(|v| v.as_array())
+            {
+                for entrada in cadenas {
+                    if let Some(s) = entrada.get("String").and_then(|v| v.as_str()) {
+                        textos.push(s.to_string());
+                    }
+                }
+            }
+            if let Some(numero) = valor.and_then(|v| v.get("Number")) {
+                textos.push(numero.to_string());
+            }
+            if textos.is_empty() {
+                continue;
+            }
+            let mut texto = textos.join(" ");
+            if texto.len() > 600 {
+                texto = format!("{}…", &texto[..600]);
+            }
+            if nombre.is_empty() {
+                lineas.push(texto);
+            } else {
+                lineas.push(format!("{}: {}", nombre, texto));
+            }
+        }
+    }
+    if let Some(hijos) = sec.get("Section").and_then(|v| v.as_array()) {
+        for hijo in hijos {
+            lineas.extend(lineas_seccion(Some(hijo), maximo));
+        }
+    }
+    lineas
+}
+
+/// Construye una ficha técnica completa a partir de los datos PUG View de PubChem.
+pub fn substance_from_pubchem_view(
+    base: &PubChemCompound,
+    view: &serde_json::Value,
+    lang: &str,
+) -> Substance {
+    let vacias: Vec<serde_json::Value> = Vec::new();
+    let secciones_root = view
+        .get("Record")
+        .and_then(|r| r.get("Section"))
+        .and_then(|s| s.as_array())
+        .map_or(vacias.as_slice(), |v| v);
+    let nombre_mostrado = localized_name(&base.synonyms, lang).unwrap_or_else(|| base.title.clone());
+
+    let buscar = |titulo: &str| encontrar_seccion(secciones_root, titulo);
+    let items = |titulo: &str| lineas_seccion(buscar(titulo), 8);
+
+    let safety = buscar("Safety and Hazards");
+    let toxicidad = buscar("Toxicity");
+    let propiedades = buscar("Chemical and Physical Properties");
+    let nombres = buscar("Names and Identifiers");
+    let fabricacion = buscar("Use and Manufacturing");
+
+    let seccion = |numero: u32, id: &str, titulo: &str, items_: Vec<String>| FdsSection {
+        numero,
+        id: id.to_string(),
+        titulo: titulo.to_string(),
+        texto: if items_.is_empty() {
+            "No hay datos publicados para esta sección en la fuente consultada.".to_string()
+        } else {
+            String::new()
+        },
+        campos: Vec::new(),
+        listas: if items_.is_empty() {
+            Vec::new()
+        } else {
+            vec![FdsList {
+                titulo: "Datos de PubChem (NIH)".to_string(),
+                items: items_,
+            }]
+        },
+        notas: Vec::new(),
+    };
+
+    let mut secciones = vec![
+        seccion(1, "identificacion", "Identificación del producto y del proveedor", {
+            let mut v = vec![
+                format!("Nombre: {}", nombre_mostrado),
+                format!("CID de PubChem: {}", base.cid),
+            ];
+            v.extend(items("Names and Identifiers"));
+            v
+        }),
+        seccion(2, "peligros", "Identificación de los peligros", {
+            let mut v = items("Hazards Identification");
+            v.extend(lineas_seccion(safety, 4));
+            v
+        }),
+        seccion(3, "composicion", "Composición / información sobre los componentes", {
+            let mut v = vec![format!("Fórmula molecular: {}", base.molecular_formula)];
+            v.extend(items("CAS"));
+            v
+        }),
+        seccion(4, "primeros_auxilios", "Primeros auxilios", items("First Aid Measures")),
+        seccion(5, "incendio", "Medidas de lucha contra incendios", items("Fire Fighting")),
+        seccion(6, "derrame", "Medidas en caso de vertido accidental", items("Accidental Release Measures")),
+        seccion(7, "manipulacion", "Manipulación y almacenamiento", items("Handling and Storage")),
+        seccion(8, "exposicion", "Controles de exposición / protección personal",
+            items("Exposure Control and Personal Protection")),
+        seccion(9, "propiedades", "Propiedades físicas y químicas",
+            lineas_seccion(propiedades, 10)),
+        seccion(10, "estabilidad", "Estabilidad y reactividad", items("Stability and Reactivity")),
+        seccion(11, "toxicologica", "Información toxicológica", items("Toxicological Information")),
+        seccion(12, "ecotoxicologica", "Información ecotoxicológica", items("Ecological Information")),
+        seccion(13, "eliminacion", "Consideraciones sobre eliminación", {
+            let mut v = items("Disposal Methods");
+            v.extend(items("Spillage Disposal"));
+            v
+        }),
+        seccion(14, "transporte", "Información relativa al transporte", {
+            let mut v = items("Transport Information");
+            if v.is_empty() {
+                v.push("Consultar el número ONU, clase y grupo de embalaje en la ficha del fabricante o en ADR/RID/IMDG/IATA.".to_string());
+            }
+            v
+        }),
+        seccion(15, "reglamentacion", "Información sobre la reglamentación", {
+            let mut v = items("Regulatory Information");
+            v.extend(lineas_seccion(fabricacion, 3));
+            v
+        }),
+        seccion(16, "otras", "Otras informaciones", vec![
+            "Fuente: PubChem (NIH), vista PUG View.".to_string(),
+            format!("CID: {}", base.cid),
+            "Ficha generada automáticamente; verificar siempre con la FDS del fabricante.".to_string(),
+        ]),
+    ];
+
+    // Evitar secciones duplicadas por nombres repetidos (p. ej. "CAS" dentro de nombres)
+    for s in secciones.iter_mut() {
+        s.listas.iter_mut().for_each(|l| {
+            l.items.dedup();
+        });
+    }
+
+    let _ = (nombres, toxicidad, safety);
+
+    Substance {
+        id: format!("online-{}", base.cid),
+        nombre: nombre_mostrado,
+        sinonimos: base.synonyms.iter().take(25).cloned().collect(),
+        cas: String::new(),
+        ce: String::new(),
+        onu: String::new(),
+        peligrosidad: Peligrosidad::default(),
+        almacenamiento: String::new(),
+        derrame: String::new(),
+        propiedades: Propiedades::default(),
+        interacciones: Interacciones::default(),
+        fuentes: vec![
+            Fuente { titulo: format!("PubChem - CID {}", base.cid), url: base.url() },
+            Fuente { titulo: "ICSC - OIT/OMS".to_string(), url: "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es".to_string() },
         ],
         estado: "online".to_string(),
         verificado_por: String::new(),
@@ -1035,6 +1231,8 @@ mod tests {
         assert!(v.contains(&"citric acid".to_string()));
         let v2 = search_variants("acide citrique");
         assert!(v2.contains(&"citric acid".to_string()));
+        let v3 = search_variants("ácido estearico");
+        assert!(v3.contains(&"stearic acid".to_string()));
     }
 
     #[test]

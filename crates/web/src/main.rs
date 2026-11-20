@@ -952,8 +952,22 @@ fn App() -> Element {
                                         class: "boton",
                                         onclick: {
                                             let compuesto = p.clone();
+                                            let lang = output_lang();
                                             move |_| {
-                                                online_ficha.set(Some(core::substance_from_pubchem(&compuesto)));
+                                                let c = compuesto.clone();
+                                                let l = lang.clone();
+                                                online_ficha.set(Some(core::substance_from_pubchem(&c)));
+                                                spawn(async move {
+                                                    let url = format!(
+                                                        "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{}/JSON",
+                                                        c.cid
+                                                    );
+                                                    if let Ok(view) = http_get_json(&url).await {
+                                                        online_ficha.set(Some(
+                                                            core::substance_from_pubchem_view(&c, &view, &l),
+                                                        ));
+                                                    }
+                                                });
                                             }
                                         },
                                         "Ver ficha en línea"
