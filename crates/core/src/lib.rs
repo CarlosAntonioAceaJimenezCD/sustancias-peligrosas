@@ -411,6 +411,7 @@ impl BoeNorm {
 /// Compuesto devuelto por la API PUG REST de PubChem (NIH).
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct PubChemCompound {
+    #[serde(rename = "CID")]
     pub cid: u64,
     #[serde(default)]
     pub title: String,
