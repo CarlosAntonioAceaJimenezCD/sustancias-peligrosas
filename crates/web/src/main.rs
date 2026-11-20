@@ -138,6 +138,8 @@ font-size:11px;line-height:1.55;color:#b9c3ce;margin:0 0 14px}
 .norma-modal .boton{align-self:flex-start;text-decoration:none}
 .leer-norma{margin-top:8px;background:var(--card-alt);color:var(--accent);border:1px solid var(--line)}
 .leer-norma:hover{border-color:var(--accent)}
+.idioma-busqueda{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0;font-size:11px;color:var(--muted)}
+.idioma-busqueda select{background:#0d1117;color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:5px 8px;font-size:11px}
 .boe-buscar{border:1px solid var(--line);border-radius:6px;padding:4px 10px 10px;margin:10px 0;background:var(--card-alt)}
 .boe-input-wrap{margin:8px 0}
 .boe-atribucion{font-size:10px!important;color:var(--muted)!important;margin:8px 0 0!important;line-height:1.5!important}
@@ -225,19 +227,6 @@ fn icon(name: &str, class: &str) -> String {
         _ => ("0 0 24 24", ""),
     };
     format!("<svg class=\"{}\" viewBox=\"{}\">{}</svg>", class, view, body)
-}
-
-/// Codificación mínima para incluir un término en una URL.
-fn url_encode(value: &str) -> String {
-    value
-        .replace(' ', "%20")
-        .replace('á', "%C3%A1")
-        .replace('é', "%C3%A9")
-        .replace('í', "%C3%AD")
-        .replace('ó', "%C3%B3")
-        .replace('ú', "%C3%BA")
-        .replace('ñ', "%C3%B1")
-        .replace('&', "%26")
 }
 
 /// Genera JavaScript para descargar un PDF mediante fetch + blob (solo web).
@@ -428,6 +417,7 @@ fn App() -> Element {
     let mut online_cargando: Signal<bool> = use_signal(|| false);
     let mut boe_resultados: Signal<Vec<core::BoeNorm>> = use_signal(Vec::new);
     let mut boe_cargando: Signal<bool> = use_signal(|| false);
+    let mut output_lang: Signal<String> = use_signal(|| "es".to_string());
     let mut opciones: Signal<AppOptions> = use_signal(cargar_opciones);
     let mut guardados: Signal<Vec<SavedDocView>> = use_signal(cargar_guardados);
     #[allow(unused_mut)]
@@ -468,6 +458,85 @@ fn App() -> Element {
         .collect();
     let multi_id_list: Vec<String> = multi_items.iter().map(|(id, _)| id.clone()).collect();
     let interactions = core::analyze_interactions_named(&multi_id_list, &multi_names);
+
+    let mut buscar_pubchem = move |texto: String, lang: String| {
+        if texto.trim().len() < 2 {
+            online_resultados.set(Vec::new());
+            return;
+        }
+        online_cargando.set(true);
+        spawn(async move {
+            let base = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound";
+            let cid_url = format!(
+                "{}/name/{}/cids/JSON?language=all",
+                base,
+                urlencoding::encode(texto.trim())
+            );
+            let cids: Vec<u64> = match gloo_net::http::Request::get(&cid_url).send().await {
+                Ok(resp) => match resp.json::<serde_json::Value>().await {
+                    Ok(v) => serde_json::from_value(
+                        v.get("IdentifierList")
+                            .and_then(|x| x.get("CID"))
+                            .cloned()
+                            .unwrap_or_default(),
+                    )
+                    .unwrap_or_default(),
+                    Err(_) => Vec::new(),
+                },
+                Err(_) => Vec::new(),
+            };
+
+            let mut resultados = Vec::new();
+            for cid in cids.into_iter().take(3) {
+                let prop_url = format!(
+                    "{}/cid/{}/property/Title,MolecularFormula,MolecularWeight,InChIKey,XLogP,ExactMass,HeavyAtomCount,Complexity/JSON?language=all",
+                    base, cid
+                );
+                let syn_url = format!("{}/cid/{}/synonyms/JSON?language=all", base, cid);
+
+                let compuesto: Option<core::PubChemCompound> =
+                    match gloo_net::http::Request::get(&prop_url).send().await {
+                        Ok(resp) => match resp.json::<serde_json::Value>().await {
+                            Ok(v) => serde_json::from_value(
+                                v.get("PropertyTable")
+                                    .and_then(|t| t.get("Properties"))
+                                    .and_then(|p| p.get(0))
+                                    .cloned()
+                                    .unwrap_or_default(),
+                            )
+                            .ok(),
+                            Err(_) => None,
+                        },
+                        Err(_) => None,
+                    };
+
+                let sinonimos: Vec<String> =
+                    match gloo_net::http::Request::get(&syn_url).send().await {
+                        Ok(resp) => match resp.json::<serde_json::Value>().await {
+                            Ok(v) => serde_json::from_value(
+                                v.get("InformationList")
+                                    .and_then(|x| x.get("Information"))
+                                    .and_then(|x| x.get(0))
+                                    .and_then(|x| x.get("Synonym"))
+                                    .cloned()
+                                    .unwrap_or_default(),
+                            )
+                            .unwrap_or_default(),
+                            Err(_) => Vec::new(),
+                        },
+                        Err(_) => Vec::new(),
+                    };
+
+                if let Some(mut c) = compuesto {
+                    c.synonyms = sinonimos;
+                    c.lang = lang.clone();
+                    resultados.push(c);
+                }
+            }
+            online_resultados.set(resultados);
+            online_cargando.set(false);
+        });
+    };
 
     let rsx_countries = |_modal: bool| {
         countries.iter().map(move |c| {
@@ -736,40 +805,32 @@ fn App() -> Element {
                     span { "{core::substances_warning()}" }
                 }
 
+                div { class: "idioma-busqueda",
+                    span { "Buscar en cualquier idioma · mostrar nombre en:" }
+                    select {
+                        value: "{output_lang()}",
+                        onchange: move |e| {
+                            let lang = e.value();
+                            output_lang.set(lang.clone());
+                            buscar_pubchem(query(), lang);
+                        },
+                        option { value: "auto", "Autor" }
+                        option { value: "es", "Español" }
+                        option { value: "en", "English" }
+                        option { value: "fr", "Français" }
+                        option { value: "de", "Deutsch" }
+                        option { value: "it", "Italiano" }
+                    }
+                }
                 div { class: "buscador",
                     span { class: "buscador-icono", dangerous_inner_html: "{icon(\"search\", \"ico\")}" }
                     input {
-                        placeholder: "Ej. Acetona, 67-64-1, ácido clorhídrico…",
+                        placeholder: "Ej. Acetona, ibuprofeno, 67-64-1…",
                         value: "{query()}",
                         oninput: move |e| {
                             let value = e.value();
                             query.set(value.clone());
-                            if value.trim().len() < 2 {
-                                online_resultados.set(Vec::new());
-                                return;
-                            }
-                            online_cargando.set(true);
-                            let url = format!(
-                                "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{}/property/Title,MolecularFormula,MolecularWeight,InChIKey,XLogP,ExactMass,HeavyAtomCount,Complexity/JSON",
-                                url_encode(value.trim())
-                            );
-                            spawn(async move {
-                                let parsed: Vec<core::PubChemCompound> =
-                                    match gloo_net::http::Request::get(&url).send().await {
-                                        Ok(resp) => match resp.json::<serde_json::Value>().await {
-                                            Ok(v) => serde_json::from_value(
-                                                v.get("PropertyTable")
-                                                    .and_then(|t| t.get("Properties"))
-                                                    .cloned()
-                                                    .unwrap_or_default()
-                                            ).unwrap_or_default(),
-                                            Err(_) => Vec::new(),
-                                        },
-                                        Err(_) => Vec::new(),
-                                    };
-                                online_resultados.set(parsed);
-                                online_cargando.set(false);
-                            });
+                            buscar_pubchem(value, output_lang());
                         },
                     }
                 }

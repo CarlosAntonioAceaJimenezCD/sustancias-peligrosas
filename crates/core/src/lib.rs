@@ -429,6 +429,40 @@ pub struct PubChemCompound {
     pub heavy_atom_count: serde_json::Value,
     #[serde(default)]
     pub complexity: serde_json::Value,
+    #[serde(default)]
+    pub synonyms: Vec<String>,
+    /// Idioma de salida elegido por el usuario (no viene en el JSON de PubChem).
+    #[serde(default)]
+    pub lang: String,
+}
+
+/// Devuelve un sinónimo localizado a partir de las etiquetas que PubChem
+/// añade a algunos nombres, por ejemplo `[INN-Spanish]` o `[French]`.
+pub fn localized_name(synonyms: &[String], lang: &str) -> Option<String> {
+    let marcas: &[&str] = match lang {
+        "es" => &["[inn-spanish]", "[spanish]", "[es]"],
+        "fr" => &["[french]", "[fr]"],
+        "de" => &["[german]", "[de]"],
+        "it" => &["[italian]", "[it]"],
+        _ => &[],
+    };
+    for marca in marcas {
+        if let found @ Some(_) = synonyms
+            .iter()
+            .find(|s| s.to_lowercase().contains(marca))
+            .cloned()
+        {
+            // Quitar la etiqueta entre corchetes para mostrar solo el nombre.
+            return found.map(|s| {
+                s.split('[')
+                    .next()
+                    .unwrap_or(&s)
+                    .trim()
+                    .to_string()
+            });
+        }
+    }
+    None
 }
 
 impl PubChemCompound {
@@ -442,6 +476,7 @@ impl PubChemCompound {
 pub fn substance_from_pubchem(p: &PubChemCompound) -> Substance {
     let consultar = "Esta sección requiere la ficha de datos de seguridad del fabricante. Consulta los enlaces oficiales al final de la ficha.";
     let online_url = p.url();
+    let nombre_mostrado = localized_name(&p.synonyms, &p.lang).unwrap_or_else(|| p.title.clone());
     let icsc = "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es";
 
     let field = |k: &str, v: String| FdsField { k: k.to_string(), v };
@@ -458,7 +493,7 @@ pub fn substance_from_pubchem(p: &PubChemCompound) -> Substance {
     let links = |items: Vec<String>| vec![FdsList { titulo: "Enlaces oficiales".to_string(), items }];
 
     let mut propiedades = vec![
-        field("Nombre (PubChem)", p.title.clone()),
+        field("Nombre (PubChem)", nombre_mostrado.clone()),
         field("CID de PubChem", p.cid.to_string()),
     ];
     if !p.molecular_formula.is_empty() {
@@ -492,7 +527,15 @@ pub fn substance_from_pubchem(p: &PubChemCompound) -> Substance {
             vec![], links(vec![online_url.clone()])),
         sec(3, "composicion", "Composición / información sobre los componentes",
             "Identidad química según PubChem. La pureza debe consultarse en el certificado del proveedor.",
-            vec![field("Fórmula molecular", p.molecular_formula.clone())], vec![]),
+            vec![field("Fórmula molecular", p.molecular_formula.clone())],
+            if p.synonyms.is_empty() {
+                vec![]
+            } else {
+                vec![FdsList {
+                    titulo: "Sinónimos y nombres en otros idiomas".to_string(),
+                    items: p.synonyms.iter().take(25).cloned().collect(),
+                }]
+            }),
         sec(4, "primeros_auxilios", "Primeros auxilios", consultar, vec![], vec![]),
         sec(5, "incendio", "Medidas de lucha contra incendios", consultar, vec![], vec![]),
         sec(6, "derrame", "Medidas en caso de vertido accidental", consultar, vec![], vec![]),
@@ -519,8 +562,8 @@ pub fn substance_from_pubchem(p: &PubChemCompound) -> Substance {
 
     Substance {
         id: format!("online-{}", p.cid),
-        nombre: p.title.clone(),
-        sinonimos: Vec::new(),
+        nombre: nombre_mostrado.clone(),
+        sinonimos: p.synonyms.iter().take(25).cloned().collect(),
         cas: String::new(),
         ce: String::new(),
         onu: String::new(),
@@ -881,11 +924,25 @@ mod tests {
             exact_mass: "206.130679813".to_string(),
             heavy_atom_count: serde_json::json!(17),
             complexity: serde_json::json!(263),
+            synonyms: vec!["Ibuprofeno [INN-Spanish]".to_string()],
+            lang: "es".to_string(),
         };
         let ficha = substance_from_pubchem(&compuesto);
         assert_eq!(ficha.secciones.len(), 16);
         assert_eq!(ficha.estado, "online");
         assert!(ficha.fuentes[0].url.contains("3672"));
+    }
+
+    #[test]
+    fn nombre_localizado_por_idioma() {
+        let sinonimos = vec![
+            "Ibuprofen [INN]".to_string(),
+            "Ibuprofeno [INN-Spanish]".to_string(),
+            "Ibuprofene [INN-French]".to_string(),
+        ];
+        assert_eq!(localized_name(&sinonimos, "es").as_deref(), Some("Ibuprofeno"));
+        assert_eq!(localized_name(&sinonimos, "fr").as_deref(), Some("Ibuprofene"));
+        assert_eq!(localized_name(&sinonimos, "de"), None);
     }
 
     #[test]
