@@ -590,17 +590,17 @@ fn App() -> Element {
                                     }
                                     boe_cargando.set(true);
                                     let js = format!(
-                                        r#"(async()=>{{try{{const q={{query:{{query_string:{{query:{q:?}}}}},sort:[]}};const r=await fetch('https://www.boe.es/datosabiertos/api/legislacion-consolidada?query='+encodeURIComponent(JSON.stringify(q))+'&limit=8',{{headers:{{Accept:'application/json'}}}});const j=await r.json();return JSON.stringify(j.data||[]);}}catch(e){{return '[]';}}}})()"#,
+                                        r#"(async()=>{{try{{const q={{query:{{query_string:{{query:{q:?}}}}},sort:[]}};const r=await fetch('https://www.boe.es/datosabiertos/api/legislacion-consolidada?query='+encodeURIComponent(JSON.stringify(q))+'&limit=8',{{headers:{{Accept:'application/json'}}}});const j=await r.json();return j.data||[];}}catch(e){{return [];}}}})()"#,
                                         q = format!("titulo:{}", value.trim())
                                     );
-                                    let mut ev = dioxus::document::eval(&js);
+                                    let ev = dioxus::document::eval(&js);
                                     spawn(async move {
-                                        if let Ok(texto) = ev.recv::<String>().await {
-                                            let parsed: Vec<core::BoeNorm> =
-                                                serde_json::from_str(&texto).unwrap_or_default();
-                                            boe_resultados.set(parsed);
-                                            boe_cargando.set(false);
-                                        }
+                                        let parsed: Vec<core::BoeNorm> = match ev.await {
+                                            Ok(valor) => serde_json::from_value(valor).unwrap_or_default(),
+                                            Err(_) => Vec::new(),
+                                        };
+                                        boe_resultados.set(parsed);
+                                        boe_cargando.set(false);
                                     });
                                 },
                             }
@@ -739,15 +739,15 @@ fn App() -> Element {
                                 "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{}/property/Title,MolecularFormula,MolecularWeight,InChIKey,XLogP,ExactMass,HeavyAtomCount,Complexity/JSON",
                                 url_encode(value.trim())
                             );
-                            let js = format!(r#"(async()=>{{try{{const r=await fetch({url:?});if(!r.ok)return '[]';const j=await r.json();return JSON.stringify(j.PropertyTable?.Properties||[]);}}catch(e){{return '[]';}}}})()"#);
-                            let mut ev = dioxus::document::eval(&js);
+                            let js = format!(r#"(async()=>{{try{{const r=await fetch({url:?});if(!r.ok)return [];const j=await r.json();return j.PropertyTable?.Properties||[];}}catch(e){{return [];}}}})()"#);
+                            let ev = dioxus::document::eval(&js);
                             spawn(async move {
-                                if let Ok(texto) = ev.recv::<String>().await {
-                                    let parsed: Vec<core::PubChemCompound> =
-                                        serde_json::from_str(&texto).unwrap_or_default();
-                                    online_resultados.set(parsed);
-                                    online_cargando.set(false);
-                                }
+                                let parsed: Vec<core::PubChemCompound> = match ev.await {
+                                    Ok(valor) => serde_json::from_value(valor).unwrap_or_default(),
+                                    Err(_) => Vec::new(),
+                                };
+                                online_resultados.set(parsed);
+                                online_cargando.set(false);
                             });
                         },
                     }
