@@ -696,7 +696,7 @@ fn App() -> Element {
                                         let nombre = core::pdf_filename(&i.url, &i.pdf_nombre);
                                         move |_| norma.set(Some((titulo.clone(), meta.clone(), texto.clone(), url.clone(), nombre.clone())))
                                     },
-                                    dangerous_inner_html: "{icon(\"book\", \"ico\")}",
+                                    span { dangerous_inner_html: "{icon(\"book\", \"ico\")}" }
                                     "Leer norma íntegra"
                                 }
                             }
@@ -718,7 +718,7 @@ fn App() -> Element {
                 }
 
                 div { class: "aviso",
-                    dangerous_inner_html: "{icon(\"alert\", \"ico\")}",
+                    span { dangerous_inner_html: "{icon(\"alert\", \"ico\")}" }
                     span { "{core::substances_warning()}" }
                 }
 
@@ -768,7 +768,7 @@ fn App() -> Element {
                         p { class: "vacio", "Consultando bases de datos oficiales…" }
                     } else if !online_resultados().is_empty() {
                         div { class: "online-titulo",
-                            dangerous_inner_html: "{icon(\"globe\", \"ico\")}",
+                            span { dangerous_inner_html: "{icon(\"globe\", \"ico\")}" }
                             "Resultados en bases de datos oficiales · PubChem (NIH)"
                         }
                         for p in online_resultados().iter() {
@@ -813,7 +813,7 @@ fn App() -> Element {
                 div { class: "multi",
                     div { class: "multi-cabecera",
                         span { class: "multi-titulo",
-                            dangerous_inner_html: "{icon(\"layers\", \"ico\")}",
+                            span { dangerous_inner_html: "{icon(\"layers\", \"ico\")}" }
                             strong { "Comparación de varias sustancias" }
                         }
                         if interactions.is_empty() {
@@ -845,7 +845,7 @@ fn App() -> Element {
                                     multi_input.set(String::new());
                                 }
                             },
-                            dangerous_inner_html: "{icon(\"plus\", \"ico\")}",
+                            span { dangerous_inner_html: "{icon(\"plus\", \"ico\")}" }
                             "Añadir"
                         }
                     }
@@ -924,7 +924,7 @@ fn App() -> Element {
                         }
                         if s.estado == "online" {
                             div { class: "aviso",
-                                dangerous_inner_html: "{icon(\"alert\", \"ico\")}",
+                                span { dangerous_inner_html: "{icon(\"alert\", \"ico\")}" }
                                 span { "Ficha parcial generada con datos públicos de PubChem. No sustituye la ficha de datos de seguridad del fabricante." }
                             }
                         }
@@ -1005,7 +1005,7 @@ fn App() -> Element {
                                             };
                                             handler
                                         },
-                                        dangerous_inner_html: "{icon(\"download\", \"ico\")}",
+                                        span { dangerous_inner_html: "{icon(\"download\", \"ico\")}" }
                                         "Descargar FDS en PDF"
                                     }
                                 }
@@ -1014,7 +1014,7 @@ fn App() -> Element {
                                     onclick: move |_| {
                                         dioxus::document::eval("window.print()");
                                     },
-                                    dangerous_inner_html: "{icon(\"file\", \"ico\")}",
+                                    span { dangerous_inner_html: "{icon(\"file\", \"ico\")}" }
                                     "Guardar ficha como PDF (imprimir)"
                                 }
                             }
@@ -1046,7 +1046,7 @@ fn App() -> Element {
                             class: "boton",
                             href: "{url}",
                             target: "_blank",
-                            dangerous_inner_html: "{icon(\"link\", \"ico\")}",
+                            span { dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
                             "Abrir PDF original"
                         }
                         button {
@@ -1079,7 +1079,7 @@ fn App() -> Element {
                                 };
                                 handler
                             },
-                            dangerous_inner_html: "{icon(\"download\", \"ico\")}",
+                            span { dangerous_inner_html: "{icon(\"download\", \"ico\")}" }
                             "Descargar PDF"
                         }
                     }
@@ -1091,14 +1091,14 @@ fn App() -> Element {
             button {
                 class: if movil_tab() == "legal" { "tab activo" } else { "tab" },
                 onclick: move |_| movil_tab.set("legal"),
-                dangerous_inner_html: "{icon(\"scale\", \"ico\")}",
+                span { dangerous_inner_html: "{icon(\"scale\", \"ico\")}" }
                 span { "Marco legal" }
 
             }
             button {
                 class: if movil_tab() == "ficha" { "tab activo" } else { "tab" },
                 onclick: move |_| movil_tab.set("ficha"),
-                dangerous_inner_html: "{icon(\"flask\", \"ico\")}",
+                span { dangerous_inner_html: "{icon(\"flask\", \"ico\")}" }
                 span { "Ficha técnica" }
             }
         }
