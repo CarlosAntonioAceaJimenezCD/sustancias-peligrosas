@@ -441,9 +441,9 @@ pub struct PubChemCompound {
 pub fn localized_name(synonyms: &[String], lang: &str) -> Option<String> {
     let marcas: &[&str] = match lang {
         "es" => &["[inn-spanish]", "[spanish]", "[es]"],
-        "fr" => &["[french]", "[fr]"],
-        "de" => &["[german]", "[de]"],
-        "it" => &["[italian]", "[it]"],
+        "fr" => &["[inn-french]", "[french]", "[fr]"],
+        "de" => &["[inn-german]", "[german]", "[de]"],
+        "it" => &["[inn-italian]", "[italian]", "[it]"],
         _ => &[],
     };
     for marca in marcas {
