@@ -590,7 +590,7 @@ fn App() -> Element {
                                     }
                                     boe_cargando.set(true);
                                     let js = format!(
-                                        r#"(async()=>{{try{{const q={{query:{{query_string:{{query:{q:?}}}}},sort:[]}};const r=await fetch('https://www.boe.es/datosabiertos/api/legislacion-consolidada?query='+encodeURIComponent(JSON.stringify(q))+'&limit=8',{{headers:{{Accept:'application/json'}}}});const j=await r.json();return j.data||[];}}catch(e){{return [];}}}})()"#,
+                                        r#"try{{const q={{query:{{query_string:{{query:{q:?}}}}},sort:[]}};const r=await fetch('https://www.boe.es/datosabiertos/api/legislacion-consolidada?query='+encodeURIComponent(JSON.stringify(q))+'&limit=8',{{headers:{{Accept:'application/json'}}}});const j=await r.json();return j.data||[];}}catch(e){{return [];}}"#,
                                         q = format!("titulo:{}", value.trim())
                                     );
                                     let ev = dioxus::document::eval(&js);
@@ -739,7 +739,7 @@ fn App() -> Element {
                                 "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/{}/property/Title,MolecularFormula,MolecularWeight,InChIKey,XLogP,ExactMass,HeavyAtomCount,Complexity/JSON",
                                 url_encode(value.trim())
                             );
-                            let js = format!(r#"(async()=>{{try{{const r=await fetch({url:?});if(!r.ok)return [];const j=await r.json();return j.PropertyTable?.Properties||[];}}catch(e){{return [];}}}})()"#);
+                            let js = format!(r#"try{{const r=await fetch({url:?});if(!r.ok)return [];const j=await r.json();return j.PropertyTable?.Properties||[];}}catch(e){{return [];}}"#);
                             let ev = dioxus::document::eval(&js);
                             spawn(async move {
                                 let parsed: Vec<core::PubChemCompound> = match ev.await {
