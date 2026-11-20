@@ -856,7 +856,7 @@ fn App() -> Element {
                         for p in online_resultados().iter() {
                             div { class: "online-resultado",
                                 div {
-                                    strong { "{p.title}" }
+                                    strong { "{core::localized_name(&p.synonyms, &output_lang()).unwrap_or_else(|| p.title.clone())}" }
                                     span { class: "online-meta", "CID {p.cid} · {p.molecular_formula} · {p.molecular_weight} g/mol" }
                                 }
                                 div { class: "online-acciones",
@@ -874,7 +874,8 @@ fn App() -> Element {
                                         class: "boton boton-secundario",
                                         onclick: {
                                             let cid = p.cid;
-                                            let nombre = p.title.clone();
+                                            let nombre = core::localized_name(&p.synonyms, &output_lang())
+                                                .unwrap_or_else(|| p.title.clone());
                                             move |_| {
                                                 let mut items = multi_ids();
                                                 let id = format!("online-{}", cid);
