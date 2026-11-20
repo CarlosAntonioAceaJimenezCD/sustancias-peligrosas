@@ -16,6 +16,7 @@ const LEGISLATION_JSON: &str = include_str!("../../../data/legislation.json");
 const SUBSTANCES_JSON: &str = include_str!("../../../data/substances.json");
 const INTERACTIONS_JSON: &str = include_str!("../../../data/interactions.json");
 const ORGANIZATIONS_JSON: &str = include_str!("../../../data/organizations.json");
+const ALIASES_JSON: &str = include_str!("../../../data/aliases.json");
 
 // ---------------------------------------------------------------------------
 // Modelos
@@ -86,6 +87,23 @@ pub struct Source {
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct SourcesDb {
     pub fuentes: Vec<Source>,
+}
+
+/// Término industrial o ambiguo resuelto a uno o más CIDs concretos de PubChem.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct Alias {
+    pub id: String,
+    #[serde(default)]
+    pub terminos: Vec<String>,
+    #[serde(default)]
+    pub cids: Vec<u64>,
+    #[serde(default)]
+    pub nota: String,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct AliasesDb {
+    pub alias: Vec<Alias>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -410,6 +428,19 @@ pub fn organization_sources(fuente_pais: &str) -> Vec<Source> {
         .collect()
 }
 
+/// Resuelve nombres industriales o ambiguos («AEO7», «éter», «alcohol
+/// etoxilado») a los CIDs de PubChem que realmente los representan.
+pub fn alias_for(query: &str) -> Option<&'static Alias> {
+    static CACHE: OnceLock<AliasesDb> = OnceLock::new();
+    let db = CACHE.get_or_init(|| parse(ALIASES_JSON));
+    let busqueda = normalize(query.trim());
+    db.alias.iter().find(|a| {
+        a.terminos
+            .iter()
+            .any(|t| normalize(t.trim()) == busqueda)
+    })
+}
+
 /// Base legislativa completa, cacheada (evita parsear 322 KB en cada render).
 pub fn legislation_db() -> &'static LegislationDb {
     static CACHE: OnceLock<LegislationDb> = OnceLock::new();
@@ -491,6 +522,9 @@ pub struct PubChemCompound {
     /// Idioma de salida elegido por el usuario (no viene en el JSON de PubChem).
     #[serde(default)]
     pub lang: String,
+    /// Aclaración cuando el resultado procede de un término industrial o ambiguo.
+    #[serde(default)]
+    pub nota: String,
 }
 
 /// Genera variantes de búsqueda para no depender del idioma del usuario.
@@ -1282,6 +1316,7 @@ mod tests {
             complexity: serde_json::json!(263),
             synonyms: vec!["Ibuprofeno [INN-Spanish]".to_string()],
             lang: "es".to_string(),
+            nota: String::new(),
         };
         let ficha = substance_from_pubchem(&compuesto);
         assert_eq!(ficha.secciones.len(), 16);
@@ -1374,6 +1409,18 @@ mod tests {
         // enlaces directos verificables al texto legal.
         assert!(organizations_for("BR").is_empty());
         assert!(organizations_for("US").is_empty());
+    }
+
+    #[test]
+    fn alias_resuelve_terminos_industriales_y_ambiguos() {
+        let aeo = alias_for("AEO7").expect("AEO7 debe resolverse");
+        assert_eq!(aeo.cids, vec![76459, 76457]);
+        assert!(!aeo.nota.is_empty());
+        assert_eq!(alias_for("alcohol etoxilado").unwrap().id, aeo.id);
+        assert_eq!(alias_for("Éter").unwrap().cids, vec![3283]);
+        assert_eq!(alias_for("ETER").unwrap().cids, vec![3283]);
+        assert_eq!(alias_for("dietil eter").unwrap().cids, vec![3283]);
+        assert!(alias_for("acetona").is_none());
     }
 
     #[test]

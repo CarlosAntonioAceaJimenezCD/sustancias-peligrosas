@@ -1,0 +1,38 @@
+{
+  "alias": [
+    {
+      "id": "eter",
+      "terminos": [
+        "eter",
+        "etere",
+        "ether",
+        "dietil eter",
+        "dietileter",
+        "diethyl ether",
+        "ethyl ether",
+        "etil eter",
+        "eter etilico"
+      ],
+      "cids": [3283],
+      "nota": "«Éter» designa una familia de compuestos; se muestra el dietiléter (etoxyetano), el disolvente habitual al que suele referirse este nombre."
+    },
+    {
+      "id": "alcohol-etoxilado",
+      "terminos": [
+        "alcohol etoxilado",
+        "alcohol etoxilado 7",
+        "alcohol etoxilado aeo7",
+        "alcoholes etoxilados",
+        "aeo7",
+        "aeo 7",
+        "aeo-7",
+        "ethoxylated alcohol",
+        "ethoxylated alcohols",
+        "alcohol ethoxylate",
+        "alcohol ethoxylates"
+      ],
+      "cids": [76459, 76457],
+      "nota": "Los alcoholes etoxilados (AEO) son mezclas industriales. Se muestran compuestos representantes: heptaethylene glycol dodecyl ether (C12E7, 7 unidades de óxido de etileno) y laureth-2."
+    }
+  ]
+}

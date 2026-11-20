@@ -190,6 +190,7 @@ font-size:11px;line-height:1.55;color:#b9c3ce;margin:0 0 14px}
 .online-resultado{display:flex;justify-content:space-between;align-items:center;gap:10px;border:1px solid var(--line);border-radius:6px;background:var(--card-alt);padding:9px 11px;margin-bottom:6px}
 .online-resultado strong{display:block;font-size:12px;color:#e6edf3}
 .online-meta{display:block;font-size:10px;color:var(--muted);margin-top:2px}
+.online-nota{margin:6px 0 0;font-size:10px;line-height:1.45;color:#d29922;border-left:2px solid #d29922;padding-left:7px}
 .online-resultado .boton{white-space:nowrap;font-size:11px}
 .badge-online{background:rgba(56,139,253,.15);color:#79c0ff;border-color:rgba(56,139,253,.45)}
 .badge-danger{background:rgba(248,81,73,.12);color:#ff7b72;border-color:rgba(248,81,73,.35)}
@@ -603,31 +604,34 @@ fn App() -> Element {
         online_cargando.set(true);
         spawn(async move {
             let base = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound";
-            let mut cids: Vec<u64> = Vec::new();
-            for variante in core::search_variants(&texto) {
-                for modo in ["?language=all", "?name_type=word"] {
-                    let cid_url = format!(
-                        "{}/name/{}/cids/JSON{}",
-                        base,
-                        urlencoding::encode(&variante),
-                        modo
-                    );
-                    if let Ok(v) = http_get_json(&cid_url).await {
-                        let encontrados: Vec<u64> = serde_json::from_value(
-                            v.get("IdentifierList")
-                                .and_then(|x| x.get("CID"))
-                                .cloned()
-                                .unwrap_or_default(),
-                        )
-                        .unwrap_or_default();
-                        if !encontrados.is_empty() {
-                            cids = encontrados;
-                            break;
+            let alias = core::alias_for(&texto);
+            let mut cids: Vec<u64> = alias.map(|a| a.cids.clone()).unwrap_or_default();
+            if cids.is_empty() {
+                for variante in core::search_variants(&texto) {
+                    for modo in ["?language=all", "?name_type=word"] {
+                        let cid_url = format!(
+                            "{}/name/{}/cids/JSON{}",
+                            base,
+                            urlencoding::encode(&variante),
+                            modo
+                        );
+                        if let Ok(v) = http_get_json(&cid_url).await {
+                            let encontrados: Vec<u64> = serde_json::from_value(
+                                v.get("IdentifierList")
+                                    .and_then(|x| x.get("CID"))
+                                    .cloned()
+                                    .unwrap_or_default(),
+                            )
+                            .unwrap_or_default();
+                            if !encontrados.is_empty() {
+                                cids = encontrados;
+                                break;
+                            }
                         }
                     }
-                }
-                if !cids.is_empty() {
-                    break;
+                    if !cids.is_empty() {
+                        break;
+                    }
                 }
             }
 
@@ -668,6 +672,9 @@ fn App() -> Element {
                 if let Some(mut c) = compuesto {
                     c.synonyms = sinonimos;
                     c.lang = lang.clone();
+                    if let Some(a) = alias {
+                        c.nota = a.nota.clone();
+                    }
                     resultados.push(c);
                 }
             }
@@ -1028,6 +1035,9 @@ fn App() -> Element {
                                 div {
                                     strong { "{core::localized_name(&p.synonyms, &output_lang()).unwrap_or_else(|| p.title.clone())}" }
                                     span { class: "online-meta", "CID {p.cid} · {p.molecular_formula} · {p.molecular_weight} g/mol" }
+                                    if !p.nota.is_empty() {
+                                        p { class: "online-nota", "{p.nota}" }
+                                    }
                                 }
                                 div { class: "online-acciones",
                                     button {
