@@ -1002,8 +1002,6 @@ fn App() -> Element {
                         div { class: "boe-resultados",
                             if boe_cargando() {
                                 p { class: "vacio", "Consultando la API de datos abiertos del BOE…" }
-                            } else if !boe_termino().is_empty() {
-                                p { class: "vacio", "No se encontraron normas en el BOE para «{boe_termino()}»." }
                             } else if !boe_resultados().is_empty() {
                                 for n in boe_resultados().iter() {
                                     div { class: "norma",
@@ -1028,6 +1026,8 @@ fn App() -> Element {
                                         " Última actualización: {boe_resultados()[0].fecha_formateada()}."
                                     }
                                 }
+                            } else if !boe_termino().is_empty() {
+                                p { class: "vacio", "No se encontraron normas en el BOE para «{boe_termino()}»." }
                             }
                         }
                     }
