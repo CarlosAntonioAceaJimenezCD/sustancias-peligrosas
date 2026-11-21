@@ -155,7 +155,19 @@ Al seleccionar **Cuba**, cada norma ofrece **«Leer norma íntegra»** (texto ex
 - **CSP:** el workflow inyecta una *Content-Security-Policy* en `index.html` y `404.html`. GitHub Pages no permite cabeceras HTTP propias, pero la meta tag restringe scripts, estilos, imágenes y destinos de red a los dominios necesarios (PubChem, Google Translate y BOE).
 - **Validación de entrada:** se rechazan búsquedas formadas solo por emoji, puntuación o dígitos sueltos, que generaban resultados aleatorios en PubChem.
 - **Errores de red diferenciados:** un fallo de conexión se distingue de «sin resultados» y se indica al usuario.
-- **Sin `unsafe`:** no hay bloques `unsafe` en el workspace. El HTML dinámico se limita a iconos y banderas controladas; los datos externos se renderizan como texto escapado.
+- **Sin `unsafe`:** no hay bloques `unsafe` en el workspace.
+
+- **Avisos transitivos aceptados:** `cargo audit` informa 5 avisos de severidad *warning* en dependencias transitivas de Dioxus/WebKit que no se pueden actualizar desde este repositorio. El CI los ignora explícitamente, con los IDs registrados:
+
+| ID | Crate | Motivo |
+|---|---|---|
+| RUSTSEC-2025-0057 | `fxhash` | No mantenida; sin versión corregida |
+| RUSTSEC-2024-0436 | `paste` | No mantenida; sin versión corregida |
+| RUSTSEC-2024-0370 | `proc-macro-error` | No mantenida; sin versión corregida |
+| RUSTSEC-2024-0429 | `glib` | Requiere `>=0.20` (lo fija el backend WebKitGTK) |
+| RUSTSEC-2026-0097 | `rand` | Requiere `>=0.8.6` (dependencia transitiva) |
+
+Ninguno es explotable desde la interfaz web: afectan a macros en tiempo de compilación y al backend nativo de escritorio. Se revisarán al actualizar Dioxus. El HTML dinámico se limita a iconos y banderas controladas; los datos externos se renderizan como texto escapado.
 
 ## Despliegue
 
