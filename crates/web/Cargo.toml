@@ -14,9 +14,11 @@ urlencoding = "2"
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
 gloo-net = { version = "0.8", features = ["http", "json"] }
+js-sys = "0.3"
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 sustancias-storage = { path = "../storage" }
+chrono = { version = "0.4", default-features = false, features = ["clock", "std"] }
 reqwest = { version = "0.12", default-features = false, features = ["rustls-tls", "json"] }
 webbrowser = "1"
 

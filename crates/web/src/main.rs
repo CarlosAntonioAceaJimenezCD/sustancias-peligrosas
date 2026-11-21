@@ -475,6 +475,7 @@ fn icon(name: &str, class: &str) -> String {
         "plus" => ("0 0 24 24", r#"<path d="M12 5v14M5 12h14"/>"#),
         "sun" => ("0 0 24 24", r#"<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>"#),
         "moon" => ("0 0 24 24", r#"<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>"#),
+        "clock" => ("0 0 24 24", r#"<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>"#),
         _ => ("0 0 24 24", ""),
     };
     format!("<svg class=\"{}\" viewBox=\"{}\">{}</svg>", class, view, body)
@@ -715,6 +716,27 @@ fn nombre_visible(c: &core::PubChemCompound, lang: &str) -> String {
         .unwrap_or_else(|| c.title.clone())
 }
 
+/// Hora local del dispositivo (zona horaria del usuario).
+fn hora_local() -> u32 {
+    #[cfg(target_arch = "wasm32")]
+    {
+        js_sys::Date::new_0().get_hours()
+    }
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        chrono::Timelike::hour(&chrono::Local::now())
+    }
+}
+
+/// Resuelve el tema efectivo: la preferencia manual gana; «auto» usa la hora.
+fn tema_efectivo(preferencia: &str) -> &'static str {
+    match preferencia {
+        "light" => "light",
+        "dark" => "dark",
+        _ => core::tema_por_hora(hora_local()),
+    }
+}
+
 /// Siluetas de los continentes en negro (derivadas de un mapa GeoJSON público).
 fn continent_svg(name: &str, class: &str) -> String {
     let d = match name {
@@ -824,7 +846,8 @@ fn App() -> Element {
     let mut boe_cargando: Signal<bool> = use_signal(|| false);
     let mut boe_termino: Signal<String> = use_signal(String::new);
     let mut output_lang: Signal<String> = use_signal(|| "es".to_string());
-    let mut theme: Signal<String> = use_signal(|| "dark".to_string());
+    let mut theme: Signal<String> = use_signal(|| "auto".to_string());
+    let mut tema_actual: Signal<String> = use_signal(|| core::tema_por_hora(hora_local()).to_string());
     let mut feedback_tipo: Signal<String> = use_signal(|| "Sugerencia".to_string());
     let mut feedback_titulo: Signal<String> = use_signal(String::new);
     let mut feedback_texto: Signal<String> = use_signal(String::new);
@@ -1043,12 +1066,24 @@ fn App() -> Element {
         });
     };
 
-    // Restaura el tema guardado antes del primer render. Se hace con eval sin
-    // recv para no bloquear: el CSS ya aplica prefers-color-scheme mientras tanto.
+    // Restaura la preferencia guardada (auto/claro/oscuro) y aplica el tema
+    // efectivo. «auto» se resuelve con la hora local de la zona horaria.
     use_effect(move || {
-        dioxus::document::eval(
-            "try{var t=localStorage.getItem('sustancias-theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}}catch(e){}",
-        );
+        spawn(async move {
+            let mut evaluar = dioxus::document::eval(
+                "(function(){try{return localStorage.getItem('sustancias-theme')||'auto'}catch(e){return 'auto'}})()",
+            );
+            if let Ok(valor) = evaluar.recv::<serde_json::Value>().await {
+                let preferencia = valor.as_str().unwrap_or("auto").to_string();
+                let efectivo = tema_efectivo(&preferencia);
+                theme.set(preferencia);
+                tema_actual.set(efectivo.to_string());
+                dioxus::document::eval(&format!(
+                    "document.documentElement.dataset.theme={:?}",
+                    efectivo
+                ));
+            }
+        });
     });
 
     let continentes = vec![
@@ -1094,7 +1129,16 @@ fn App() -> Element {
         }
     };
 
-    let tema_icono = if theme() == "dark" { "sun" } else { "moon" };
+    let tema_icono = match theme().as_str() {
+        "auto" => "clock",
+        "light" => "sun",
+        _ => "moon",
+    };
+    let tema_titulo = match theme().as_str() {
+        "auto" => "Tema automático según tu zona horaria · cambiar a claro",
+        "light" => "Tema claro · cambiar a oscuro",
+        _ => "Tema oscuro · cambiar a automático",
+    };
 
     rsx! {
         style { {CSS} }
@@ -1134,14 +1178,20 @@ fn App() -> Element {
             div { class: "cabecera-derecha",
                 button {
                     class: "tema-boton",
-                    aria_label: if theme() == "dark" { "Cambiar a tema claro" } else { "Cambiar a tema oscuro" },
-                    title: if theme() == "dark" { "Tema claro" } else { "Tema oscuro" },
+                    aria_label: "{tema_titulo}",
+                    title: "{tema_titulo}",
                     onclick: move |_| {
-                        let nuevo = if theme() == "dark" { "light" } else { "dark" };
+                        let nuevo = match theme().as_str() {
+                            "auto" => "light",
+                            "light" => "dark",
+                            _ => "auto",
+                        };
+                        let efectivo = tema_efectivo(nuevo);
                         theme.set(nuevo.to_string());
+                        tema_actual.set(efectivo.to_string());
                         dioxus::document::eval(&format!(
                             "try{{document.documentElement.dataset.theme={:?};localStorage.setItem('sustancias-theme',{:?});}}catch(e){{}}",
-                            nuevo, nuevo
+                            efectivo, nuevo
                         ));
                     },
                     dangerous_inner_html: "{icon(tema_icono, \"ico\")}"

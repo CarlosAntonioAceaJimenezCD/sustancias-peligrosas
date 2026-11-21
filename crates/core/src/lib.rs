@@ -342,6 +342,14 @@ pub struct PairAnalysis {
 // Carga de datos
 // ---------------------------------------------------------------------------
 
+/// Devuelve el tema adecuado según la hora local (modo «automático»).
+///
+/// De 07:00 a 19:00 se usa el tema claro; el resto del día, el oscuro, para
+/// no deslumbrar al usuario cuando ya es de noche en su zona horaria.
+pub fn tema_por_hora(hora: u32) -> &'static str {
+    if (7..19).contains(&hora) { "light" } else { "dark" }
+}
+
 /// Carga y devuelve todos los países disponibles (datos cacheados).
 pub fn countries() -> Vec<Country> {
     static CACHE: OnceLock<CountriesDb> = OnceLock::new();
@@ -1307,6 +1315,16 @@ mod tests {
         let variantes = name_variants("Ácido sulfúrico");
         assert_eq!(variantes[0], "sulfuric acid");
         assert_eq!(variantes[1], "acido sulfurico");
+    }
+
+    #[test]
+    fn tema_segun_hora_local() {
+        assert_eq!(tema_por_hora(6), "dark");
+        assert_eq!(tema_por_hora(7), "light");
+        assert_eq!(tema_por_hora(13), "light");
+        assert_eq!(tema_por_hora(18), "light");
+        assert_eq!(tema_por_hora(19), "dark");
+        assert_eq!(tema_por_hora(23), "dark");
     }
 
     #[test]
