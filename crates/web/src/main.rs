@@ -16,17 +16,16 @@ const CSS: &str = r#"
 :root{
   color-scheme:dark;
 
-  /* --- Primitivos: escalas (no se usan directamente en componentes) --- */
+  /* --- Primitivos compartidos --- */
   --gray-950:#090d12; --gray-900:#0d1117; --gray-850:#11161d; --gray-800:#161b22;
   --gray-750:#1c2128; --gray-700:#21262d; --gray-650:#2a313a; --gray-600:#30363d;
   --gray-500:#484f58; --gray-400:#6e7681; --gray-300:#8b949e; --gray-200:#b9c3ce;
   --gray-100:#e6edf3; --gray-50:#f0f6fc;
-  --blue-900:#101d33; --blue-800:#12213a; --blue-700:#1b2c4f; --blue-400:#79c0ff;
-  --blue-500:#58a6ff; --blue-600:#388bfd;
+  --blue-500:#58a6ff; --blue-400:#79c0ff; --blue-700:#1b2c4f; --blue-800:#12213a;
   --green-500:#3fb950; --green-600:#2ea043; --green-700:#238636;
   --amber-500:#d29922; --amber-300:#e3b341; --red-500:#f85149; --purple-500:#a371f7;
 
-  /* --- Semánticos: contratos que los componentes consumen --- */
+  /* --- Semánticos: tema oscuro (instrumental) --- */
   --bg:var(--gray-900); --surface:var(--gray-800); --surface-2:var(--gray-750);
   --card:var(--gray-800); --card-alt:var(--gray-750); --raised:var(--gray-700);
   --ink:var(--gray-200); --ink-strong:var(--gray-50); --muted:var(--gray-300);
@@ -35,15 +34,15 @@ const CSS: &str = r#"
   --accent-soft:rgba(88,166,255,.14); --accent-line:rgba(88,166,255,.38);
   --purple:var(--purple-500); --ok:var(--green-500); --warn:var(--amber-500);
   --danger:var(--red-500); --focus:var(--blue-400);
+  --banner-a:#12213a; --banner-b:#1b2c4f; --banner-c:#241d42; --banner-text:#b8c7da;
+  --lab-grid:rgba(88,166,255,.045); --lab-line:rgba(88,166,255,.12);
 
-  /* --- Escala de espaciado, radios y sombras --- */
   --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px; --sp-5:20px; --sp-6:24px; --sp-8:32px;
   --r-sm:6px; --r-md:8px; --r-lg:12px; --r-pill:2em;
   --shadow-1:0 2px 8px rgba(0,0,0,.24);
   --shadow-2:0 10px 28px rgba(0,0,0,.34);
   --shadow-3:0 24px 60px rgba(0,0,0,.55);
 
-  /* --- Tipografía fluida: escala modular sin saltos de breakpoint --- */
   --font-sans:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif;
   --font-mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
   --step--1:clamp(.78rem,.76rem + .10vw,.84rem);
@@ -55,14 +54,50 @@ const CSS: &str = r#"
   --ease:cubic-bezier(.2,.7,.3,1); --dur:150ms;
 }
 
+/* --- Tema claro suave: papel de laboratorio, sin blanco deslumbrante --- */
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:#eef2f6; --surface:#f6f9fb; --surface-2:#ffffff;
+  --card:#f6f9fb; --card-alt:#ffffff; --raised:#e7edf3;
+  --ink:#2a3644; --ink-strong:#152130; --muted:#5b6b7c;
+  --line:#ccd6e0; --line-soft:#dde5ed;
+  --accent:#0b5d8f; --accent-strong:#08466d;
+  --accent-soft:rgba(11,93,143,.10); --accent-line:rgba(11,93,143,.30);
+  --purple:#6d4a9c; --ok:#1a7f37; --warn:#8a5a00; --danger:#b42318; --focus:#0b5d8f;
+  --banner-a:#dae6f1; --banner-b:#cfdcec; --banner-c:#e3dcf0; --banner-text:#34485d;
+  --lab-grid:rgba(11,93,143,.055); --lab-line:rgba(11,93,143,.14);
+  --shadow-1:0 2px 8px rgba(21,33,48,.07);
+  --shadow-2:0 10px 28px rgba(21,33,48,.10);
+  --shadow-3:0 24px 60px rgba(21,33,48,.16);
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    color-scheme:light;
+    --bg:#eef2f6; --surface:#f6f9fb; --surface-2:#ffffff;
+    --card:#f6f9fb; --card-alt:#ffffff; --raised:#e7edf3;
+    --ink:#2a3644; --ink-strong:#152130; --muted:#5b6b7c;
+    --line:#ccd6e0; --line-soft:#dde5ed;
+    --accent:#0b5d8f; --accent-strong:#08466d;
+    --accent-soft:rgba(11,93,143,.10); --accent-line:rgba(11,93,143,.30);
+    --purple:#6d4a9c; --ok:#1a7f37; --warn:#8a5a00; --danger:#b42318; --focus:#0b5d8f;
+    --banner-a:#dae6f1; --banner-b:#cfdcec; --banner-c:#e3dcf0; --banner-text:#34485d;
+    --lab-grid:rgba(11,93,143,.055); --lab-line:rgba(11,93,143,.14);
+    --shadow-1:0 2px 8px rgba(21,33,48,.07);
+    --shadow-2:0 10px 28px rgba(21,33,48,.10);
+    --shadow-3:0 24px 60px rgba(21,33,48,.16);
+  }
+}
+
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   margin:0;font-family:var(--font-sans);font-size:var(--step-0);line-height:1.6;
   color:var(--ink);background:var(--bg);
   background-image:
-    radial-gradient(1100px 520px at 50% -12%,rgba(88,166,255,.10),transparent 68%),
-    radial-gradient(700px 420px at 100% 0%,rgba(163,113,247,.06),transparent 65%);
+    linear-gradient(var(--lab-grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--lab-grid) 1px,transparent 1px),
+    radial-gradient(1100px 520px at 50% -12%,rgba(88,166,255,.10),transparent 68%);
+  background-size:32px 32px,32px 32px,auto;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
   min-height:100dvh;
 }
@@ -82,7 +117,13 @@ body{
 /* --- Cabecera --- */
 .cabecera{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-4);
   padding:var(--sp-3) var(--sp-6);background:color-mix(in srgb,var(--surface) 88%,transparent);
-  border-bottom:1px solid var(--line);backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
+  border-bottom:1px solid var(--line);border-top:2px solid var(--accent-line);
+  backdrop-filter:blur(12px);position:sticky;top:0;z-index:30}
+.cabecera-derecha{display:flex;align-items:center;gap:var(--sp-2)}
+.tema-boton{display:grid;place-items:center;width:40px;height:40px;border:1px solid var(--line);
+  border-radius:var(--r-sm);background:var(--surface-2);color:var(--accent);cursor:pointer;
+  transition:all var(--dur) var(--ease)}
+.tema-boton:hover{border-color:var(--accent-line);background:var(--accent-soft);transform:translateY(-1px)}
 .marca{display:flex;gap:var(--sp-3);align-items:center}
 .marca-icono{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line-soft);
   border-radius:var(--r-md);color:var(--accent);background:var(--surface-2);
@@ -92,6 +133,7 @@ body{
 
 /* --- Badges --- */
 .badge{display:inline-flex;align-items:center;gap:var(--sp-1);padding:2px 9px;border-radius:var(--r-pill);
+  font-family:var(--font-mono);letter-spacing:.03em;text-transform:uppercase;
   font-size:var(--step--1);font-weight:650;line-height:1.5;background:var(--accent-soft);
   color:var(--accent);border:1px solid var(--accent-line);white-space:nowrap}
 .badge-suave{background:var(--surface-2);color:var(--muted);border-color:var(--line)}
@@ -105,10 +147,10 @@ body{
 /* --- Banner del país --- */
 .banner{margin:var(--sp-5) auto 0;max-width:1180px;padding:var(--sp-5) var(--sp-6);
   border-radius:var(--r-lg);display:flex;align-items:center;gap:var(--sp-5);
-  background:linear-gradient(115deg,var(--blue-800),var(--blue-700) 58%,#241d42);
-  border:1px solid rgba(121,192,255,.24);box-shadow:var(--shadow-2);position:relative;overflow:hidden}
+  background:linear-gradient(115deg,var(--banner-a),var(--banner-b) 58%,var(--banner-c));
+  border:1px solid var(--accent-line);box-shadow:var(--shadow-2);position:relative;overflow:hidden}
 .banner::after{content:"";position:absolute;inset:0;pointer-events:none;
-  background:linear-gradient(90deg,transparent 55%,rgba(163,113,247,.12));mix-blend-mode:screen}
+  background:linear-gradient(90deg,transparent 55%,var(--lab-grid));mix-blend-mode:screen}
 .flag{width:30px;height:20px;display:block;border-radius:3px;box-shadow:0 0 0 1px rgba(255,255,255,.22)}
 .flag-lg{width:56px;height:38px;border-radius:var(--r-sm)}
 .banner-pais-grande{display:grid;place-items:center;width:66px;height:66px;border-radius:var(--r-md);
@@ -117,9 +159,9 @@ body{
   font-size:var(--step-2);font-weight:750;letter-spacing:.02em;flex:none}
 .banner-texto{flex:1;min-inline-size:0}.banner-texto h2{margin:0 0 var(--sp-1);
   font-size:var(--step-3);color:var(--ink-strong);font-weight:700;letter-spacing:-.02em;text-wrap:balance}
-.banner-texto p{margin:0;color:#b8c7da;font-size:var(--step-0);max-width:72ch;line-height:1.6}
+.banner-texto p{margin:0;color:var(--banner-text);font-size:var(--step-0);max-width:72ch;line-height:1.6}
 .banner-pais{font-size:var(--step--1);font-weight:700;letter-spacing:.06em;padding:5px 13px;
-  border-radius:var(--r-pill);color:#cbd8e8;border:1px solid rgba(203,216,232,.3);white-space:nowrap}
+  border-radius:var(--r-pill);color:var(--banner-text);border:1px solid var(--accent-line);white-space:nowrap}
 
 /* --- Contenedor principal: grid con pistas intrínsecas --- */
 .contenido{max-width:1180px;margin:var(--sp-5) auto 110px;padding:0 var(--sp-5);
@@ -218,11 +260,11 @@ body{
   padding:4px 9px;font-size:var(--step--1);font-weight:650;color:var(--muted);font-family:var(--font-mono)}
 .fds-index{display:flex;flex-wrap:wrap;gap:var(--sp-1);border:1px solid var(--line);border-radius:var(--r-sm);
   padding:var(--sp-2);margin-bottom:var(--sp-4);background:var(--surface-2)}
-.fds-index a{font-size:var(--step--1);color:var(--muted);text-decoration:none;
+.fds-index a{font-size:var(--step--1);font-family:var(--font-mono);color:var(--muted);text-decoration:none;
   border:1px solid var(--line);border-radius:var(--r-sm);padding:3px 7px;
   transition:all var(--dur) var(--ease)}
 .fds-index a:hover{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
-.seccion{margin:var(--sp-4) 0;border-left:2px solid var(--blue-700);padding-left:var(--sp-3);scroll-margin-top:80px}
+.seccion{margin:var(--sp-4) 0;border-left:2px solid var(--accent-line);box-shadow:inset 1px 0 0 var(--lab-line);padding-left:var(--sp-3);scroll-margin-top:80px}
 .seccion h5{margin:0 0 var(--sp-2);font-size:var(--step--1);text-transform:uppercase;
   letter-spacing:.09em;color:var(--accent);font-weight:750}
 .seccion p{margin:0 0 var(--sp-2);font-size:var(--step-0);line-height:1.7;color:var(--gray-200);max-width:72ch}
@@ -340,7 +382,8 @@ body{
 .boe-atribucion{font-size:var(--step--1)!important;color:var(--muted)!important;margin:var(--sp-2) 0 0!important;line-height:1.5!important}
 .boe-atribucion a{color:var(--accent)}
 .leyenda-grupo{margin:var(--sp-4) 0 var(--sp-1);font-size:var(--step--1);text-transform:uppercase;
-  letter-spacing:.09em;color:var(--muted);font-weight:750;display:flex;align-items:center;gap:var(--sp-2)}
+  letter-spacing:.09em;color:var(--muted);font-weight:750;display:flex;align-items:center;gap:var(--sp-2);
+  font-family:var(--font-mono)}
 .leyenda-grupo::after{content:"";flex:1;height:1px;background:var(--line)}
 .portales{border:1px solid var(--line);border-radius:var(--r-sm);padding:var(--sp-3);
   background:var(--surface-2);margin-bottom:var(--sp-1)}
@@ -430,6 +473,8 @@ fn icon(name: &str, class: &str) -> String {
         "check" => ("0 0 24 24", r#"<path d="M20 6L9 17l-5-5"/>"#),
         "info" => ("0 0 24 24", r#"<circle cx="12" cy="12" r="10"/><path d="M12 16v-5M12 8h.01"/>"#),
         "plus" => ("0 0 24 24", r#"<path d="M12 5v14M5 12h14"/>"#),
+        "sun" => ("0 0 24 24", r#"<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>"#),
+        "moon" => ("0 0 24 24", r#"<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>"#),
         _ => ("0 0 24 24", ""),
     };
     format!("<svg class=\"{}\" viewBox=\"{}\">{}</svg>", class, view, body)
@@ -779,6 +824,7 @@ fn App() -> Element {
     let mut boe_cargando: Signal<bool> = use_signal(|| false);
     let mut boe_termino: Signal<String> = use_signal(String::new);
     let mut output_lang: Signal<String> = use_signal(|| "es".to_string());
+    let mut theme: Signal<String> = use_signal(|| "dark".to_string());
     let mut feedback_tipo: Signal<String> = use_signal(|| "Sugerencia".to_string());
     let mut feedback_titulo: Signal<String> = use_signal(String::new);
     let mut feedback_texto: Signal<String> = use_signal(String::new);
@@ -997,6 +1043,14 @@ fn App() -> Element {
         });
     };
 
+    // Restaura el tema guardado antes del primer render. Se hace con eval sin
+    // recv para no bloquear: el CSS ya aplica prefers-color-scheme mientras tanto.
+    use_effect(move || {
+        dioxus::document::eval(
+            "try{var t=localStorage.getItem('sustancias-theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;}}catch(e){}",
+        );
+    });
+
     let continentes = vec![
         "Marco internacional", "America", "Europa", "Africa", "Asia", "Oceania",
     ];
@@ -1040,6 +1094,8 @@ fn App() -> Element {
         }
     };
 
+    let tema_icono = if theme() == "dark" { "sun" } else { "moon" };
+
     rsx! {
         style { {CSS} }
         a { class: "skip-link", href: "#panel-sustancia", "Saltar al buscador" }
@@ -1075,7 +1131,23 @@ fn App() -> Element {
                     small { "Marco legal y fichas técnicas" }
                 }
             }
-            span { class: "badge badge-suave", "{country.codigo}" }
+            div { class: "cabecera-derecha",
+                button {
+                    class: "tema-boton",
+                    aria_label: if theme() == "dark" { "Cambiar a tema claro" } else { "Cambiar a tema oscuro" },
+                    title: if theme() == "dark" { "Tema claro" } else { "Tema oscuro" },
+                    onclick: move |_| {
+                        let nuevo = if theme() == "dark" { "light" } else { "dark" };
+                        theme.set(nuevo.to_string());
+                        dioxus::document::eval(&format!(
+                            "try{{document.documentElement.dataset.theme={:?};localStorage.setItem('sustancias-theme',{:?});}}catch(e){{}}",
+                            nuevo, nuevo
+                        ));
+                    },
+                    dangerous_inner_html: "{icon(tema_icono, \"ico\")}"
+                }
+                span { class: "badge badge-suave", "{country.codigo}" }
+            }
         }
 
         section { class: "banner",
