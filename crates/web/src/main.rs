@@ -2,6 +2,9 @@ use dioxus::prelude::*;
 use sustancias_core as core;
 use sustancias_i18n::Translator;
 
+/// URL canónica del repositorio, reutilizada en feedback, redes y footer.
+const GITHUB_URL: &str = "https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas";
+
 mod flags_extra;
 
 const CSS: &str = r#"
@@ -308,16 +311,6 @@ async fn descargar_nativo(
         .map_err(|e| format!("Error al guardar: {e}"))
 }
 
-/// Abre GitHub Issues con un reporte precargado (solo en nativo).
-#[cfg(not(target_arch = "wasm32"))]
-fn abrir_feedback(titulo: &str, cuerpo: &str) {
-    let url = format!(
-        "https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas/issues/new?title={}&body={}",
-        urlencoding::encode(titulo),
-        urlencoding::encode(cuerpo)
-    );
-    let _ = webbrowser::open(&url);
-}
 
 /// Tipos neutrales (existen en web y nativo) para no condicionar el RSX.
 #[derive(Clone, Debug)]
@@ -425,22 +418,72 @@ fn guardar_opciones(o: &AppOptions) {
 #[cfg(target_arch = "wasm32")]
 fn guardar_opciones(_o: &AppOptions) {}
 
-/// Abre el issue de GitHub con el reporte ya redactado (web).
-#[cfg(target_arch = "wasm32")]
-fn abrir_issue(titulo: &str, cuerpo: &str) {
-    let url = format!(
-        "https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas/issues/new?title={}&body={}",
-        urlencoding::encode(titulo),
-        urlencoding::encode(cuerpo)
-    );
-    let js = format!("window.open({:?}, '_blank');", url);
-    dioxus::document::eval(&js);
+/// Tipo de documento para la descarga compartida.
+#[allow(dead_code)]
+#[derive(Clone, Copy)]
+enum DocKind {
+    Substance,
+    Legislation,
 }
 
-/// Abre el issue de GitHub con el reporte ya redactado (nativo).
-#[cfg(not(target_arch = "wasm32"))]
+/// Descarga un documento con el mismo efecto en web y en nativo.
+#[allow(unused_mut)]
+fn descargar_documento(
+    url: String,
+    nombre: String,
+    titulo: String,
+    kind: DocKind,
+    opciones: AppOptions,
+    mut guardados: Signal<Vec<SavedDocView>>,
+    mut estado: Signal<String>,
+) {
+    #[cfg(target_arch = "wasm32")]
+    {
+        dioxus::document::eval(&js_descargar(&url, &nombre));
+        let _ = (titulo, kind, opciones, guardados, estado);
+    }
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        let opciones = opciones.clone();
+        let auto = opciones.auto_report;
+        let doc_kind = match kind {
+            DocKind::Substance => sustancias_storage::DocumentKind::Substance,
+            DocKind::Legislation => sustancias_storage::DocumentKind::Legislation,
+        };
+        spawn(async move {
+            match descargar_nativo(url, titulo, nombre, doc_kind, opciones).await {
+                Ok(_) => {
+                    guardados.set(cargar_guardados());
+                    estado.set("Guardado sin conexión y copiado a Descargas".to_string());
+                }
+                Err(e) => {
+                    if auto {
+                        abrir_issue("Error al descargar documento", &e);
+                    }
+                    estado.set(e);
+                }
+            }
+        });
+    }
+}
+
+/// Construye la URL de un issue de GitHub ya redactado.
+fn url_issue(titulo: &str, cuerpo: &str) -> String {
+    format!(
+        "{}/issues/new?title={}&body={}",
+        GITHUB_URL,
+        urlencoding::encode(titulo),
+        urlencoding::encode(cuerpo)
+    )
+}
+
+/// Abre el issue con el reporte ya redactado, en web o en nativo.
 fn abrir_issue(titulo: &str, cuerpo: &str) {
-    abrir_feedback(titulo, cuerpo);
+    let url = url_issue(titulo, cuerpo);
+    #[cfg(target_arch = "wasm32")]
+    dioxus::document::eval(&format!("window.open({:?}, '_blank');", url));
+    #[cfg(not(target_arch = "wasm32"))]
+    let _ = webbrowser::open(&url);
 }
 
 /// Nombre a mostrar: sinónimo localizado, traducción automática o título.
@@ -1343,41 +1386,16 @@ fn App() -> Element {
                                 if !s.pdf_url.is_empty() {
                                     button {
                                         class: "boton boton-descargar",
-                                        onclick: {
-                                            let url = s.pdf_url.clone();
-                                            let nombre = core::pdf_filename(&s.pdf_url, &s.pdf_nombre);
-                                            #[cfg(target_arch = "wasm32")]
-                                            let handler = move |_| {
-                                                let js = js_descargar(&url, &nombre);
-                                                dioxus::document::eval(&js);
-                                            };
-                                            #[cfg(not(target_arch = "wasm32"))]
-                                            let handler = move |_| {
-                                                let u = url.clone();
-                                                let n = nombre.clone();
-                                                let t = s.nombre.clone();
-                                                let o = opciones();
-                                                let auto = o.auto_report;
-                                                spawn(async move {
-                                                    match descargar_nativo(
-                                                        u, t, n,
-                                                        sustancias_storage::DocumentKind::Substance,
-                                                        o,
-                                                    ).await {
-                                                        Ok(_) => {
-                                                            guardados.set(cargar_guardados());
-                                                            estado_descarga.set("Guardado sin conexión y copiado a Descargas".to_string());
-                                                        }
-                                                        Err(e) => {
-                                                            if auto {
-                                                                abrir_feedback("Error al descargar documento", &e);
-                                                            }
-                                                            estado_descarga.set(e);
-                                                        }
-                                                    }
-                                                });
-                                            };
-                                            handler
+                                        onclick: move |_| {
+                                            descargar_documento(
+                                                s.pdf_url.clone(),
+                                                core::pdf_filename(&s.pdf_url, &s.pdf_nombre),
+                                                s.nombre.clone(),
+                                                DocKind::Substance,
+                                                opciones(),
+                                                guardados,
+                                                estado_descarga,
+                                            );
                                         },
                                         span { dangerous_inner_html: "{icon(\"download\", \"ico\")}" }
                                         "Descargar FDS en PDF"
@@ -1425,39 +1443,16 @@ fn App() -> Element {
                         }
                         button {
                             class: "boton boton-descargar",
-                            onclick: {
-                                #[cfg(target_arch = "wasm32")]
-                                let handler = move |_| {
-                                    let js = js_descargar(&url, &nombre_pdf);
-                                    dioxus::document::eval(&js);
-                                };
-                                #[cfg(not(target_arch = "wasm32"))]
-                                let handler = move |_| {
-                                    let u = url.clone();
-                                    let n = nombre_pdf.clone();
-                                    let t = titulo.clone();
-                                    let o = opciones();
-                                    let auto = o.auto_report;
-                                    spawn(async move {
-                                        match descargar_nativo(
-                                            u, t, n,
-                                            sustancias_storage::DocumentKind::Legislation,
-                                            o,
-                                        ).await {
-                                            Ok(_) => {
-                                                guardados.set(cargar_guardados());
-                                                estado_descarga.set("Guardado sin conexión y copiado a Descargas".to_string());
-                                            }
-                                            Err(e) => {
-                                                if auto {
-                                                    abrir_feedback("Error al descargar documento", &e);
-                                                }
-                                                estado_descarga.set(e);
-                                            }
-                                        }
-                                    });
-                                };
-                                handler
+                            onclick: move |_| {
+                                descargar_documento(
+                                    url.clone(),
+                                    nombre_pdf.clone(),
+                                    titulo.clone(),
+                                    DocKind::Legislation,
+                                    opciones(),
+                                    guardados,
+                                    estado_descarga,
+                                );
                             },
                             span { dangerous_inner_html: "{icon(\"download\", \"ico\")}" }
                             "Descargar PDF"
@@ -1566,7 +1561,7 @@ fn App() -> Element {
                             class: "boton boton-secundario",
                             onclick: move |_| {
                                 #[cfg(not(target_arch = "wasm32"))]
-                                abrir_feedback("Feedback sobre Sustancias Peligrosas", "Cuéntanos qué funciona mal o qué te gustaría mejorar:");
+                                abrir_issue("Feedback sobre Sustancias Peligrosas", "Cuéntanos qué funciona mal o qué te gustaría mejorar:");
                             },
                             "Enviar feedback / reportar un bug"
                         }
@@ -1677,10 +1672,10 @@ fn App() -> Element {
         section { class: "panel redes-panel",
             h3 { "Redes y enlaces" }
             div { class: "redes",
-                a { href: "https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas", target: "_blank",
+                a { href: "{GITHUB_URL}", target: "_blank",
                     dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
                     "GitHub"
-                a { href: "https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas/issues", target: "_blank",
+                a { href: "{GITHUB_URL}/issues", target: "_blank",
                     dangerous_inner_html: "{icon(\"info\", \"ico\")}" }
                     "Issues"
                 a { href: "https://www.linkedin.com/", target: "_blank",
@@ -1694,7 +1689,7 @@ fn App() -> Element {
             p { "Fuentes normativas: UNECE · OMI · OIT · INSST · BOE · DOF · SINIA · Gaceta Oficial de Cuba" }
             p {
                 a {
-                    href: "https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas/issues/new",
+                    href: "{GITHUB_URL}/issues/new",
                     target: "_blank",
                     class: "link-feedback",
                     "Enviar feedback / reportar un bug"
