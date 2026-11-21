@@ -149,6 +149,14 @@ Al seleccionar **Cuba**, cada norma ofrece **«Leer norma íntegra»** (texto ex
 
 ---
 
+## Seguridad
+
+- **Auditoría automática:** el workflow ejecuta `rustsec/audit-check` en cada `push` y bloquea el despliegue si aparece una vulnerabilidad conocida (CVE) en las dependencias.
+- **CSP:** el workflow inyecta una *Content-Security-Policy* en `index.html` y `404.html`. GitHub Pages no permite cabeceras HTTP propias, pero la meta tag restringe scripts, estilos, imágenes y destinos de red a los dominios necesarios (PubChem, Google Translate y BOE).
+- **Validación de entrada:** se rechazan búsquedas formadas solo por emoji, puntuación o dígitos sueltos, que generaban resultados aleatorios en PubChem.
+- **Errores de red diferenciados:** un fallo de conexión se distingue de «sin resultados» y se indica al usuario.
+- **Sin `unsafe`:** no hay bloques `unsafe` en el workspace. El HTML dinámico se limita a iconos y banderas controladas; los datos externos se renderizan como texto escapado.
+
 ## Despliegue
 
 El repositorio es público y el despliegue está automatizado en `.github/workflows/deploy-pages.yml`: cada `push` a `main` compila el WASM con `dx build --release` y publica el resultado en GitHub Pages.
@@ -159,7 +167,7 @@ Paso único: **Settings → Pages → Build and deployment → Source: GitHub Ac
 
 ## Estado verificado
 
-- `cargo test --workspace`: ✅ 22 tests (core 16 + i18n 3 + storage 3)
+- `cargo test --workspace`: ✅ 23 tests (core 17 + i18n 3 + storage 3)
 - `cargo check -p sustancias-web --target wasm32-unknown-unknown`: ✅
 - `cargo check -p sustancias-web --features desktop`: ✅
 - Despliegue en GitHub Pages: ✅

@@ -603,6 +603,7 @@ fn App() -> Element {
     let mut online_resultados: Signal<Vec<core::PubChemCompound>> = use_signal(Vec::new);
     let mut online_ficha: Signal<Option<core::Substance>> = use_signal(|| None);
     let mut online_cargando: Signal<bool> = use_signal(|| false);
+    let mut online_error_red: Signal<bool> = use_signal(|| false);
     let mut boe_resultados: Signal<Vec<core::BoeNorm>> = use_signal(Vec::new);
     let mut boe_cargando: Signal<bool> = use_signal(|| false);
     let mut boe_termino: Signal<String> = use_signal(String::new);
@@ -665,11 +666,14 @@ fn App() -> Element {
     let interactions = core::analyze_interactions_named(&multi_id_list, &multi_names);
 
     let mut buscar_pubchem = move |texto: String, lang: String| {
-        if texto.trim().len() < 2 {
+        if texto.trim().len() < 2 || !core::es_consulta_valida(&texto) {
             online_resultados.set(Vec::new());
+            online_error_red.set(false);
+            online_cargando.set(false);
             return;
         }
         online_cargando.set(true);
+        online_error_red.set(true);
         spawn(async move {
             let base = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound";
             fn cids_de(v: serde_json::Value) -> Vec<u64> {
@@ -716,6 +720,7 @@ fn App() -> Element {
                                 modo
                             );
                             if let Ok(v) = http_get_json(&url).await {
+                                online_error_red.set(false);
                                 cids = cids_de(v);
                                 if !cids.is_empty() {
                                     break;
@@ -733,6 +738,7 @@ fn App() -> Element {
                             urlencoding::encode(formula)
                         );
                         if let Ok(v) = http_get_json(&url).await {
+                                online_error_red.set(false);
                             cids = cids_de(v);
                         }
                         if !cids.is_empty() {
@@ -756,6 +762,7 @@ fn App() -> Element {
                                     modo
                                 );
                                 if let Ok(v) = http_get_json(&url).await {
+                                online_error_red.set(false);
                                     cids = cids_de(v);
                                     if !cids.is_empty() {
                                         break;
@@ -1181,8 +1188,14 @@ fn App() -> Element {
                 div { class: "resultados-online",
                     if online_cargando() {
                         p { class: "vacio", "Consultando bases de datos oficiales…" }
-                    } else if !query().trim().is_empty() {
-                        p { class: "vacio", "No se encontraron sustancias. Prueba con otro nombre, un CAS (7664-93-9), una fórmula (H2SO4) o un código de producto (AEO7)." }
+                    } else if !query().trim().is_empty() && online_resultados().is_empty() {
+                        if online_error_red() {
+                            p { class: "vacio", "No se pudo conectar con las bases de datos. Revisa tu conexión e inténtalo de nuevo." }
+                        } else if !core::es_consulta_valida(&query()) {
+                            p { class: "vacio", "La búsqueda debe incluir al menos una letra o un identificador válido (CAS, fórmula o código de producto)." }
+                        } else {
+                            p { class: "vacio", "No se encontraron sustancias. Prueba con otro nombre, un CAS (7664-93-9), una fórmula (H2SO4) o un código de producto (AEO7)." }
+                        }
                     } else if !online_resultados().is_empty() {
                         div { class: "online-titulo",
                             span { dangerous_inner_html: "{icon(\"globe\", \"ico\")}" }

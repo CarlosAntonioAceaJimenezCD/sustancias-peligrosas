@@ -15,6 +15,18 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  audit:
+    name: Auditoría de dependencias (RustSec)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Comprobar CVEs con cargo-audit
+        uses: rustsec/audit-check@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -38,6 +50,30 @@ jobs:
       - name: Soporte de rutas del cliente
         run: cp target/dx/sustancias-web/release/web/public/index.html target/dx/sustancias-web/release/web/public/404.html
 
+      - name: Política de seguridad (CSP)
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          csp = (
+              "default-src 'self'; "
+              "script-src 'self' 'unsafe-eval' 'wasm-unsafe-eval'; "
+              "style-src 'self' 'unsafe-inline'; "
+              "img-src 'self' data:; "
+              "connect-src 'self' https://pubchem.ncbi.nlm.nih.gov "
+              "https://translate.googleapis.com https://www.boe.es; "
+              "font-src 'self' data:; object-src 'none'; base-uri 'self'"
+          )
+          meta = f'<meta http-equiv="Content-Security-Policy" content="{csp}">'
+          base = Path('target/dx/sustancias-web/release/web/public')
+          for nombre in ('index.html', '404.html'):
+              ruta = base / nombre
+              html = ruta.read_text(encoding='utf-8')
+              if 'Content-Security-Policy' not in html:
+                  html = html.replace('<head>', '<head>' + meta, 1)
+                  ruta.write_text(html, encoding='utf-8')
+          print('CSP inyectada en index.html y 404.html')
+          PY
+
       - name: Configurar Pages
         uses: actions/configure-pages@v5
 
@@ -47,7 +83,7 @@ jobs:
           path: target/dx/sustancias-web/release/web/public
 
   deploy:
-    needs: build
+    needs: [build, audit]
     runs-on: ubuntu-latest
     environment:
       name: github-pages

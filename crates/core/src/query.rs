@@ -180,6 +180,23 @@ pub fn detect_formula(query: &str) -> Option<String> {
     if simbolos > 0 { Some(q.to_string()) } else { None }
 }
 
+
+/// Comprueba que la consulta tenga contenido buscable.
+///
+/// Descarta entradas formadas solo por emoji, puntuación o dígitos sueltos:
+/// PubChem devuelve compuestos aleatorios para ese ruido. CAS, fórmulas y
+/// códigos de producto se aceptan aunque no contengan letras.
+pub fn es_consulta_valida(query: &str) -> bool {
+    let q = query.trim();
+    if q.is_empty() {
+        return false;
+    }
+    match classify(q) {
+        QueryKind::Cas(_) | QueryKind::Formula(_) | QueryKind::Product(_) => true,
+        QueryKind::Name => q.chars().any(char::is_alphabetic),
+    }
+}
+
 /// Traduce la consulta al inglés, idioma en el que PubChem indexa los nombres.
 pub fn english(query: &str) -> String {
     let base = normalize(query.trim());

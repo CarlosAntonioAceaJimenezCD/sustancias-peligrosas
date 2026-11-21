@@ -20,7 +20,9 @@ const ALIASES_JSON: &str = include_str!("../../../data/aliases.json");
 
 mod query;
 
-pub use query::{classify, detect_cas, detect_formula, english, name_variants, QueryKind};
+pub use query::{
+    classify, detect_cas, detect_formula, english, es_consulta_valida, name_variants, QueryKind,
+};
 
 // ---------------------------------------------------------------------------
 // Modelos
@@ -1305,6 +1307,18 @@ mod tests {
         let variantes = name_variants("Ácido sulfúrico");
         assert_eq!(variantes[0], "sulfuric acid");
         assert_eq!(variantes[1], "acido sulfurico");
+    }
+
+    #[test]
+    fn valida_consultas_con_ruido() {
+        assert!(es_consulta_valida("ácido sulfúrico"));
+        assert!(es_consulta_valida("7664-93-9"));
+        assert!(es_consulta_valida("H2SO4"));
+        assert!(es_consulta_valida("AEO7"));
+        assert!(!es_consulta_valida(""));
+        assert!(!es_consulta_valida("😀"));
+        assert!(!es_consulta_valida("123"));
+        assert!(!es_consulta_valida("!!!"));
     }
 
     #[test]
