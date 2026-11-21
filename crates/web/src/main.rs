@@ -605,6 +605,7 @@ fn App() -> Element {
     let mut online_cargando: Signal<bool> = use_signal(|| false);
     let mut boe_resultados: Signal<Vec<core::BoeNorm>> = use_signal(Vec::new);
     let mut boe_cargando: Signal<bool> = use_signal(|| false);
+    let mut boe_termino: Signal<String> = use_signal(String::new);
     let mut output_lang: Signal<String> = use_signal(|| "es".to_string());
     let mut feedback_tipo: Signal<String> = use_signal(|| "Sugerencia".to_string());
     let mut feedback_titulo: Signal<String> = use_signal(String::new);
@@ -956,8 +957,26 @@ fn App() -> Element {
                                         boe_resultados.set(Vec::new());
                                         return;
                                     }
+                                    // Solo caracteres alfanuméricos: evita inyectar
+                                    // sintaxis Lucene y agrupa varias palabras con AND.
+                                    let palabras: Vec<String> = value
+                                        .trim()
+                                        .split_whitespace()
+                                        .map(|w| w.chars().filter(|c| c.is_alphanumeric()).collect())
+                                        .filter(|w: &String| !w.is_empty())
+                                        .collect();
+                                    if palabras.is_empty() {
+                                        boe_resultados.set(Vec::new());
+                                        boe_termino.set(String::new());
+                                        return;
+                                    }
+                                    let consulta = if palabras.len() > 1 {
+                                        format!("titulo:({})", palabras.join(" AND "))
+                                    } else {
+                                        format!("titulo:{}", palabras[0])
+                                    };
+                                    boe_termino.set(value.trim().to_string());
                                     boe_cargando.set(true);
-                                    let consulta = format!("titulo:{}", value.trim());
                                     spawn(async move {
                                         let query = serde_json::json!({
                                             "query": { "query_string": { "query": consulta } },
@@ -983,6 +1002,8 @@ fn App() -> Element {
                         div { class: "boe-resultados",
                             if boe_cargando() {
                                 p { class: "vacio", "Consultando la API de datos abiertos del BOE…" }
+                            } else if !boe_termino().is_empty() {
+                                p { class: "vacio", "No se encontraron normas en el BOE para «{boe_termino()}»." }
                             } else if !boe_resultados().is_empty() {
                                 for n in boe_resultados().iter() {
                                     div { class: "norma",
@@ -1126,7 +1147,7 @@ fn App() -> Element {
                             output_lang.set(lang.clone());
                             buscar_pubchem(query(), lang);
                         },
-                        option { value: "auto", "Autor" }
+                        option { value: "auto", "Auto" }
                         option { value: "es", "Español" }
                         option { value: "en", "English" }
                         option { value: "fr", "Français" }
@@ -1160,6 +1181,8 @@ fn App() -> Element {
                 div { class: "resultados-online",
                     if online_cargando() {
                         p { class: "vacio", "Consultando bases de datos oficiales…" }
+                    } else if !query().trim().is_empty() {
+                        p { class: "vacio", "No se encontraron sustancias. Prueba con otro nombre, un CAS (7664-93-9), una fórmula (H2SO4) o un código de producto (AEO7)." }
                     } else if !online_resultados().is_empty() {
                         div { class: "online-titulo",
                             span { dangerous_inner_html: "{icon(\"globe\", \"ico\")}" }
