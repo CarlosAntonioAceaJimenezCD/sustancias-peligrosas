@@ -7,9 +7,7 @@
       "id": "internacional",
       "nombre": "Marco internacional",
       "codigo": "INT",
-      "tipo": "global",
       "idioma": "es",
-      "bandera": "🌐",
       "saludo": "Bienvenido al marco internacional",
       "descripcion": "SGA/GHS, convenios de la ONU y Reglamentacion Modelo para el Transporte de Mercancias Peligrosas. Aplica como base comun a todos los paises.",
       "continente": "Marco internacional"
@@ -18,9 +16,7 @@
       "id": "albania",
       "nombre": "Albania",
       "codigo": "AL",
-      "tipo": "nacional",
       "idioma": "sq",
-      "bandera": "",
       "saludo": "Bienvenido a Albania",
       "descripcion": "Se han identificado los portales oficiales de Albania. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "Europa"
@@ -29,9 +25,7 @@
       "id": "alemania",
       "nombre": "Alemania",
       "codigo": "DE",
-      "tipo": "nacional",
       "idioma": "de",
-      "bandera": "",
       "saludo": "Bienvenido a Alemania",
       "descripcion": "Marco legal de Alemania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -40,9 +34,7 @@
       "id": "andorra",
       "nombre": "Andorra",
       "codigo": "AD",
-      "tipo": "nacional",
       "idioma": "ca",
-      "bandera": "",
       "saludo": "Bienvenido a Andorra",
       "descripcion": "Se han identificado los portales oficiales de Andorra. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "Europa"
@@ -51,9 +43,7 @@
       "id": "angola",
       "nombre": "Angola",
       "codigo": "AO",
-      "tipo": "nacional",
       "idioma": "pt",
-      "bandera": "",
       "saludo": "Bienvenido a Angola",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Angola con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -62,9 +52,7 @@
       "id": "antigua-y-barbuda",
       "nombre": "Antigua Y Barbuda",
       "codigo": "AG",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Antigua Y Barbuda",
       "descripcion": "Marco legal de Antigua Y Barbuda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -73,9 +61,7 @@
       "id": "arabia-saudita",
       "nombre": "Arabia Saudita",
       "codigo": "SA",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Arabia Saudita",
       "descripcion": "Marco legal de Arabia Saudita aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -84,9 +70,7 @@
       "id": "argelia",
       "nombre": "Argelia",
       "codigo": "DZ",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Argelia",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Argelia con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -95,9 +79,7 @@
       "id": "argentina",
       "nombre": "Argentina",
       "codigo": "AR",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a Argentina",
       "descripcion": "Marco legal de Argentina aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -106,9 +88,7 @@
       "id": "armenia",
       "nombre": "Armenia",
       "codigo": "AM",
-      "tipo": "nacional",
       "idioma": "hy",
-      "bandera": "",
       "saludo": "Bienvenido a Armenia",
       "descripcion": "Marco legal de Armenia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -117,9 +97,7 @@
       "id": "australia",
       "nombre": "Australia",
       "codigo": "AU",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Australia",
       "descripcion": "Marco legal de Australia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Oceania"
@@ -128,9 +106,7 @@
       "id": "austria",
       "nombre": "Austria",
       "codigo": "AT",
-      "tipo": "nacional",
       "idioma": "de",
-      "bandera": "",
       "saludo": "Bienvenido a Austria",
       "descripcion": "Marco legal de Austria aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -139,9 +115,7 @@
       "id": "azerbaiyan",
       "nombre": "Azerbaiyán",
       "codigo": "AZ",
-      "tipo": "nacional",
       "idioma": "az",
-      "bandera": "",
       "saludo": "Bienvenido a Azerbaiyán",
       "descripcion": "Marco legal de Azerbaiyán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -150,9 +124,7 @@
       "id": "bahamas",
       "nombre": "Bahamas",
       "codigo": "BS",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Bahamas",
       "descripcion": "Marco legal de Bahamas aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -161,9 +133,7 @@
       "id": "bangladesh",
       "nombre": "Bangladés",
       "codigo": "BD",
-      "tipo": "nacional",
       "idioma": "bn",
-      "bandera": "",
       "saludo": "Bienvenido a Bangladés",
       "descripcion": "Marco legal de Bangladés aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -172,9 +142,7 @@
       "id": "barbados",
       "nombre": "Barbados",
       "codigo": "BB",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Barbados",
       "descripcion": "Marco legal de Barbados aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -183,9 +151,7 @@
       "id": "barein",
       "nombre": "Baréin",
       "codigo": "BH",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Baréin",
       "descripcion": "Marco legal de Baréin aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -194,9 +160,7 @@
       "id": "belice",
       "nombre": "Belice",
       "codigo": "BZ",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Belice",
       "descripcion": "Marco legal de Belice aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -205,9 +169,7 @@
       "id": "benin",
       "nombre": "Benín",
       "codigo": "BJ",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Benín",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Benín con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -216,9 +178,7 @@
       "id": "bielorrusia",
       "nombre": "Bielorrusia",
       "codigo": "BY",
-      "tipo": "nacional",
       "idioma": "be",
-      "bandera": "",
       "saludo": "Bienvenido a Bielorrusia",
       "descripcion": "Marco legal de Bielorrusia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -227,9 +187,7 @@
       "id": "bolivia",
       "nombre": "Bolivia",
       "codigo": "BO",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a Bolivia",
       "descripcion": "Marco legal de Bolivia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -238,9 +196,7 @@
       "id": "bosnia-y-herzegovina",
       "nombre": "Bosnia Y Herzegovina",
       "codigo": "BA",
-      "tipo": "nacional",
       "idioma": "bs",
-      "bandera": "",
       "saludo": "Bienvenido a Bosnia Y Herzegovina",
       "descripcion": "Se han identificado los portales oficiales de Bosnia Y Herzegovina. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "Europa"
@@ -249,9 +205,7 @@
       "id": "botsuana",
       "nombre": "Botsuana",
       "codigo": "BW",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Botsuana",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Botsuana con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -260,9 +214,7 @@
       "id": "brasil",
       "nombre": "Brasil",
       "codigo": "BR",
-      "tipo": "nacional",
       "idioma": "pt",
-      "bandera": "",
       "saludo": "Bienvenido a Brasil",
       "descripcion": "Marco legal de Brasil aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -271,9 +223,7 @@
       "id": "brunei",
       "nombre": "Brunei",
       "codigo": "BN",
-      "tipo": "nacional",
       "idioma": "ms",
-      "bandera": "",
       "saludo": "Bienvenido a Brunei",
       "descripcion": "Marco legal de Brunei aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -282,9 +232,7 @@
       "id": "bulgaria",
       "nombre": "Bulgaria",
       "codigo": "BG",
-      "tipo": "nacional",
       "idioma": "bg",
-      "bandera": "",
       "saludo": "Bienvenido a Bulgaria",
       "descripcion": "Marco legal de Bulgaria aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -293,9 +241,7 @@
       "id": "burkina-faso",
       "nombre": "Burkina Faso",
       "codigo": "BF",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Burkina Faso",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Burkina Faso con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -304,9 +250,7 @@
       "id": "burundi",
       "nombre": "Burundi",
       "codigo": "BI",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Burundi",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Burundi con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -315,9 +259,7 @@
       "id": "belgica",
       "nombre": "Bélgica",
       "codigo": "BE",
-      "tipo": "nacional",
       "idioma": "nl",
-      "bandera": "",
       "saludo": "Bienvenido a Bélgica",
       "descripcion": "Marco legal de Bélgica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -326,9 +268,7 @@
       "id": "cabo-verde",
       "nombre": "Cabo Verde",
       "codigo": "CV",
-      "tipo": "nacional",
       "idioma": "pt",
-      "bandera": "",
       "saludo": "Bienvenido a Cabo Verde",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Cabo Verde con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -337,9 +277,7 @@
       "id": "camboya",
       "nombre": "Camboya",
       "codigo": "KH",
-      "tipo": "nacional",
       "idioma": "km",
-      "bandera": "",
       "saludo": "Bienvenido a Camboya",
       "descripcion": "Marco legal de Camboya aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -348,9 +286,7 @@
       "id": "camerun",
       "nombre": "Camerún",
       "codigo": "CM",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Camerún",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Camerún con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -359,9 +295,7 @@
       "id": "chad",
       "nombre": "Chad",
       "codigo": "TD",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Chad",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Chad con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -370,9 +304,7 @@
       "id": "chequia",
       "nombre": "Chequia",
       "codigo": "CZ",
-      "tipo": "nacional",
       "idioma": "cs",
-      "bandera": "",
       "saludo": "Bienvenido a Chequia",
       "descripcion": "Marco legal de Chequia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -381,9 +313,7 @@
       "id": "chile",
       "nombre": "Chile",
       "codigo": "CL",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a Chile",
       "descripcion": "Marco legal de Chile aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -392,9 +322,7 @@
       "id": "china",
       "nombre": "China",
       "codigo": "CN",
-      "tipo": "nacional",
       "idioma": "zh",
-      "bandera": "",
       "saludo": "Bienvenido a China",
       "descripcion": "Marco legal de China aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -403,9 +331,7 @@
       "id": "chipre",
       "nombre": "Chipre",
       "codigo": "CY",
-      "tipo": "nacional",
       "idioma": "el",
-      "bandera": "",
       "saludo": "Bienvenido a Chipre",
       "descripcion": "Marco legal de Chipre aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -414,9 +340,7 @@
       "id": "colombia",
       "nombre": "Colombia",
       "codigo": "CO",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "🇨🇴",
       "saludo": "Bienvenido a Colombia",
       "descripcion": "Marco legal colombiano de sustancias peligrosas, residuos y transporte.",
       "continente": "America"
@@ -425,9 +349,7 @@
       "id": "comoras",
       "nombre": "Comoras",
       "codigo": "KM",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Comoras",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Comoras con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -436,9 +358,7 @@
       "id": "congo",
       "nombre": "Congo",
       "codigo": "CG",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Congo",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Congo con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -447,9 +367,7 @@
       "id": "corea-del-sur",
       "nombre": "Corea Del Sur",
       "codigo": "KR",
-      "tipo": "nacional",
       "idioma": "ko",
-      "bandera": "",
       "saludo": "Bienvenido a Corea Del Sur",
       "descripcion": "Marco legal de Corea Del Sur aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -458,9 +376,7 @@
       "id": "costa-de-marfil",
       "nombre": "Costa De Marfil",
       "codigo": "CI",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Costa De Marfil",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Costa De Marfil con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -469,9 +385,7 @@
       "id": "costa-rica",
       "nombre": "Costa Rica",
       "codigo": "CR",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a Costa Rica",
       "descripcion": "Marco legal de Costa Rica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -480,9 +394,7 @@
       "id": "croacia",
       "nombre": "Croacia",
       "codigo": "HR",
-      "tipo": "nacional",
       "idioma": "hr",
-      "bandera": "",
       "saludo": "Bienvenido a Croacia",
       "descripcion": "Marco legal de Croacia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -491,11 +403,9 @@
       "id": "cuba",
       "nombre": "Cuba",
       "codigo": "CU",
-      "tipo": "nacional",
       "origen_legislacion": "base_local_usuario",
       "estado": "pendiente_importacion",
       "idioma": "es",
-      "bandera": "🇨🇺",
       "saludo": "Bienvenido a Cuba",
       "descripcion": "El usuario dispone de la legislacion cubana completa en una base local. No se realizan busquedas web para este pais; la base se importara cuando se defina su formato.",
       "continente": "America"
@@ -504,9 +414,7 @@
       "id": "dinamarca",
       "nombre": "Dinamarca",
       "codigo": "DK",
-      "tipo": "nacional",
       "idioma": "da",
-      "bandera": "",
       "saludo": "Bienvenido a Dinamarca",
       "descripcion": "Marco legal de Dinamarca aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -515,9 +423,7 @@
       "id": "dominica",
       "nombre": "Dominica",
       "codigo": "DM",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Dominica",
       "descripcion": "Marco legal de Dominica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -526,9 +432,7 @@
       "id": "ecuador",
       "nombre": "Ecuador",
       "codigo": "EC",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a Ecuador",
       "descripcion": "Marco legal de Ecuador aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -537,9 +441,7 @@
       "id": "egipto",
       "nombre": "Egipto",
       "codigo": "EG",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Egipto",
       "descripcion": "Marco legal de Egipto aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -548,9 +450,7 @@
       "id": "el-salvador",
       "nombre": "El Salvador",
       "codigo": "SV",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a El Salvador",
       "descripcion": "Marco legal de El Salvador aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -559,9 +459,7 @@
       "id": "emiratos-arabes-unidos",
       "nombre": "Emiratos Árabes Unidos",
       "codigo": "AE",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Emiratos Árabes Unidos",
       "descripcion": "Marco legal de Emiratos Árabes Unidos aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -570,9 +468,7 @@
       "id": "eritrea",
       "nombre": "Eritrea",
       "codigo": "ER",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Eritrea",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Eritrea con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -581,9 +477,7 @@
       "id": "eslovaquia",
       "nombre": "Eslovaquia",
       "codigo": "SK",
-      "tipo": "nacional",
       "idioma": "sk",
-      "bandera": "",
       "saludo": "Bienvenido a Eslovaquia",
       "descripcion": "Marco legal de Eslovaquia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -592,9 +486,7 @@
       "id": "eslovenia",
       "nombre": "Eslovenia",
       "codigo": "SI",
-      "tipo": "nacional",
       "idioma": "sl",
-      "bandera": "",
       "saludo": "Bienvenido a Eslovenia",
       "descripcion": "Marco legal de Eslovenia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -603,10 +495,8 @@
       "id": "espana",
       "nombre": "España",
       "codigo": "ES",
-      "tipo": "nacional",
       "bloque": "union_europea",
       "idioma": "es",
-      "bandera": "🇪🇸",
       "saludo": "Bienvenido a España",
       "descripcion": "Legislacion espanola de riesgos quimicos, PRL, REACH-CLP y transporte de mercancias peligrosas.",
       "continente": "Europa"
@@ -615,10 +505,7 @@
       "id": "eeuu",
       "nombre": "Estados Unidos",
       "codigo": "US",
-      "tipo": "referencia",
-      "aplicable": false,
       "idioma": "en",
-      "bandera": "🇺🇸",
       "saludo": "Welcome to the United States",
       "descripcion": "Referencia complementaria (OSHA). No es marco aplicable en los paises del proyecto.",
       "continente": "America"
@@ -627,9 +514,7 @@
       "id": "estonia",
       "nombre": "Estonia",
       "codigo": "EE",
-      "tipo": "nacional",
       "idioma": "et",
-      "bandera": "",
       "saludo": "Bienvenido a Estonia",
       "descripcion": "Marco legal de Estonia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -638,9 +523,7 @@
       "id": "eswatini",
       "nombre": "Esuatini",
       "codigo": "SZ",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Esuatini",
       "descripcion": "Se han identificado los portales oficiales de Esuatini. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "Africa"
@@ -649,9 +532,7 @@
       "id": "etiopia",
       "nombre": "Etiopía",
       "codigo": "ET",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Etiopía",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Etiopía con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -660,9 +541,7 @@
       "id": "filipinas",
       "nombre": "Filipinas",
       "codigo": "PH",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Filipinas",
       "descripcion": "Marco legal de Filipinas aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -671,9 +550,7 @@
       "id": "finlandia",
       "nombre": "Finlandia",
       "codigo": "FI",
-      "tipo": "nacional",
       "idioma": "fi",
-      "bandera": "",
       "saludo": "Bienvenido a Finlandia",
       "descripcion": "Marco legal de Finlandia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -682,9 +559,7 @@
       "id": "francia",
       "nombre": "Francia",
       "codigo": "FR",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Francia",
       "descripcion": "Marco legal de Francia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -693,9 +568,7 @@
       "id": "gabon",
       "nombre": "Gabón",
       "codigo": "GA",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Gabón",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Gabón con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -704,9 +577,7 @@
       "id": "gambia",
       "nombre": "Gambia",
       "codigo": "GM",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Gambia",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Gambia con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -715,9 +586,7 @@
       "id": "georgia",
       "nombre": "Georgia",
       "codigo": "GE",
-      "tipo": "nacional",
       "idioma": "ka",
-      "bandera": "",
       "saludo": "Bienvenido a Georgia",
       "descripcion": "Marco legal de Georgia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -726,9 +595,7 @@
       "id": "ghana",
       "nombre": "Ghana",
       "codigo": "GH",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Ghana",
       "descripcion": "Marco legal de Ghana aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -737,9 +604,7 @@
       "id": "granada",
       "nombre": "Granada",
       "codigo": "GD",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Granada",
       "descripcion": "Marco legal de Granada aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -748,9 +613,7 @@
       "id": "grecia",
       "nombre": "Grecia",
       "codigo": "GR",
-      "tipo": "nacional",
       "idioma": "el",
-      "bandera": "",
       "saludo": "Bienvenido a Grecia",
       "descripcion": "Marco legal de Grecia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -759,9 +622,7 @@
       "id": "guatemala",
       "nombre": "Guatemala",
       "codigo": "GT",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a Guatemala",
       "descripcion": "Marco legal de Guatemala aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -770,9 +631,7 @@
       "id": "guinea",
       "nombre": "Guinea",
       "codigo": "GN",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Guinea",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Guinea con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -781,9 +640,7 @@
       "id": "guinea-ecuatorial",
       "nombre": "Guinea Ecuatorial",
       "codigo": "GQ",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a Guinea Ecuatorial",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Guinea Ecuatorial con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -792,9 +649,7 @@
       "id": "guinea-bisau",
       "nombre": "Guinea-Bisáu",
       "codigo": "GW",
-      "tipo": "nacional",
       "idioma": "pt",
-      "bandera": "",
       "saludo": "Bienvenido a Guinea-Bisáu",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Guinea-Bisáu con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -803,9 +658,7 @@
       "id": "guyana",
       "nombre": "Guyana",
       "codigo": "GY",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Guyana",
       "descripcion": "Marco legal de Guyana aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -814,9 +667,7 @@
       "id": "haiti",
       "nombre": "Haití",
       "codigo": "HT",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Haití",
       "descripcion": "Se han identificado los portales oficiales de Haití. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "America"
@@ -825,9 +676,7 @@
       "id": "honduras",
       "nombre": "Honduras",
       "codigo": "HN",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a Honduras",
       "descripcion": "Marco legal de Honduras aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -836,9 +685,7 @@
       "id": "hong-kong",
       "nombre": "Hong Kong",
       "codigo": "HK",
-      "tipo": "nacional",
       "idioma": "zh",
-      "bandera": "",
       "saludo": "Bienvenido a Hong Kong",
       "descripcion": "Marco legal de Hong Kong aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -847,9 +694,7 @@
       "id": "hungria",
       "nombre": "Hungría",
       "codigo": "HU",
-      "tipo": "nacional",
       "idioma": "hu",
-      "bandera": "",
       "saludo": "Bienvenido a Hungría",
       "descripcion": "Marco legal de Hungría aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -858,9 +703,7 @@
       "id": "india",
       "nombre": "India",
       "codigo": "IN",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a India",
       "descripcion": "Marco legal de India aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -869,9 +712,7 @@
       "id": "indonesia",
       "nombre": "Indonesia",
       "codigo": "ID",
-      "tipo": "nacional",
       "idioma": "id",
-      "bandera": "",
       "saludo": "Bienvenido a Indonesia",
       "descripcion": "Marco legal de Indonesia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -880,9 +721,7 @@
       "id": "irlanda",
       "nombre": "Irlanda",
       "codigo": "IE",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Irlanda",
       "descripcion": "Marco legal de Irlanda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -891,9 +730,7 @@
       "id": "iran",
       "nombre": "Irán",
       "codigo": "IR",
-      "tipo": "nacional",
       "idioma": "fa",
-      "bandera": "",
       "saludo": "Bienvenido a Irán",
       "descripcion": "Marco legal de Irán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -902,9 +739,7 @@
       "id": "islandia",
       "nombre": "Islandia",
       "codigo": "IS",
-      "tipo": "nacional",
       "idioma": "is",
-      "bandera": "",
       "saludo": "Bienvenido a Islandia",
       "descripcion": "Marco legal de Islandia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -913,9 +748,7 @@
       "id": "israel",
       "nombre": "Israel",
       "codigo": "IL",
-      "tipo": "nacional",
       "idioma": "he",
-      "bandera": "",
       "saludo": "Bienvenido a Israel",
       "descripcion": "Marco legal de Israel aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -924,9 +757,7 @@
       "id": "italia",
       "nombre": "Italia",
       "codigo": "IT",
-      "tipo": "nacional",
       "idioma": "it",
-      "bandera": "",
       "saludo": "Bienvenido a Italia",
       "descripcion": "Marco legal de Italia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -935,9 +766,7 @@
       "id": "jamaica",
       "nombre": "Jamaica",
       "codigo": "JM",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Jamaica",
       "descripcion": "Marco legal de Jamaica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -946,9 +775,7 @@
       "id": "japon",
       "nombre": "Japón",
       "codigo": "JP",
-      "tipo": "nacional",
       "idioma": "ja",
-      "bandera": "",
       "saludo": "Bienvenido a Japón",
       "descripcion": "Marco legal de Japón aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -957,9 +784,7 @@
       "id": "jordania",
       "nombre": "Jordania",
       "codigo": "JO",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Jordania",
       "descripcion": "Marco legal de Jordania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -968,9 +793,7 @@
       "id": "kazajistan",
       "nombre": "Kazajistán",
       "codigo": "KZ",
-      "tipo": "nacional",
       "idioma": "kk",
-      "bandera": "",
       "saludo": "Bienvenido a Kazajistán",
       "descripcion": "Marco legal de Kazajistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -979,9 +802,7 @@
       "id": "kenia",
       "nombre": "Kenia",
       "codigo": "KE",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Kenia",
       "descripcion": "Marco legal de Kenia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -990,9 +811,7 @@
       "id": "kirguistan",
       "nombre": "Kirguistán",
       "codigo": "KG",
-      "tipo": "nacional",
       "idioma": "ky",
-      "bandera": "",
       "saludo": "Bienvenido a Kirguistán",
       "descripcion": "Marco legal de Kirguistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1001,9 +820,7 @@
       "id": "kosovo",
       "nombre": "Kosovo",
       "codigo": "XK",
-      "tipo": "nacional",
       "idioma": "sq",
-      "bandera": "",
       "saludo": "Bienvenido a Kosovo",
       "descripcion": "Se han identificado los portales oficiales de Kosovo. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "Europa"
@@ -1012,9 +829,7 @@
       "id": "kuwait",
       "nombre": "Kuwait",
       "codigo": "KW",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Kuwait",
       "descripcion": "Marco legal de Kuwait aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1023,9 +838,7 @@
       "id": "laos",
       "nombre": "Laos",
       "codigo": "LA",
-      "tipo": "nacional",
       "idioma": "lo",
-      "bandera": "",
       "saludo": "Bienvenido a Laos",
       "descripcion": "Marco legal de Laos aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1034,9 +847,7 @@
       "id": "lesoto",
       "nombre": "Lesoto",
       "codigo": "LS",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Lesoto",
       "descripcion": "Se han identificado los portales oficiales de Lesoto. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "Africa"
@@ -1045,9 +856,7 @@
       "id": "letonia",
       "nombre": "Letonia",
       "codigo": "LV",
-      "tipo": "nacional",
       "idioma": "lv",
-      "bandera": "",
       "saludo": "Bienvenido a Letonia",
       "descripcion": "Marco legal de Letonia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1056,9 +865,7 @@
       "id": "liberia",
       "nombre": "Liberia",
       "codigo": "LR",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Liberia",
       "descripcion": "Se han identificado los portales oficiales de Liberia. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "Africa"
@@ -1067,9 +874,7 @@
       "id": "libia",
       "nombre": "Libia",
       "codigo": "LY",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Libia",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Libia con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1078,9 +883,7 @@
       "id": "liechtenstein",
       "nombre": "Liechtenstein",
       "codigo": "LI",
-      "tipo": "nacional",
       "idioma": "de",
-      "bandera": "",
       "saludo": "Bienvenido a Liechtenstein",
       "descripcion": "Marco legal de Liechtenstein aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1089,9 +892,7 @@
       "id": "lituania",
       "nombre": "Lituania",
       "codigo": "LT",
-      "tipo": "nacional",
       "idioma": "lt",
-      "bandera": "",
       "saludo": "Bienvenido a Lituania",
       "descripcion": "Marco legal de Lituania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1100,9 +901,7 @@
       "id": "luxemburgo",
       "nombre": "Luxemburgo",
       "codigo": "LU",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Luxemburgo",
       "descripcion": "Marco legal de Luxemburgo aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1111,9 +910,7 @@
       "id": "libano",
       "nombre": "Líbano",
       "codigo": "LB",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Líbano",
       "descripcion": "Marco legal de Líbano aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1122,9 +919,7 @@
       "id": "macedonia-del-norte",
       "nombre": "Macedonia Del Norte",
       "codigo": "MK",
-      "tipo": "nacional",
       "idioma": "mk",
-      "bandera": "",
       "saludo": "Bienvenido a Macedonia Del Norte",
       "descripcion": "Se han identificado los portales oficiales de Macedonia Del Norte. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "Europa"
@@ -1133,9 +928,7 @@
       "id": "madagascar",
       "nombre": "Madagascar",
       "codigo": "MG",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Madagascar",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Madagascar con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1144,9 +937,7 @@
       "id": "malasia",
       "nombre": "Malasia",
       "codigo": "MY",
-      "tipo": "nacional",
       "idioma": "ms",
-      "bandera": "",
       "saludo": "Bienvenido a Malasia",
       "descripcion": "Marco legal de Malasia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1155,9 +946,7 @@
       "id": "malaui",
       "nombre": "Malaui",
       "codigo": "MW",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Malaui",
       "descripcion": "Marco legal de Malaui aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -1166,9 +955,7 @@
       "id": "malta",
       "nombre": "Malta",
       "codigo": "MT",
-      "tipo": "nacional",
       "idioma": "mt",
-      "bandera": "",
       "saludo": "Bienvenido a Malta",
       "descripcion": "Marco legal de Malta aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1177,9 +964,7 @@
       "id": "mali",
       "nombre": "Malí",
       "codigo": "ML",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Malí",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Malí con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1188,9 +973,7 @@
       "id": "marruecos",
       "nombre": "Marruecos",
       "codigo": "MA",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Marruecos",
       "descripcion": "Marco legal de Marruecos aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -1199,9 +982,7 @@
       "id": "mauricio",
       "nombre": "Mauricio",
       "codigo": "MU",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Mauricio",
       "descripcion": "Marco legal de Mauricio aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -1210,9 +991,7 @@
       "id": "mauritania",
       "nombre": "Mauritania",
       "codigo": "MR",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Mauritania",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Mauritania con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1221,9 +1000,7 @@
       "id": "mongolia",
       "nombre": "Mongolia",
       "codigo": "MN",
-      "tipo": "nacional",
       "idioma": "mn",
-      "bandera": "",
       "saludo": "Bienvenido a Mongolia",
       "descripcion": "Marco legal de Mongolia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1232,9 +1009,7 @@
       "id": "montenegro",
       "nombre": "Montenegro",
       "codigo": "ME",
-      "tipo": "nacional",
       "idioma": "sr",
-      "bandera": "",
       "saludo": "Bienvenido a Montenegro",
       "descripcion": "Se han identificado los portales oficiales de Montenegro. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "Europa"
@@ -1243,9 +1018,7 @@
       "id": "mozambique",
       "nombre": "Mozambique",
       "codigo": "MZ",
-      "tipo": "nacional",
       "idioma": "pt",
-      "bandera": "",
       "saludo": "Bienvenido a Mozambique",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Mozambique con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1254,9 +1027,7 @@
       "id": "myanmar",
       "nombre": "Myanmar",
       "codigo": "MM",
-      "tipo": "nacional",
       "idioma": "my",
-      "bandera": "",
       "saludo": "Bienvenido a Myanmar",
       "descripcion": "Marco legal de Myanmar aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1265,9 +1036,7 @@
       "id": "mexico",
       "nombre": "México",
       "codigo": "MX",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "🇲🇽",
       "saludo": "Bienvenido a México",
       "descripcion": "Normas Oficiales Mexicanas de la STPS y la SEMARNAT.",
       "continente": "America"
@@ -1276,9 +1045,7 @@
       "id": "monaco",
       "nombre": "Mónaco",
       "codigo": "MC",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Mónaco",
       "descripcion": "Se han identificado los portales oficiales de Mónaco. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "Europa"
@@ -1287,9 +1054,7 @@
       "id": "namibia",
       "nombre": "Namibia",
       "codigo": "NA",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Namibia",
       "descripcion": "Marco legal de Namibia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -1298,9 +1063,7 @@
       "id": "nepal",
       "nombre": "Nepal",
       "codigo": "NP",
-      "tipo": "nacional",
       "idioma": "ne",
-      "bandera": "",
       "saludo": "Bienvenido a Nepal",
       "descripcion": "Marco legal de Nepal aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1309,9 +1072,7 @@
       "id": "nicaragua",
       "nombre": "Nicaragua",
       "codigo": "NI",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a Nicaragua",
       "descripcion": "Marco legal de Nicaragua aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -1320,9 +1081,7 @@
       "id": "nigeria",
       "nombre": "Nigeria",
       "codigo": "NG",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Nigeria",
       "descripcion": "Marco legal de Nigeria aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -1331,9 +1090,7 @@
       "id": "noruega",
       "nombre": "Noruega",
       "codigo": "NO",
-      "tipo": "nacional",
       "idioma": "no",
-      "bandera": "",
       "saludo": "Bienvenido a Noruega",
       "descripcion": "Marco legal de Noruega aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1342,9 +1099,7 @@
       "id": "nueva-zelanda",
       "nombre": "Nueva Zelanda",
       "codigo": "NZ",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Nueva Zelanda",
       "descripcion": "Marco legal de Nueva Zelanda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Oceania"
@@ -1353,9 +1108,7 @@
       "id": "niger",
       "nombre": "Níger",
       "codigo": "NE",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Níger",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Níger con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1364,9 +1117,7 @@
       "id": "oman",
       "nombre": "Omán",
       "codigo": "OM",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Omán",
       "descripcion": "Marco legal de Omán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1375,9 +1126,7 @@
       "id": "pakistan",
       "nombre": "Pakistán",
       "codigo": "PK",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Pakistán",
       "descripcion": "Marco legal de Pakistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1386,9 +1135,7 @@
       "id": "panama",
       "nombre": "Panamá",
       "codigo": "PA",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a Panamá",
       "descripcion": "Marco legal de Panamá aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -1397,9 +1144,7 @@
       "id": "paraguay",
       "nombre": "Paraguay",
       "codigo": "PY",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a Paraguay",
       "descripcion": "Marco legal de Paraguay aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -1408,9 +1153,7 @@
       "id": "paises-bajos",
       "nombre": "Países Bajos",
       "codigo": "NL",
-      "tipo": "nacional",
       "idioma": "nl",
-      "bandera": "",
       "saludo": "Bienvenido a Países Bajos",
       "descripcion": "Marco legal de Países Bajos aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1419,9 +1162,7 @@
       "id": "peru",
       "nombre": "Perú",
       "codigo": "PE",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "🇵🇪",
       "saludo": "Bienvenido al Perú",
       "descripcion": "Normativa del MINAM sobre materiales y residuos peligrosos y su transporte terrestre.",
       "continente": "America"
@@ -1430,9 +1171,7 @@
       "id": "polonia",
       "nombre": "Polonia",
       "codigo": "PL",
-      "tipo": "nacional",
       "idioma": "pl",
-      "bandera": "",
       "saludo": "Bienvenido a Polonia",
       "descripcion": "Marco legal de Polonia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1441,9 +1180,7 @@
       "id": "portugal",
       "nombre": "Portugal",
       "codigo": "PT",
-      "tipo": "nacional",
       "idioma": "pt",
-      "bandera": "",
       "saludo": "Bienvenido a Portugal",
       "descripcion": "Marco legal de Portugal aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1452,9 +1189,7 @@
       "id": "qatar",
       "nombre": "Qatar",
       "codigo": "QA",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Qatar",
       "descripcion": "Marco legal de Qatar aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1463,9 +1198,7 @@
       "id": "reino-unido",
       "nombre": "Reino Unido",
       "codigo": "GB",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Reino Unido",
       "descripcion": "Marco legal de Reino Unido aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1474,9 +1207,7 @@
       "id": "republica-centroafricana",
       "nombre": "República Centroafricana",
       "codigo": "CF",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a República Centroafricana",
       "descripcion": "No se ha identificado un portal legal oficial en línea de República Centroafricana con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1485,9 +1216,7 @@
       "id": "republica-democratica-del-congo",
       "nombre": "República Democrática Del Congo",
       "codigo": "CD",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a República Democrática Del Congo",
       "descripcion": "No se ha identificado un portal legal oficial en línea de República Democrática Del Congo con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1496,9 +1225,7 @@
       "id": "republica-dominicana",
       "nombre": "República Dominicana",
       "codigo": "DO",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a República Dominicana",
       "descripcion": "Marco legal de República Dominicana aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -1507,9 +1234,7 @@
       "id": "ruanda",
       "nombre": "Ruanda",
       "codigo": "RW",
-      "tipo": "nacional",
       "idioma": "rw",
-      "bandera": "",
       "saludo": "Bienvenido a Ruanda",
       "descripcion": "Marco legal de Ruanda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -1518,9 +1243,7 @@
       "id": "rumania",
       "nombre": "Rumanía",
       "codigo": "RO",
-      "tipo": "nacional",
       "idioma": "ro",
-      "bandera": "",
       "saludo": "Bienvenido a Rumanía",
       "descripcion": "Marco legal de Rumanía aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1529,9 +1252,7 @@
       "id": "rusia",
       "nombre": "Rusia",
       "codigo": "RU",
-      "tipo": "nacional",
       "idioma": "ru",
-      "bandera": "",
       "saludo": "Bienvenido a Rusia",
       "descripcion": "Marco legal de Rusia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1540,9 +1261,7 @@
       "id": "san-cristobal-y-nieves",
       "nombre": "San Cristóbal Y Nieves",
       "codigo": "KN",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a San Cristóbal Y Nieves",
       "descripcion": "Se han identificado los portales oficiales de San Cristóbal Y Nieves. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "America"
@@ -1551,9 +1270,7 @@
       "id": "san-marino",
       "nombre": "San Marino",
       "codigo": "SM",
-      "tipo": "nacional",
       "idioma": "it",
-      "bandera": "",
       "saludo": "Bienvenido a San Marino",
       "descripcion": "Se han identificado los portales oficiales de San Marino. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "Europa"
@@ -1562,9 +1279,7 @@
       "id": "san-vicente-y-las-granadinas",
       "nombre": "San Vicente Y Las Granadinas",
       "codigo": "VC",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a San Vicente Y Las Granadinas",
       "descripcion": "Marco legal de San Vicente Y Las Granadinas aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -1573,9 +1288,7 @@
       "id": "santa-lucia",
       "nombre": "Santa Lucía",
       "codigo": "LC",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Santa Lucía",
       "descripcion": "Marco legal de Santa Lucía aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -1584,9 +1297,7 @@
       "id": "santo-tome-principe",
       "nombre": "Santo Tomé Y Príncipe",
       "codigo": "ST",
-      "tipo": "nacional",
       "idioma": "pt",
-      "bandera": "",
       "saludo": "Bienvenido a Santo Tomé Y Príncipe",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Santo Tomé Y Príncipe con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1595,9 +1306,7 @@
       "id": "senegal",
       "nombre": "Senegal",
       "codigo": "SN",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Senegal",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Senegal con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1606,9 +1315,7 @@
       "id": "serbia",
       "nombre": "Serbia",
       "codigo": "RS",
-      "tipo": "nacional",
       "idioma": "sr",
-      "bandera": "",
       "saludo": "Bienvenido a Serbia",
       "descripcion": "Marco legal de Serbia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1617,9 +1324,7 @@
       "id": "seychelles",
       "nombre": "Seychelles",
       "codigo": "SC",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Seychelles",
       "descripcion": "Marco legal de Seychelles aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -1628,9 +1333,7 @@
       "id": "sierra-leona",
       "nombre": "Sierra Leona",
       "codigo": "SL",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Sierra Leona",
       "descripcion": "Se han identificado los portales oficiales de Sierra Leona. La normativa aplicable a sustancias peligrosas debe consultarse en el diario oficial o en el ministerio competente.",
       "continente": "Africa"
@@ -1639,9 +1342,7 @@
       "id": "singapur",
       "nombre": "Singapur",
       "codigo": "SG",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Singapur",
       "descripcion": "Marco legal de Singapur aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1650,9 +1351,7 @@
       "id": "somalia",
       "nombre": "Somalia",
       "codigo": "SO",
-      "tipo": "nacional",
       "idioma": "so",
-      "bandera": "",
       "saludo": "Bienvenido a Somalia",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Somalia con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1661,9 +1360,7 @@
       "id": "sri-lanka",
       "nombre": "Sri Lanka",
       "codigo": "LK",
-      "tipo": "nacional",
       "idioma": "si",
-      "bandera": "",
       "saludo": "Bienvenido a Sri Lanka",
       "descripcion": "Marco legal de Sri Lanka aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1672,9 +1369,7 @@
       "id": "sudafrica",
       "nombre": "Sudáfrica",
       "codigo": "ZA",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Sudáfrica",
       "descripcion": "Marco legal de Sudáfrica aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -1683,9 +1378,7 @@
       "id": "sudan",
       "nombre": "Sudán",
       "codigo": "SD",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Sudán",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Sudán con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1694,9 +1387,7 @@
       "id": "suecia",
       "nombre": "Suecia",
       "codigo": "SE",
-      "tipo": "nacional",
       "idioma": "sv",
-      "bandera": "",
       "saludo": "Bienvenido a Suecia",
       "descripcion": "Marco legal de Suecia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1705,9 +1396,7 @@
       "id": "suiza",
       "nombre": "Suiza",
       "codigo": "CH",
-      "tipo": "nacional",
       "idioma": "de",
-      "bandera": "",
       "saludo": "Bienvenido a Suiza",
       "descripcion": "Marco legal de Suiza aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1716,9 +1405,7 @@
       "id": "surinam",
       "nombre": "Surinam",
       "codigo": "SR",
-      "tipo": "nacional",
       "idioma": "nl",
-      "bandera": "",
       "saludo": "Bienvenido a Surinam",
       "descripcion": "Marco legal de Surinam aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -1727,9 +1414,7 @@
       "id": "tailandia",
       "nombre": "Tailandia",
       "codigo": "TH",
-      "tipo": "nacional",
       "idioma": "th",
-      "bandera": "",
       "saludo": "Bienvenido a Tailandia",
       "descripcion": "Marco legal de Tailandia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1738,9 +1423,7 @@
       "id": "taiwan",
       "nombre": "Taiwán",
       "codigo": "TW",
-      "tipo": "nacional",
       "idioma": "zh",
-      "bandera": "",
       "saludo": "Bienvenido a Taiwán",
       "descripcion": "Marco legal de Taiwán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1749,9 +1432,7 @@
       "id": "tanzania",
       "nombre": "Tanzania",
       "codigo": "TZ",
-      "tipo": "nacional",
       "idioma": "sw",
-      "bandera": "",
       "saludo": "Bienvenido a Tanzania",
       "descripcion": "Marco legal de Tanzania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -1760,9 +1441,7 @@
       "id": "tayikistan",
       "nombre": "Tayikistán",
       "codigo": "TJ",
-      "tipo": "nacional",
       "idioma": "tg",
-      "bandera": "",
       "saludo": "Bienvenido a Tayikistán",
       "descripcion": "Marco legal de Tayikistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1771,9 +1450,7 @@
       "id": "togo",
       "nombre": "Togo",
       "codigo": "TG",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Togo",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Togo con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1782,9 +1459,7 @@
       "id": "trinidad-y-tobago",
       "nombre": "Trinidad Y Tobago",
       "codigo": "TT",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Trinidad Y Tobago",
       "descripcion": "Marco legal de Trinidad Y Tobago aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -1793,9 +1468,7 @@
       "id": "turkmenistan",
       "nombre": "Turkmenistán",
       "codigo": "TM",
-      "tipo": "nacional",
       "idioma": "tk",
-      "bandera": "",
       "saludo": "Bienvenido a Turkmenistán",
       "descripcion": "Marco legal de Turkmenistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1804,9 +1477,7 @@
       "id": "turquia",
       "nombre": "Turquía",
       "codigo": "TR",
-      "tipo": "nacional",
       "idioma": "tr",
-      "bandera": "",
       "saludo": "Bienvenido a Turquía",
       "descripcion": "Marco legal de Turquía aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1815,9 +1486,7 @@
       "id": "tunez",
       "nombre": "Túnez",
       "codigo": "TN",
-      "tipo": "nacional",
       "idioma": "ar",
-      "bandera": "",
       "saludo": "Bienvenido a Túnez",
       "descripcion": "Marco legal de Túnez aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -1826,9 +1495,7 @@
       "id": "ucrania",
       "nombre": "Ucrania",
       "codigo": "UA",
-      "tipo": "nacional",
       "idioma": "uk",
-      "bandera": "",
       "saludo": "Bienvenido a Ucrania",
       "descripcion": "Marco legal de Ucrania aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1837,9 +1504,7 @@
       "id": "uganda",
       "nombre": "Uganda",
       "codigo": "UG",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Uganda",
       "descripcion": "Marco legal de Uganda aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -1848,9 +1513,7 @@
       "id": "union-europea",
       "nombre": "Unión Europea",
       "codigo": "EU",
-      "tipo": "supranacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Unión Europea",
       "descripcion": "Marco legal de Unión Europea aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Europa"
@@ -1859,9 +1522,7 @@
       "id": "uruguay",
       "nombre": "Uruguay",
       "codigo": "UY",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "",
       "saludo": "Bienvenido a Uruguay",
       "descripcion": "Marco legal de Uruguay aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "America"
@@ -1870,9 +1531,7 @@
       "id": "uzbekistan",
       "nombre": "Uzbekistán",
       "codigo": "UZ",
-      "tipo": "nacional",
       "idioma": "uz",
-      "bandera": "",
       "saludo": "Bienvenido a Uzbekistán",
       "descripcion": "Marco legal de Uzbekistán aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1881,9 +1540,7 @@
       "id": "venezuela",
       "nombre": "Venezuela",
       "codigo": "VE",
-      "tipo": "nacional",
       "idioma": "es",
-      "bandera": "🇻🇪",
       "saludo": "Bienvenido a Venezuela",
       "descripcion": "Ley sobre Sustancias, Materiales y Desechos Peligrosos y normativa tecnica de transporte.",
       "continente": "America"
@@ -1892,9 +1549,7 @@
       "id": "vietnam",
       "nombre": "Vietnam",
       "codigo": "VN",
-      "tipo": "nacional",
       "idioma": "vi",
-      "bandera": "",
       "saludo": "Bienvenido a Vietnam",
       "descripcion": "Marco legal de Vietnam aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Asia"
@@ -1903,9 +1558,7 @@
       "id": "yibuti",
       "nombre": "Yibuti",
       "codigo": "DJ",
-      "tipo": "nacional",
       "idioma": "fr",
-      "bandera": "",
       "saludo": "Bienvenido a Yibuti",
       "descripcion": "No se ha identificado un portal legal oficial en línea de Yibuti con documentación sobre sustancias peligrosas. Se muestran únicamente las fuentes internacionales aplicables; consulte el diario oficial o el ministerio competente del país.",
       "continente": "Africa"
@@ -1914,9 +1567,7 @@
       "id": "zambia",
       "nombre": "Zambia",
       "codigo": "ZM",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Zambia",
       "descripcion": "Marco legal de Zambia aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"
@@ -1925,9 +1576,7 @@
       "id": "zimbabue",
       "nombre": "Zimbabue",
       "codigo": "ZW",
-      "tipo": "nacional",
       "idioma": "en",
-      "bandera": "",
       "saludo": "Bienvenido a Zimbabue",
       "descripcion": "Marco legal de Zimbabue aplicable a sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, transporte de mercancías peligrosas, residuos y convenios internacionales.",
       "continente": "Africa"

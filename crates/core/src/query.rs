@@ -25,16 +25,16 @@ const ACID_WORDS: &[&str] = &["acido", "acide", "acid", "saure", "saur", "acidos
 /// destino de las palabras que ya lo están para que la tabla sea total.
 const WORDS: &[(&str, &str)] = &[
     // Ácidos
-    ("citrico", "citric"), ("citrique", "citric"), ("zitronensaure", "citric"), ("citrico", "citric"),
+    ("citrico", "citric"), ("citrique", "citric"), ("zitronensaure", "citric"),
     ("clorhidrico", "hydrochloric"), ("chlorhydrique", "hydrochloric"), ("chlorwasserstoffsaure", "hydrochloric"),
     ("sulfurico", "sulfuric"), ("sulfurique", "sulfuric"), ("schwefelsaure", "sulfuric"), ("solfurico", "sulfuric"),
-    ("nitrico", "nitric"), ("nitrique", "nitric"), ("salpetersaure", "nitric"), ("nitrico", "nitric"),
-    ("acetico", "acetic"), ("acetique", "acetic"), ("essigsaure", "acetic"), ("acetico", "acetic"),
+    ("nitrico", "nitric"), ("nitrique", "nitric"), ("salpetersaure", "nitric"),
+    ("acetico", "acetic"), ("acetique", "acetic"), ("essigsaure", "acetic"),
     ("ascorbico", "ascorbic"), ("ascorbique", "ascorbic"), ("askorbinsaure", "ascorbic"),
     ("lactico", "lactic"), ("lactique", "lactic"), ("milchsaure", "lactic"), ("latico", "lactic"),
     ("benzoico", "benzoic"), ("benzoique", "benzoic"), ("benzoesaure", "benzoic"),
-    ("fosforico", "phosphoric"), ("phosphorique", "phosphoric"), ("phosphorsaure", "phosphoric"), ("fosforico", "phosphoric"),
-    ("carbonico", "carbonic"), ("carbonique", "carbonic"), ("kohlensaure", "carbonic"), ("carbonico", "carbonic"),
+    ("fosforico", "phosphoric"), ("phosphorique", "phosphoric"), ("phosphorsaure", "phosphoric"),
+    ("carbonico", "carbonic"), ("carbonique", "carbonic"), ("kohlensaure", "carbonic"),
     ("acetilsalicilico", "acetylsalicylic"), ("acetylsalicylique", "acetylsalicylic"), ("aspirina", "aspirin"),
     ("tartarico", "tartaric"), ("tartarique", "tartaric"), ("weinsaure", "tartaric"),
     ("maleico", "maleic"), ("maleique", "maleic"), ("maleinsaure", "maleic"),

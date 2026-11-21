@@ -46,6 +46,15 @@ pub struct Options {
     pub downloads_dir: Option<PathBuf>,
     /// Abrir automáticamente un issue de GitHub al detectar un error.
     pub auto_report: bool,
+    /// Activar DeepL con la key del usuario (por defecto se usa Google).
+    #[serde(default)]
+    pub deepl_enabled: bool,
+    /// Key propia de DeepL.
+    #[serde(default)]
+    pub deepl_key: String,
+    /// Usar el endpoint de pago de DeepL en vez del gratuito.
+    #[serde(default)]
+    pub deepl_pro: bool,
 }
 
 impl Default for Options {
@@ -55,6 +64,9 @@ impl Default for Options {
             copy_to_downloads: true,
             downloads_dir: None,
             auto_report: false,
+            deepl_enabled: false,
+            deepl_key: String::new(),
+            deepl_pro: false,
         }
     }
 }

@@ -39,4 +39,4 @@ powershell -ExecutionPolicy Bypass -File "%LOCALAPPDATA%\Programs\SustanciasPeli
 
 ## Nota
 
-El binario compilado es el mismo que el de Linux: usa SQLite incluida, caché offline en los datos del usuario y exporta los PDF a `Descargas\Sustancias Peligrosas\`.
+El binario compilado es el mismo que el de Linux: usa caché offline en los datos del usuario y exporta los PDF a `Descargas\Sustancias Peligrosas\`.

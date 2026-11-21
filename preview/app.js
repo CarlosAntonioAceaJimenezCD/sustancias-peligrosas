@@ -275,7 +275,6 @@ function abrirNorma(id) {
   $("norma-titulo").textContent = norma.titulo;
   $("norma-meta").textContent = [
     norma.paginas ? `Páginas ${norma.paginas} de la Gaceta Oficial` : "Gaceta Oficial",
-    norma.archivo_local || "",
   ].filter(Boolean).join(" · ");
   $("norma-texto").textContent = norma.texto;
   const pdf = $("norma-pdf");

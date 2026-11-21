@@ -6,7 +6,6 @@ Un solo código (Rust + Dioxus) para todas las plataformas. El crate se llama `s
 
 - Rust stable **1.85+** (`rustup`), `cargo`.
 - target WebAssembly: `rustup target add wasm32-unknown-unknown`.
-- Compilador C (para SQLite incluida en `dbtool`): MSVC en Windows, Xcode CLT en macOS, GCC/Clang en Linux.
 - Opcional: `dioxus-cli` (`dx`) para serve/bundle: `cargo install dioxus-cli --locked` o el instalador precompilado de https://dioxus.dev/install.sh.
 
 Features del crate `sustancias-web`:

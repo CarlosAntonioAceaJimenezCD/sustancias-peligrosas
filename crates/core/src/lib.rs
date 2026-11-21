@@ -32,17 +32,11 @@ pub struct Country {
     pub nombre: String,
     pub codigo: String,
     #[serde(default)]
-    pub tipo: String,
-    #[serde(default)]
     pub idioma: String,
-    #[serde(default)]
-    pub bandera: String,
     #[serde(default)]
     pub saludo: String,
     #[serde(default)]
     pub descripcion: String,
-    #[serde(default)]
-    pub aplicable: bool,
     #[serde(default)]
     pub continente: String,
 }
@@ -56,8 +50,6 @@ pub struct CountriesDb {
 pub struct Topic {
     pub id: String,
     pub nombre: String,
-    #[serde(default)]
-    pub descripcion: String,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -71,21 +63,15 @@ pub struct Source {
     #[serde(default)]
     pub pais: String,
     #[serde(default)]
-    pub institucion: String,
-    #[serde(default)]
     pub tema: String,
     pub titulo: String,
     pub url: String,
-    #[serde(default)]
-    pub descripcion: String,
     #[serde(default)]
     pub verificacion: String,
     #[serde(default)]
     pub categoria: String,
     #[serde(default)]
     pub oficial: bool,
-    #[serde(default)]
-    pub nota: String,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -150,8 +136,6 @@ pub struct Instrument {
     pub alternativas: Vec<String>,
     #[serde(default)]
     pub tipo: String,
-    #[serde(default)]
-    pub archivo_local: String,
     #[serde(default)]
     pub paginas: String,
     #[serde(default)]
@@ -308,8 +292,6 @@ pub struct SubstancesDb {
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct InteractionLevel {
     pub etiqueta: String,
-    #[serde(default)]
-    pub descripcion: String,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -374,23 +356,6 @@ pub fn topics() -> Vec<Topic> {
 pub fn sources() -> Vec<Source> {
     static CACHE: OnceLock<SourcesDb> = OnceLock::new();
     CACHE.get_or_init(|| parse(SOURCES_JSON)).fuentes.clone()
-}
-
-/// Devuelve las fuentes aplicables a un país.
-pub fn sources_for(country_id: &str) -> Vec<Source> {
-    static CACHE: OnceLock<SourcesDb> = OnceLock::new();
-    CACHE
-        .get_or_init(|| parse(SOURCES_JSON))
-        .fuentes
-        .iter()
-        .filter(|s| {
-            country_id == "internacional"
-                || s.pais == country_id
-                || (country_id == "espana" && s.pais == "espana")
-                || (country_id == "eeuu" && s.pais == "eeuu")
-        })
-        .cloned()
-        .collect()
 }
 
 /// Carga y devuelve todas las organizaciones regionales (datos cacheados).
@@ -529,12 +494,9 @@ pub struct PubChemCompound {
     /// Aclaración cuando el resultado procede de un término industrial o ambiguo.
     #[serde(default)]
     pub nota: String,
-}
-
-/// Genera variantes de búsqueda para no depender del idioma del usuario.
-/// La capa `query` traduce la consulta al inglés antes de consultar PubChem.
-pub fn search_variants(query: &str) -> Vec<String> {
-    name_variants(query)
+    /// Nombre traducido automáticamente al idioma de salida elegido.
+    #[serde(default)]
+    pub nombre_localizado: String,
 }
 
 /// Devuelve un sinónimo localizado a partir de las etiquetas que PubChem
@@ -545,6 +507,17 @@ pub fn localized_name(synonyms: &[String], lang: &str) -> Option<String> {
         "fr" => &["[inn-french]", "[french]", "[fr]"],
         "de" => &["[inn-german]", "[german]", "[de]"],
         "it" => &["[inn-italian]", "[italian]", "[it]"],
+        "pt" => &["[inn-portuguese]", "[portuguese]", "[pt]"],
+        "ru" => &["[russian]", "[ru]"],
+        "zh" => &["[chinese]", "[zh]"],
+        "ja" => &["[japanese]", "[ja]"],
+        "ar" => &["[arabic]", "[ar]"],
+        "hi" => &["[hindi]", "[hi]"],
+        "nl" => &["[dutch]", "[nl]"],
+        "sv" => &["[swedish]", "[sv]"],
+        "pl" => &["[polish]", "[pl]"],
+        "tr" => &["[turkish]", "[tr]"],
+        "ko" => &["[korean]", "[ko]"],
         _ => &[],
     };
     for marca in marcas {
@@ -773,9 +746,7 @@ pub fn substance_from_pubchem_view(
     let items = |titulo: &str| lineas_seccion(buscar(titulo), 8);
 
     let safety = buscar("Safety and Hazards");
-    let toxicidad = buscar("Toxicity");
     let propiedades = buscar("Chemical and Physical Properties");
-    let nombres = buscar("Names and Identifiers");
     let fabricacion = buscar("Use and Manufacturing");
 
     let seccion = |numero: u32, id: &str, titulo: &str, items_: Vec<String>| FdsSection {
@@ -861,7 +832,7 @@ pub fn substance_from_pubchem_view(
         });
     }
 
-    let _ = (nombres, toxicidad, safety);
+    let _ = safety;
 
     Substance {
         id: format!("online-{}", base.cid),
@@ -928,15 +899,6 @@ pub fn level_label(level: &str) -> String {
         .unwrap_or_else(|| level.to_string())
 }
 
-/// Analiza todas las parejas de una lista de sustancias.
-///
-/// Busca una regla explícita para cada par. Si no existe, devuelve una regla
-/// general de "sin reacción conocida" para no dar una respuesta vacía.
-pub fn analyze_interactions(ids: &[String]) -> Vec<PairAnalysis> {
-    let nombres = HashMap::new();
-    analyze_interactions_named(ids, &nombres)
-}
-
 /// Variante que recibe los nombres de las sustancias, necesaria cuando estas
 /// proceden de una base de datos en línea y no están en el repositorio.
 pub fn analyze_interactions_named(
@@ -944,7 +906,6 @@ pub fn analyze_interactions_named(
     nombres: &HashMap<String, String>,
 ) -> Vec<PairAnalysis> {
     let db = interactions_db();
-    let all: Vec<Substance> = Vec::new();
     let mut results = Vec::new();
 
     for i in 0..ids.len() {
@@ -960,12 +921,10 @@ pub fn analyze_interactions_named(
             let nombre_a = nombres
                 .get(a)
                 .cloned()
-                .or_else(|| all.iter().find(|s| &s.id == a).map(|s| s.nombre.clone()))
                 .unwrap_or_else(|| a.clone());
             let nombre_b = nombres
                 .get(b)
                 .cloned()
-                .or_else(|| all.iter().find(|s| &s.id == b).map(|s| s.nombre.clone()))
                 .unwrap_or_else(|| b.clone());
 
             let found = db.interacciones.iter().find(|it| {
@@ -1230,6 +1189,7 @@ mod tests {
             synonyms: vec!["Ibuprofeno [INN-Spanish]".to_string()],
             lang: "es".to_string(),
             nota: String::new(),
+            nombre_localizado: String::new(),
         };
         let ficha = substance_from_pubchem(&compuesto);
         assert_eq!(ficha.secciones.len(), 16);
@@ -1239,18 +1199,18 @@ mod tests {
 
     #[test]
     fn variantes_de_busqueda_multilingues() {
-        let v = search_variants("Ácido cítrico");
+        let v = name_variants("Ácido cítrico");
         assert!(v.contains(&"acido citrico".to_string()));
         assert!(v.contains(&"citric acid".to_string()));
-        let v2 = search_variants("acide citrique");
+        let v2 = name_variants("acide citrique");
         assert!(v2.contains(&"citric acid".to_string()));
-        let v3 = search_variants("ácido estearico");
+        let v3 = name_variants("ácido estearico");
         assert!(v3.contains(&"stearic acid".to_string()));
     }
 
     #[test]
     fn nombre_localizado_por_idioma() {
-        let sinonimos = vec![
+        let mut sinonimos = vec![
             "Ibuprofen [INN]".to_string(),
             "Ibuprofeno [INN-Spanish]".to_string(),
             "Ibuprofene [INN-French]".to_string(),
@@ -1258,6 +1218,8 @@ mod tests {
         assert_eq!(localized_name(&sinonimos, "es").as_deref(), Some("Ibuprofeno"));
         assert_eq!(localized_name(&sinonimos, "fr").as_deref(), Some("Ibuprofene"));
         assert_eq!(localized_name(&sinonimos, "de"), None);
+        sinonimos.push("Ibuprofeno [INN-Portuguese]".to_string());
+        assert_eq!(localized_name(&sinonimos, "pt").as_deref(), Some("Ibuprofeno"));
     }
 
     #[test]
@@ -1285,7 +1247,7 @@ mod tests {
             "acido-clorhidrico".to_string(),
             "hidroxido-sodio".to_string(),
         ];
-        let result = analyze_interactions(&ids);
+        let result = analyze_interactions_named(&ids, &HashMap::new());
         assert_eq!(result.len(), 1);
         assert_eq!(result[0].nivel, "alto");
         assert_eq!(result[0].etiqueta, "Peligro alto");
@@ -1295,7 +1257,7 @@ mod tests {
     #[test]
     fn pareja_desconocida_usa_regla_general() {
         let ids = vec!["acetona".to_string(), "desconocida".to_string()];
-        let result = analyze_interactions(&ids);
+        let result = analyze_interactions_named(&ids, &HashMap::new());
         assert_eq!(result.len(), 1);
         assert!(result[0].es_regla_general);
         assert_eq!(result[0].nivel, "nulo");

@@ -1,5 +1,6 @@
 use dioxus::prelude::*;
 use sustancias_core as core;
+use sustancias_i18n::Translator;
 
 mod flags_extra;
 
@@ -286,16 +287,7 @@ async fn descargar_nativo(
     kind: sustancias_storage::DocumentKind,
     opciones: AppOptions,
 ) -> Result<(), String> {
-    let opciones = sustancias_storage::Options {
-        offline_cache: opciones.offline_cache,
-        copy_to_downloads: opciones.copy_to_downloads,
-        downloads_dir: if opciones.downloads_dir.trim().is_empty() {
-            None
-        } else {
-            Some(std::path::PathBuf::from(&opciones.downloads_dir))
-        },
-        auto_report: opciones.auto_report,
-    };
+    let opciones = sustancias_storage::Options::from(&opciones);
     let respuesta = reqwest::get(&url)
         .await
         .map_err(|e| format!("Error de red: {e}"))?;
@@ -334,6 +326,9 @@ struct AppOptions {
     copy_to_downloads: bool,
     downloads_dir: String,
     auto_report: bool,
+    deepl_enabled: bool,
+    deepl_key: String,
+    deepl_pro: bool,
 }
 
 impl Default for AppOptions {
@@ -343,6 +338,28 @@ impl Default for AppOptions {
             copy_to_downloads: true,
             downloads_dir: String::new(),
             auto_report: false,
+            deepl_enabled: false,
+            deepl_key: String::new(),
+            deepl_pro: false,
+        }
+    }
+}
+
+#[cfg(not(target_arch = "wasm32"))]
+impl From<&AppOptions> for sustancias_storage::Options {
+    fn from(o: &AppOptions) -> Self {
+        Self {
+            offline_cache: o.offline_cache,
+            copy_to_downloads: o.copy_to_downloads,
+            downloads_dir: if o.downloads_dir.trim().is_empty() {
+                None
+            } else {
+                Some(std::path::PathBuf::from(&o.downloads_dir))
+            },
+            auto_report: o.auto_report,
+            deepl_enabled: o.deepl_enabled,
+            deepl_key: o.deepl_key.clone(),
+            deepl_pro: o.deepl_pro,
         }
     }
 }
@@ -368,6 +385,9 @@ fn cargar_opciones() -> AppOptions {
             .map(|p| p.to_string_lossy().to_string())
             .unwrap_or_default(),
         auto_report: o.auto_report,
+        deepl_enabled: o.deepl_enabled,
+        deepl_key: o.deepl_key,
+        deepl_pro: o.deepl_pro,
     }
 }
 
@@ -398,16 +418,7 @@ fn cargar_guardados() -> Vec<SavedDocView> {
 
 #[cfg(not(target_arch = "wasm32"))]
 fn guardar_opciones(o: &AppOptions) {
-    let opciones = sustancias_storage::Options {
-        offline_cache: o.offline_cache,
-        copy_to_downloads: o.copy_to_downloads,
-        downloads_dir: if o.downloads_dir.trim().is_empty() {
-            None
-        } else {
-            Some(std::path::PathBuf::from(&o.downloads_dir))
-        },
-        auto_report: o.auto_report,
-    };
+    let opciones = sustancias_storage::Options::from(o);
     let _ = sustancias_storage::save_options(&opciones);
 }
 
@@ -430,6 +441,19 @@ fn abrir_issue(titulo: &str, cuerpo: &str) {
 #[cfg(not(target_arch = "wasm32"))]
 fn abrir_issue(titulo: &str, cuerpo: &str) {
     abrir_feedback(titulo, cuerpo);
+}
+
+/// Nombre a mostrar: sinónimo localizado, traducción automática o título.
+fn nombre_visible(c: &core::PubChemCompound, lang: &str) -> String {
+    core::localized_name(&c.synonyms, lang)
+        .or_else(|| {
+            if c.nombre_localizado.is_empty() {
+                None
+            } else {
+                Some(c.nombre_localizado.clone())
+            }
+        })
+        .unwrap_or_else(|| c.title.clone())
 }
 
 /// Siluetas de los continentes en negro (derivadas de un mapa GeoJSON público).
@@ -614,6 +638,22 @@ fn App() -> Element {
                 .unwrap_or_default()
             }
 
+            // Traductor compartido (web + nativo): DeepL solo si el usuario
+            // configuró su key; después Google; después diccionario local.
+            let op = opciones();
+            let traductor = sustancias_i18n::Cadena::con_configuracion(
+                if op.deepl_enabled && !op.deepl_key.trim().is_empty() {
+                    Some(op.deepl_key.clone())
+                } else {
+                    None
+                },
+                if op.deepl_pro {
+                    sustancias_i18n::DeeplApi::Pro
+                } else {
+                    sustancias_i18n::DeeplApi::Free
+                },
+            );
+
             // La capa `query` decide si la consulta es CAS, fórmula, código de
             // producto o nombre; los nombres se traducen al inglés.
             let clase = core::classify(&texto);
@@ -658,7 +698,12 @@ fn App() -> Element {
                         }
                     }
                     _ => {
-                        for variante in core::name_variants(&texto) {
+                        let mut variantes = core::name_variants(&texto);
+                        if let Some(traduccion) = traductor.translate(&texto, "en").await {
+                            variantes.insert(0, traduccion.texto);
+                        }
+                        variantes.dedup();
+                        for variante in variantes {
                             for modo in ["?language=all", "?name_type=word"] {
                                 let url = format!(
                                     "{}/name/{}/cids/JSON{}",
@@ -719,6 +764,9 @@ fn App() -> Element {
                     c.synonyms = sinonimos;
                     c.lang = lang.clone();
                     c.nota = nota.clone();
+                    if let Some(traduccion) = traductor.translate(&c.title, &lang).await {
+                        c.nombre_localizado = traduccion.texto;
+                    }
                     resultados.push(c);
                 }
             }
@@ -1051,7 +1099,7 @@ fn App() -> Element {
                         oninput: move |e| {
                             let value = e.value();
                             query.set(value.clone());
-                            buscar_pubchem(value, output_lang());
+                            buscar_pubchem(value, if output_lang() == "auto" { lang.to_string() } else { output_lang() });
                         },
                     }
                 }
@@ -1077,7 +1125,7 @@ fn App() -> Element {
                         for p in online_resultados().iter() {
                             div { class: "online-resultado",
                                 div {
-                                    strong { "{core::localized_name(&p.synonyms, &output_lang()).unwrap_or_else(|| p.title.clone())}" }
+                                    strong { "{nombre_visible(p, &output_lang())}" }
                                     span { class: "online-meta", "CID {p.cid} · {p.molecular_formula} · {p.molecular_weight} g/mol" }
                                     if !p.nota.is_empty() {
                                         p { class: "online-nota", "{p.nota}" }
@@ -1112,8 +1160,7 @@ fn App() -> Element {
                                         class: "boton boton-secundario",
                                         onclick: {
                                             let cid = p.cid;
-                                            let nombre = core::localized_name(&p.synonyms, &output_lang())
-                                                .unwrap_or_else(|| p.title.clone());
+                                            let nombre = nombre_visible(&p, &output_lang());
                                             move |_| {
                                                 let mut items = multi_ids();
                                                 let id = format!("online-{}", cid);
@@ -1470,6 +1517,49 @@ fn App() -> Element {
                             },
                         }
                         "Enviar automáticamente feedback y reportes de errores"
+                    }
+                    label { class: "opcion",
+                        span { "Proveedor de traducción" }
+                        select {
+                            value: if opciones().deepl_enabled { "deepl" } else { "google" },
+                            onchange: move |e| {
+                                let mut o = opciones();
+                                o.deepl_enabled = e.value() == "deepl";
+                                guardar_opciones(&o);
+                                opciones.set(o);
+                            },
+                            option { value: "google", "Google Translate (gratuito, por defecto)" }
+                            option { value: "deepl", "DeepL (con mi propia key)" }
+                        }
+                    }
+                    if opciones().deepl_enabled {
+                        label { class: "opcion",
+                            span { "Key de DeepL (se guarda solo en este dispositivo)" }
+                            input {
+                                r#type: "password",
+                                value: opciones().deepl_key.clone(),
+                                placeholder: "Introduce tu key de DeepL",
+                                onchange: move |e| {
+                                    let mut o = opciones();
+                                    o.deepl_key = e.value();
+                                    guardar_opciones(&o);
+                                    opciones.set(o);
+                                },
+                            }
+                        }
+                        label { class: "opcion",
+                            input {
+                                r#type: "checkbox",
+                                checked: opciones().deepl_pro,
+                                onchange: move |e| {
+                                    let mut o = opciones();
+                                    o.deepl_pro = e.checked();
+                                    guardar_opciones(&o);
+                                    opciones.set(o);
+                                },
+                            }
+                            "Usar endpoint de pago (DeepL Pro)"
+                        }
                     }
                     if !cfg!(target_arch = "wasm32") {
                         button {

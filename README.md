@@ -1,236 +1,179 @@
-# Sustancias peligrosas
+# Sustancias Peligrosas
 
-Base de conocimiento sobre sustancias peligrosas: marco legal por país, SGA/GHS, fichas de datos de seguridad, convenios internacionales y regulación del transporte.
+Base de conocimiento multilingüe de sustancias peligrosas: **marco legal por país, SGA/GHS, fichas técnicas completas de 16 secciones, convenios internacionales y transporte de mercancías peligrosas**.
 
-**Sitio web (GitHub Pages): https://carlosantonioaceajimenezcd.github.io/sustancias-peligrosas/**
+| | |
+|---|---|
+| **Sitio web (vista previa)** | https://carlosantonioaceajimenezcd.github.io/sustancias-peligrosas/ |
+| **Repositorio** | https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas |
+| **Plataformas objetivo** | Web (WASM), Windows, macOS, Linux, Android e iOS |
+| **Datos de sustancias** | En vivo, desde PubChem (NIH) |
 
-Repositorio: https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas
+> **La web es la vista previa; el producto es la aplicación nativa.** La interfaz web se publica en GitHub Pages para que cualquiera pueda probar la aplicación sin instalar nada. La aplicación real se compila de forma nativa para escritorio y móvil, con caché sin conexión, descarga de documentos y almacenamiento local de opciones.
 
-## Estado actual
+---
 
-Capa de datos terminada y **interfaz en construcción**. Hay dos vistas del mismo diseño:
+## Qué hace la aplicación
 
-- **Vista previa editable** en `preview/` (HTML/CSS/JS): se abre directamente en el navegador y sirve para ver y ajustar el diseño sin compilar.
-- **Aplicación definitiva** en `crates/web/`: interfaz **Dioxus** escrita en Rust, conectada al núcleo `crates/core` y a la base SQLite gestionada por `crates/dbtool`.
+1. **Elige jurisdicción.** 175 jurisdicciones agrupadas por continente. Cada continente es una «carpeta» desplegable: primero abres *Europa* y después seleccionas *Suiza*. Todas las banderas están embebidas (SVG para las originales, PNG de 40 px para el resto), sin emojis ni dependencias externas. En móvil el selector es desplazable y la búsqueda permanece siempre visible.
+2. **Consulta el marco legal en capas**, siempre en este orden:
+   - **Marco internacional** (ONU, UNECE, OMI, OIT, convenciones de Basilea, Róterdam, Estocolmo, Minamata) — para todos los países.
+   - **Organizaciones regionales** — solo si el país pertenece a una con normativa verificada y enlace directo: Unión Europea (REACH, CLP, Directiva 2008/68/CE) y Comunidad Andina (Decisiones 602 y 547). MERCOSUR quedó excluido porque su sistema normativo bloquea el acceso y no hay enlaces directos comprobables.
+   - **Legislación nacional** — del país seleccionado, con enlaces a los textos oficiales.
+3. **Busca cualquier sustancia**, en cualquier idioma y por cualquier identificador:
+   - Nombre químico en español, inglés, francés, alemán, italiano, portugués, ruso, chino, árabe… (traducción automática al inglés antes de consultar PubChem).
+   - **Código CAS** (`7664-93-9`), **fórmula molecular** (`H2SO4`, `NaCl`, `CH3COOH`) y **códigos de producto** (`AEO7`, `TX-100`, `SDS`, `SLS`, `EDTA`, `BHT`, `TEA`). Los términos ambiguos muestran una nota aclaratoria.
+4. **Abre la ficha completa** con los 16 apartados del SGA y datos reales de PubChem PUG View (propiedades, clasificación GHS, todas las frases H, sinónimos y enlaces oficiales). Todo se muestra dentro de la app, sin saltar a sitios externos.
+5. **Compara sustancias** por parejas: nivel de peligro, tipo de reacción, productos, consecuencias y acciones recomendadas (`data/interactions.json`). Las parejas sin regla explícita usan una regla general de «sin reacción registrada».
+6. **Envía feedback** mediante un formulario que genera automáticamente un issue estructurado (tipo, descripción, país, idioma, búsqueda actual y plataforma). En la versión nativa puedes activar además el reporte automático de errores.
+
+---
+
+## Traducción: una capa, siete plataformas
+
+La traducción vive en `crates/i18n`, **no en la web**, para que la misma implementación sirva a WASM, Windows, macOS, Linux, Android e iOS. El HTTP se abstrae una sola vez (`gloo-net` en WASM, `reqwest` en nativo) y los proveedores implementan un trait común:
+
+| Proveedor | Cuándo se usa | Características |
+|---|---|---|
+| **DeepL** | Solo si el usuario activa su propia key en *Opciones* | Máxima calidad; endpoint gratuito o Pro; la key se guarda únicamente en el dispositivo |
+| **Google Translate** | Por defecto | Sin clave, sin configuración, `sl=auto` detecta cualquier idioma, CORS abierto en web |
+| **Diccionario local** | Respaldo offline | 209 términos químicos multilingües + alias industriales del core; funciona sin internet |
+
+La cadena prueba los proveedores en ese orden y devuelve el primero que responde. La **entrada** se traduce al inglés antes de consultar PubChem y la **salida** al idioma elegido en el selector (es, en, fr, de, it, pt, ru, zh, ja, ar, hi, nl, sv, pl, tr, ko o «auto»).
+
+*Privacidad:* al traducir, el texto de la búsqueda se envía a Google Translate (o a DeepL si lo configuraste). El diccionario local no envía nada.
+
+---
 
 ## Política de fuentes
 
-**Solo fuentes oficiales**: gobiernos (`.gob.*`, `.gov.*`, `.mil.*`), organismos internacionales (ONU/UNECE, OMI, OIT, OPCW, convenciones) o instituciones públicas reconocidas (LATU).
+**Normativa: solo fuentes oficiales.** Gobiernos (`.gob.*`, `.gov.*`, `.mil.*`), organismos internacionales (ONU/UNECE, OMI, OIT, OPCW, convenciones) o instituciones públicas reconocidas (LATU). Se excluyen empresas, consultoras, blogs, agregadores comerciales, enciclopedias y repositorios de presentaciones.
 
-Para la **normativa** se excluyen empresas, consultoras, blogs, agregadores comerciales, enciclopedias y repositorios de presentaciones.
-
-Para los **datos de sustancias y FDS**, el usuario aceptó además: PubChem, ChemSpider, Chemical Safety, SDS Manager, ChemBlink, VWR, Fisher Scientific, TCI Chemicals y Fluorochem. Estas fuentes no se usan como autoridad normativa. El detalle de la auditoría, las fuentes rechazadas y las limitaciones de búsqueda están en [`docs/fuentes-oficiales.md`](docs/fuentes-oficiales.md).
+**Datos de sustancias y FDS**, además de PubChem: ChemSpider, Chemical Safety, SDS Manager, ChemBlink, VWR, Fisher Scientific, TCI Chemicals y Fluorochem. Estas fuentes **no** se usan como autoridad normativa.
 
 Cada fuente lleva un campo `verificacion`:
 
 | Valor | Significado |
 |---|---|
-| `contenido_verificado` | Página abierta y contenido confirmado. |
-| `dominio_snippet` | Dominio gubernamental confirmado por búsqueda; el sitio bloquea al lector automático. |
-| `portal_validar` | URL canónica del organismo pendiente de confirmación manual. |
-| `base_local_usuario` | Fuente del usuario pendiente de importación. |
+| `contenido_verificado` | Página abierta y contenido confirmado |
+| `dominio_snippet` | Dominio gubernamental confirmado; el sitio bloquea al lector automático |
+| `portal_validar` | URL canónica pendiente de confirmación manual |
+| `base_local_usuario` | Fuente del usuario pendiente de importación |
 
-## Estructura de datos
+La auditoría completa, las fuentes rechazadas y los enlaces directos verificados están en [`docs/fuentes-oficiales.md`](docs/fuentes-oficiales.md) y [`docs/fuentes-datos-en-linea.md`](docs/fuentes-datos-en-linea.md).
 
-| Archivo | Contenido |
+---
+
+## Estructura del repositorio
+
+| Ruta | Contenido |
 |---|---|
-| `data/countries.json` | 175 jurisdicciones: marco internacional, 167 países con fuentes verificadas, más los 7 países originales y EE. UU. (referencia). |
-| `data/topics.json` | Apartados disponibles: SGA, FDS, convenios, transporte y legislación nacional. |
-| `data/sources.json` | Registro de fuentes oficiales con institución, URL, tema y verificación. |
-| `data/legislation.json` | Portales e instrumentos normativos por país. Cuba se alimenta de la base local del usuario. |
-| `data/substances.json` | **Vacío a propósito.** No se almacenan fichas técnicas en el repositorio; las sustancias se obtienen en vivo de PubChem. |
+| `crates/core` | Modelos, cachés `OnceLock`, búsqueda difusa y resolución del marco legal. Sin interfaz. |
+| `crates/query` → `core/src/query.rs` | Capa de consultas: traducción local, detección de CAS, fórmulas y códigos de producto. |
+| `crates/i18n` | Capa de traducción compartida: `Translator`, Google, DeepL (opcional), diccionario local y cadena de respaldo. |
+| `crates/storage` | Caché sin conexión, opciones, exportación a `Descargas` y saneamiento de nombres (nativo). |
+| `crates/web` | Interfaz Dioxus (RSX), banderas embebidas, formulario de feedback y panel de opciones. |
+| `data/countries.json` | 175 jurisdicciones agrupadas por continente. |
+| `data/sources.json` | Fuentes oficiales con institución, tema, URL y verificación. |
+| `data/legislation.json` | Portales e instrumentos por país, con el texto íntegro de las normas cubanas. |
+| `data/leyes/cuba/*.pdf` | Gacetas oficiales originales de las tres normas cubanas incluidas. |
+| `data/organizations.json` | Organizaciones regionales y sus miembros (UE, Comunidad Andina). |
+| `data/aliases.json` | Códigos de producto y términos ambiguos resueltos a CIDs de PubChem. |
+| `data/interactions.json` | 15 reglas de interacción entre sustancias. |
+| `data/substances.json` | **Vacío a propósito.** No se almacenan fichas en el repositorio. |
+| `preview/` | Maqueta HTML/CSS/JS editable de la interfaz (solo diseño; no se despliega). |
+| `.github/workflows/deploy-pages.yml` | Compilación y publicación del WASM en GitHub Pages. |
 
-## Vista previa (diseño)
+ Todas las fichas se generan en vivo desde PubChem y se marcan como **`DATOS EN LÍNEA · PUBCHEM`**. `data/substances.json` contiene `"sustancias": []` deliberadamente.
 
-Abre `preview/index.html` en cualquier navegador. No necesita servidor ni instalación: los datos están embebidos en `preview/data.js`.
+---
 
-Para editar el diseño:
+## Compilación
 
-| Archivo | Qué controla |
-|---|---|
-| `preview/index.html` | Estructura de la página |
-| `preview/styles.css` | Colores, tamaños, disposición y animaciones |
-| `preview/app.js` | Comportamiento (país, idioma, búsqueda, ficha, multi-sustancia) |
-| `preview/data.js` | **Generado** desde `data/*.json`; no editar a mano |
+> Esta sección es la **fuente canónica** de comandos. Los archivos de `docs/` son complementos, no copias.
 
-Si cambias los JSON, regenera `preview/data.js` con:
+### Comunes a todas las plataformas
 
 ```bash
-python3 - <<'PY'
-import json, pathlib
-root = pathlib.Path('data')
-def load(n): return json.loads((root / n).read_text(encoding='utf-8'))
-sub = load('substances.json')
-data = {
-  'countries': load('countries.json')['paises'],
-  'topics': load('topics.json')['temas'],
-  'sources': load('sources.json')['fuentes'],
-  'legislation': load('legislation.json')['paises'],
-  'substances': sub['sustancias'],
-  'warning': sub['advertencia'],
-}
-pathlib.Path('preview/data.js').write_text(
-  'window.DATA = ' + json.dumps(data, ensure_ascii=False, indent=2) + ';\n',
-  encoding='utf-8')
-PY
+rustup update stable
+rustup target add wasm32-unknown-unknown
+cargo install dioxus-cli --locked
 ```
 
-## Arquitectura Rust
+### Comandos
 
-```
-crates/core     Librería sin interfaz: modelos, búsqueda y resolución del marco legal.
-crates/dbtool   Importa los JSON a SQLite (data/sustancias.db) con índices y FTS5.
-crates/web      Aplicación Dioxus (RSX) que consume crates/core.
-```
-
-Comandos:
-
-```bash
-cargo test                                          # pruebas del núcleo
-cargo run -p sustancias-dbtool -- build             # crear/actualizar la base SQLite
-cargo run -p sustancias-dbtool -- stats             # contenido de la base
-cargo run -p sustancias-dbtool -- search acetona    # búsqueda FTS5
-cargo check -p sustancias-web --target wasm32-unknown-unknown
-```
-
-SQLite se compila incluida (`bundled`) y el frontend se compila a WebAssembly, de modo que no hay dependencias de servidor: el mismo código sirve para web y, más adelante, para escritorio/móvil con Dioxus.
-
-## Flujo de la aplicación
-
-1. El usuario elige el **país** (o "Marco internacional").
-2. El idioma y el banner cambian al instante; el selector queda abajo a la derecha.
-3. El panel izquierdo muestra el marco legal filtrable por apartado.
-4. El panel derecho busca sustancias por nombre, CAS, CE u ONU y muestra la ficha completa.
-5. El bloque multi-sustancia permite añadir varias sustancias y analiza **todas las parejas**: muestra nivel de peligro, tipo de reacción, productos, consecuencias y acciones recomendadas (`data/interactions.json`). Las parejas sin regla explícita usan una regla general de "sin reacción registrada".
-6. El buscador tolera ausencia de acentos y errores tipográficos menores (distancia de edición 1–2); los identificadores CAS/CE/ONU se buscan de forma exacta.
-
-## Jurisdicciones incluidas
-
-La app cubre **175 jurisdicciones** con fuentes oficiales (167 incorporadas en la ampliación + las 7 originales + marco internacional y EE. UU. como referencia). Solo se incluye normativa relevante para sustancias peligrosas: SGA/GHS, fichas de datos de seguridad, convenios químicos, transporte de mercancías peligrosas, residuos peligrosos y seguridad química laboral.
-
-| Región | Jurisdicciones | Ejemplos |
-|---|---|---|
-| Marco internacional y supranacional | 2 | ONU/UNECE/OMI/OIT, Unión Europea (EUR-Lex, REACH, CLP) |
-| América Latina y Caribe | 29 | Argentina, Brasil, Chile, Costa Rica, México, Perú, Cuba, Uruguay, República Dominicana |
-| Europa | 44 | Alemania, Francia, Italia, Reino Unido, Suiza, Polonia, Suecia, Ucrania, Turquía |
-| Asia, Pacífico y Medio Oriente | 42 | China, Japón, India, Corea del Sur, Australia, Nueva Zelanda, Israel, Arabia Saudita |
-| África | 52 | Sudáfrica, Nigeria, Kenia, Ghana, Egipto, Marruecos, Tanzania, Zambia |
-
-El detalle varía según el país:
-
-- **Cobertura plena** (portales + instrumentos concretos): Reino Unido, Alemania, Italia, Francia, España, Unión Europea, Chile, México, Perú, Colombia, Venezuela, Cuba, Brasil, Argentina, Costa Rica, Australia, Nueva Zelanda, Japón, India, Corea del Sur, Sudáfrica, Kenia, Nigeria, Ghana, Egipto y Marruecos, entre otros.
-- **Cobertura de portales**: en jurisdicciones donde no se identificó un texto normativo concreto y verificable, se listan únicamente el diario oficial y el ministerio competente; la descripción del país lo indica explícitamente.
-- **Estados Unidos** sigue siendo referencia complementaria (OSHA), no marco aplicable.
-
-Los tratados globales (Basilea, Róterdam, Estocolmo, Minamata, UNECE, OMI) se muestran una sola vez como fuentes internacionales para **todas** los países; no se repiten en cada jurisdicción.
-
-La auditoría de URLs, los niveles de verificación y las fuentes rechazadas están documentados en [`docs/fuentes-oficiales.md`](docs/fuentes-oficiales.md).
-
-## Publicación en GitHub Pages
-
-El repositorio es público. El despliegue de la app Dioxus está automatizado en `.github/workflows/deploy-pages.yml`: cada `push` a `main` compila el WASM con `dx build --release` y publica el resultado en GitHub Pages.
-
-Paso único en el repositorio: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Después de eso, el workflow se ejecuta solo y la URL queda en **Settings → Pages**.
-
-También se puede lanzar a mano desde la pestaña **Actions → Deploy Dioxus a GitHub Pages → Run workflow**.
-
-## Acceso a las leyes cubanas
-
-El usuario final no necesita la carpeta local. Al seleccionar **Cuba**, el panel de marco legal muestra cada norma con:
-
-- **Leer norma íntegra**: abre el texto completo extraído de la Gaceta Oficial, sin salir de la app.
-- **Abrir PDF original**: enlaza al archivo alojado en el repositorio (`data/leyes/cuba/`).
-
-Normas incluidas: Resolución 253/2021 (productos químicos peligrosos y desechos peligrosos), Resolución 96/2004 (productos químicos tóxicos) y el Reglamento del Sistema Nacional de Control de Sustancias Químicas. La Ley 81/1997 aparece como referencia citada, pendiente de incorporar su texto.
-
-## Herramientas de compilación
-
-Guía completa, comandos y estado real de cada plataforma en [`docs/compilacion.md`](docs/compilacion.md). Scripts listos en `scripts/`: `build-web.sh`, `build-linux.sh` y `build-android.sh`.
-
-
-Comunes a todas las plataformas:
-
-| Herramienta | Uso |
+| Acción | Comando |
 |---|---|
-| `rustup`, `rustc`, `cargo` | Toolchain Rust (versión 1.85 o superior) |
-| `rustup target add wasm32-unknown-unknown` | Destino WebAssembly para la web |
-| `cargo install dioxus-cli` | CLI `dx`: desarrollo, empaquetado y assets |
-| Compilador C (`cc`, MSVC o Xcode CLT) | Necesario para compilar SQLite incluida (`rusqlite bundled`) |
+| Tests de todo el workspace | `cargo test --workspace` |
+| Comprobar WASM | `cargo check -p sustancias-web --target wasm32-unknown-unknown` |
+| Sitio completo (Igual que CI) | `dx build --release --package sustancias-web` |
+| Escritorio (desarrollo) | `dx serve --platform desktop` |
+| Móvil (desarrollo) | `dx serve --platform android` |
+| Binario nativo suelto | `cargo build -p sustancias-web --features desktop --release` |
 
-Por plataforma:
+### Requisitos por plataforma
 
 | Plataforma | Requisitos adicionales |
 |---|---|
-| **Web** | Ninguno además de WASM + `dx`. Se publica como sitio estático. |
-| **Windows** | WebView2 Runtime y Visual Studio Build Tools con carga de C++ (MSVC). |
-| **macOS** | Xcode Command Line Tools y macOS SDK. **Solo se puede compilar en una máquina Apple.** |
+| **Web** | Ninguno además del target WASM y `dx`. Se publica como sitio estático. |
+| **Windows** | WebView2 Runtime y Visual Studio Build Tools con carga de C++. Instalador en `installers/windows/`. |
+| **macOS** | Xcode Command Line Tools y macOS SDK. Solo se puede compilar en una máquina Apple. |
 | **Linux** | `libwebkit2gtk-4.1-dev`, `libgtk-3-dev`, `libsoup-3.0-dev`, `pkg-config`. |
 | **Android** | Android SDK + NDK, JDK 17, `cargo install cargo-ndk`, targets `aarch64-linux-android`, `armv7-linux-androideabi`, `x86_64-linux-android`, Gradle. |
-| **iOS** | macOS + Xcode + targets `aarch64-apple-ios` y `x86_64-apple-ios`. **No se puede compilar en Linux.** |
+| **iOS** | macOS + Xcode + targets `aarch64-apple-ios` y `x86_64-apple-ios`. No se puede compilar en Linux. |
 
-Opcional: `wasm-opt` (Binaryen) para optimizar el bundle WASM, y `wasm-bindgen` (lo gestiona `dioxus-cli`).
+Opcional: `wasm-opt` (Binaryen) para optimizar el bundle. `wasm-bindgen` lo gestiona `dioxus-cli`.
 
-## Sin fichas locales
+**Importante:** el perfil de release usa `opt-level = "z"`, `lto = "thin"` y `codegen-units = 1`, pero **no** `strip = true`: elimina la sección `target_features` del WASM y rompe `wasm-bindgen` durante el despliegue.
 
-No hay **ninguna** sustancia almacenada en el repositorio. `data/substances.json` contiene `"sustancias": []` a propósito. Todas las fichas se generan en vivo desde PubChem (NIH), se marcan como **`DATOS EN LÍNEA · PUBCHEM`** y se construyen con las 16 secciones del SGA. Las secciones que exigen datos del fabricante lo indican y enlazan a fuentes oficiales.
+Guía ampliada y estado verificado por plataforma: [`docs/compilacion.md`](docs/compilacion.md) e [`docs/instalacion.md`](docs/instalacion.md).
 
-Esto se probó con sustancias **no incluidas en ningún archivo del repo**: `ibuprofeno` (CID 3672), `paracetamol` (Acetaminophen) y `cafeína`. En los tres casos: 0 resultados locales, ficha de 16 secciones desde PubChem y comparación por parejas con sus nombres reales.
+---
 
-La comparación multi-sustancia acepta sustancias en línea: cada resultado de PubChem tiene **"Añadir a comparación"**. Las parejas sin regla en `data/interactions.json` usan la regla general de "sin reacción registrada". Para reacciones concretas, añade pares con `sustancias: [id_a, id_b]`, `nivel`, `tipo`, `descripcion`, `productos`, `consecuencias` y `acciones`.
-
-Si en el futuro se incorpora una FDS verificada en PDF, el modelo sigue admitiendo `pdf_url` y `pdf_nombre` para mostrar **"Descargar FDS en PDF"**, y `estado: "verificado"` para la insignia verde.
-
-## Descargas y caché sin conexión (nativo)
-
-El comportamiento depende de la plataforma:
+## Descargas y caché sin conexión
 
 | Versión | Qué hace al descargar |
 |---|---|
-| **Web (WASM)** | Descarga directamente al directorio de descargas del navegador/sistema. **No guarda nada** en la app. |
-| **Nativa (escritorio/móvil)** | 1) Guarda el PDF en el directorio de datos de la aplicación; 2) lo copia al directorio de descargas del sistema. Ambas cosas se pueden configurar. |
+| **Web (WASM)** | Descarga directamente al directorio del navegador. No guarda nada en la app. |
+| **Nativa** | 1) Guarda el documento en el directorio de datos de la app; 2) lo copia a `Descargas/Sustancias Peligrosas\`. Ambas opciones se pueden configurar. |
 
-El módulo `crates/storage` implementa:
+`crates/storage` implementa `offline_cache`, `copy_to_downloads`, `downloads_dir` personalizado, indexado, lectura, borrado y saneamiento de nombres de archivo. Estas opciones —y el proveedor de traducción— aparecen en el panel **«Documentos sin conexión»**, que solo se muestra en la versión nativa.
 
-- `offline_cache`: guardar normas y fichas en `<datos del usuario>/sustancias-peligrosas/documents/` con un índice `index.json`, para consultarlas sin internet.
-- `copy_to_downloads`: copiar además el archivo a `Descargas`.
-- `downloads_dir`: directorio de descargas personalizado; vacío = el del sistema (`dirs::download_dir()`).
-- Indexación, lectura, borrado y saneamiento de nombres de archivo.
+Para las fichas generadas en línea existe **«Guardar ficha como PDF (imprimir)»**, con una hoja de estilo que oculta paneles, menús y botones y deja solo la ficha de 16 secciones.
 
-Estas opciones aparecen en el panel **"Documentos sin conexión"**, que solo se muestra en la versión nativa (la web no incluye el módulo de almacenamiento ni el cliente HTTP).
+---
 
-Compilación nativa:
+## Acceso a las leyes cubanas
 
-```bash
-cargo build -p sustancias-web --features desktop --release
-```
+Al seleccionar **Cuba**, cada norma ofrece **«Leer norma íntegra»** (texto extraído de la Gaceta Oficial, sin salir de la app) y **«Abrir PDF original»** (archivo alojado en `data/leyes/cuba/`). Incluidas: Resolución 253/2021, Resolución 96/2004 y el Reglamento del Sistema Nacional de Control de Sustancias Químicas. La Ley 81/1997 aparece como referencia citada.
 
-Requiere las dependencias de WebView de tu sistema (WebKitGTK en Linux, WebView2 en Windows, WKWebView en macOS). La compilación de iOS/macOS exige macOS + Xcode. La compilación web (`wasm32-unknown-unknown`) no incluye este módulo.
+---
 
-## Optimizaciones
+## Despliegue
 
-- **Caché estática**: `crates/core` parsea cada JSON una sola vez con `OnceLock` en lugar de hacerlo en cada render de la interfaz. Esto elimina el coste de deserializar ~477 KB de legislación y ~310 KB de texto de leyes en cada actualización de pantalla.
-- **Búsqueda difusa eficiente**: distancia de Levenshtein con dos filas y salida temprana; tokens con stopwords; los identificadores numéricos (CAS/CE/ONU) se comparan por substring exacto, sin fuzzy.
-- **Perfil de release**: `opt-level = "z"`, `lto = "thin"` y `codegen-units = 1`. **No se usa `strip = true`**: elimina la sección `target_features` del WASM y rompe `wasm-bindgen` durante el despliegue.
-- **Límites de API**: *debounce* de 450 ms en PubChem (≈2 req/s, por debajo del límite de 5 req/s) y 500 ms en el BOE.
-- **Datos embebidos en la vista previa**: `preview/data.js` evita peticiones `fetch` locales y hace que la maqueta funcione abriendo el HTML directamente.
+El repositorio es público y el despliegue está automatizado en `.github/workflows/deploy-pages.yml`: cada `push` a `main` compila el WASM con `dx build --release` y publica el resultado en GitHub Pages.
 
-## Bases de datos oficiales en línea
+Paso único: **Settings → Pages → Build and deployment → Source: GitHub Actions**. También se puede lanzar a mano desde **Actions → Deploy Dioxus a GitHub Pages → Run workflow**.
 
-La aplicación ya no se limita a los datos embebidos:
+---
 
-- **Sustancias**: al escribir en el buscador se consulta en vivo la API PUG REST de **PubChem (NIH, EE. UU.)** con CORS abierto. Los resultados aparecen bajo "Resultados en bases de datos oficiales · PubChem (NIH)". Al pulsar *Ver ficha en línea* se genera una **ficha parcial de 16 secciones** con propiedades reales (fórmula, peso, InChIKey, XLogP, etc.), marcada como `DATOS EN LÍNEA · PUBCHEM` y con enlaces a PubChem y a las fichas ICSC de la OIT. Las secciones que requieren FDS del fabricante lo indican explícitamente: **no se presenta como una FDS completa**.
-- **Marco legal**: al seleccionar cualquier país se muestran **siempre** las fuentes del marco internacional (UNECE, OMI, OIT, convenciones) **junto a** la legislación nacional, más los portales oficiales del país. Ya no es necesario elegir "Marco internacional" por separado para verlo.
-- No existen fichas locales: la búsqueda de sustancias se resuelve íntegramente contra PubChem en vivo.
+## Estado verificado
 
-## Descarga de documentos
+- `cargo test --workspace`: ✅ 22 tests (core 16 + i18n 3 + storage 3)
+- `cargo check -p sustancias-web --target wasm32-unknown-unknown`: ✅
+- `cargo check -p sustancias-web --features desktop`: ✅
+- Despliegue en GitHub Pages: ✅
+- Búsquedas verificadas en vivo: `ácido sulfúrico`, `alcohol etoxilado`, `AEO7`, `éter`, `H2SO4`, `7664-93-9`, `TX-100`
+- Frases H del ácido sulfúrico: 9 (`H290`, `H303`, `H314`, `H318`, `H330`, `H370`, `H372`, `H402`, `H410`)
 
-- **Leyes cubanas**: el lector de normas muestra *Abrir PDF original* y *Descargar PDF*. La descarga usa `fetch` + `blob` (el hosting `raw.githubusercontent.com` permite CORS), con el nombre de archivo de la Gaceta.
-- **Fichas de sustancias**: si una sustancia aporta `pdf_url`, aparece *Descargar FDS en PDF*. Para las fichas generadas en línea (sin PDF) existe *Guardar ficha como PDF (imprimir)*, que abre el diálogo de impresión del navegador con una hoja de estilo que oculta paneles, menús y botones, dejando solo la ficha de 16 secciones.
-- La aplicación Dioxus realiza la misma descarga ejecutando el patrón `fetch`/`blob` desde Rust mediante `dioxus::document::eval`.
+---
 
 ## Pendiente
 
 - Ampliar las reglas de `data/interactions.json` a más pares de sustancias.
 - Validar en navegador los enlaces con `verificacion: portal_validar`.
-- Importar el resto de la base de legislación cubana del usuario (ya hay 3 normas incluidas).
-- Generar los paquetes Dioxus para escritorio y móvil. Las compilaciones de iOS/macOS requieren macOS + Xcode.
+- Generar los paquetes de instalación para escritorio y móvil (iOS/macOS requieren Apple).
+
+## Licencia
+
+MIT OR Apache-2.0.
