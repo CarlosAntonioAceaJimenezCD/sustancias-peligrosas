@@ -65,7 +65,7 @@ const CSS: &str = r#"
   --line:#ccd6e0; --line-soft:#dde5ed;
   --accent:#0b5d8f; --accent-strong:#08466d;
   --accent-soft:rgba(11,93,143,.10); --accent-line:rgba(11,93,143,.30);
-  --purple:#6d4a9c; --ok:#1a7f37; --warn:#8a5a00; --danger:#b42318; --focus:#0b5d8f;
+  --purple:#6d4a9c; --ok:#12662b; --warn:#6b4400; --danger:#b42318; --focus:#0b5d8f;
   --banner-a:#dae6f1; --banner-b:#cfdcec; --banner-c:#e3dcf0; --banner-text:#34485d;
   --lab-grid:rgba(11,93,143,.055); --lab-line:rgba(11,93,143,.14);
   --shadow-1:0 2px 8px rgba(21,33,48,.07);
@@ -82,7 +82,7 @@ const CSS: &str = r#"
     --line:#ccd6e0; --line-soft:#dde5ed;
     --accent:#0b5d8f; --accent-strong:#08466d;
     --accent-soft:rgba(11,93,143,.10); --accent-line:rgba(11,93,143,.30);
-    --purple:#6d4a9c; --ok:#1a7f37; --warn:#8a5a00; --danger:#b42318; --focus:#0b5d8f;
+    --purple:#6d4a9c; --ok:#12662b; --warn:#6b4400; --danger:#b42318; --focus:#0b5d8f;
     --banner-a:#dae6f1; --banner-b:#cfdcec; --banner-c:#e3dcf0; --banner-text:#34485d;
     --lab-grid:rgba(11,93,143,.055); --lab-line:rgba(11,93,143,.14);
     --shadow-1:0 2px 8px rgba(21,33,48,.07);
@@ -127,6 +127,8 @@ body{
   border-radius:var(--r-sm);background:var(--surface-2);color:var(--accent);cursor:pointer;
   transition:all var(--dur) var(--ease)}
 .tema-boton:hover{border-color:var(--accent-line);background:var(--accent-soft);transform:translateY(-1px)}
+.tutorial-cas{margin-top:var(--sp-2);font-size:var(--step--1);color:var(--muted)}
+.tutorial-cas summary{cursor:pointer;font-weight:650;color:var(--accent)}
 .marca{display:flex;gap:var(--sp-3);align-items:center}
 .marca-icono{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line-soft);
   border-radius:var(--r-md);color:var(--accent);background:var(--surface-2);
@@ -223,7 +225,7 @@ body{
 .resultado:hover,.resultado.activo{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
 .aviso{display:flex;gap:var(--sp-2);align-items:flex-start;background:rgba(210,153,34,.10);
   border:1px solid rgba(210,153,34,.36);border-radius:var(--r-sm);padding:var(--sp-2) var(--sp-3);
-  font-size:var(--step--1);color:var(--amber-300);margin-bottom:var(--sp-3)}
+  font-size:var(--step--1);color:var(--warn);margin-bottom:var(--sp-3)}
 .aviso .ico{color:var(--warn);margin-top:2px}
 
 /* --- Multi-sustancia --- */
@@ -2107,6 +2109,16 @@ fn App() -> Element {
                             },
                         }
                     }
+                    details { class: "tutorial-cas",
+                        summary { "Cómo obtener tu clave de CAS (gratis, 2 minutos)" }
+                        ol { class: "lista",
+                            li { "Abre " a { href: "https://www.cas.org/services/commonchemistry-api", target: "_blank", "el formulario de CAS Common Chemistry" } "." }
+                            li { "Rellena tu nombre, tu correo y para qué quieres usar la clave." }
+                            li { "Recibirás un token por correo. Es personal: no lo compartas." }
+                            li { "Pega el token en el campo de arriba y se guardará solo en este dispositivo." }
+                        }
+                        p { class: "multi-nota", "Solo hace falta si PubChem no devuelve el número CAS. La licencia de Common Chemistry es de uso no comercial." }
+                    }
                     label { class: "opcion",
                         "Directorio de descargas personalizado (vacío = el del sistema)"
                         input {
@@ -2213,13 +2225,13 @@ fn App() -> Element {
         section { class: "panel redes-panel",
             h3 { "Redes y enlaces" }
             div { class: "redes",
-                a { href: "{GITHUB_URL}", target: "_blank",
+                a { href: "{GITHUB_URL}", target: "_blank", aria_label: "GitHub",
                     dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
                     "GitHub"
-                a { href: "{GITHUB_URL}/issues", target: "_blank",
+                a { href: "{GITHUB_URL}/issues", target: "_blank", aria_label: "Issues de GitHub",
                     dangerous_inner_html: "{icon(\"info\", \"ico\")}" }
                     "Issues"
-                a { href: "https://www.linkedin.com/", target: "_blank",
+                a { href: "https://www.linkedin.com/", target: "_blank", aria_label: "LinkedIn",
                     dangerous_inner_html: "{icon(\"globe\", \"ico\")}" }
                     "LinkedIn"
             }

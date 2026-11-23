@@ -1,4 +1,185 @@
 {
-  "nota": "Pares revisados por profesionales. Cada entrada debe incluir id del par, nombre del revisor, fecha y fuente. Vacío hasta que un profesional lo confirme.",
-  "revisiones": []
+  "nota": "20 pares habituales preparados para revision por un profesional. Rellena revisor, fecha y comentario; cambia estado a \"revisado\" para mostrar la insignia en la app.",
+  "revisiones": [
+    {
+      "id": "RG2-RG10",
+      "par": "Acido sulfurico + Hidroxido de sodio",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG2-RG4",
+      "par": "Acido sulfurico + Etanol",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG2-RG19",
+      "par": "Acido sulfurico + Acetona",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG44-RG29",
+      "par": "Cloro + Gasolina",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG44-RG4",
+      "par": "Cloro + Etanol",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG44-RG19",
+      "par": "Cloro + Acetona",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG44-RG59",
+      "par": "Cloro + Halogenantes",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG1-RG10",
+      "par": "Acidos fuertes no oxidantes + Bases fuertes",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG1-RG11",
+      "par": "Acidos fuertes + Cianuros inorganicos",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG1-RG33",
+      "par": "Acidos fuertes + Sulfuros inorganicos",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG1-RG21",
+      "par": "Acidos fuertes + Metales alcalinos",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG2-RG30",
+      "par": "Acidos oxidantes + Peroxidos organicos",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG2-RG45",
+      "par": "Acidos oxidantes + Reductores fuertes",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG2-RG8",
+      "par": "Acidos oxidantes + Compuestos azoicos",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG10-RG4",
+      "par": "Bases fuertes + Alcoholes",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG10-RG76",
+      "par": "Bases fuertes + Compuestos polimerizables",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG30-RG44",
+      "par": "Peroxidos organicos + Oxidantes fuertes",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG45-RG44",
+      "par": "Reductores fuertes + Oxidantes fuertes",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG59-RG4",
+      "par": "Halogenantes + Alcoholes",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    },
+    {
+      "id": "RG100-RG21",
+      "par": "Agua y disoluciones acuosas + Metales alcalinos",
+      "revisor": "",
+      "fecha": "",
+      "fuente": "NOAA/EPA CAMEO Chemicals",
+      "estado": "pendiente",
+      "comentario": ""
+    }
+  ]
 }
