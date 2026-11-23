@@ -76,6 +76,38 @@ impl HttpClient {
         }
     }
 
+    /// GET JSON con una cabecera adicional (para APIs con clave).
+    pub async fn get_json_with_header(
+        &self,
+        url: &str,
+        nombre: &str,
+        valor: &str,
+    ) -> Result<serde_json::Value, String> {
+        #[cfg(target_arch = "wasm32")]
+        {
+            gloo_net::http::Request::get(url)
+                .header(nombre, valor)
+                .send()
+                .await
+                .map_err(|e| e.to_string())?
+                .json::<serde_json::Value>()
+                .await
+                .map_err(|e| e.to_string())
+        }
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            reqwest::Client::new()
+                .get(url)
+                .header(nombre, valor)
+                .send()
+                .await
+                .map_err(|e| e.to_string())?
+                .json::<serde_json::Value>()
+                .await
+                .map_err(|e| e.to_string())
+        }
+    }
+
     pub async fn post_form(
         &self,
         url: &str,

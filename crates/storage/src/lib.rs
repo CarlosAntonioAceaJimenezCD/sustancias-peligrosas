@@ -55,6 +55,9 @@ pub struct Options {
     /// Usar el endpoint de pago de DeepL en vez del gratuito.
     #[serde(default)]
     pub deepl_pro: bool,
+    /// Clave gratuita de la API de CAS Common Chemistry.
+    #[serde(default)]
+    pub cas_api_key: String,
 }
 
 impl Default for Options {
@@ -67,6 +70,7 @@ impl Default for Options {
             deepl_enabled: false,
             deepl_key: String::new(),
             deepl_pro: false,
+            cas_api_key: String::new(),
         }
     }
 }

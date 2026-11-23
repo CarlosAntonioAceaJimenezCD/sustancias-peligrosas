@@ -568,6 +568,7 @@ struct AppOptions {
     deepl_enabled: bool,
     deepl_key: String,
     deepl_pro: bool,
+    cas_api_key: String,
 }
 
 impl Default for AppOptions {
@@ -580,6 +581,7 @@ impl Default for AppOptions {
             deepl_enabled: false,
             deepl_key: String::new(),
             deepl_pro: false,
+            cas_api_key: String::new(),
         }
     }
 }
@@ -599,6 +601,7 @@ impl From<&AppOptions> for sustancias_storage::Options {
             deepl_enabled: o.deepl_enabled,
             deepl_key: o.deepl_key.clone(),
             deepl_pro: o.deepl_pro,
+            cas_api_key: o.cas_api_key.clone(),
         }
     }
 }
@@ -627,6 +630,7 @@ fn cargar_opciones() -> AppOptions {
         deepl_enabled: o.deepl_enabled,
         deepl_key: o.deepl_key,
         deepl_pro: o.deepl_pro,
+        cas_api_key: o.cas_api_key,
     }
 }
 
@@ -756,6 +760,28 @@ async fn dormir(ms: u64) {
     gloo_timers::future::TimeoutFuture::new(ms as u32).await;
     #[cfg(not(target_arch = "wasm32"))]
     tokio::time::sleep(std::time::Duration::from_millis(ms)).await;
+}
+
+/// Consulta CAS Common Chemistry para resolver el CAS de un nombre.
+/// Requiere una clave API gratuita solicitada en commonchemistry.cas.org.
+async fn cas_from_common_chemistry(nombre: &str, clave: &str) -> Option<String> {
+    if clave.trim().is_empty() || nombre.trim().is_empty() {
+        return None;
+    }
+    let url = format!(
+        "https://commonchemistry.cas.org/api/search?q={}",
+        urlencoding::encode(nombre.trim())
+    );
+    let valor = sustancias_i18n::HttpClient::default()
+        .get_json_with_header(&url, "X-API-KEY", clave.trim())
+        .await
+        .ok()?;
+    valor
+        .get("results")?
+        .get(0)?
+        .get("rn")?
+        .as_str()
+        .map(str::to_string)
 }
 
 /// Hora local del dispositivo (zona horaria del usuario).
@@ -948,6 +974,20 @@ fn App() -> Element {
     let multi_id_list: Vec<String> = multi_items.iter().map(|(id, _, _)| id.clone()).collect();
     let interactions = core::analyze_interactions_named(&multi_id_list, &multi_names);
 
+    // Límites de exposición de NIOSH para la sustancia mostrada.
+    let limites = online_ficha()
+        .or(active_substance)
+        .and_then(|s| core::niosh_limit_for_cas(&s.cas));
+
+    // Perfiles de reactividad de PubChem para sustancias sin cobertura CAMEO.
+    let perfiles: Vec<(String, &'static core::PubChemReactivity)> = multi_items
+        .iter()
+        .filter_map(|(id, nombre, _)| {
+            let cid = id.strip_prefix("online-")?.parse::<u64>().ok()?;
+            core::pubchem_reactivity_for_cid(cid).map(|p| (nombre.clone(), p))
+        })
+        .collect();
+
     // Analisis de compatibilidad con NOAA/EPA CAMEO para los pares con CAS.
     let mut cameo_analyses: Vec<(String, String, core::CameoAnalysis)> = Vec::new();
     for i in 0..multi_items.len() {
@@ -1115,6 +1155,14 @@ fn App() -> Element {
 
                 if let Some(mut c) = compuesto {
                     c.cas = core::extraer_cas(&sinonimos).unwrap_or_default();
+                    if c.cas.is_empty() {
+                        let clave = opciones().cas_api_key.clone();
+                        if !clave.trim().is_empty() {
+                            if let Some(rn) = cas_from_common_chemistry(&c.title, &clave).await {
+                                c.cas = rn;
+                            }
+                        }
+                    }
                     c.synonyms = sinonimos;
                     c.lang = lang.clone();
                     c.nota = nota.clone();
@@ -1704,6 +1752,18 @@ fn App() -> Element {
                             }
                         }
                     }
+                    for (nombre, perfil) in perfiles.iter() {
+                        if let Some(textos) = perfil.secciones.get("Reactivity Profile") {
+                            div { class: "interaccion cameo",
+                                div { class: "interaccion-cabecera",
+                                    strong { "Perfil de reactividad · {nombre}" }
+                                    span { class: "badge badge-suave", "PubChem" }
+                                }
+                                p { class: "multi-nota", "Fuente: PubChem (NIH). Sin clasificación CAMEO disponible." }
+                                for txt in textos.iter() { p { "{txt}" } }
+                            }
+                        }
+                    }
                     for (na, nb, a) in cameo_analyses.iter() {
                         div { class: "interaccion cameo",
                             div { class: "interaccion-cabecera",
@@ -1718,6 +1778,7 @@ fn App() -> Element {
                                 }
                             }
                             p { class: "multi-nota", "Compatibilidad segun NOAA/EPA CAMEO Chemicals" }
+                            if a.revisado { span { class: "badge badge-ok", "Revisado por profesional" } }
                             span {
                                 class: match a.compatibilidad.as_str() {
                                     "incompatible" => "badge badge-danger",
@@ -1784,6 +1845,25 @@ fn App() -> Element {
                             div { class: "aviso",
                                 span { dangerous_inner_html: "{icon(\"alert\", \"ico\")}" }
                                 span { "Ficha parcial generada con datos públicos de PubChem. No sustituye la ficha de datos de seguridad del fabricante." }
+                            }
+                        }
+                        if let Some(lim) = limites {
+                            div { class: "seccion limites",
+                                h5 { "Límites de exposición · NIOSH" }
+                                div { class: "prop-grid",
+                                    if !lim.rel.is_empty() {
+                                        div { class: "prop", b { "NIOSH REL" } "{lim.rel}" }
+                                    }
+                                    if !lim.pel.is_empty() {
+                                        div { class: "prop", b { "OSHA PEL" } "{lim.pel}" }
+                                    }
+                                    if !lim.idlh.is_empty() {
+                                        div { class: "prop", b { "IDLH" } "{lim.idlh}" }
+                                    }
+                                }
+                                p { class: "multi-nota",
+                                    a { href: "{lim.url}", target: "_blank", "Fuente: NIOSH Pocket Guide (CDC)" }
+                                }
                             }
                         }
                         div { class: "fds-index",

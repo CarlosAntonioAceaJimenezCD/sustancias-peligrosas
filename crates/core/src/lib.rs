@@ -20,6 +20,8 @@ const ALIASES_JSON: &str = include_str!("../../../data/aliases.json");
 const CAMEO_SUBSTANCES_JSON: &str = include_str!("../../../data/cameo_substances.json");
 const CAMEO_REACTIONS_JSON: &str = include_str!("../../../data/cameo_reactions_min.json");
 const PUBCHEM_REACTIVITY_JSON: &str = include_str!("../../../data/pubchem_reactivity.json");
+const CAMEO_REVIEWED_JSON: &str = include_str!("../../../data/cameo_reviewed.json");
+const NIOSH_LIMITS_JSON: &str = include_str!("../../../data/niosh_limits.json");
 
 mod query;
 
@@ -163,6 +165,40 @@ pub struct LegislationDb {
     pub paises: HashMap<String, CountryLegislation>,
 }
 
+#[derive(Debug, Clone, Deserialize, Serialize)]
+struct CameoReviewedDb {
+    #[serde(default)]
+    pub revisiones: Vec<serde_json::Value>,
+}
+
+/// Indica si un par ha sido revisado por un profesional.
+pub fn par_revisado(id: &str) -> bool {
+    static CACHE: OnceLock<CameoReviewedDb> = OnceLock::new();
+    let db = CACHE.get_or_init(|| parse(CAMEO_REVIEWED_JSON));
+    db.revisiones.iter().any(|r| {
+        r.get("id").and_then(|v| v.as_str()).map(|s| s == id).unwrap_or(false)
+    })
+}
+
+/// Límites de exposición de la Guía de Bolsillo de NIOSH.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct NioshLimit {
+    pub cas: String,
+    pub nombre: String,
+    #[serde(default)]
+    pub rel: String,
+    #[serde(default)]
+    pub pel: String,
+    #[serde(default)]
+    pub idlh: String,
+    pub url: String,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+struct NioshLimitsDb {
+    pub limites: Vec<NioshLimit>,
+}
+
 /// Perfil de reactividad de PubChem para sustancias sin clasificación CAMEO.
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct PubChemReactivity {
@@ -200,16 +236,21 @@ pub struct CameoPair {
     pub a: u32,
     pub b: u32,
     #[serde(default)]
-    pub grupo_a: String,
-    #[serde(default)]
-    pub grupo_b: String,
-    pub url: String,
-    #[serde(default)]
     pub peligros: Vec<String>,
     #[serde(default)]
     pub gases: Vec<String>,
     #[serde(default)]
     pub citas: Vec<String>,
+}
+
+impl CameoPair {
+    /// URL de la documentación del par (se deriva de los identificadores).
+    pub fn url(&self) -> String {
+        format!(
+            "https://cameochemicals.noaa.gov/reactivity/documentation/RG{}-RG{}",
+            self.a, self.b
+        )
+    }
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -229,6 +270,8 @@ pub struct CameoAnalysis {
     pub etiqueta: String,
     /// Clasificación de la mezcla según el criterio de CAMEO.
     pub compatibilidad: String,
+    /// Indica si un profesional ha revisado y confirmado este par.
+    pub revisado: bool,
     pub peligros: Vec<String>,
     pub gases: Vec<String>,
     pub citas: Vec<String>,
@@ -429,6 +472,18 @@ pub fn extraer_cas(sinonimos: &[String]) -> Option<String> {
     })
 }
 
+/// Límites de exposición de NIOSH (cacheados).
+pub fn niosh_limits() -> &'static [NioshLimit] {
+    static CACHE: OnceLock<NioshLimitsDb> = OnceLock::new();
+    &CACHE.get_or_init(|| parse(NIOSH_LIMITS_JSON)).limites
+}
+
+/// Busca los límites de exposición de NIOSH por CAS.
+pub fn niosh_limit_for_cas(cas: &str) -> Option<&'static NioshLimit> {
+    let buscado = normalize(cas.trim());
+    niosh_limits().iter().find(|l| normalize(&l.cas) == buscado)
+}
+
 /// Perfiles de reactividad de PubChem (cacheados).
 pub fn pubchem_reactivity() -> &'static [PubChemReactivity] {
     static CACHE: OnceLock<PubChemReactivityDb> = OnceLock::new();
@@ -471,6 +526,7 @@ pub fn cameo_analyze(cas_a: &str, cas_b: &str) -> Option<CameoAnalysis> {
     let mut gases: Vec<String> = Vec::new();
     let mut citas: Vec<String> = Vec::new();
     let mut fuentes: Vec<String> = Vec::new();
+    let mut revisado = false;
     for ga in &a.grupos {
         for gb in &b.grupos {
             let (x, y) = if ga.numero <= gb.numero {
@@ -479,6 +535,7 @@ pub fn cameo_analyze(cas_a: &str, cas_b: &str) -> Option<CameoAnalysis> {
                 (gb.numero, ga.numero)
             };
             if let Some(par) = pares.iter().find(|p| p.a == x && p.b == y) {
+                if par_revisado(&par.id) { revisado = true; }
                 for d in &par.peligros {
                     if !peligros.iter().any(|q| q == d) { peligros.push(d.clone()); }
                 }
@@ -488,7 +545,7 @@ pub fn cameo_analyze(cas_a: &str, cas_b: &str) -> Option<CameoAnalysis> {
                 for c in &par.citas {
                     if !citas.iter().any(|q| q == c) { citas.push(c.clone()); }
                 }
-                if !fuentes.iter().any(|q| q == &par.url) { fuentes.push(par.url.clone()); }
+                if !fuentes.iter().any(|q| q == &par.url()) { fuentes.push(par.url()); }
             }
         }
     }
@@ -521,6 +578,7 @@ pub fn cameo_analyze(cas_a: &str, cas_b: &str) -> Option<CameoAnalysis> {
         nivel: nivel.to_string(),
         etiqueta: etiqueta.to_string(),
         compatibilidad: compatibilidad.to_string(),
+        revisado,
         peligros, gases, citas, fuentes,
     })
 }
@@ -838,7 +896,7 @@ pub fn substance_from_pubchem(p: &PubChemCompound) -> Substance {
         id: format!("online-{}", p.cid),
         nombre: nombre_mostrado.clone(),
         sinonimos: p.synonyms.iter().take(25).cloned().collect(),
-        cas: String::new(),
+        cas: p.cas.clone(),
         ce: String::new(),
         onu: String::new(),
         peligrosidad: Peligrosidad::default(),
@@ -1038,7 +1096,7 @@ pub fn substance_from_pubchem_view(
         id: format!("online-{}", base.cid),
         nombre: nombre_mostrado,
         sinonimos: base.synonyms.iter().take(25).cloned().collect(),
-        cas: String::new(),
+        cas: p.cas.clone(),
         ce: String::new(),
         onu: String::new(),
         peligrosidad: Peligrosidad::default(),
