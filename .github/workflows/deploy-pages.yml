@@ -33,7 +33,8 @@ jobs:
             RUSTSEC-2024-0436,
             RUSTSEC-2024-0370,
             RUSTSEC-2024-0429,
-            RUSTSEC-2026-0097
+            RUSTSEC-2026-0097,
+            RUSTSEC-2026-0543
 
   build:
     runs-on: ubuntu-latest
