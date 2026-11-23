@@ -418,6 +418,29 @@ body{
   padding:var(--sp-3);margin-bottom:var(--sp-2)}
 .doc-guardado strong{font-size:var(--step-0);color:var(--ink-strong);display:block}
 
+/* --- Robustez ante contenido extremo (texto largo, zoom, pantallas estrechas) --- */
+.norma,.norma-meta,.panel-cabecera,.norma h4,.banner-texto,.resultados-online,
+.online-resultado,.interaccion,.doc-guardado{min-inline-size:0;overflow-wrap:anywhere}
+.badge{max-inline-size:100%;overflow-wrap:anywhere;white-space:normal}
+.norma h4{overflow-wrap:anywhere;word-break:break-word}
+.panel-legal summary{flex-wrap:wrap;min-inline-size:0}
+.panel-legal summary .badge{margin-inline-start:auto}
+.cabecera{flex-wrap:wrap}
+.marca{min-inline-size:0}
+.marca strong,.marca small{overflow-wrap:anywhere}
+.leyenda-grupo{min-inline-size:0;overflow-wrap:anywhere}
+
+@media(max-width:360px){
+  .cabecera{padding:var(--sp-2) var(--sp-3)}
+  .banner-pais-grande{width:42px;height:42px}
+  .flag-lg{width:40px;height:27px}
+  .banner{padding:var(--sp-3);gap:var(--sp-2)}
+  .contenido{margin-inline:var(--sp-2)}
+  .panel,.offline-panel{padding:var(--sp-3)}
+  .online-resultado,.norma{padding:var(--sp-2)}
+  .ficha-titulo h4{font-size:var(--step-2)}
+}
+
 /* --- Preferencias de movimiento --- */
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
