@@ -1092,19 +1092,20 @@ fn App() -> Element {
     // Restaura la preferencia guardada (auto/claro/oscuro) y aplica el tema
     // efectivo. «auto» se resuelve con la hora local de la zona horaria.
     use_effect(move || {
+        // Se aplica de forma directa: `Eval::recv` no es fiable en el primer
+        // render y dejaría el tema sin aplicar. La preferencia se sincroniza
+        // después, solo para el icono del botón.
+        dioxus::document::eval(
+            "try{var p=localStorage.getItem('sustancias-theme')||'auto';var h=new Date().getHours();var t=p==='auto'?(h>=7&&h<19?'light':'dark'):p;document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}",
+        );
         spawn(async move {
             let mut evaluar = dioxus::document::eval(
                 "(function(){try{return localStorage.getItem('sustancias-theme')||'auto'}catch(e){return 'auto'}})()",
             );
             if let Ok(valor) = evaluar.recv::<serde_json::Value>().await {
-                let preferencia = valor.as_str().unwrap_or("auto").to_string();
-                let efectivo = tema_efectivo(&preferencia);
-                theme.set(preferencia);
-                tema_actual.set(efectivo.to_string());
-                dioxus::document::eval(&format!(
-                    "document.documentElement.dataset.theme={:?}",
-                    efectivo
-                ));
+                if let Some(preferencia) = valor.as_str() {
+                    theme.set(preferencia.to_string());
+                }
             }
         });
     });
