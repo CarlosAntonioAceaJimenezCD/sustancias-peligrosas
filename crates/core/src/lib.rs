@@ -896,7 +896,7 @@ pub fn substance_from_pubchem(p: &PubChemCompound) -> Substance {
         id: format!("online-{}", p.cid),
         nombre: nombre_mostrado.clone(),
         sinonimos: p.synonyms.iter().take(25).cloned().collect(),
-        cas: base.cas.clone(),
+        cas: p.cas.clone(),
         ce: String::new(),
         onu: String::new(),
         peligrosidad: Peligrosidad::default(),
