@@ -773,7 +773,7 @@ async fn cas_from_common_chemistry(nombre: &str, clave: &str) -> Option<String> 
         urlencoding::encode(nombre.trim())
     );
     let valor = sustancias_i18n::HttpClient::default()
-        .get_json_with_header(&url, "X-API-KEY", clave.trim())
+        .get_json_with_header(&url, "X-Api-Key", clave.trim())
         .await
         .ok()?;
     valor
@@ -2091,6 +2091,20 @@ fn App() -> Element {
                                 abrir_issue("Feedback sobre Sustancias Peligrosas", "Cuéntanos qué funciona mal o qué te gustaría mejorar:");
                             },
                             "Enviar feedback / reportar un bug"
+                        }
+                    }
+                    label { class: "opcion",
+                        span { "Clave API de CAS Common Chemistry (opcional; se solicita gratis en cas.org)" }
+                        input {
+                            r#type: "password",
+                            value: opciones().cas_api_key.clone(),
+                            placeholder: "X-Api-Key",
+                            onchange: move |e| {
+                                let mut o = opciones();
+                                o.cas_api_key = e.value();
+                                guardar_opciones(&o);
+                                opciones.set(o);
+                            },
                         }
                     }
                     label { class: "opcion",
