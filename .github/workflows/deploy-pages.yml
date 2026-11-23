@@ -126,7 +126,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: site-build
-          path: site
+          path: site/sustancias-peligrosas
 
       - name: Preparar Python y navegador
         run: |
