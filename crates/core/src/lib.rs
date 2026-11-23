@@ -17,6 +17,8 @@ const SUBSTANCES_JSON: &str = include_str!("../../../data/substances.json");
 const INTERACTIONS_JSON: &str = include_str!("../../../data/interactions.json");
 const ORGANIZATIONS_JSON: &str = include_str!("../../../data/organizations.json");
 const ALIASES_JSON: &str = include_str!("../../../data/aliases.json");
+const CAMEO_SUBSTANCES_JSON: &str = include_str!("../../../data/cameo_substances.json");
+const CAMEO_REACTIONS_JSON: &str = include_str!("../../../data/cameo_reactions_min.json");
 
 mod query;
 
@@ -158,6 +160,63 @@ pub struct CountryLegislation {
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct LegislationDb {
     pub paises: HashMap<String, CountryLegislation>,
+}
+
+/// Sustancia mapeada a sus grupos reactivos de CAMEO.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct CameoSubstance {
+    pub cas: String,
+    pub nombre: String,
+    pub cameo_id: u64,
+    pub url: String,
+    pub grupos: Vec<CameoGrupo>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct CameoGrupo {
+    pub id: String,
+    pub numero: u32,
+    pub nombre: String,
+}
+
+/// Par de grupos reactivos con predicciones documentadas.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct CameoPair {
+    pub id: String,
+    pub a: u32,
+    pub b: u32,
+    #[serde(default)]
+    pub grupo_a: String,
+    #[serde(default)]
+    pub grupo_b: String,
+    pub url: String,
+    #[serde(default)]
+    pub peligros: Vec<String>,
+    #[serde(default)]
+    pub gases: Vec<String>,
+    #[serde(default)]
+    pub citas: Vec<String>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+struct CameoSubstancesDb {
+    pub sustancias: Vec<CameoSubstance>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+struct CameoReactionsDb {
+    pub pares: Vec<CameoPair>,
+}
+
+/// Resultado agregado de la compatibilidad entre dos sustancias.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct CameoAnalysis {
+    pub nivel: String,
+    pub etiqueta: String,
+    pub peligros: Vec<String>,
+    pub gases: Vec<String>,
+    pub citas: Vec<String>,
+    pub fuentes: Vec<String>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -337,6 +396,75 @@ pub struct PairAnalysis {
     pub consecuencias: Vec<String>,
     pub acciones: Vec<String>,
     pub es_regla_general: bool,
+}
+
+/// Base de sustancias mapeadas a grupos reactivos (cacheada).
+pub fn cameo_substances() -> &'static [CameoSubstance] {
+    static CACHE: OnceLock<CameoSubstancesDb> = OnceLock::new();
+    &CACHE.get_or_init(|| parse(CAMEO_SUBSTANCES_JSON)).sustancias
+}
+
+/// Busca una sustancia de CAMEO por número CAS normalizado.
+pub fn cameo_substance_for_cas(cas: &str) -> Option<&'static CameoSubstance> {
+    let buscado = normalize(cas.trim());
+    cameo_substances().iter().find(|s| normalize(&s.cas) == buscado)
+}
+
+/// Base de pares reactivos (cacheada).
+pub fn cameo_pairs() -> &'static [CameoPair] {
+    static CACHE: OnceLock<CameoReactionsDb> = OnceLock::new();
+    &CACHE.get_or_init(|| parse(CAMEO_REACTIONS_JSON)).pares
+}
+
+/// Analiza la compatibilidad entre dos CAS con datos de NOAA/EPA CAMEO.
+///
+/// Una sustancia puede pertenecer a varios grupos reactivos; se agregan todos
+/// los pares resultantes y se deduce el nivel más grave.
+pub fn cameo_analyze(cas_a: &str, cas_b: &str) -> Option<CameoAnalysis> {
+    let a = cameo_substance_for_cas(cas_a)?;
+    let b = cameo_substance_for_cas(cas_b)?;
+    let pares = cameo_pairs();
+    let alto = ["Explosive", "Intense or explosive reaction", "Toxic", "Corrosive"];
+    let mut peligros: Vec<String> = Vec::new();
+    let mut gases: Vec<String> = Vec::new();
+    let mut citas: Vec<String> = Vec::new();
+    let mut fuentes: Vec<String> = Vec::new();
+    for ga in &a.grupos {
+        for gb in &b.grupos {
+            let (x, y) = if ga.numero <= gb.numero {
+                (ga.numero, gb.numero)
+            } else {
+                (gb.numero, ga.numero)
+            };
+            if let Some(par) = pares.iter().find(|p| p.a == x && p.b == y) {
+                for d in &par.peligros {
+                    if !peligros.iter().any(|q| q == d) { peligros.push(d.clone()); }
+                }
+                for g in &par.gases {
+                    if !gases.iter().any(|q| q == g) { gases.push(g.clone()); }
+                }
+                for c in &par.citas {
+                    if !citas.iter().any(|q| q == c) { citas.push(c.clone()); }
+                }
+                if !fuentes.iter().any(|q| q == &par.url) { fuentes.push(par.url.clone()); }
+            }
+        }
+    }
+    let nivel = if peligros.iter().any(|p| alto.iter().any(|a| p == a)) {
+        "alto"
+    } else if peligros.iter().any(|p| p != "No known hazardous reaction") {
+        "moderado"
+    } else {
+        "nulo"
+    };
+    let etiqueta = match nivel {
+        "alto" => "Peligro alto",
+        "moderado" => "Precaución",
+        _ => "Sin reacción registrada",
+    };
+    Some(CameoAnalysis {
+        nivel: nivel.to_string(), etiqueta: etiqueta.to_string(), peligros, gases, citas, fuentes,
+    })
 }
 
 // ---------------------------------------------------------------------------
@@ -1316,6 +1444,17 @@ mod tests {
         let variantes = name_variants("Ácido sulfúrico");
         assert_eq!(variantes[0], "sulfuric acid");
         assert_eq!(variantes[1], "acido sulfurico");
+    }
+
+    #[test]
+    fn cameo_analiza_pares_por_cas() {
+        let r = cameo_analyze("7664-93-9", "67-64-1").unwrap();
+        assert_eq!(r.nivel, "alto");
+        assert!(r.peligros.iter().any(|p| p.contains("Toxic") || p.contains("Explosive") || p.contains("Generates")));
+        assert!(r.fuentes.iter().any(|u| u.contains("cameochemicals.noaa.gov")));
+        let nulo = cameo_analyze("67-64-1", "67-64-1").unwrap();
+        assert_eq!(nulo.nivel, "nulo");
+        assert!(cameo_analyze("000-00-0", "67-64-1").is_none());
     }
 
     #[test]

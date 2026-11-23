@@ -1,0 +1,189 @@
+{
+  "fuente": "NOAA/EPA CAMEO Chemicals",
+  "nota": "Mapeo de CAS a grupos reactivos._selecciona la ficha de compuesto puro cuando el CAS comparte numero con mezclas.",
+  "sustancias": [
+    {
+      "cas": "7664-93-9",
+      "buscado": "SULFURIC ACID",
+      "cameo_id": "5193",
+      "nombre": "SULFURIC ACID",
+      "url": "https://cameochemicals.noaa.gov/chemical/5193",
+      "grupos": [
+        {
+          "id": "RG2",
+          "numero": 2,
+          "nombre": "Acids, Strong Oxidizing"
+        }
+      ]
+    },
+    {
+      "cas": "67-64-1",
+      "buscado": "ACETONE",
+      "cameo_id": "8",
+      "nombre": "ACETONE",
+      "url": "https://cameochemicals.noaa.gov/chemical/8",
+      "grupos": [
+        {
+          "id": "RG19",
+          "numero": 19,
+          "nombre": "Ketones"
+        }
+      ]
+    },
+    {
+      "cas": "64-17-5",
+      "buscado": "ETHYL ALCOHOL",
+      "cameo_id": "667",
+      "nombre": "ETHANOL",
+      "url": "https://cameochemicals.noaa.gov/chemical/667",
+      "grupos": [
+        {
+          "id": "RG4",
+          "numero": 4,
+          "nombre": "Alcohols and Polyols"
+        }
+      ]
+    },
+    {
+      "cas": "7782-50-5",
+      "buscado": "CHLORINE",
+      "cameo_id": "2862",
+      "nombre": "CHLORINE",
+      "url": "https://cameochemicals.noaa.gov/chemical/2862",
+      "grupos": [
+        {
+          "id": "RG44",
+          "numero": 44,
+          "nombre": "Oxidizing Agents, Strong"
+        },
+        {
+          "id": "RG59",
+          "numero": 59,
+          "nombre": "Halogenating Agents"
+        }
+      ]
+    },
+    {
+      "cas": "1310-73-2",
+      "buscado": "SODIUM HYDROXIDE",
+      "cameo_id": "1499",
+      "nombre": "SODIUM HYDROXIDE SOLUTION",
+      "url": "https://cameochemicals.noaa.gov/chemical/1499",
+      "grupos": [
+        {
+          "id": "RG10",
+          "numero": 10,
+          "nombre": "Bases, Strong"
+        },
+        {
+          "id": "RG100",
+          "numero": 100,
+          "nombre": "Water and Aqueous Solutions"
+        }
+      ]
+    },
+    {
+      "cas": "7647-01-0",
+      "buscado": "HYDROCHLORIC ACID",
+      "cameo_id": "3598",
+      "nombre": "HYDROCHLORIC ACID, SOLUTION",
+      "url": "https://cameochemicals.noaa.gov/chemical/3598",
+      "grupos": [
+        {
+          "id": "RG1",
+          "numero": 1,
+          "nombre": "Acids, Strong Non-oxidizing"
+        },
+        {
+          "id": "RG100",
+          "numero": 100,
+          "nombre": "Water and Aqueous Solutions"
+        }
+      ]
+    },
+    {
+      "cas": "7664-41-7",
+      "buscado": "AMMONIA",
+      "cameo_id": "4860",
+      "nombre": "AMMONIA, ANHYDROUS",
+      "url": "https://cameochemicals.noaa.gov/chemical/4860",
+      "grupos": [
+        {
+          "id": "RG61",
+          "numero": 61,
+          "nombre": "Bases, Weak"
+        }
+      ]
+    },
+    {
+      "cas": "67-56-1",
+      "buscado": "METHYL ALCOHOL",
+      "cameo_id": "3874",
+      "nombre": "METHANOL",
+      "url": "https://cameochemicals.noaa.gov/chemical/3874",
+      "grupos": [
+        {
+          "id": "RG4",
+          "numero": 4,
+          "nombre": "Alcohols and Polyols"
+        }
+      ]
+    },
+    {
+      "cas": "7722-84-1",
+      "buscado": "HYDROGEN PEROXIDE",
+      "cameo_id": "5023",
+      "nombre": "HYDROGEN PEROXIDE, STABILIZED",
+      "url": "https://cameochemicals.noaa.gov/chemical/5023",
+      "grupos": [
+        {
+          "id": "RG44",
+          "numero": 44,
+          "nombre": "Oxidizing Agents, Strong"
+        }
+      ]
+    },
+    {
+      "cas": "64-19-7",
+      "buscado": "ACETIC ACID",
+      "cameo_id": "2272",
+      "nombre": "ACETIC ACID, GLACIAL",
+      "url": "https://cameochemicals.noaa.gov/chemical/2272",
+      "grupos": [
+        {
+          "id": "RG3",
+          "numero": 3,
+          "nombre": "Acids, Carboxylic"
+        }
+      ]
+    },
+    {
+      "cas": "71-43-2",
+      "buscado": "BENZENE",
+      "cameo_id": "2577",
+      "nombre": "BENZENE",
+      "url": "https://cameochemicals.noaa.gov/chemical/2577",
+      "grupos": [
+        {
+          "id": "RG16",
+          "numero": 16,
+          "nombre": "Hydrocarbons, Aromatic"
+        }
+      ]
+    },
+    {
+      "cas": "110-54-3",
+      "buscado": "HEXANE",
+      "cameo_id": "851",
+      "nombre": "N-HEXANE",
+      "url": "https://cameochemicals.noaa.gov/chemical/851",
+      "grupos": [
+        {
+          "id": "RG29",
+          "numero": 29,
+          "nombre": "Hydrocarbons, Aliphatic Saturated"
+        }
+      ]
+    }
+  ]
+}
