@@ -976,8 +976,8 @@ fn App() -> Element {
 
     // Límites de exposición de NIOSH para la sustancia mostrada.
     let limites = online_ficha()
-        .or(active_substance)
-        .and_then(|s| core::niosh_limit_for_cas(&s.cas));
+        .or_else(|| active_substance.clone())
+        .and_then(|s| core::niosh_limit_for_cas(&s.cas).cloned());
 
     // Perfiles de reactividad de PubChem para sustancias sin cobertura CAMEO.
     let perfiles: Vec<(String, &'static core::PubChemReactivity)> = multi_items
