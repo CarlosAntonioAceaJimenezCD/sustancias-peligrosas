@@ -213,6 +213,8 @@ struct CameoReactionsDb {
 pub struct CameoAnalysis {
     pub nivel: String,
     pub etiqueta: String,
+    /// Clasificación de la mezcla según el criterio de CAMEO.
+    pub compatibilidad: String,
     pub peligros: Vec<String>,
     pub gases: Vec<String>,
     pub citas: Vec<String>,
@@ -477,8 +479,24 @@ pub fn cameo_analyze(cas_a: &str, cas_b: &str) -> Option<CameoAnalysis> {
         "moderado" => "Precaución",
         _ => "Sin reacción registrada",
     };
+    // Criterio publicado por CAMEO: incompatible si hay productos peligrosos
+    // o calor excesivo; cautela si hay inestabilidad o reacción lenta;
+    // compatible si no hay reacción conocida.
+    let incompatibles = [
+        "Explosive", "Intense or explosive reaction", "Toxic", "Corrosive", "Flammable",
+    ];
+    let compatibilidad = if peligros.iter().any(|p| incompatibles.iter().any(|i| p == i)) {
+        "incompatible"
+    } else if peligros.iter().any(|p| p != "No known hazardous reaction") {
+        "precaucion"
+    } else {
+        "compatible"
+    };
     Some(CameoAnalysis {
-        nivel: nivel.to_string(), etiqueta: etiqueta.to_string(), peligros, gases, citas, fuentes,
+        nivel: nivel.to_string(),
+        etiqueta: etiqueta.to_string(),
+        compatibilidad: compatibilidad.to_string(),
+        peligros, gases, citas, fuentes,
     })
 }
 
@@ -1476,10 +1494,12 @@ mod tests {
     fn cameo_analiza_pares_por_cas() {
         let r = cameo_analyze("7664-93-9", "67-64-1").unwrap();
         assert_eq!(r.nivel, "alto");
+        assert_eq!(r.compatibilidad, "incompatible");
         assert!(r.peligros.iter().any(|p| p.contains("Toxic") || p.contains("Explosive") || p.contains("Generates")));
         assert!(r.fuentes.iter().any(|u| u.contains("cameochemicals.noaa.gov")));
         let nulo = cameo_analyze("67-64-1", "67-64-1").unwrap();
         assert_eq!(nulo.nivel, "nulo");
+        assert_eq!(nulo.compatibilidad, "compatible");
         assert!(cameo_analyze("000-00-0", "67-64-1").is_none());
     }
 

@@ -1718,6 +1718,18 @@ fn App() -> Element {
                                 }
                             }
                             p { class: "multi-nota", "Compatibilidad segun NOAA/EPA CAMEO Chemicals" }
+                            span {
+                                class: match a.compatibilidad.as_str() {
+                                    "incompatible" => "badge badge-danger",
+                                    "precaucion" => "badge badge-warn",
+                                    _ => "badge badge-ok",
+                                },
+                                match a.compatibilidad.as_str() {
+                                    "incompatible" => "INCOMPATIBLE",
+                                    "precaucion" => "PRECAUCION",
+                                    _ => "COMPATIBLE",
+                                }
+                            }
                             if !a.peligros.is_empty() {
                                 p { class: "lista-titulo", "Peligros previstos" }
                                 ul { class: "lista",
