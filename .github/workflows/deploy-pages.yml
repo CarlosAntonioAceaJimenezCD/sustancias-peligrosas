@@ -82,7 +82,7 @@ jobs:
               html = ruta.read_text(encoding='utf-8')
               if 'Content-Security-Policy' not in html:
                   html = html.replace('<head>', '<head>' + meta, 1)
-              html = html.replace('<html>', '<html lang="es">', 1)
+                  html = html.replace('<html>', '<html lang="es">', 1)
                   ruta.write_text(html, encoding='utf-8')
           print('CSP inyectada en index.html y 404.html')
           PY
