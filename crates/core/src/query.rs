@@ -197,6 +197,36 @@ pub fn es_consulta_valida(query: &str) -> bool {
     }
 }
 
+/// Corrige la acentuación del nombre **mostrado** en español.
+///
+/// La búsqueda se procesa sin tildes, pero el resultado debe conservar la
+/// ortografía correcta. Solo se sustituyen palabras conocidas; se respeta la
+/// puntuación y todo lo que ya está bien escrito.
+pub fn corregir_tildes(nombre: &str) -> String {
+    const CORRECCIONES: &[(&str, &str)] = &[
+        ("acido", "ácido"), ("sulfurico", "sulfúrico"), ("nitrico", "nítrico"),
+        ("acetico", "acético"), ("clorhidrico", "clorhídrico"), ("fosforico", "fósforico"),
+        ("carbonico", "carbónico"), ("citrico", "cítrico"), ("lactico", "láctico"),
+        ("estearico", "esteárico"), ("palmitico", "palmitítico"), ("oxigeno", "oxígeno"),
+        ("hidrogeno", "hidrógeno"), ("nitrogeno", "nitrógeno"), ("hidroxido", "hidróxido"),
+        ("peroxido", "peróxido"), ("eter", "éter"), ("dietileter", "dietiléter"),
+        ("etilico", "etílico"), ("metilico", "metílico"), ("triton", "Tritón"),
+        ("dodecilico", "dodecílico"), ("acetaldehido", "acetaldehído"),
+        ("ester", "éster"), ("grafito", "grafito"), ("anhidrido", "anhídrido"),
+    ];
+    nombre.split_whitespace().map(|palabra| {
+        let clave = normalize(palabra.trim_matches(|c: char| !c.is_alphanumeric()));
+        if let Some((_, corregida)) = CORRECCIONES.iter().find(|(c, _)| *c == clave) {
+            let sufijo: String = palabra.chars().rev()
+                .take_while(|c| !c.is_alphanumeric())
+                .collect::<Vec<_>>().into_iter().rev().collect();
+            format!("{}{}", corregida, sufijo)
+        } else {
+            palabra.to_string()
+        }
+    }).collect::<Vec<_>>().join(" ")
+}
+
 /// Traduce la consulta al inglés, idioma en el que PubChem indexa los nombres.
 pub fn english(query: &str) -> String {
     let base = normalize(query.trim());

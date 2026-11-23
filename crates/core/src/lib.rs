@@ -21,7 +21,8 @@ const ALIASES_JSON: &str = include_str!("../../../data/aliases.json");
 mod query;
 
 pub use query::{
-    classify, detect_cas, detect_formula, english, es_consulta_valida, name_variants, QueryKind,
+    classify, corregir_tildes, detect_cas, detect_formula, english, es_consulta_valida,
+    name_variants, QueryKind,
 };
 
 // ---------------------------------------------------------------------------
@@ -1315,6 +1316,14 @@ mod tests {
         let variantes = name_variants("Ácido sulfúrico");
         assert_eq!(variantes[0], "sulfuric acid");
         assert_eq!(variantes[1], "acido sulfurico");
+    }
+
+    #[test]
+    fn tildes_en_nombre_mostrado() {
+        assert_eq!(corregir_tildes("Acido sulfurico"), "Ácido sulfúrico");
+        assert_eq!(corregir_tildes("Acido sulfurico, H2SO4"), "Ácido sulfúrico, H2SO4");
+        assert_eq!(corregir_tildes("Triton X 100"), "Tritón X 100");
+        assert_eq!(corregir_tildes("Ácido sulfúrico"), "Ácido sulfúrico");
     }
 
     #[test]

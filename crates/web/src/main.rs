@@ -27,6 +27,7 @@ const CSS: &str = r#"
 
   /* --- Semánticos: tema oscuro (instrumental) --- */
   --bg:var(--gray-900); --surface:var(--gray-800); --surface-2:var(--gray-750);
+  --input-bg:#0d1117; --code-bg:#0d1117;
   --card:var(--gray-800); --card-alt:var(--gray-750); --raised:var(--gray-700);
   --ink:var(--gray-200); --ink-strong:var(--gray-50); --muted:var(--gray-300);
   --line:var(--gray-600); --line-soft:var(--gray-650);
@@ -58,6 +59,7 @@ const CSS: &str = r#"
 :root[data-theme="light"]{
   color-scheme:light;
   --bg:#eef2f6; --surface:#f6f9fb; --surface-2:#ffffff;
+  --input-bg:#ffffff; --code-bg:#f1f5f9;
   --card:#f6f9fb; --card-alt:#ffffff; --raised:#e7edf3;
   --ink:#2a3644; --ink-strong:#152130; --muted:#5b6b7c;
   --line:#ccd6e0; --line-soft:#dde5ed;
@@ -74,6 +76,7 @@ const CSS: &str = r#"
   :root:not([data-theme="dark"]){
     color-scheme:light;
     --bg:#eef2f6; --surface:#f6f9fb; --surface-2:#ffffff;
+  --input-bg:#ffffff; --code-bg:#f1f5f9;
     --card:#f6f9fb; --card-alt:#ffffff; --raised:#e7edf3;
     --ink:#2a3644; --ink-strong:#152130; --muted:#5b6b7c;
     --line:#ccd6e0; --line-soft:#dde5ed;
@@ -207,7 +210,7 @@ body{
 /* --- Buscador --- */
 .resultados-online{max-height:300px;overflow-y:auto;margin:var(--sp-3) 0 var(--sp-4);border-radius:var(--r-sm)}
 .buscador{display:flex;align-items:center;gap:var(--sp-3);border:1px solid var(--line);border-radius:var(--r-md);
-  padding:var(--sp-3) var(--sp-4);margin:var(--sp-3) 0 var(--sp-2);background:var(--gray-950);
+  padding:var(--sp-3) var(--sp-4);margin:var(--sp-3) 0 var(--sp-2);background:var(--input-bg);
   transition:border-color var(--dur) var(--ease),box-shadow var(--dur) var(--ease)}
 .buscador:focus-within{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
 .buscador-icono{color:var(--muted)}
@@ -230,7 +233,7 @@ body{
 .multi-titulo{display:flex;align-items:center;gap:var(--sp-2);color:var(--ink-strong)}
 .multi-titulo .ico{color:var(--purple)}
 .multi-anadir{display:flex;gap:var(--sp-2)}
-.multi-anadir input{border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 11px;background:var(--gray-950)}
+.multi-anadir input{border:1px solid var(--line);border-radius:var(--r-sm);padding:8px 11px;background:var(--input-bg)}
 .multi-chips{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin:var(--sp-3) 0 var(--sp-1)}
 .multi-chip{background:rgba(163,113,247,.14);color:#d2a8ff;border:1px solid rgba(163,113,247,.38);
   border-radius:var(--r-pill);padding:4px 11px;font-size:var(--step--1);font-weight:650}
@@ -300,7 +303,7 @@ body{
 .feedback-panel summary::-webkit-details-marker{display:none}
 .formulario{display:flex;flex-direction:column;gap:var(--sp-3);margin-top:var(--sp-3)}
 .formulario .opcion{display:flex;flex-direction:column;align-items:stretch;gap:var(--sp-1)}
-.formulario input,.formulario select,.formulario textarea{background:var(--gray-950);color:var(--ink);
+.formulario input,.formulario select,.formulario textarea{background:var(--input-bg);color:var(--ink);
   border:1px solid var(--line);border-radius:var(--r-sm);padding:10px 12px;
   font-size:var(--step-0);font-family:inherit}
 .formulario textarea{min-height:100px;resize:vertical}
@@ -363,7 +366,7 @@ body{
 .oculto{display:none!important}
 .norma-modal{max-width:900px;text-align:left;max-height:88dvh;display:flex;flex-direction:column}
 .norma-modal h2{font-size:var(--step-2);padding-right:44px}.norma-modal #norma-meta{margin-bottom:var(--sp-3)}
-.norma-texto{flex:1;overflow:auto;white-space:pre-wrap;word-wrap:break-word;background:var(--gray-950);
+.norma-texto{flex:1;overflow:auto;white-space:pre-wrap;word-wrap:break-word;background:var(--input-bg);
   border:1px solid var(--line);border-radius:var(--r-sm);padding:var(--sp-4);
   font-family:var(--font-mono);font-size:var(--step--1);line-height:1.65;
   color:var(--gray-200);margin:0 0 var(--sp-4)}
@@ -374,7 +377,7 @@ body{
 /* --- Idioma, BOE y capas legales --- */
 .idioma-busqueda{display:flex;align-items:center;gap:var(--sp-2);flex-wrap:wrap;
   margin:var(--sp-3) 0;font-size:var(--step--1);color:var(--muted)}
-.idioma-busqueda select{background:var(--gray-950);color:var(--ink);border:1px solid var(--line);
+.idioma-busqueda select{background:var(--input-bg);color:var(--ink);border:1px solid var(--line);
   border-radius:var(--r-sm);padding:7px 10px;font-size:var(--step--1);min-height:36px}
 .boe-buscar{border:1px solid var(--line);border-radius:var(--r-sm);padding:var(--sp-1) var(--sp-3) var(--sp-3);
   margin:var(--sp-3) 0;background:var(--surface-2)}
@@ -410,7 +413,7 @@ body{
 .opcion{display:flex;align-items:center;gap:var(--sp-2);font-size:var(--step-0);color:var(--gray-200);flex-wrap:wrap}
 .opcion input[type=checkbox]{width:18px;height:18px;accent-color:var(--green-600)}
 .opcion input[type=text],.opcion input[type=password],.opcion select{flex:1;min-width:220px;
-  background:var(--gray-950);color:var(--ink);border:1px solid var(--line);
+  background:var(--input-bg);color:var(--ink);border:1px solid var(--line);
   border-radius:var(--r-sm);padding:8px 11px;font-size:var(--step-0);font-family:inherit}
 .estado-descarga{font-size:var(--step--1);color:var(--ok);margin:var(--sp-1) 0}
 .doc-guardado{display:flex;justify-content:space-between;align-items:center;gap:var(--sp-3);
@@ -728,7 +731,7 @@ fn abrir_issue(titulo: &str, cuerpo: &str) {
 
 /// Nombre a mostrar: sinónimo localizado, traducción automática o título.
 fn nombre_visible(c: &core::PubChemCompound, lang: &str) -> String {
-    core::localized_name(&c.synonyms, lang)
+    let nombre = core::localized_name(&c.synonyms, lang)
         .or_else(|| {
             if c.nombre_localizado.is_empty() {
                 None
@@ -736,7 +739,20 @@ fn nombre_visible(c: &core::PubChemCompound, lang: &str) -> String {
                 Some(c.nombre_localizado.clone())
             }
         })
-        .unwrap_or_else(|| c.title.clone())
+        .unwrap_or_else(|| c.title.clone());
+    if lang == "es" {
+        core::corregir_tildes(&nombre)
+    } else {
+        nombre
+    }
+}
+
+/// Espera asíncrona portable (WASM y nativo) para el *debounce* de búsqueda.
+async fn dormir(ms: u64) {
+    #[cfg(target_arch = "wasm32")]
+    gloo_timers::future::TimeoutFuture::new(ms as u32).await;
+    #[cfg(not(target_arch = "wasm32"))]
+    tokio::time::sleep(std::time::Duration::from_millis(ms)).await;
 }
 
 /// Hora local del dispositivo (zona horaria del usuario).
@@ -865,6 +881,7 @@ fn App() -> Element {
     let mut online_ficha: Signal<Option<core::Substance>> = use_signal(|| None);
     let mut online_cargando: Signal<bool> = use_signal(|| false);
     let mut online_error_red: Signal<bool> = use_signal(|| false);
+    let mut busqueda_id: Signal<u64> = use_signal(|| 0);
     let mut boe_resultados: Signal<Vec<core::BoeNorm>> = use_signal(Vec::new);
     let mut boe_cargando: Signal<bool> = use_signal(|| false);
     let mut boe_termino: Signal<String> = use_signal(String::new);
@@ -935,9 +952,18 @@ fn App() -> Element {
             online_cargando.set(false);
             return;
         }
+        let id = {
+            busqueda_id += 1;
+            busqueda_id()
+        };
         online_cargando.set(true);
         online_error_red.set(true);
         spawn(async move {
+            // Debounce: escribir rápido no lanza una avalancha de peticiones.
+            dormir(320).await;
+            if id != busqueda_id() {
+                return;
+            }
             let base = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound";
             fn cids_de(v: serde_json::Value) -> Vec<u64> {
                 serde_json::from_value(
@@ -1083,6 +1109,9 @@ fn App() -> Element {
                     }
                     resultados.push(c);
                 }
+            }
+            if id != busqueda_id() {
+                return;
             }
             online_resultados.set(resultados);
             online_cargando.set(false);
