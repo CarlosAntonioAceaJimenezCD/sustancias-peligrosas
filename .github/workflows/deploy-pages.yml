@@ -22,13 +22,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Comprobar CVEs con cargo-audit
-        uses: rustsec/audit-check@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          # Avisos transitivos de Dioxus/WebKit sin solución desde este repo.
-          # Se documentan en README.md → Seguridad.
-          ignore: RUSTSEC-2025-0057,RUSTSEC-2024-0436,RUSTSEC-2024-0370,RUSTSEC-2024-0429,RUSTSEC-2026-0097,RUSTSEC-2026-0543,RUSTSEC-2026-0592
+      - name: Instalar cargo-audit
+        uses: taiki-e/install-action@cargo-audit
+
+      - name: Comprobar CVEs (avisos transitivos documentados)
+        run: >-
+          cargo audit --ignore
+          RUSTSEC-2025-0057,
+          RUSTSEC-2024-0436,
+          RUSTSEC-2024-0370,
+          RUSTSEC-2024-0429,
+          RUSTSEC-2026-0097,
+          RUSTSEC-2026-0543,
+          RUSTSEC-2026-0592
 
   build:
     runs-on: ubuntu-latest
