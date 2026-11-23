@@ -403,6 +403,9 @@ body{
 .interaccion-tipo{font-size:var(--step--1);color:var(--accent);margin:var(--sp-1) 0 var(--sp-2);font-weight:650}
 .interaccion p{margin:0 0 var(--sp-2);font-size:var(--step--1);line-height:1.6;color:var(--gray-200)}
 .interaccion .lista{margin-bottom:var(--sp-1)}.interaccion-productos b{color:var(--purple)}
+.interaccion.cameo{border-left-color:var(--purple)}
+.citas{margin-top:var(--sp-2);font-size:var(--step--1);color:var(--muted)}
+.citas summary{cursor:pointer;font-weight:650}
 .norma-acciones{display:flex;gap:var(--sp-2);flex-wrap:wrap}
 .documentos-acciones{display:flex;gap:var(--sp-2);flex-wrap:wrap;margin-top:var(--sp-3)}
 .documentos-acciones .boton{text-decoration:none}
@@ -875,7 +878,7 @@ fn App() -> Element {
     let mut filter: Signal<String> = use_signal(|| "todos".to_string());
     let mut selected_substance: Signal<Option<String>> = use_signal(|| None);
     let mut multi_input: Signal<String> = use_signal(String::new);
-    let mut multi_ids: Signal<Vec<(String, String)>> = use_signal(Vec::new);
+    let mut multi_ids: Signal<Vec<(String, String, String)>> = use_signal(Vec::new);
     let mut norma: Signal<Option<(String, String, String, String, String)>> = use_signal(|| None);
     let mut online_resultados: Signal<Vec<core::PubChemCompound>> = use_signal(Vec::new);
     let mut online_ficha: Signal<Option<core::Substance>> = use_signal(|| None);
@@ -940,10 +943,20 @@ fn App() -> Element {
     let multi_items = multi_ids();
     let multi_names: std::collections::HashMap<String, String> = multi_items
         .iter()
-        .cloned()
+        .map(|(id, nombre, _)| (id.clone(), nombre.clone()))
         .collect();
-    let multi_id_list: Vec<String> = multi_items.iter().map(|(id, _)| id.clone()).collect();
+    let multi_id_list: Vec<String> = multi_items.iter().map(|(id, _, _)| id.clone()).collect();
     let interactions = core::analyze_interactions_named(&multi_id_list, &multi_names);
+
+    // Analisis de compatibilidad con NOAA/EPA CAMEO para los pares con CAS.
+    let mut cameo_analyses: Vec<(String, String, core::CameoAnalysis)> = Vec::new();
+    for i in 0..multi_items.len() {
+        for j in (i + 1)..multi_items.len() {
+            if let Some(a) = core::cameo_analyze(&multi_items[i].2, &multi_items[j].2) {
+                cameo_analyses.push((multi_items[i].1.clone(), multi_items[j].1.clone(), a));
+            }
+        }
+    }
 
     let mut buscar_pubchem = move |texto: String, lang: String| {
         if texto.trim().len() < 2 || !core::es_consulta_valida(&texto) {
@@ -1101,6 +1114,7 @@ fn App() -> Element {
                 };
 
                 if let Some(mut c) = compuesto {
+                    c.cas = core::extraer_cas(&sinonimos).unwrap_or_default();
                     c.synonyms = sinonimos;
                     c.lang = lang.clone();
                     c.nota = nota.clone();
@@ -1587,11 +1601,12 @@ fn App() -> Element {
                                         onclick: {
                                             let cid = p.cid;
                                             let nombre = nombre_visible(&p, &output_lang());
+                                            let cas = p.cas.clone();
                                             move |_| {
                                                 let mut items = multi_ids();
                                                 let id = format!("online-{}", cid);
-                                                if !items.iter().any(|(x, _)| x == &id) {
-                                                    items.push((id, nombre.clone()));
+                                                if !items.iter().any(|(x, _, _)| x == &id) {
+                                                    items.push((id, nombre.clone(), cas.clone()));
                                                 }
                                                 multi_ids.set(items);
                                             }
@@ -1632,8 +1647,8 @@ fn App() -> Element {
                                 if let Some(p) = encontrado {
                                     let mut items = multi_ids();
                                     let id = format!("online-{}", p.cid);
-                                    if !items.iter().any(|(x, _)| x == &id) {
-                                        items.push((id, p.title.clone()));
+                                    if !items.iter().any(|(x, _, _)| x == &id) {
+                                        items.push((id, p.title.clone(), p.cas.clone()));
                                     }
                                     multi_ids.set(items);
                                     multi_input.set(String::new());
@@ -1644,7 +1659,7 @@ fn App() -> Element {
                         }
                     }
                     div { class: "multi-chips",
-                        for (_, nombre) in multi_items.iter() {
+                        for (_, nombre, _) in multi_items.iter() {
                             span { class: "multi-chip", "{nombre}" }
                         }
                     }
@@ -1686,6 +1701,43 @@ fn App() -> Element {
                                 if r.es_regla_general {
                                     p { class: "multi-nota", "Regla general: verificar compatibilidad en fuentes oficiales." }
                                 }
+                            }
+                        }
+                    }
+                    for (na, nb, a) in cameo_analyses.iter() {
+                        div { class: "interaccion cameo",
+                            div { class: "interaccion-cabecera",
+                                strong { "{na} + {nb}" }
+                                span {
+                                    class: match a.nivel.as_str() {
+                                        "alto" => "badge badge-danger",
+                                        "moderado" => "badge badge-warn",
+                                        _ => "badge badge-suave",
+                                    },
+                                    "{a.etiqueta}"
+                                }
+                            }
+                            p { class: "multi-nota", "Compatibilidad segun NOAA/EPA CAMEO Chemicals" }
+                            if !a.peligros.is_empty() {
+                                p { class: "lista-titulo", "Peligros previstos" }
+                                ul { class: "lista",
+                                    for x in a.peligros.iter() { li { "{x}" } }
+                                }
+                            }
+                            if !a.gases.is_empty() {
+                                p { class: "lista-titulo", "Posibles gases" }
+                                p { class: "interaccion-productos", "{a.gases.join(\", \")}" }
+                            }
+                            if !a.citas.is_empty() {
+                                details { class: "citas",
+                                    summary { "Referencias bibliograficas" }
+                                    ul { class: "lista",
+                                        for c in a.citas.iter() { li { "{c}" } }
+                                    }
+                                }
+                            }
+                            for u in a.fuentes.iter() {
+                                a { href: "{u}", target: "_blank", class: "multi-nota", "Ver documentacion del par en CAMEO" }
                             }
                         }
                     }

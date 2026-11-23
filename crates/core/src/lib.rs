@@ -398,6 +398,21 @@ pub struct PairAnalysis {
     pub es_regla_general: bool,
 }
 
+/// Extrae el primer número CAS válido de una lista de sinónimos.
+pub fn extraer_cas(sinonimos: &[String]) -> Option<String> {
+    sinonimos.iter().find_map(|s| {
+        let texto = s.trim();
+        if texto.len() > 30 { return None; }
+        let partes: Vec<&str> = texto.split('-').collect();
+        if partes.len() != 3 { return None; }
+        let (a, b, c) = (partes[0], partes[1], partes[2]);
+        if !(2..=7).contains(&a.len()) || !a.bytes().all(|x| x.is_ascii_digit()) { return None; }
+        if b.len() != 2 || !b.bytes().all(|x| x.is_ascii_digit()) { return None; }
+        if c.len() != 1 || !c.bytes().all(|x| x.is_ascii_digit()) { return None; }
+        Some(texto.to_string())
+    })
+}
+
 /// Base de sustancias mapeadas a grupos reactivos (cacheada).
 pub fn cameo_substances() -> &'static [CameoSubstance] {
     static CACHE: OnceLock<CameoSubstancesDb> = OnceLock::new();
@@ -636,6 +651,9 @@ pub struct PubChemCompound {
     /// Nombre traducido automáticamente al idioma de salida elegido.
     #[serde(default)]
     pub nombre_localizado: String,
+    /// Número CAS extraído de los sinónimos de PubChem, cuando existe.
+    #[serde(default)]
+    pub cas: String,
 }
 
 /// Devuelve un sinónimo localizado a partir de las etiquetas que PubChem
@@ -1329,6 +1347,7 @@ mod tests {
             lang: "es".to_string(),
             nota: String::new(),
             nombre_localizado: String::new(),
+            cas: String::new(),
         };
         let ficha = substance_from_pubchem(&compuesto);
         assert_eq!(ficha.secciones.len(), 16);
@@ -1444,6 +1463,13 @@ mod tests {
         let variantes = name_variants("Ácido sulfúrico");
         assert_eq!(variantes[0], "sulfuric acid");
         assert_eq!(variantes[1], "acido sulfurico");
+    }
+
+    #[test]
+    fn extrae_cas_de_sinonimos() {
+        let sin = vec!["Sulfuric acid".to_string(), "7664-93-9".to_string(), "CID 1118".to_string()];
+        assert_eq!(extraer_cas(&sin).as_deref(), Some("7664-93-9"));
+        assert!(extraer_cas(&["no CAS aqui".to_string()]).is_none());
     }
 
     #[test]
