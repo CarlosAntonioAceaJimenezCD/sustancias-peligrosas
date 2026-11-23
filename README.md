@@ -167,6 +167,7 @@ Al seleccionar **Cuba**, cada norma ofrece **«Leer norma íntegra»** (texto ex
 | RUSTSEC-2024-0429 | `glib` | Requiere `>=0.20` (lo fija el backend WebKitGTK) |
 | RUSTSEC-2026-0097 | `rand` | Requiere `>=0.8.6` (dependencia transitiva) |
 | RUSTSEC-2026-0543 | `chrono` | No mantenido, sin versión corregida; solo se usa para leer la hora local |
+| RUSTSEC-2026-0592 | `url` | Stack overflow en `Url::origin()` con URLs `blob:` anidadas; la app no construye ese tipo de URL |
 
 Ninguno es explotable desde la interfaz web: afectan a macros en tiempo de compilación y al backend nativo de escritorio. Se revisarán al actualizar Dioxus. El HTML dinámico se limita a iconos y banderas controladas; los datos externos se renderizan como texto escapado.
 
