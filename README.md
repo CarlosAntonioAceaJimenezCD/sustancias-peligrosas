@@ -80,6 +80,8 @@ La auditoría completa, las fuentes rechazadas y los enlaces directos verificado
 | `data/organizations.json` | Organizaciones regionales y sus miembros (UE, Comunidad Andina). |
 | `data/aliases.json` | Códigos de producto y términos ambiguos resueltos a CIDs de PubChem. |
 | `data/interactions.json` | 15 reglas de interacción entre sustancias. |
+| `data/cameo_groups.json` | 68 grupos reactivos de NOAA/EPA CAMEO Chemicals. |
+| `data/cameo_reactions.json` | Prototipo de 3 pares de grupos con peligros, gases y citas bibliográficas (Capa 1). |
 | `data/substances.json` | **Vacío a propósito.** No se almacenan fichas en el repositorio. |
 | `preview/` | Maqueta HTML/CSS/JS editable de la interfaz (solo diseño; no se despliega). |
 | `.github/workflows/deploy-pages.yml` | Compilación y publicación del WASM en GitHub Pages. |

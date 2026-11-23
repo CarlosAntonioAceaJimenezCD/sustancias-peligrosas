@@ -1,0 +1,346 @@
+{
+  "fuente": "NOAA/EPA CAMEO Chemicals",
+  "url": "https://cameochemicals.noaa.gov/help/reactivity/reactive_groups.htm",
+  "grupos": [
+    {
+      "id": "RG1",
+      "numero": 1,
+      "nombre": "Acids, Strong Non-oxidizing"
+    },
+    {
+      "id": "RG2",
+      "numero": 2,
+      "nombre": "Acids, Strong Oxidizing"
+    },
+    {
+      "id": "RG3",
+      "numero": 3,
+      "nombre": "Acids, Carboxylic"
+    },
+    {
+      "id": "RG4",
+      "numero": 4,
+      "nombre": "Alcohols and Polyols"
+    },
+    {
+      "id": "RG5",
+      "numero": 5,
+      "nombre": "Aldehydes"
+    },
+    {
+      "id": "RG6",
+      "numero": 6,
+      "nombre": "Amides and Imides"
+    },
+    {
+      "id": "RG7",
+      "numero": 7,
+      "nombre": "Amines, Phosphines, and Pyridines"
+    },
+    {
+      "id": "RG8",
+      "numero": 8,
+      "nombre": "Azo, Diazo, Azido, Hydrazine, and Azide Compounds"
+    },
+    {
+      "id": "RG9",
+      "numero": 9,
+      "nombre": "Carbamates"
+    },
+    {
+      "id": "RG10",
+      "numero": 10,
+      "nombre": "Bases, Strong"
+    },
+    {
+      "id": "RG11",
+      "numero": 11,
+      "nombre": "Cyanides, Inorganic"
+    },
+    {
+      "id": "RG12",
+      "numero": 12,
+      "nombre": "Thiocarbamate Esters and Salts/Dithiocarbamate Esters and Salts"
+    },
+    {
+      "id": "RG13",
+      "numero": 13,
+      "nombre": "Esters, Sulfate Esters, Phosphate Esters, Thiophosphate Esters, and Borate Esters"
+    },
+    {
+      "id": "RG14",
+      "numero": 14,
+      "nombre": "Ethers"
+    },
+    {
+      "id": "RG16",
+      "numero": 16,
+      "nombre": "Hydrocarbons, Aromatic"
+    },
+    {
+      "id": "RG17",
+      "numero": 17,
+      "nombre": "Halogenated Organic Compounds"
+    },
+    {
+      "id": "RG18",
+      "numero": 18,
+      "nombre": "Isocyanates and Isothiocyanates"
+    },
+    {
+      "id": "RG19",
+      "numero": 19,
+      "nombre": "Ketones"
+    },
+    {
+      "id": "RG20",
+      "numero": 20,
+      "nombre": "Sulfides, Organic"
+    },
+    {
+      "id": "RG21",
+      "numero": 21,
+      "nombre": "Metals, Alkali, Very Active"
+    },
+    {
+      "id": "RG22",
+      "numero": 22,
+      "nombre": "Metals, Elemental and Powder, Active"
+    },
+    {
+      "id": "RG23",
+      "numero": 23,
+      "nombre": "Metals, Less Reactive"
+    },
+    {
+      "id": "RG25",
+      "numero": 25,
+      "nombre": "Diazonium Salts"
+    },
+    {
+      "id": "RG26",
+      "numero": 26,
+      "nombre": "Nitriles"
+    },
+    {
+      "id": "RG27",
+      "numero": 27,
+      "nombre": "Nitro, Nitroso, Nitrate, and Nitrite Compounds, Organic"
+    },
+    {
+      "id": "RG28",
+      "numero": 28,
+      "nombre": "Hydrocarbons, Aliphatic Unsaturated"
+    },
+    {
+      "id": "RG29",
+      "numero": 29,
+      "nombre": "Hydrocarbons, Aliphatic Saturated"
+    },
+    {
+      "id": "RG30",
+      "numero": 30,
+      "nombre": "Peroxides, Organic"
+    },
+    {
+      "id": "RG31",
+      "numero": 31,
+      "nombre": "Phenols and Cresols"
+    },
+    {
+      "id": "RG32",
+      "numero": 32,
+      "nombre": "Sulfonates, Phosphonates, and Thiophosphonates, Organic"
+    },
+    {
+      "id": "RG33",
+      "numero": 33,
+      "nombre": "Sulfides, Inorganic"
+    },
+    {
+      "id": "RG34",
+      "numero": 34,
+      "nombre": "Epoxides"
+    },
+    {
+      "id": "RG35",
+      "numero": 35,
+      "nombre": "Metal Hydrides, Metal Alkyls, Metal Aryls, and Silanes"
+    },
+    {
+      "id": "RG37",
+      "numero": 37,
+      "nombre": "Anhydrides"
+    },
+    {
+      "id": "RG38",
+      "numero": 38,
+      "nombre": "Salts, Acidic"
+    },
+    {
+      "id": "RG39",
+      "numero": 39,
+      "nombre": "Salts, Basic"
+    },
+    {
+      "id": "RG40",
+      "numero": 40,
+      "nombre": "Acyl Halides, Sulfonyl Halides, and Chloroformates"
+    },
+    {
+      "id": "RG42",
+      "numero": 42,
+      "nombre": "Organometallics"
+    },
+    {
+      "id": "RG44",
+      "numero": 44,
+      "nombre": "Oxidizing Agents, Strong"
+    },
+    {
+      "id": "RG45",
+      "numero": 45,
+      "nombre": "Reducing Agents, Strong"
+    },
+    {
+      "id": "RG46",
+      "numero": 46,
+      "nombre": "Non-Redox-Active Inorganic Compounds"
+    },
+    {
+      "id": "RG47",
+      "numero": 47,
+      "nombre": "Fluorinated Organic Compounds"
+    },
+    {
+      "id": "RG48",
+      "numero": 48,
+      "nombre": "Fluoride Salts, Soluble"
+    },
+    {
+      "id": "RG49",
+      "numero": 49,
+      "nombre": "Oxidizing Agents, Weak"
+    },
+    {
+      "id": "RG50",
+      "numero": 50,
+      "nombre": "Reducing Agents, Weak"
+    },
+    {
+      "id": "RG51",
+      "numero": 51,
+      "nombre": "Nitrides, Phosphides, Carbides, and Silicides"
+    },
+    {
+      "id": "RG55",
+      "numero": 55,
+      "nombre": "Chlorosilanes"
+    },
+    {
+      "id": "RG58",
+      "numero": 58,
+      "nombre": "Siloxanes"
+    },
+    {
+      "id": "RG59",
+      "numero": 59,
+      "nombre": "Halogenating Agents"
+    },
+    {
+      "id": "RG60",
+      "numero": 60,
+      "nombre": "Acids, Weak"
+    },
+    {
+      "id": "RG61",
+      "numero": 61,
+      "nombre": "Bases, Weak"
+    },
+    {
+      "id": "RG62",
+      "numero": 62,
+      "nombre": "Carbonate Salts"
+    },
+    {
+      "id": "RG63",
+      "numero": 63,
+      "nombre": "Alkynes, with Acetylenic Hydrogen"
+    },
+    {
+      "id": "RG64",
+      "numero": 64,
+      "nombre": "Alkynes, with No Acetylenic Hydrogen"
+    },
+    {
+      "id": "RG65",
+      "numero": 65,
+      "nombre": "Conjugated Dienes"
+    },
+    {
+      "id": "RG66",
+      "numero": 66,
+      "nombre": "Aryl Halides"
+    },
+    {
+      "id": "RG68",
+      "numero": 68,
+      "nombre": "Amines, Aromatic"
+    },
+    {
+      "id": "RG69",
+      "numero": 69,
+      "nombre": "Nitrate and Nitrite Compounds, Inorganic"
+    },
+    {
+      "id": "RG70",
+      "numero": 70,
+      "nombre": "Acetals, Ketals, Hemiacetals, and Hemiketals"
+    },
+    {
+      "id": "RG71",
+      "numero": 71,
+      "nombre": "Acrylates and Acrylic Acids"
+    },
+    {
+      "id": "RG72",
+      "numero": 72,
+      "nombre": "Phenolic Salts"
+    },
+    {
+      "id": "RG73",
+      "numero": 73,
+      "nombre": "Quaternary Ammonium and Phosphonium Salts"
+    },
+    {
+      "id": "RG74",
+      "numero": 74,
+      "nombre": "Sulfite and Thiosulfate Salts"
+    },
+    {
+      "id": "RG75",
+      "numero": 75,
+      "nombre": "Oximes"
+    },
+    {
+      "id": "RG76",
+      "numero": 76,
+      "nombre": "Polymerizable Compounds"
+    },
+    {
+      "id": "RG98",
+      "numero": 98,
+      "nombre": "Not Chemically Reactive"
+    },
+    {
+      "id": "RG99",
+      "numero": 99,
+      "nombre": "Insufficient Information for Classification"
+    },
+    {
+      "id": "RG100",
+      "numero": 100,
+      "nombre": "Water and Aqueous Solutions"
+    }
+  ]
+}

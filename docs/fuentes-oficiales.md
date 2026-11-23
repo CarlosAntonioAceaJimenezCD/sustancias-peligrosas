@@ -195,3 +195,16 @@ Durante la ampliación de búsqueda los motores bloquearon el acceso automatizad
 Con el scraper local se logró acceso real a DOF, Asamblea Nacional, ICSC (OIT), sdsmanager.es y DuckDuckGo. UNECE, SINIA-MINAM y ECHA siguen devolviendo 403 (Cloudflare / Azure WAF), y chemicalsafety.com dio timeout de conexión.
 
 Los portales marcados como `portal_validar` son URLs canónicas conocidas de los organismos oficiales, **no resultados confirmados en esta sesión**. Deben validarse en navegador antes de publicarse en la aplicación. No se han inventado números de norma ni enlaces directos a instrumentos no verificados; cuando no se obtuvo una URL directa, se enlaza al portal oficial y se indica la búsqueda a realizar.
+
+## Reactividad química: NOAA/EPA CAMEO Chemicals (Capa 1)
+
+Para predecir reacciones entre sustancias se usa la metodología de **CAMEO Chemicals**, desarrollada por la NOAA (Office of Response and Restoration) junto con la EPA:
+
+- **Grupos reactivos:** 68 categorías estructurales; cada sustancia se asigna a una o más.
+- **Predicción por pares:** se combinan los grupos de dos sustancias; el resultado es *Incompatible*, *Caution* o *Compatible*, con peligros (corrosivo, gas, calor, explosivo, tóxico) y gases subproductos.
+- **Trazabilidad:** cada par incluye citas bibliográficas concretas (Bretherick's Handbook, Sax's, Mellor, Kirk-Othmer, MCA Case Histories).
+- **Condiciones del escenario:** proporciones similares, mezcla completa, 1 atm, 24–49 °C y sin impurezas catalíticas. No predice reacciones de tres o más sustancias.
+
+Fuentes: https://cameochemicals.noaa.gov/help/reactivity/how_reactivity_is_predicted.htm y https://cameochemicals.noaa.gov/reactivity/documentation/RG1-RG10
+
+**Uso de datos:** los datos de reactividad son elaborados por NOAA/EPA y se usan con atribución y el descargo de responsabilidad de la agencia. No se copian los campos con copyright de terceros (CAS, NFPA, DuPont, AEGL, ERPG). Ver https://cameochemicals.noaa.gov/help/reference/terms_and_conditions.htm

@@ -1,0 +1,128 @@
+{
+  "fuente": "NOAA/EPA CAMEO Chemicals",
+  "metodologia": "https://cameochemicals.noaa.gov/help/reactivity/how_reactivity_is_predicted.htm",
+  "nota": "Predicciones por pares de grupos reactivos. Escenario: proporciones similares, 24-49 C, 1 atm, sin catalizadores. No sustituye la FDS del fabricante.",
+  "pares": [
+    {
+      "id": "RG1-RG10",
+      "grupo_a": "Acids, Strong Non-oxidizing",
+      "grupo_b": "Bases, Strong",
+      "url": "https://cameochemicals.noaa.gov/reactivity/documentation/RG1-RG10",
+      "peligros": [
+        {
+          "tipo": "Corrosive",
+          "detalle": "Reaction products may be corrosive"
+        },
+        {
+          "tipo": "Generates gas",
+          "detalle": "Reaction liberates gaseous products and may cause pressurization"
+        },
+        {
+          "tipo": "Generates heat",
+          "detalle": "Exothermic reaction at ambient temperatures (releases heat)"
+        },
+        {
+          "tipo": "Intense or explosive reaction",
+          "detalle": "Reaction may be particularly intense, violent, or explosive"
+        }
+      ],
+      "gases": [
+        "Acid Fumes",
+        "Base Fumes"
+      ],
+      "citas": [
+        "Contact with anhydrous liquid HF causes CaO to incandesce (Mellor, J.W. 1956. Mellor's Comprehensive Treatise on Inorganic and Theoretical Chemistry. Vol. 2, Supp. 1, p. 122. Longmans, Green and Co Ltd.; Mellor, J.W. 1939. Mellor's Comprehensive Treatise on Inorganic and Theoretical Chemistry. Vol. 9, p. 101. Longmans, Green and Co Ltd.).",
+        "HCl and HF react violently with NaOH or ammonia (Lewis, R.J., Sr. 1992. Sax's Dangerous Properties of Industrial Materials, 8th Edition. New York: Van Nostrand Reinhold. pp. 1893, 1897).",
+        "Reactions between acids and KOH can be violent (MCA Case History No. 920, Case Histories of Accidents in the Chemical Industry, Washington, Manufacturing Chemists' Association).",
+        "Inorganic acids may react with bases to liberate acid and base fumes."
+      ]
+    },
+    {
+      "id": "RG2-RG4",
+      "grupo_a": "Acids, Strong Oxidizing",
+      "grupo_b": "Alcohols and Polyols",
+      "url": "https://cameochemicals.noaa.gov/reactivity/documentation/RG2-RG4",
+      "peligros": [
+        {
+          "tipo": "Explosive",
+          "detalle": "Reaction products may be explosive or sensitive to shock or friction"
+        },
+        {
+          "tipo": "Flammable",
+          "detalle": "Reaction products may be flammable"
+        },
+        {
+          "tipo": "Generates gas",
+          "detalle": "Reaction liberates gaseous products and may cause pressurization"
+        },
+        {
+          "tipo": "Intense or explosive reaction",
+          "detalle": "Reaction may be particularly intense, violent, or explosive"
+        },
+        {
+          "tipo": "Toxic",
+          "detalle": "Reaction products may be toxic"
+        }
+      ],
+      "gases": [
+        "Aldehydes",
+        "Chlorine Dioxide (ClO2)",
+        "Hydrocarbons",
+        "Nitrogen Oxides (NOx)",
+        "Halogen Oxides (XO2)"
+      ],
+      "citas": [
+        "Reaction of 2-propanol with nitric acid caused rapid gas evolution (possibly NOx gases, citation needed) (Urben, P.G. 1991. Bretherick's Handbook of Reactive Chemical Hazards, 4th Edition. Oxford: Butterworth-Heinemann. pp. 1150).",
+        "2-butanol is readily dehydrated to flammable isobutene gas by H2SO4 (Gates, B.C., J.S. Wisnoukas, H.W. Heath., and J. Catal. 1972. 2(24):320-327.).",
+        "Alcohols and glycols form explosive alkyl perchlorates with perchloric acid (Bailar, J. C., Emeleus, H. J., Nyholm, R. S., Trotman-Dickenson, A. F., Comprehensive Inorganic Chemistry, Oxford, Pergamon, 1973, Volume 2, pp. 1451).",
+        "Alcohols, including methanol, cyclohexanol, furfuryl alcohol, and ethylene glycol may explode, ignite, or form explosive compounds with high-concentration nitric acid (Urben, P.G. 1995. Bretherick's Handbook of Reactive Chemical Hazards, 5th Edition. Oxford: Butterworth-Heinemann. pp. 1466. Many articles referenced.).",
+        "Nitric acid reacts explosively with ethanol; and the combination of nitric acid and furfuryl alcohol reacts sufficiently exothermically and violently for use as a rocket propellant (Clarke, S.I., W.J. Mazzafro. 2005. Nitric Acid. In Kirk-Othmer Encyclopedia of Chemical Technology. John Wiley & Sons, Inc. (Online)).",
+        "Many organic solvents, including some alcohols, explode on contact with permanganic acid (Fire and Explosion Risks, von Schwartz, E., London, Griffin, 1918, p. 327.).",
+        "Oxidizing acids may react with alcohols to liberate toxic and flammable aldehyde and halide dioxide gases (Predicted)."
+      ]
+    },
+    {
+      "id": "RG44-RG29",
+      "grupo_a": "Oxidizing Agents, Strong",
+      "grupo_b": "Hydrocarbons, Aliphatic Saturated",
+      "url": "https://cameochemicals.noaa.gov/reactivity/documentation/RG44-RG29",
+      "peligros": [
+        {
+          "tipo": "Flammable",
+          "detalle": "Reaction products may be flammable"
+        },
+        {
+          "tipo": "Generates gas",
+          "detalle": "Reaction liberates gaseous products and may cause pressurization"
+        },
+        {
+          "tipo": "Generates heat",
+          "detalle": "Exothermic reaction at ambient temperatures (releases heat)"
+        },
+        {
+          "tipo": "Intense or explosive reaction",
+          "detalle": "Reaction may be particularly intense, violent, or explosive"
+        },
+        {
+          "tipo": "Toxic",
+          "detalle": "Reaction products may be toxic"
+        }
+      ],
+      "gases": [
+        "Carbon Monoxide (CO)",
+        "Carbon Dioxide (CO2)"
+      ],
+      "citas": [
+        "Methane will ignite or explode on contact with BrF5 (Mellor, J.W. 1956. Mellor's Comprehensive Treatise on Inorganic and Theoretical Chemistry. Vol. 2, Supp. 1, p. 172. Longmans, Green and Co Ltd.).",
+        "Methane will explode on contact with F2O2, or F2O2/F2O4 mixtures, at cryogenic temperatures (Streng, A.G. 1963. Chemical Reviews 63:615.).",
+        "Methane or ethane will explode on contact with dioxygenyl tetrafluoroborate at low temperatures (Goetschel, C.T. et al. 1969. Journal of the American Chemical Society 91: 4706.).",
+        "Hydrocarbons explode on contact with ClF3 at or below ambient temperatures (Brower, K.R. 1986. Journal of Fluorine Chemistry 31:333-349.).",
+        "Hydrocarbons ignite or explode on contact with fluorine, even at cryogenic temperatures (Mellor, J.W. 1940. Mellor's Comprehensive Treatise on Inorganic and Theoretical Chemistry. Vol. 2, p. 11. Longmans, Green and Co Ltd.; 1956. Volume 2, Supplemental 1. pp. 198; The Chemical Elements and their Compounds, Sidgwick, N.V., Oxford, Oxford University Press, 1950, pp. 1117).",
+        "Low molecular weight hydrocarbons will ignite on contact with IF7 (Booth, H.S. et al. 1947. Chemical Reviews 41:428.).",
+        "Cycloalkanes can produce nitroperoxonitrates with N2O4 at low temperatures; these compounds are unstable at ambient temperatures (Lachowicz, D.R. et al. 1971. U.S. Patent 3621050.).",
+        "Inorganic oxidants may liberate flammable and toxic aldehyde and inert CO2 gas upon exposure to saturated aliphatic compounds (Predicted).",
+        "Vanadyl Perchlorate is a powerful oxidant which may explode above 80°C, and which ignites organic solvents on contact. (Schmeisser, M., Angew. Chem., 1955, 67, 499)"
+      ]
+    }
+  ]
+}
