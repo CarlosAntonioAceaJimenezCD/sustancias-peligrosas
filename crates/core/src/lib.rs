@@ -19,6 +19,7 @@ const ORGANIZATIONS_JSON: &str = include_str!("../../../data/organizations.json"
 const ALIASES_JSON: &str = include_str!("../../../data/aliases.json");
 const CAMEO_SUBSTANCES_JSON: &str = include_str!("../../../data/cameo_substances.json");
 const CAMEO_REACTIONS_JSON: &str = include_str!("../../../data/cameo_reactions_min.json");
+const PUBCHEM_REACTIVITY_JSON: &str = include_str!("../../../data/pubchem_reactivity.json");
 
 mod query;
 
@@ -160,6 +161,19 @@ pub struct CountryLegislation {
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct LegislationDb {
     pub paises: HashMap<String, CountryLegislation>,
+}
+
+/// Perfil de reactividad de PubChem para sustancias sin clasificación CAMEO.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct PubChemReactivity {
+    pub cid: u64,
+    pub nombre: String,
+    pub secciones: std::collections::HashMap<String, Vec<String>>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+struct PubChemReactivityDb {
+    pub sustancias: Vec<PubChemReactivity>,
 }
 
 /// Sustancia mapeada a sus grupos reactivos de CAMEO.
@@ -413,6 +427,17 @@ pub fn extraer_cas(sinonimos: &[String]) -> Option<String> {
         if c.len() != 1 || !c.bytes().all(|x| x.is_ascii_digit()) { return None; }
         Some(texto.to_string())
     })
+}
+
+/// Perfiles de reactividad de PubChem (cacheados).
+pub fn pubchem_reactivity() -> &'static [PubChemReactivity] {
+    static CACHE: OnceLock<PubChemReactivityDb> = OnceLock::new();
+    &CACHE.get_or_init(|| parse(PUBCHEM_REACTIVITY_JSON)).sustancias
+}
+
+/// Devuelve el perfil de reactividad de PubChem para un CID.
+pub fn pubchem_reactivity_for_cid(cid: u64) -> Option<&'static PubChemReactivity> {
+    pubchem_reactivity().iter().find(|r| r.cid == cid)
 }
 
 /// Base de sustancias mapeadas a grupos reactivos (cacheada).
