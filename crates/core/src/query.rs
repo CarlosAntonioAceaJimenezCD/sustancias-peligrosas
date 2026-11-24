@@ -220,6 +220,15 @@ pub fn corregir_tildes(nombre: &str) -> String {
             let sufijo: String = palabra.chars().rev()
                 .take_while(|c| !c.is_alphanumeric())
                 .collect::<Vec<_>>().into_iter().rev().collect();
+            let corregida = if palabra.chars().next().map(|c| c.is_uppercase()).unwrap_or(false) {
+                let mut it = corregida.chars();
+                match it.next() {
+                    Some(c) => format!("{}{}", c.to_uppercase(), it.as_str()),
+                    None => corregida,
+                }
+            } else {
+                corregida
+            };
             format!("{}{}", corregida, sufijo)
         } else {
             palabra.to_string()
