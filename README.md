@@ -94,7 +94,7 @@ La auditoría completa, las fuentes rechazadas y los enlaces directos verificado
 
 > Esta sección es la **fuente canónica** de comandos. Los archivos de `docs/` son complementos, no copias.
 
-### Comunes a todas las plataformas
+### Preparación común (todas las plataformas)
 
 ```bash
 rustup update stable
@@ -102,33 +102,90 @@ rustup target add wasm32-unknown-unknown
 cargo install dioxus-cli --locked
 ```
 
-### Comandos
+Verifica la instalación con `cargo --version`, `rustc --version` y `dx --version`.
+
+### Comandos generales
 
 | Acción | Comando |
 |---|---|
-| Tests de todo el workspace | `cargo test --workspace` |
+| Tests del workspace | `cargo test --workspace` |
 | Comprobar WASM | `cargo check -p sustancias-web --target wasm32-unknown-unknown` |
-| Sitio completo (Igual que CI) | `dx build --release --package sustancias-web` |
-| Escritorio (desarrollo) | `dx serve --platform desktop` |
-| Móvil (desarrollo) | `dx serve --platform android` |
-| Binario nativo suelto | `cargo build -p sustancias-web --features desktop --release` |
+| Sitio completo (igual que el CI) | `dx build --release --package sustancias-web` |
+| Desarrollo web | `dx serve` |
+| Desarrollo escritorio | `dx serve --platform desktop` |
+| Desarrollo Android | `dx serve --platform android` |
+| Binario nativo optimizado | `cargo build -p sustancias-web --features desktop --profile native-release` |
 
-### Requisitos por plataforma
+El sitio se genera en `target/dx/sustancias-web/release/web/public/`. El workflow copia `index.html` a `404.html` e inyecta la CSP y `robots.txt`.
 
-| Plataforma | Requisitos adicionales |
-|---|---|
-| **Web** | Ninguno además del target WASM y `dx`. Se publica como sitio estático. |
-| **Windows** | WebView2 Runtime y Visual Studio Build Tools con carga de C++. Instalador en `installers/windows/`. |
-| **macOS** | Xcode Command Line Tools y macOS SDK. Solo se puede compilar en una máquina Apple. |
-| **Linux** | `libwebkit2gtk-4.1-dev`, `libgtk-3-dev`, `libsoup-3.0-dev`, `pkg-config`. |
-| **Android** | Android SDK + NDK, JDK 17, `cargo install cargo-ndk`, targets `aarch64-linux-android`, `armv7-linux-androideabi`, `x86_64-linux-android`, Gradle. |
-| **iOS** | macOS + Xcode + targets `aarch64-apple-ios` y `x86_64-apple-ios`. No se puede compilar en Linux. |
+### Perfiles de compilación
 
-Opcional: `wasm-opt` (Binaryen) para optimizar el bundle. `wasm-bindgen` lo gestiona `dioxus-cli`.
+| Perfil | Uso | Ajustes |
+|---|---|---|
+| `release` | Web / WASM | `opt-level = "z"`, `lto = "thin"`, `codegen-units = 1`. **Sin `strip`**: rompe `wasm-bindgen` |
+| `native-release` | Escritorio y móvil | Hereda de `release`, `opt-level = 2`, `lto = "thin"`, `codegen-units = 1`, `strip = true`, `panic = "abort"` |
 
-**Importante:** el perfil de release usa `opt-level = "z"`, `lto = "thin"` y `codegen-units = 1`, pero **no** `strip = true`: elimina la sección `target_features` del WASM y rompe `wasm-bindgen` durante el despliegue.
+### Linux (verificado en CI)
 
-Guía ampliada y estado verificado por plataforma: [`docs/compilacion.md`](docs/compilacion.md) e [`docs/instalacion.md`](docs/instalacion.md).
+```bash
+sudo apt-get update
+sudo apt-get install -y \
+  libwebkit2gtk-4.1-dev libgtk-3-dev libsoup-3.0-dev \
+  libjavascriptcoregtk-4.1-dev libayatana-appindicator3-dev \
+  librsvg2-dev libxdo-dev patchelf
+
+cargo build -p sustancias-web --features desktop --profile native-release
+```
+
+Sin `libxdo-dev` el enlazado falla con `unable to find library -lxdo`. En distribuciones distintas de Debian/Ubuntu, instala los equivalentes de WebKitGTK 4.1 y GTK 3.
+
+### Windows
+
+1. Instala **Visual Studio Build Tools** con la carga de trabajo *Desktop development with C++*.
+2. Instala **WebView2 Runtime**.
+3. Compila:
+
+```powershell
+cargo build -p sustancias-web --features desktop --profile native-release
+```
+
+El instalador de `installers/windows/` compila en la máquina del usuario y deja el ejecutable en `Descargas\Sustancias Peligrosas\`.
+
+### macOS
+
+Solo se puede compilar en una máquina Apple:
+
+```bash
+xcode-select --install
+cargo build -p sustancias-web --features desktop --profile native-release
+```
+
+### Android
+
+```bash
+rustup target add aarch64-linux-android armv7-linux-androideabi x86_64-linux-android
+cargo install cargo-ndk
+# Configura ANDROID_HOME / ANDROID_NDK_HOME y JDK 17
+cargo ndk -t arm64 -t armv7 -t x86_64 -o ./jniLibs build --release -p sustancias-web --features mobile
+dx build --platform android --release
+```
+
+### iOS
+
+Requiere macOS + Xcode:
+
+```bash
+rustup target add aarch64-apple-ios x86_64-apple-ios
+cargo build -p sustancias-web --features mobile --target aarch64-apple-ios --profile native-release
+```
+
+### Verificación automática
+
+Cada `push` a `main` ejecuta cinco jobs: compilación WASM, tests y compilación nativa (con las dependencias de Linux), auditoría RustSec, accesibilidad con axe y despliegue a Pages. El job de auditoría es informativo; los avisos transitivos están documentados en `docs/fuentes-oficiales.md`.
+
+Opcional: `wasm-opt` (Binaryen) para optimizar el bundle WASM. `wasm-bindgen` lo gestiona `dioxus-cli`.
+
+Guía ampliada: [`docs/compilacion.md`](docs/compilacion.md) e [`docs/instalacion.md`](docs/instalacion.md).
 
 ---
 
