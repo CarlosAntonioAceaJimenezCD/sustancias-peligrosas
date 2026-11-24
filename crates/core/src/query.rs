@@ -224,7 +224,7 @@ pub fn corregir_tildes(nombre: &str) -> String {
                 let mut it = corregida.chars();
                 match it.next() {
                     Some(c) => format!("{}{}", c.to_uppercase(), it.as_str()),
-                    None => corregida,
+                    None => corregida.to_string(),
                 }
             } else {
                 corregida
