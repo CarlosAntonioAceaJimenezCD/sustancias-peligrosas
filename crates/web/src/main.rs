@@ -765,6 +765,18 @@ struct CameoVisible {
     revisado: bool,
 }
 
+/// Traduce un texto al idioma activo con la cadena de proveedores.
+async fn traducir_texto(traductor: &sustancias_i18n::Cadena, lang: &str, texto: String) -> String {
+    if lang == "en" {
+        return texto;
+    }
+    traductor
+        .translate(&texto, lang)
+        .await
+        .map(|r| r.texto)
+        .unwrap_or(texto)
+}
+
 /// Cierra el aviso de la estrella y recuerda la preferencia.
 fn cerrar_estrella() {
     dioxus::document::eval("try{localStorage.setItem('estrella-cerrada','1')}catch(e){}");
@@ -1229,25 +1241,17 @@ fn App() -> Element {
                     sustancias_i18n::DeeplApi::Free
                 },
             );
-            let traducir = |texto: String| async move {
-                if lang == "en" {
-                    return texto;
-                }
-                traductor.translate(&texto, &lang).await
-                    .map(|r| r.texto)
-                    .unwrap_or(texto)
-            };
             let mut salida = Vec::new();
             for i in 0..items.len() {
                 for j in (i + 1)..items.len() {
                     if let Some(a) = core::cameo_analyze(&items[i].2, &items[j].2) {
                         let mut peligros = Vec::new();
-                        for x in &a.peligros { peligros.push(traducir(x.clone()).await); }
+                        for x in &a.peligros { peligros.push(traducir_texto(&traductor, &lang, x.clone()).await); }
                         let mut gases = Vec::new();
-                        for x in &a.gases { gases.push(traducir(x.clone()).await); }
+                        for x in &a.gases { gases.push(traducir_texto(&traductor, &lang, x.clone()).await); }
                         salida.push(CameoVisible {
                             na: items[i].1.clone(), nb: items[j].1.clone(),
-                            etiqueta: traducir(a.etiqueta.clone()).await,
+                            etiqueta: traducir_texto(&traductor, &lang, a.etiqueta.clone()).await,
                             compatibilidad: a.compatibilidad.clone(),
                             nivel: a.nivel.clone(),
                             peligros, gases,
