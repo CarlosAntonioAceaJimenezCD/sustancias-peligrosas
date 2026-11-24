@@ -1,5 +1,7 @@
 # Sustancias Peligrosas
 
+> **¿Te resultó útil?** Dale una estrella al repositorio en GitHub: ayuda a que más profesionales de seguridad química, PRL y laboratorio lo encuentren. [★ Repositorio](https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas)
+
 Base de conocimiento multilingüe de sustancias peligrosas: **marco legal por país, SGA/GHS, fichas técnicas completas de 16 secciones, convenios internacionales y transporte de mercancías peligrosas**.
 
 | | |
@@ -188,6 +190,26 @@ Opcional: `wasm-opt` (Binaryen) para optimizar el bundle WASM. `wasm-bindgen` lo
 Guía ampliada: [`docs/compilacion.md`](docs/compilacion.md) e [`docs/instalacion.md`](docs/instalacion.md).
 
 ---
+
+## Publicación en tiendas y canales de descarga
+
+Requisitos verificados en la documentación oficial de cada plataforma. La app today solo está publicada en la web; el resto son pasos pendientes.
+
+| Plataforma | Canal | Requisitos principales | Estado |
+|---|---|---|---|
+| **Web** | GitHub Pages | Repositorio público, workflow de Actions, CSP y `robots.txt` | ✅ Publicada |
+| **Android** | Google Play | Cuenta de desarrollador; **AAB firmado** con Play App Signing; `versionCode` creciente (máx. 2100000000); cumplir los *target API level requirements*; declaraciones de políticas; ficha con nombre (30), descripción corta (80) y completa (4000 caracteres), 2–8 capturas y correo de contacto; las cuentas personales nuevas tienen requisitos de testing previo | Pendiente |
+| **Android** | F-Droid | Código abierto con licencia **FLOSS** reconocida; **solo dependencias FLOSS** (prohibidos Google Play Services, Firebase y SDKs privativos); toolchain FLOSS, compilación por CLI; ID de aplicación único; tags de versión (`v1.0`); metadata `fastlane/metadata/android/en-US/`; solicitud por merge request en `fdroiddata`; revisión manual y 24–48 h hasta publicación. **Ojo:** F-Droid no incluye claves API de terceros; las claves de DeepL/CAS las introduce el usuario, y el uso de Google Translate puede marcarse como *AntiFeature* de servicio no libre | Pendiente, con avisos |
+| **Linux** | Flathub | Manifiesto de construcción y metainfo AppStream; compilar con `org.flatpak.Builder`; pasar el linter (`flatpak-builder-lint`); PR a `flathub/flathub` contra la rama `new-pr` (no `master`); revisión por voluntarios; publicación 1–2 h tras merge | Pendiente |
+| **Windows** | Microsoft Store | Cuenta de desarrollador en Partner Center (individual o empresa); paquete **MSIX**, MSI/EXE o PWA; reservar el nombre de la app; pasar certificación; aceptar políticas de la Store; se puede automatizar con Microsoft Store Developer CLI y GitHub Actions | Pendiente |
+| **macOS** | Mac App Store | Apple Developer Program; **sandboxing** obligatorio; paquete firmado y notarizado, sin instaladores de terceros; actualizaciones solo por App Store; revisión de App Store. La guía 1.4.1 examina con más rigor apps que puedan dar datos inexactos: mantener visible el aviso de que no sustituye la FDS del fabricante | Pendiente |
+| **iOS** | App Store / TestFlight | Apple Developer Program; Xcode; revisión de App Store; TestFlight para betas; mismas normas de contenido y privacidad | Pendiente |
+
+Fuentes oficiales: [Google Play](https://support.google.com/googleplay/android-developer/answer/9859152), [F-Droid](https://f-droid.org/en/docs/Submitting_to_F-Droid_Quick_Start_Guide) y su [política de inclusión](https://f-droid.org/en/docs/Inclusion_Policy), [Flathub](https://docs.flathub.org/docs/for-app-authors/submission), [Microsoft Store](https://learn.microsoft.com/en-us/windows/apps/publish/), [App Store Review Guidelines](https://developer.apple.com/app-store/review/guidelines/).
+
+### Sitios de descarga legales alternativos
+
+Si no se publica en una tienda, la app se puede distribuir como descarga directa firmada desde el repositorio (ya existe un instalador en `installers/windows/` que compila en la máquina del usuario). Para Linux, un repo propio compatible con F-Droid permite llegar a esos usuarios sin pasar por el repositorio principal.
 
 ## Descargas y caché sin conexión
 
