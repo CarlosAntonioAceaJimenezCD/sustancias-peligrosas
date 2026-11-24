@@ -18,6 +18,7 @@ const INTERACTIONS_JSON: &str = include_str!("../../../data/interactions.json");
 const ORGANIZATIONS_JSON: &str = include_str!("../../../data/organizations.json");
 const ALIASES_JSON: &str = include_str!("../../../data/aliases.json");
 const CAMEO_SUBSTANCES_JSON: &str = include_str!("../../../data/cameo_substances.json");
+const CAMEO_GROUPS_JSON: &str = include_str!("../../../data/cameo_groups.json");
 const CAMEO_REACTIONS_JSON: &str = include_str!("../../../data/cameo_reactions_min.json");
 const PUBCHEM_REACTIVITY_JSON: &str = include_str!("../../../data/pubchem_reactivity.json");
 const CAMEO_REVIEWED_JSON: &str = include_str!("../../../data/cameo_reviewed.json");
@@ -218,8 +219,10 @@ pub struct CameoSubstance {
     pub cas: String,
     pub nombre: String,
     pub cameo_id: u64,
+    #[serde(default)]
     pub url: String,
-    pub grupos: Vec<CameoGrupo>,
+    /// Solo los números de grupo; los nombres se derivan de cameo_groups.json.
+    pub grupos: Vec<u32>,
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
@@ -227,6 +230,11 @@ pub struct CameoGrupo {
     pub id: String,
     pub numero: u32,
     pub nombre: String,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+struct CameoGruposDb {
+    pub grupos: Vec<CameoGrupo>,
 }
 
 /// Par de grupos reactivos con predicciones documentadas.
@@ -495,6 +503,22 @@ pub fn pubchem_reactivity_for_cid(cid: u64) -> Option<&'static PubChemReactivity
     pubchem_reactivity().iter().find(|r| r.cid == cid)
 }
 
+/// Nombre legible de un grupo reactivo por su número.
+pub fn cameo_grupo_nombre(numero: u32) -> &'static str {
+    static CACHE: OnceLock<CameoGruposDb> = OnceLock::new();
+    let db = CACHE.get_or_init(|| parse(CAMEO_GROUPS_JSON));
+    db.grupos
+        .iter()
+        .find(|g| g.numero == numero)
+        .map(|g| g.nombre.as_str())
+        .unwrap_or("Grupo desconocido")
+}
+
+/// URL de la ficha de CAMEO para un compuesto.
+pub fn cameo_url(cameo_id: u64) -> String {
+    format!("https://cameochemicals.noaa.gov/chemical/{}", cameo_id)
+}
+
 /// Base de sustancias mapeadas a grupos reactivos (cacheada).
 pub fn cameo_substances() -> &'static [CameoSubstance] {
     static CACHE: OnceLock<CameoSubstancesDb> = OnceLock::new();
@@ -529,11 +553,7 @@ pub fn cameo_analyze(cas_a: &str, cas_b: &str) -> Option<CameoAnalysis> {
     let mut revisado = false;
     for ga in &a.grupos {
         for gb in &b.grupos {
-            let (x, y) = if ga.numero <= gb.numero {
-                (ga.numero, gb.numero)
-            } else {
-                (gb.numero, ga.numero)
-            };
+            let (x, y) = if ga <= gb { (*ga, *gb) } else { (*gb, *ga) };
             if let Some(par) = pares.iter().find(|p| p.a == x && p.b == y) {
                 if par_revisado(&par.id) { revisado = true; }
                 for d in &par.peligros {
