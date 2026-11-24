@@ -25,8 +25,9 @@ else:
 TAGS = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]
 
 
-def escanear(page, estado):
-    page.wait_for_selector(".continente-carpeta", timeout=60000)
+def escanear(page, estado, esperar_selector=True):
+    if esperar_selector:
+        page.wait_for_selector(".continente-carpeta", timeout=60000)
     page.wait_for_timeout(500)
     resultado = page.evaluate(
         """async (tags) => {
@@ -64,7 +65,7 @@ with sync_playwright() as p:
         europa.locator("summary").click()
         europa.locator(".pais-boton", has_text="España").first.click()
         pagina.wait_for_timeout(600)
-        total += escanear(pagina, "con pais seleccionado")
+        total += escanear(pagina, "con pais seleccionado", esperar_selector=False)
 
     navegador.close()
 

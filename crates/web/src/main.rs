@@ -1559,6 +1559,7 @@ fn App() -> Element {
                 div { class: "idioma-busqueda",
                     span { "Buscar en cualquier idioma · mostrar nombre en:" }
                     select {
+                        aria_label: "Idioma de salida",
                         value: "{output_lang()}",
                         onchange: move |e| {
                             let lang = e.value();
@@ -2045,6 +2046,7 @@ fn App() -> Element {
                     label { class: "opcion",
                         span { "Proveedor de traducción" }
                         select {
+                            aria_label: "Proveedor de traducción",
                             value: if opciones().deepl_enabled { "deepl" } else { "google" },
                             onchange: move |e| {
                                 let mut o = opciones();
@@ -2177,6 +2179,7 @@ fn App() -> Element {
                 label { class: "opcion",
                     "Tipo"
                     select {
+                        aria_label: "Tipo de reporte",
                         value: "{feedback_tipo()}",
                         onchange: move |e| feedback_tipo.set(e.value()),
                         option { value: "Sugerencia", "Sugerencia" }
