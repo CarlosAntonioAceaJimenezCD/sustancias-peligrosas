@@ -227,7 +227,7 @@ pub fn corregir_tildes(nombre: &str) -> String {
                     None => corregida.to_string(),
                 }
             } else {
-                corregida
+                corregida.to_string()
             };
             format!("{}{}", corregida, sufijo)
         } else {
