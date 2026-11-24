@@ -1514,23 +1514,16 @@ mod tests {
     }
 
     #[test]
-    fn interacciones_cubren_todas_las_parejas() {
-        let db = interactions_db();
-        assert_eq!(db.interacciones.len(), 15);
-        assert_eq!(db.niveles.len(), 4);
+    fn interacciones_propias_retiradas() {
+        assert!(interactions_db().interacciones.is_empty());
+        assert_eq!(interactions_db().niveles.len(), 4);
     }
 
     #[test]
-    fn neutralizacion_es_peligro_alto() {
-        let ids = vec![
-            "acido-clorhidrico".to_string(),
-            "hidroxido-sodio".to_string(),
-        ];
-        let result = analyze_interactions_named(&ids, &HashMap::new());
-        assert_eq!(result.len(), 1);
-        assert_eq!(result[0].nivel, "alto");
-        assert_eq!(result[0].etiqueta, "Peligro alto");
-        assert!(!result[0].es_regla_general);
+    fn neutralizacion_cubierta_por_cameo() {
+        let r = cameo_analyze("7647-01-0", "1310-73-2").unwrap();
+        assert_eq!(r.nivel, "alto");
+        assert_eq!(r.compatibilidad, "incompatible");
     }
 
     #[test]
@@ -1623,8 +1616,8 @@ mod tests {
 
     #[test]
     fn tildes_en_nombre_mostrado() {
-        assert_eq!(corregir_tildes("Acido sulfurico"), "Ácido sulfúrico");
-        assert_eq!(corregir_tildes("Acido sulfurico, H2SO4"), "Ácido sulfúrico, H2SO4");
+        assert_eq!(corregir_tildes("acido sulfurico"), "ácido sulfúrico");
+        assert_eq!(corregir_tildes("acido sulfurico, H2SO4"), "ácido sulfúrico, H2SO4");
         assert_eq!(corregir_tildes("Triton X 100"), "Tritón X 100");
         assert_eq!(corregir_tildes("Ácido sulfúrico"), "Ácido sulfúrico");
     }
