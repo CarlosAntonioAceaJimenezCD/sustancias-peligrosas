@@ -777,6 +777,22 @@ async fn traducir_texto(traductor: &sustancias_i18n::Cadena, lang: &str, texto: 
         .unwrap_or(texto)
 }
 
+/// Lee de forma síncrona si el usuario cerró ya el aviso de la estrella.
+fn estrella_cerrada_guardada() -> bool {
+    #[cfg(target_arch = "wasm32")]
+    {
+        web_sys::window()
+            .and_then(|w| w.local_storage().ok().flatten())
+            .and_then(|s| s.get_item("estrella-cerrada").ok().flatten())
+            .as_deref()
+            == Some("1")
+    }
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        false
+    }
+}
+
 /// Cierra el aviso de la estrella y recuerda la preferencia.
 fn cerrar_estrella() {
     dioxus::document::eval("try{localStorage.setItem('estrella-cerrada','1')}catch(e){}");
@@ -969,7 +985,7 @@ fn App() -> Element {
     let mut busquedas: Signal<u32> = use_signal(|| 0);
     let mut mostrar_estrella: Signal<bool> = use_signal(|| false);
     let mut cameo_visible: Signal<Vec<CameoVisible>> = use_signal(Vec::new);
-    let mut estrella_cerrada: Signal<bool> = use_signal(|| false);
+    let mut estrella_cerrada: Signal<bool> = use_signal(estrella_cerrada_guardada);
     let mut opciones: Signal<AppOptions> = use_signal(cargar_opciones);
     let mut guardados: Signal<Vec<SavedDocView>> = use_signal(cargar_guardados);
     #[allow(unused_mut)]
@@ -1262,18 +1278,6 @@ fn App() -> Element {
                 }
             }
             cameo_visible.set(salida);
-        });
-    });
-
-    use_effect(move || {
-        spawn(async move {
-            dormir(600).await;
-            let mut evaluar = dioxus::document::eval(
-                "(function(){try{return localStorage.getItem('estrella-cerrada')||''}catch(e){return ''}})()",
-            );
-            if let Ok(valor) = evaluar.recv::<serde_json::Value>().await {
-                estrella_cerrada.set(valor.as_str().unwrap_or("") == "1");
-            }
         });
     });
 
