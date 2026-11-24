@@ -951,6 +951,7 @@ fn txt(key: &str, lang: &str) -> &'static str {
 }
 
 fn main() {
+    console_error_panic_hook::set_once();
     dioxus::launch(App);
 }
 
