@@ -127,6 +127,18 @@ body{
   border-radius:var(--r-sm);background:var(--surface-2);color:var(--accent);cursor:pointer;
   transition:all var(--dur) var(--ease)}
 .tema-boton:hover{border-color:var(--accent-line);background:var(--accent-soft);transform:translateY(-1px)}
+.estrella-banner{display:flex;align-items:center;gap:var(--sp-2);flex-wrap:wrap;
+  border:1px solid var(--accent-line);border-radius:var(--r-sm);background:var(--accent-soft);
+  padding:var(--sp-2) var(--sp-3);margin:var(--sp-2) 0;font-size:var(--step--1);color:var(--ink)}
+.estrella-banner .ico{color:var(--accent)}
+.estrella-texto{flex:1;min-inline-size:180px}
+.estrella-enlace{color:var(--accent);font-weight:700;text-decoration:none}
+.estrella-enlace:hover{text-decoration:underline}
+.estrella-cerrar{flex:none;width:44px;height:44px;display:grid;place-items:center;
+  border:1px solid var(--line);border-radius:var(--r-sm);background:var(--surface-2);
+  color:var(--muted);cursor:pointer}
+.estrella-cerrar:hover{border-color:var(--accent);color:var(--accent)}
+.estrella-cerrar .ico{width:20px;height:20px}
 .tutorial-cas{margin-top:var(--sp-2);font-size:var(--step--1);color:var(--muted)}
 .tutorial-cas summary{cursor:pointer;font-weight:650;color:var(--accent)}
 .marca{display:flex;gap:var(--sp-3);align-items:center}
@@ -922,6 +934,8 @@ fn App() -> Element {
     let mut feedback_tipo: Signal<String> = use_signal(|| "Sugerencia".to_string());
     let mut feedback_titulo: Signal<String> = use_signal(String::new);
     let mut feedback_texto: Signal<String> = use_signal(String::new);
+    let mut busquedas: Signal<u32> = use_signal(|| 0);
+    let mut mostrar_estrella: Signal<bool> = use_signal(|| false);
     let mut opciones: Signal<AppOptions> = use_signal(cargar_opciones);
     let mut guardados: Signal<Vec<SavedDocView>> = use_signal(cargar_guardados);
     #[allow(unused_mut)]
@@ -1006,6 +1020,10 @@ fn App() -> Element {
             online_error_red.set(false);
             online_cargando.set(false);
             return;
+        }
+        busquedas += 1;
+        if busquedas() >= 10 {
+            mostrar_estrella.set(true);
         }
         let id = {
             busqueda_id += 1;
@@ -1597,6 +1615,17 @@ fn App() -> Element {
                     }
                 }
 
+                if mostrar_estrella() {
+                    div { class: "estrella-banner",
+                        span { dangerous_inner_html: "{icon(\"flask\", \"ico\")}" }
+                        span { class: "estrella-texto", "¿Te resultó útil? Dale una estrella al proyecto en GitHub." }
+                        a { class: "estrella-enlace", href: GITHUB_URL, target: "_blank", "Dar una estrella" }
+                        button { class: "estrella-cerrar", aria_label: "Quitar aviso", title: "Quitar aviso",
+                            onclick: move |_| mostrar_estrella.set(false),
+                            dangerous_inner_html: "{icon(\"x\", \"ico\")}"
+                        }
+                    }
+                }
                 div { class: "resultados-online", aria_live: "polite",
                     if online_cargando() {
                         p { class: "vacio", "Consultando bases de datos oficiales…" }
@@ -2260,5 +2289,6 @@ fn App() -> Element {
                 span { class: "flotante-cambiar", dangerous_inner_html: "{icon(\"refresh\", \"ico\")}" }
             }
         }
+
     }
 }
