@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Disallow: /assets/
+
+# La aplicación es una SPA: el contenido cambia con la interacción del usuario
+# y no es indexable por rastreadores. Solo se permite la portada.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+Sitemap: https://carlosantonioaceajimenezcd.github.io/sustancias-peligrosas/sitemap.xml
