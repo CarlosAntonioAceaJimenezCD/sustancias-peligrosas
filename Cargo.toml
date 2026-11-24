@@ -16,3 +16,13 @@ codegen-units = 1
 [profile.release.package."*"]
 opt-level = "z"
 codegen-units = 1
+
+# Perfil para binarios nativos: menos tamaño y arranque mas rapido.
+# No se usa en WASM (strip rompe wasm-bindgen).
+[profile.native-release]
+inherits = "release"
+opt-level = 2
+lto = "fat"
+codegen-units = 1
+strip = true
+panic = "abort"

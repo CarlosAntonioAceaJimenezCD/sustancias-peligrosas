@@ -1587,6 +1587,21 @@ mod tests {
     }
 
     #[test]
+    fn estres_entradas_hostiles() {
+        let gigante = "A".repeat(20_000);
+        assert!(es_consulta_valida(&gigante));
+        assert!(alias_for(&gigante).is_none());
+        let raro = "̴̶̷̵Zalgo̴̶̷̵😀中文\u{0000}";
+        let _ = normalize(raro);
+        let _ = name_variants(raro);
+        assert!(extraer_cas(&[gigante]).is_none());
+        assert!(cameo_analyze("'; DROP TABLE--", "67-64-1").is_none());
+        assert!(cameo_analyze("../../../etc/passwd", "67-64-1").is_none());
+        assert!(cameo_analyze("<script>alert(1)</script>", "67-64-1").is_none());
+        assert!(corregir_tildes(&gigante).len() <= gigante.len() + 40);
+    }
+
+    #[test]
     fn extrae_cas_de_sinonimos() {
         let sin = vec!["Sulfuric acid".to_string(), "7664-93-9".to_string(), "CID 1118".to_string()];
         assert_eq!(extraer_cas(&sin).as_deref(), Some("7664-93-9"));

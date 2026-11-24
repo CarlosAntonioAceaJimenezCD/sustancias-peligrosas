@@ -238,6 +238,20 @@ mod tests {
     }
 
     #[test]
+    fn rutas_y_nombres_hostiles() {
+        assert_eq!(safe_filename("../../etc/passwd"), "passwd");
+        assert_eq!(safe_filename("..\\..\\windows\\system32.ini"), "system32.ini");
+        assert!(!safe_filename("<script>alert(1)</script>.pdf").contains('<'));
+        let opciones = Options {
+            downloads_dir: Some(PathBuf::from("/tmp/..\\/descargas")),
+            cas_api_key: "x'.repeat(50)".to_string(),
+            ..Options::default()
+        };
+        let destino = downloads_target(&opciones);
+        assert!(destino.to_string_lossy().contains(EXPORT_DIR));
+    }
+
+    #[test]
     fn descargas_usa_carpeta_propia() {
         let opciones = Options {
             downloads_dir: Some(PathBuf::from("/tmp/descargas")),

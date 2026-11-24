@@ -34,6 +34,11 @@ VECTORES = [
     "urn:x;alert(1)//",
     "SELECT * FROM users WHERE 1=1--",
     "😀" * 500,
+    "<svg/onload=window.__pwned=1>",
+    "<iframe src=javascript:alert(1)>",
+    "<form action=javascript:alert(1)><input name=q>",
+    "data:text/html,<script>window.__pwned=1</script>",
+    "&lt;script&gt;alert(1)&lt;/script&gt;",
 ]
 
 HALLAZGOS = []
@@ -103,6 +108,10 @@ with sync_playwright() as p:
 
         # 6) Manipulacion de tema y almacenamiento
         page.evaluate("localStorage.setItem('sustancias-theme','<script>window.__pwned=1</script>')")
+        try:
+            page.evaluate("for(let i=0;i<5000;i++)localStorage.setItem('relleno'+i,'x'.repeat(400))")
+        except Exception:
+            pass
         page.reload(wait_until="domcontentloaded")
         page.wait_for_timeout(1000)
         chk(ronda, "tema con valor malicious", page.evaluate("typeof window.__pwned === 'undefined'"))
