@@ -185,6 +185,7 @@ pub fn par_revisado(id: &str) -> bool {
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct NioshLimit {
     pub cas: String,
+    #[serde(default)]
     pub nombre: String,
     #[serde(default)]
     pub rel: String,
