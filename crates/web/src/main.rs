@@ -1267,6 +1267,7 @@ fn App() -> Element {
 
     use_effect(move || {
         spawn(async move {
+            dormir(600).await;
             let mut evaluar = dioxus::document::eval(
                 "(function(){try{return localStorage.getItem('estrella-cerrada')||''}catch(e){return ''}})()",
             );
