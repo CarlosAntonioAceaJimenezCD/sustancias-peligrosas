@@ -750,6 +750,26 @@ fn abrir_issue(titulo: &str, cuerpo: &str) {
     let _ = webbrowser::open(&url);
 }
 
+/// Análisis CAMEO ya traducido al idioma activo.
+#[derive(Clone)]
+struct CameoVisible {
+    na: String,
+    nb: String,
+    etiqueta: String,
+    compatibilidad: String,
+    nivel: String,
+    peligros: Vec<String>,
+    gases: Vec<String>,
+    citas: Vec<String>,
+    fuentes: Vec<String>,
+    revisado: bool,
+}
+
+/// Cierra el aviso de la estrella y recuerda la preferencia.
+fn cerrar_estrella() {
+    dioxus::document::eval("try{localStorage.setItem('estrella-cerrada','1')}catch(e){}");
+}
+
 /// Nombre a mostrar: sinónimo localizado, traducción automática o título.
 fn nombre_visible(c: &core::PubChemCompound, lang: &str) -> String {
     let nombre = core::localized_name(&c.synonyms, lang)
@@ -936,6 +956,8 @@ fn App() -> Element {
     let mut feedback_texto: Signal<String> = use_signal(String::new);
     let mut busquedas: Signal<u32> = use_signal(|| 0);
     let mut mostrar_estrella: Signal<bool> = use_signal(|| false);
+    let mut cameo_visible: Signal<Vec<CameoVisible>> = use_signal(Vec::new);
+    let mut estrella_cerrada: Signal<bool> = use_signal(|| false);
     let mut opciones: Signal<AppOptions> = use_signal(cargar_opciones);
     let mut guardados: Signal<Vec<SavedDocView>> = use_signal(cargar_guardados);
     #[allow(unused_mut)]
@@ -1004,16 +1026,6 @@ fn App() -> Element {
         })
         .collect();
 
-    // Analisis de compatibilidad con NOAA/EPA CAMEO para los pares con CAS.
-    let mut cameo_analyses: Vec<(String, String, core::CameoAnalysis)> = Vec::new();
-    for i in 0..multi_items.len() {
-        for j in (i + 1)..multi_items.len() {
-            if let Some(a) = core::cameo_analyze(&multi_items[i].2, &multi_items[j].2) {
-                cameo_analyses.push((multi_items[i].1.clone(), multi_items[j].1.clone(), a));
-            }
-        }
-    }
-
     let mut buscar_pubchem = move |texto: String, lang: String| {
         if texto.trim().len() < 2 || !core::es_consulta_valida(&texto) {
             online_resultados.set(Vec::new());
@@ -1022,7 +1034,7 @@ fn App() -> Element {
             return;
         }
         busquedas += 1;
-        if busquedas() >= 10 {
+        if busquedas() >= 10 && !estrella_cerrada() {
             mostrar_estrella.set(true);
         }
         let id = {
@@ -1202,6 +1214,64 @@ fn App() -> Element {
 
     // Restaura la preferencia guardada (auto/claro/oscuro) y aplica el tema
     // efectivo. «auto» se resuelve con la hora local de la zona horaria.
+    // Traduce el análisis de compatibilidad al idioma elegido por el usuario.
+    use_effect(move || {
+        let lang = output_lang();
+        let items = multi_ids();
+        let clave = opciones().deepl_key.clone();
+        let pro = opciones().deepl_pro;
+        spawn(async move {
+            let traductor = sustancias_i18n::Cadena::con_configuracion(
+                if clave.trim().is_empty() { None } else { Some(clave) },
+                if pro {
+                    sustancias_i18n::DeeplApi::Pro
+                } else {
+                    sustancias_i18n::DeeplApi::Free
+                },
+            );
+            let traducir = |texto: &str| async {
+                if lang == "en" {
+                    return texto.to_string();
+                }
+                traductor.translate(texto, &lang).await
+                    .map(|r| r.texto)
+                    .unwrap_or_else(|| texto.to_string())
+            };
+            let mut salida = Vec::new();
+            for i in 0..items.len() {
+                for j in (i + 1)..items.len() {
+                    if let Some(a) = core::cameo_analyze(&items[i].2, &items[j].2) {
+                        let mut peligros = Vec::new();
+                        for x in &a.peligros { peligros.push(traducir(x).await); }
+                        let mut gases = Vec::new();
+                        for x in &a.gases { gases.push(traducir(x).await); }
+                        salida.push(CameoVisible {
+                            na: items[i].1.clone(), nb: items[j].1.clone(),
+                            etiqueta: traducir(&a.etiqueta).await,
+                            compatibilidad: a.compatibilidad.clone(),
+                            nivel: a.nivel.clone(),
+                            peligros, gases,
+                            citas: a.citas.clone(), fuentes: a.fuentes.clone(),
+                            revisado: a.revisado,
+                        });
+                    }
+                }
+            }
+            cameo_visible.set(salida);
+        });
+    });
+
+    use_effect(move || {
+        spawn(async move {
+            let mut evaluar = dioxus::document::eval(
+                "(function(){try{return localStorage.getItem('estrella-cerrada')||''}catch(e){return ''}})()",
+            );
+            if let Ok(valor) = evaluar.recv::<serde_json::Value>().await {
+                estrella_cerrada.set(valor.as_str().unwrap_or("") == "1");
+            }
+        });
+    });
+
     use_effect(move || {
         // Se aplica de forma directa: `Eval::recv` no es fiable en el primer
         // render y dejaría el tema sin aplicar. La preferencia se sincroniza
@@ -1621,7 +1691,11 @@ fn App() -> Element {
                         span { class: "estrella-texto", "¿Te resultó útil? Dale una estrella al proyecto en GitHub." }
                         a { class: "estrella-enlace", href: GITHUB_URL, target: "_blank", "Dar una estrella" }
                         button { class: "estrella-cerrar", aria_label: "Quitar aviso", title: "Quitar aviso",
-                            onclick: move |_| mostrar_estrella.set(false),
+                            onclick: move |_| {
+                                mostrar_estrella.set(false);
+                                estrella_cerrada.set(true);
+                                cerrar_estrella();
+                            },
                             dangerous_inner_html: "{icon(\"x\", \"ico\")}"
                         }
                     }
@@ -1796,10 +1870,10 @@ fn App() -> Element {
                             }
                         }
                     }
-                    for (na, nb, a) in cameo_analyses.iter() {
+                    for a in cameo_visible.iter() {
                         div { class: "interaccion cameo",
                             div { class: "interaccion-cabecera",
-                                strong { "{na} + {nb}" }
+                                strong { "{a.na} + {a.nb}" }
                                 span {
                                     class: match a.nivel.as_str() {
                                         "alto" => "badge badge-danger",
@@ -2149,6 +2223,11 @@ fn App() -> Element {
                             li { "Pega el token en el campo de arriba y se guardará solo en este dispositivo." }
                         }
                         p { class: "multi-nota", "Solo hace falta si PubChem no devuelve el número CAS. La licencia de Common Chemistry es de uso no comercial." }
+                    }
+                    label { class: "opcion",
+                        span { "Apoyar al creador" }
+                        a { class: "estrella-enlace", href: GITHUB_URL, target: "_blank",
+                            "Dale una estrella al proyecto en GitHub" }
                     }
                     label { class: "opcion",
                         "Directorio de descargas personalizado (vacío = el del sistema)"
