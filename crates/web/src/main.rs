@@ -1229,25 +1229,25 @@ fn App() -> Element {
                     sustancias_i18n::DeeplApi::Free
                 },
             );
-            let traducir = |texto: &str| async {
+            let traducir = |texto: String| async move {
                 if lang == "en" {
-                    return texto.to_string();
+                    return texto;
                 }
-                traductor.translate(texto, &lang).await
+                traductor.translate(&texto, &lang).await
                     .map(|r| r.texto)
-                    .unwrap_or_else(|| texto.to_string())
+                    .unwrap_or(texto)
             };
             let mut salida = Vec::new();
             for i in 0..items.len() {
                 for j in (i + 1)..items.len() {
                     if let Some(a) = core::cameo_analyze(&items[i].2, &items[j].2) {
                         let mut peligros = Vec::new();
-                        for x in &a.peligros { peligros.push(traducir(x).await); }
+                        for x in &a.peligros { peligros.push(traducir(x.clone()).await); }
                         let mut gases = Vec::new();
-                        for x in &a.gases { gases.push(traducir(x).await); }
+                        for x in &a.gases { gases.push(traducir(x.clone()).await); }
                         salida.push(CameoVisible {
                             na: items[i].1.clone(), nb: items[j].1.clone(),
-                            etiqueta: traducir(&a.etiqueta).await,
+                            etiqueta: traducir(a.etiqueta.clone()).await,
                             compatibilidad: a.compatibilidad.clone(),
                             nivel: a.nivel.clone(),
                             peligros, gases,
