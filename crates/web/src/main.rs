@@ -1784,10 +1784,10 @@ fn App() -> Element {
                             span { dangerous_inner_html: "{icon(\"layers\", \"ico\")}" }
                             strong { "Comparación de varias sustancias" }
                         }
-                        if interactions.is_empty() {
-                            span { class: "badge badge-ok", "ACTIVO" }
+                        if cameo_visible().is_empty() {
+                            span { class: "badge badge-suave", "Añade sustancias" }
                         } else {
-                            span { class: "badge badge-ok", "{interactions.len()} parejas" }
+                            span { class: "badge badge-ok", "{cameo_visible().len()} parejas" }
                         }
                     }
                     div { class: "multi-anadir",
