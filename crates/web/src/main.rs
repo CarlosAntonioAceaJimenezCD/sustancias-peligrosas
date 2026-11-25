@@ -1885,6 +1885,7 @@ fn App() -> Element {
                             }
                         }
                     }
+                    }
                     p { class: "multi-nota", "{core::interactions_warning()}" }
                 }
 
