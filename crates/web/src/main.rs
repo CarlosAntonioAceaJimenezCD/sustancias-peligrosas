@@ -1035,12 +1035,6 @@ fn App() -> Element {
         .filter(|i| filter() == "todos" || i.tema == filter())
         .collect();
     let multi_items = multi_ids();
-    let multi_names: std::collections::HashMap<String, String> = multi_items
-        .iter()
-        .map(|(id, nombre, _)| (id.clone(), nombre.clone()))
-        .collect();
-    let multi_id_list: Vec<String> = multi_items.iter().map(|(id, _, _)| id.clone()).collect();
-    let interactions = core::analyze_interactions_named(&multi_id_list, &multi_names);
 
     // Límites de exposición de NIOSH para la sustancia mostrada.
     let limites = online_ficha()
@@ -1829,46 +1823,6 @@ fn App() -> Element {
                         }
                     }
                     div { class: "interacciones",
-                        for r in interactions.iter() {
-                            div { class: "interaccion",
-                                div { class: "interaccion-cabecera",
-                                    strong { "{r.nombre_a} + {r.nombre_b}" }
-                                    span {
-                                        class: match r.nivel.as_str() {
-                                            "alto" => "badge badge-danger",
-                                            "moderado" => "badge badge-warn",
-                                            "bajo" => "badge badge-ok",
-                                            _ => "badge badge-suave",
-                                        },
-                                        "{r.etiqueta}"
-                                    }
-                                }
-                                div { class: "interaccion-tipo", "{r.tipo}" }
-                                p { "{r.descripcion}" }
-                                if !r.productos.is_empty() {
-                                    p { class: "interaccion-productos",
-                                        b { "Productos: " }
-                                        "{r.productos.join(\", \")}"
-                                    }
-                                }
-                                if !r.consecuencias.is_empty() {
-                                    p { class: "lista-titulo", "Consecuencias" }
-                                    ul { class: "lista",
-                                        for x in r.consecuencias.iter() { li { "{x}" } }
-                                    }
-                                }
-                                if !r.acciones.is_empty() {
-                                    p { class: "lista-titulo", "Acciones recomendadas" }
-                                    ul { class: "lista",
-                                        for x in r.acciones.iter() { li { "{x}" } }
-                                    }
-                                }
-                                if r.es_regla_general {
-                                    p { class: "multi-nota", "Regla general: verificar compatibilidad en fuentes oficiales." }
-                                }
-                            }
-                        }
-                    }
                     for (nombre, perfil) in perfiles.iter() {
                         if let Some(textos) = perfil.secciones.get("Reactivity Profile") {
                             div { class: "interaccion cameo",
