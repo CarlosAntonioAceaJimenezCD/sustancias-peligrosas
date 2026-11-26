@@ -48,8 +48,15 @@ fn normalizar_lang(lang: &str) -> &'static str {
 
 /// Resuelve `auto` al idioma derivado del país (`es`/`en`).
 pub fn idioma_efectivo(sel: &str, country_lang: &str) -> &'static str {
-    let base = if sel == "auto" { country_lang } else { sel };
-    normalizar_lang(base)
+    if sel != "auto" {
+        return normalizar_lang(sel);
+    }
+    // «Auto» solo puede resolverse al idioma del país (es/en).
+    if country_lang == "en" {
+        "en"
+    } else {
+        "es"
+    }
 }
 
 /// Texto fijo sin red. Devuelve `""` si la clave no existe.
