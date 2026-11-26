@@ -66,7 +66,7 @@ Quedan como portal los casos sin identificador público estable: Italia (Normatt
 | UNECE (ONU) | ADR | https://unece.org/about-adr |
 | OMI (ONU) | Lista de convenios (SOLAS, MARPOL, HNS 1996 + Protocolo 2010) | https://www.imo.org/es/about/conventions/pages/listofconventions.aspx |
 | OMI (ONU) | Código IMDG, ed. 2024, enmienda 42-24, vigente desde 1-ene-2026 | https://www.imo.org/es/publications/Pages/IMDG%20Code.aspx |
-| OIT (ONU) | Fichas ICSC | https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es |
+| OIT (ONU) | Fichas ICSC (índice CAS → ficha en `data/icsc_cards.json`, enlace profundo por idioma; el texto de la ficha se consulta siempre en el sitio oficial) | https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es |
 | Convención de Rotterdam (PIC) | Basilea, Róterdam y Estocolmo | https://www.pic.int/ |
 | Convención HNS | Texto oficial del convenio SNP | https://www.hnsconvention.org/es/el-convenio/ |
 | OPCW | Directrices de transporte seguro de sustancias químicas peligrosas (2025) | https://www.opcw.org/ |

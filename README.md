@@ -226,7 +226,7 @@ Para las fichas generadas en línea existe **«Guardar ficha como PDF (imprimir)
 
 ## Acceso a las leyes cubanas
 
-Al seleccionar **Cuba**, cada norma ofrece **«Leer norma íntegra»** (texto extraído de la Gaceta Oficial, sin salir de la app) y **«Abrir PDF original»** (archivo alojado en `data/leyes/cuba/`). Incluidas: Resolución 253/2021, Resolución 96/2004 y el Reglamento del Sistema Nacional de Control de Sustancias Químicas. La Ley 81/1997 aparece como referencia citada.
+Al seleccionar **Cuba**, cada norma ofrece **«Leer norma íntegra»** (texto extraído de la Gaceta Oficial, sin salir de la app) y **«Abrir PDF original»** (enlace a la edición oficial de la Gaceta). Incluidas: Resolución 253/2021, Resolución 96/2004, el Reglamento del Sistema Nacional de Control de Sustancias Químicas y la **Ley 150/2022**, que derogó la Ley 81/1997.
 
 ---
 
