@@ -1,0 +1,93 @@
+{
+  "change_country": {
+    "es": "Cambiar de país",
+    "en": "Change country",
+    "fr": "Changer de pays",
+    "de": "Land ändern",
+    "it": "Cambia paese"
+  },
+  "change_sub": {
+    "es": "El banner y el marco legal se actualizarán al instante.",
+    "en": "The banner and legal framework update instantly.",
+    "fr": "La bannière et le cadre juridique seront mis à jour instantanément.",
+    "de": "Das Banner und die rechtlichen Rahmenbedingungen werden umgehend aktualisiert.",
+    "it": "Il banner e il quadro giuridico verranno aggiornati immediatamente."
+  },
+  "interactions_warning": {
+    "es": "La compatibilidad entre pares se calcula con datos de NOAA/EPA CAMEO. Las reglas propias se retiraron por estar cubiertas y referirse a sustancias que ya no están en el repositorio. No sustituyen la evaluación de un profesional ni la ficha del fabricante. No mezclar sustancias fuera de un entorno controlado.",
+    "en": "Compatibility between pairs is calculated using NOAA/EPA CAMEO data. The in-house rules were removed because they were already covered and referred to substances no longer in the repository. They do not replace a professional assessment or the manufacturer's safety data sheet. Do not mix substances outside a controlled setting.",
+    "fr": "La compatibilité entre paires est calculée à partir des données NOAA/EPA CAMEO. Les règles internes ont été retirées car elles étaient déjà couvertes et concernaient des substances qui ne figurent plus dans le dépôt. Elles ne remplacent ni l'évaluation d'un professionnel ni la fiche de données de sécurité du fabricant. Ne mélangez pas de substances hors d'un environnement contrôlé.",
+    "de": "Die Kompatibilität zwischen Paaren wird anhand von NOAA/EPA-CAMEO-Daten berechnet. Die eigenen Regeln wurden entfernt, da sie bereits abgedeckt waren und Substanzen betrafen, die nicht mehr im Repository enthalten sind. Sie ersetzen weder die Bewertung durch einen Fachmann noch das Sicherheitsdatenblatt des Herstellers. Mischen Sie keine Substanzen außerhalb einer kontrollierten Umgebung.",
+    "it": "La compatibilità tra coppie è calcolata con i dati NOAA/EPA CAMEO. Le regole interne sono state rimosse perché già coperte e relative a sostanze non più presenti nel repository. Non sostituiscono la valutazione di un professionista né la scheda di dati di sicurezza del produttore. Non mescolare sostanze al di fuori di un ambiente controllato."
+  },
+  "legal_sub": {
+    "es": "Normativa aplicable al país seleccionado",
+    "en": "Regulations applicable to the selected country",
+    "fr": "Réglementation applicable au pays sélectionné",
+    "de": "Für das ausgewählte Land geltende Vorschriften",
+    "it": "Normativa applicabile al Paese selezionato"
+  },
+  "legal_title": {
+    "es": "Verificación del marco legal",
+    "en": "Legal framework verification",
+    "fr": "Vérification du cadre juridique",
+    "de": "Überprüfung der rechtlichen Rahmenbedingungen",
+    "it": "Verifica del quadro giuridico"
+  },
+  "multi_substance_warning": {
+    "es": "El análisis de CAMEO es únicamente por pares: con {count} sustancias se evalúan combinaciones de dos, pero NO cubre reacciones simultáneas de 3 o más sustancias (mezclas ternarias). No asumas que la mezcla completa es segura: verifica su compatibilidad en fuentes oficiales y con un profesional.",
+    "en": "CAMEO compatibility analysis covers substance pairs only. With {count} substances it evaluates two-by-two combinations, but it does NOT predict simultaneous reactions among 3 or more substances (ternary mixtures). Do not assume the whole mixture is safe: verify compatibility with official sources and a qualified professional.",
+    "fr": "L'analyse CAMEO ne traite que les paires : avec {count} substances, elle évalue les combinaisons deux à deux, mais ne prédit PAS les réactions simultanées entre 3 substances ou plus (mélanges ternaires). Ne supposez pas que le mélange complet est sûr : vérifiez la compatibilité auprès de sources officielles et d'un professionnel qualifié.",
+    "de": "Die CAMEO-Analyse betrachtet nur Paare: Bei {count} Substanzen werden Zweierkombinationen bewertet, aber gleichzeitige Reaktionen von 3 oder mehr Substanzen (ternäre Gemische) werden NICHT vorhergesagt. Gehen Sie nicht davon aus, dass das gesamte Gemisch sicher ist: Prüfen Sie die Verträglichkeit anhand offizieller Quellen und durch einen qualifizierten Fachmann.",
+    "it": "L'analisi CAMEO riguarda solo le coppie: con {count} sostanze vengono valutate le combinazioni a due, ma NON predice reazioni simultanee tra 3 o più sostanze (miscele ternarie). Non presumere che la miscela completa sia sicura: verifica la compatibilità con fonti ufficiali e con un professionista qualificato."
+  },
+  "pick_substance": {
+    "es": "Selecciona una sustancia",
+    "en": "Select a substance",
+    "fr": "Sélectionnez une substance",
+    "de": "Wählen Sie einen Stoff aus",
+    "it": "Seleziona una sostanza"
+  },
+  "pick_substance_sub": {
+    "es": "Escribe en el buscador y haz clic en un resultado para ver la ficha de 16 secciones.",
+    "en": "Type in the search box and click a result to see the full 16-section sheet.",
+    "fr": "Tapez dans le moteur de recherche et cliquez sur un résultat pour voir la fiche de 16 sections.",
+    "de": "Geben Sie im Suchfeld einen Namen ein und klicken Sie auf ein Ergebnis, um die vollständige Fiche mit 16 Abschnitten zu sehen.",
+    "it": "Digita nel campo di ricerca e fai clic su un risultato per vedere la scheda completa di 16 sezioni."
+  },
+  "select_country": {
+    "es": "Selecciona tu país",
+    "en": "Select your country",
+    "fr": "Sélectionnez votre pays",
+    "de": "Wählen Sie Ihr Land aus",
+    "it": "Seleziona il tuo paese"
+  },
+  "select_sub": {
+    "es": "El marco legal y el idioma del sitio se adaptarán a tu elección.",
+    "en": "The legal framework and language will adapt to your choice.",
+    "fr": "Le cadre juridique et la langue du site seront adaptés à votre choix.",
+    "de": "Der rechtliche Rahmen und die Sprache der Website werden an Ihre Wahl angepasst.",
+    "it": "Il quadro giuridico e la lingua del sito saranno adattati alla tua scelta."
+  },
+  "sub_sub": {
+    "es": "Busca por nombre, CAS, CE o número ONU",
+    "en": "Search by name, CAS, EC or UN number",
+    "fr": "Recherche par nom, numéro CAS, CE ou ONU",
+    "de": "Suche nach Name, CAS-, EG- oder UN-Nummer",
+    "it": "Cerca per nome, numero CAS, CE o ONU"
+  },
+  "sub_title": {
+    "es": "Carta técnica de la sustancia",
+    "en": "Substance technical sheet",
+    "fr": "Fiche technique de la substance",
+    "de": "Technisches Datenblatt des Stoffes",
+    "it": "Scheda tecnica della sostanza"
+  },
+  "substances_warning": {
+    "es": " No se almacenan fichas técnicas en este repositorio. Las sustancias se consultan en vivo en bases de datos oficiales (PubChem / NIH) y se marcan como DATOS EN LÍNEA. Verifica siempre la peligrosidad y el transporte en la FDS del fabricante.",
+    "en": "No technical sheets are stored in this repository.",
+    "fr": "Aucune fiche technique n'est stockée dans ce référentiel. Les substances sont interrogées en direct dans les bases de données officielles (PubChem/NIH) et marquées comme DONNÉES EN LIGNE. Vérifiez toujours le danger et le transport dans la FDS du fabricant.",
+    "de": "In diesem Repository sind keine technischen Datenblätter gespeichert. Die Substanzen werden live aus offiziellen Datenbanken (PubChem/NIH) abgefragt und als ONLINE-DATEN gekennzeichnet. Prüfen Sie Gefährlichkeit und Transport stets im Sicherheitsdatenblatt des Herstellers.",
+    "it": "In questo repository non sono archiviate schede tecniche. Le sostanze vengono consultate in tempo reale in banche dati ufficiali (PubChem/NIH) e contrassegnate come DATI ONLINE. Verifica sempre la pericolosità e il trasporto nella scheda di dati di sicurezza del produttore."
+  }
+}

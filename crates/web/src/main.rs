@@ -4,6 +4,9 @@ use sustancias_i18n::Translator;
 
 /// URL canónica del repositorio, reutilizada en feedback, redes y footer.
 const GITHUB_URL: &str = "https://github.com/CarlosAntonioAceaJimenezCD/sustancias-peligrosas";
+/// Tope de combinaciones calculadas y de tarjetas mostradas (evita explosión con n=10).
+const MAX_TRIPLE_CANDIDATES: usize = 120;
+const MAX_TRIPLES_SHOWN: usize = 12;
 
 mod flags_extra;
 
@@ -253,6 +256,7 @@ body{
   border-radius:var(--r-pill);padding:4px 11px;font-size:var(--step--1);font-weight:650}
 .multi-nota{margin:var(--sp-1) 0 0;font-size:var(--step--1);color:var(--muted)}
 .aviso-ternario{margin:var(--sp-3) 0 var(--sp-1);border-left:2px solid var(--warn);padding-left:var(--sp-2);font-weight:650}
+.multi-tercias{margin-top:var(--sp-3)}
 
 /* --- Botones --- */
 .boton{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-2);
@@ -766,7 +770,46 @@ struct CameoVisible {
     revisado: bool,
 }
 
-/// Traduce un texto al idioma activo con la cadena de proveedores.
+/// Terna agregada, lista para RSX (nombres ya localizados).
+#[derive(Clone)]
+struct TripleVisible {
+    nombres: Vec<String>,
+    nivel: String,
+    etiqueta: String,
+    compatibilidad: String,
+    /// Texto compacto "A + B: INCOMPATIBLE" para cada par de la terna.
+    parejas: Vec<(String, String)>,
+    puente: Option<String>,
+    fuentes: Vec<core::Fuente>,
+    nota: String,
+    cobertura_limitada: bool,
+    revisado: bool,
+}
+
+/// Solo ordena la presentación; no es una valoración científica nueva.
+fn triple_prioridad(t: &core::TripleAnalysis) -> u8 {
+    let nivel = match t.nivel.as_str() {
+        "alto" => 3,
+        "moderado" => 2,
+        _ => 1,
+    };
+    let comp = match t.compatibilidad.as_str() {
+        "incompatible" => 3,
+        "precaucion" => 2,
+        _ => 1,
+    };
+    nivel * 4 + comp + if t.puente.is_some() { 2 } else { 0 }
+}
+
+fn combinaciones3(n: usize) -> usize {
+    n.saturating_mul(n.saturating_sub(1))
+        .saturating_mul(n.saturating_sub(2))
+        / 6
+}
+
+/// Traduce texto DINÁMICO que llega en inglés (CAMEO/PubChem).
+/// `lang == "en"` es un no-op deliberado: la entrada ya está en inglés.
+/// Los textos FIJOS usan `sustancias_i18n::texto_fijo` (catálogo offline).
 async fn traducir_texto(traductor: &sustancias_i18n::Cadena, lang: &str, texto: String) -> String {
     if lang == "en" {
         return texto;
@@ -926,29 +969,7 @@ fn flag_svg(id: &str, class: &str) -> String {
 }
 
 fn txt(key: &str, lang: &str) -> &'static str {
-    match (lang, key) {
-        ("en", "select_country") => "Select your country",
-        ("en", "select_sub") => "The legal framework and language will adapt to your choice.",
-        ("en", "change_country") => "Change country",
-        ("en", "change_sub") => "The banner and legal framework update instantly.",
-        ("en", "legal_title") => "Legal framework verification",
-        ("en", "legal_sub") => "Regulations applicable to the selected country",
-        ("en", "sub_title") => "Substance technical sheet",
-        ("en", "sub_sub") => "Search by name, CAS, EC or UN number",
-        ("en", "pick_substance") => "Select a substance",
-        ("en", "pick_substance_sub") => "Type in the search box and click a result to see the full 16-section sheet.",
-        ("es", "select_country") => "Selecciona tu país",
-        ("es", "select_sub") => "El marco legal y el idioma del sitio se adaptarán a tu elección.",
-        ("es", "change_country") => "Cambiar de país",
-        ("es", "change_sub") => "El banner y el marco legal se actualizarán al instante.",
-        ("es", "legal_title") => "Verificación del marco legal",
-        ("es", "legal_sub") => "Normativa aplicable al país seleccionado",
-        ("es", "sub_title") => "Carta técnica de la sustancia",
-        ("es", "sub_sub") => "Busca por nombre, CAS, CE o número ONU",
-        ("es", "pick_substance") => "Selecciona una sustancia",
-        ("es", "pick_substance_sub") => "Escribe en el buscador y haz clic en un resultado para ver la ficha de 16 secciones.",
-        _ => "",
-    }
+    sustancias_i18n::texto_fijo(key, lang)
 }
 
 fn main() {
@@ -988,6 +1009,7 @@ fn App() -> Element {
     let mut busquedas: Signal<u32> = use_signal(|| 0);
     let mut mostrar_estrella: Signal<bool> = use_signal(|| false);
     let mut cameo_visible: Signal<Vec<CameoVisible>> = use_signal(Vec::new);
+    let mut triple_visible: Signal<Vec<TripleVisible>> = use_signal(Vec::new);
     let mut estrella_cerrada: Signal<bool> = use_signal(estrella_cerrada_guardada);
     let mut opciones: Signal<AppOptions> = use_signal(cargar_opciones);
     let mut guardados: Signal<Vec<SavedDocView>> = use_signal(cargar_guardados);
@@ -998,6 +1020,7 @@ fn App() -> Element {
         .and_then(|id| core::country_by_id(&id))
         .unwrap_or_else(|| countries[0].clone());
     let lang = if country.idioma == "en" { "en" } else { "es" };
+    let lang_ui = sustancias_i18n::idioma_efectivo(&output_lang(), lang);
     let chosen = selected_id().is_some();
 
     let results = if query().trim().is_empty() {
@@ -1278,6 +1301,81 @@ fn App() -> Element {
         });
     });
 
+    // Resumen de ternas: agrega los TRES pares CAMEO reales sin inventar química.
+    use_effect(move || {
+        let sel = output_lang();
+        let lang = sustancias_i18n::idioma_efectivo(&sel, lang);
+        let items = multi_ids();
+        let clave = opciones().deepl_key.clone();
+        let pro = opciones().deepl_pro;
+
+        // Un mismo CAS con distinto CID no cuenta como sustancia distinta.
+        let mut vistos = std::collections::HashSet::new();
+        let unicos: Vec<_> = items
+            .iter()
+            .filter(|item| {
+                let cas = item.2.trim().to_lowercase();
+                !cas.is_empty() && vistos.insert(cas)
+            })
+            .collect();
+
+        let mut candidatas: Vec<(u8, usize, core::TripleAnalysis)> = Vec::new();
+        'ternas: for i in 0..unicos.len() {
+            for j in (i + 1)..unicos.len() {
+                for k in (j + 1)..unicos.len() {
+                    if candidatas.len() >= MAX_TRIPLE_CANDIDATES {
+                        break 'ternas;
+                    }
+                    if let Some(t) = core::cameo_analyze_triple_named(
+                        [unicos[i].1.as_str(), unicos[j].1.as_str(), unicos[k].1.as_str()],
+                        [unicos[i].2.as_str(), unicos[j].2.as_str(), unicos[k].2.as_str()],
+                    ) {
+                        candidatas.push((triple_prioridad(&t), i * 10000 + j * 100 + k, t));
+                    }
+                }
+            }
+        }
+        candidatas.sort_by(|a, b| b.0.cmp(&a.0).then(a.1.cmp(&b.1)));
+        candidatas.truncate(MAX_TRIPLES_SHOWN);
+
+        spawn(async move {
+            let traductor = sustancias_i18n::Cadena::con_configuracion(
+                if clave.trim().is_empty() { None } else { Some(clave) },
+                if pro {
+                    sustancias_i18n::DeeplApi::Pro
+                } else {
+                    sustancias_i18n::DeeplApi::Free
+                },
+            );
+            let mut salida = Vec::new();
+            for (_, _, t) in candidatas {
+                let parejas = t
+                    .parejas
+                    .iter()
+                    .map(|p| {
+                        (
+                            format!("{} + {}", p.nombre_a, p.nombre_b),
+                            p.compatibilidad.clone(),
+                        )
+                    })
+                    .collect();
+                salida.push(TripleVisible {
+                    nombres: t.nombres.clone(),
+                    nivel: t.nivel.clone(),
+                    etiqueta: traducir_texto(&traductor, lang, t.etiqueta.clone()).await,
+                    compatibilidad: t.compatibilidad.clone(),
+                    parejas,
+                    puente: t.puente.as_ref().map(|b| b.nombre.clone()),
+                    fuentes: t.fuentes.clone(),
+                    nota: core::cameo_triple_nota(lang),
+                    cobertura_limitada: t.cobertura_limitada,
+                    revisado: t.revisado,
+                });
+            }
+            triple_visible.set(salida);
+        });
+    });
+
     use_effect(move || {
         // Se aplica de forma directa: `Eval::recv` no es fiable en el primer
         // render y dejaría el tema sin aplicar. La preferencia se sincroniza
@@ -1359,8 +1457,8 @@ fn App() -> Element {
             div { class: "overlay",
                 div { class: "overlay-card",
                     div { class: "overlay-logo", dangerous_inner_html: "{icon(\"flask\", \"ico ico-xl\")}" }
-                    h1 { "{txt(\"select_country\", lang)}" }
-                    p { "{txt(\"select_sub\", lang)}" }
+                    h1 { "{txt(\"select_country\", lang_ui)}" }
+                    p { "{txt(\"select_sub\", lang_ui)}" }
                     div { class: "pais-grid", {rsx_countries(false)} }
                 }
             }
@@ -1371,8 +1469,8 @@ fn App() -> Element {
                 div { class: "overlay-card compacta",
                     button { class: "cerrar", onclick: move |_| modal_open.set(false),
                         dangerous_inner_html: "{icon(\"x\", \"ico\")}" }
-                    h2 { "{txt(\"change_country\", lang)}" }
-                    p { "{txt(\"change_sub\", lang)}" }
+                    h2 { "{txt(\"change_country\", lang_ui)}" }
+                    p { "{txt(\"change_sub\", lang_ui)}" }
                     div { class: "pais-grid", {rsx_countries(true)} }
                 }
             }
@@ -1434,8 +1532,8 @@ fn App() -> Element {
                     div { class: "panel-titulo",
                         span { class: "panel-icono", dangerous_inner_html: "{icon(\"scale\", \"ico ico-lg\")}" }
                         div {
-                            h3 { "{txt(\"legal_title\", lang)}" }
-                            p { "{txt(\"legal_sub\", lang)}" }
+                            h3 { "{txt(\"legal_title\", lang_ui)}" }
+                            p { "{txt(\"legal_sub\", lang_ui)}" }
                         }
                     }
                     span { class: "badge", "{visible_instruments.len() + international_sources.len() + org_count} normas" }
@@ -1639,15 +1737,15 @@ fn App() -> Element {
                     div { class: "panel-titulo",
                         span { class: "panel-icono", dangerous_inner_html: "{icon(\"flask\", \"ico ico-lg\")}" }
                         div {
-                            h3 { "{txt(\"sub_title\", lang)}" }
-                            p { "{txt(\"sub_sub\", lang)}" }
+                            h3 { "{txt(\"sub_title\", lang_ui)}" }
+                            p { "{txt(\"sub_sub\", lang_ui)}" }
                         }
                     }
                 }
 
                 div { class: "aviso",
                     span { dangerous_inner_html: "{icon(\"alert\", \"ico\")}" }
-                    span { "{core::substances_warning()}" }
+                    span { "{txt(\"substances_warning\", lang_ui)}" }
                 }
 
                 div { class: "idioma-busqueda",
@@ -1785,10 +1883,10 @@ fn App() -> Element {
                             span { dangerous_inner_html: "{icon(\"layers\", \"ico\")}" }
                             strong { "Comparación de varias sustancias" }
                         }
-                        if cameo_visible().is_empty() {
+                        if cameo_visible().is_empty() && triple_visible().is_empty() {
                             span { class: "badge badge-suave", "Añade sustancias" }
                         } else {
-                            span { class: "badge badge-ok", "{cameo_visible().len()} parejas" }
+                            span { class: "badge badge-ok", "{cameo_visible().len()} parejas · {triple_visible().len()}/{combinaciones3(multi_items.len())} ternas" }
                         }
                     }
                     div { class: "multi-anadir",
@@ -1887,15 +1985,81 @@ fn App() -> Element {
                         }
                     }
                     }
+                    if !triple_visible().is_empty() {
+                        div { class: "multi-tercias",
+                            p { class: "lista-titulo", "Resumen de ternas (derivado de pares CAMEO)" }
+                            p { class: "multi-nota", "Los pares y sus peligros se detallan arriba; aquí solo se agrega su resultado." }
+                            for t in triple_visible.iter() {
+                                div { class: "interaccion cameo",
+                                    div { class: "interaccion-cabecera",
+                                        strong { "{t.nombres.join(\" + \")}" }
+                                        span {
+                                            class: match t.nivel.as_str() {
+                                                "alto" => "badge badge-danger",
+                                                "moderado" => "badge badge-warn",
+                                                _ => "badge badge-suave",
+                                            },
+                                            "{t.etiqueta}"
+                                        }
+                                    }
+                                    span {
+                                        class: match t.compatibilidad.as_str() {
+                                            "incompatible" => "badge badge-danger",
+                                            "precaucion" => "badge badge-warn",
+                                            _ => "badge badge-ok",
+                                        },
+                                        match (t.compatibilidad.as_str(), lang_ui) {
+                                            ("incompatible", _) => "INCOMPATIBLE (POR PARES)",
+                                            ("precaucion", _) => "PRECAUCION (POR PARES)",
+                                            (_, "en") => "NO HAZARD REPORTED FOR ANY PAIR",
+                                            _ => "SIN PELIGRO REGISTRADO POR PARES",
+                                        }
+                                    }
+                                    div { class: "multi-chips",
+                                        for (par, comp) in t.parejas.iter() {
+                                            span {
+                                                class: match comp.as_str() {
+                                                    "incompatible" => "badge badge-danger",
+                                                    "precaucion" => "badge badge-warn",
+                                                    _ => "badge badge-suave",
+                                                },
+                                                "{par}: {comp}"
+                                            }
+                                        }
+                                    }
+                                    if let Some(puente) = &t.puente {
+                                        p { class: "multi-nota",
+                                            "Patrón por pares: {puente} es incompatible con las otras dos, que son compatibles entre sí. No implica reacción ternaria ni catálisis."
+                                        }
+                                    }
+                                    if t.cobertura_limitada {
+                                        span { class: "badge badge-warn", "Cobertura limitada (RG99)" }
+                                    }
+                                    if t.revisado {
+                                        span { class: "badge badge-ok", "Revisado por profesional" }
+                                    }
+                                    details { class: "citas",
+                                        summary { "Referencias oficiales de la terna" }
+                                        ul { class: "lista",
+                                            for f in t.fuentes.iter() {
+                                                li { a { href: "{f.url}", target: "_blank", "{f.titulo}" } }
+                                            }
+                                        }
+                                    }
+                                    p { class: "multi-nota", "{t.nota}" }
+                                }
+                            }
+                        }
+                    }
                     if multi_items.len() >= 3 {
                         div {
                             class: "aviso aviso-ternario",
                             aria_label: "Aviso sobre mezclas de tres o mas sustancias",
                             span { dangerous_inner_html: "{icon(\"alert\", \"ico\")}" }
-                            span { "{core::multi_substance_warning(multi_items.len(), lang)}" }
+                            span { "{sustancias_i18n::texto_fijo_count(\"multi_substance_warning\", lang_ui, multi_items.len())}" }
                         }
                     }
-                    p { class: "multi-nota", "{core::interactions_warning()}" }
+                    p { class: "multi-nota", "{txt(\"interactions_warning\", lang_ui)}" }
                 }
 
                 div { class: "ficha",
@@ -2022,8 +2186,8 @@ fn App() -> Element {
                     } else {
                         div { class: "ficha-vacia",
                             span { dangerous_inner_html: "{icon(\"file\", \"ico ico-xl\")}" }
-                            h4 { "{txt(\"pick_substance\", lang)}" }
-                            p { "{txt(\"pick_substance_sub\", lang)}" }
+                            h4 { "{txt(\"pick_substance\", lang_ui)}" }
+                            p { "{txt(\"pick_substance_sub\", lang_ui)}" }
                         }
                     }
                 }
@@ -2324,7 +2488,7 @@ fn App() -> Element {
         }
 
         footer { class: "pie",
-            p { "{core::substances_warning()}" }
+            p { "{txt(\"substances_warning\", lang_ui)}" }
             p { "Fuentes normativas: UNECE · OMI · OIT · INSST · BOE · DOF · SINIA · Gaceta Oficial de Cuba" }
             p {
                 a {

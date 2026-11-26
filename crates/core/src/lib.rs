@@ -318,6 +318,61 @@ pub struct CameoAnalysis {
     pub fuentes: Vec<String>,
 }
 
+/// Uno de los tres pares (AB, AC, BC) de una terna.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct TriplePair {
+    pub nombre_a: String,
+    pub nombre_b: String,
+    pub cas_a: String,
+    pub cas_b: String,
+    pub nivel: String,
+    pub compatibilidad: String,
+    pub peligros: Vec<String>,
+    pub gases: Vec<String>,
+    pub citas: Vec<String>,
+    /// URLs de la documentación oficial RGx-RGy del par.
+    pub fuentes: Vec<String>,
+    pub revisado: bool,
+}
+
+/// Patrón estructural del grafo de pares, NO una predicción de reacción ternaria.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct TripleBridge {
+    pub cas: String,
+    pub nombre: String,
+    /// CAS de los otros dos componentes, compatibles entre sí.
+    pub compatibles: Vec<String>,
+}
+
+/// Agregación conservadora de los tres pares CAMEO de una terna.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct TripleAnalysis {
+    pub nombres: Vec<String>,
+    pub cass: Vec<String>,
+    pub nivel: String,
+    pub etiqueta: String,
+    pub compatibilidad: String,
+    /// Siempre tres elementos, en orden AB, AC, BC.
+    pub parejas: Vec<TriplePair>,
+    pub puente: Option<TripleBridge>,
+    pub peligros: Vec<String>,
+    pub gases: Vec<String>,
+    pub citas: Vec<String>,
+    pub fuentes: Vec<Fuente>,
+    pub revisado: bool,
+    /// Algún componente pertenece a RG99 (información insuficiente).
+    pub cobertura_limitada: bool,
+    /// Descargo literal, ya en el idioma solicitado.
+    pub nota: String,
+}
+
+const CAMEO_METODOLOGIA_URL: &str =
+    "https://cameochemicals.noaa.gov/help/reactivity/how_reactivity_is_predicted.htm";
+const CAMEO_GRUPOS_URL: &str =
+    "https://cameochemicals.noaa.gov/help/reactivity/reactive_groups.htm";
+const CAMEO_TERMINOS_URL: &str =
+    "https://cameochemicals.noaa.gov/help/reference/terms_and_conditions.htm";
+
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct FraseH {
     pub codigo: String,
@@ -644,7 +699,6 @@ pub fn cameo_analyze(cas_a: &str, cas_b: &str) -> Option<CameoAnalysis> {
     let a = cameo_substance_for_cas(cas_a)?;
     let b = cameo_substance_for_cas(cas_b)?;
     let pares = cameo_pairs();
-    let alto = ["Explosive", "Intense or explosive reaction", "Toxic", "Corrosive"];
     let mut peligros: Vec<String> = Vec::new();
     let mut gases: Vec<String> = Vec::new();
     let mut citas: Vec<String> = Vec::new();
@@ -668,7 +722,20 @@ pub fn cameo_analyze(cas_a: &str, cas_b: &str) -> Option<CameoAnalysis> {
             }
         }
     }
-    let nivel = if peligros.iter().any(|p| alto.iter().any(|a| p == a)) {
+    let (nivel, etiqueta, compatibilidad) = cameo_clasificar(&peligros);
+    Some(CameoAnalysis {
+        nivel: nivel.to_string(),
+        etiqueta: etiqueta.to_string(),
+        compatibilidad: compatibilidad.to_string(),
+        revisado,
+        peligros, gases, citas, fuentes,
+    })
+}
+
+/// Misma clasificación que `cameo_analyze`; la comparten pares y ternas.
+fn cameo_clasificar(peligros: &[String]) -> (&'static str, &'static str, &'static str) {
+    let alto = ["Explosive", "Intense or explosive reaction", "Toxic", "Corrosive"];
+    let nivel = if peligros.iter().any(|p| alto.contains(&p.as_str())) {
         "alto"
     } else if peligros.iter().any(|p| p != "No known hazardous reaction") {
         "moderado"
@@ -681,25 +748,179 @@ pub fn cameo_analyze(cas_a: &str, cas_b: &str) -> Option<CameoAnalysis> {
         _ => "Sin reacción registrada",
     };
     // Criterio publicado por CAMEO: incompatible si hay productos peligrosos
-    // o calor excesivo; cautela si hay inestabilidad o reacción lenta;
-    // compatible si no hay reacción conocida.
+    // o calor excesivo; cautela si hay inestabilidad o reacción lenta.
     let incompatibles = [
         "Explosive", "Intense or explosive reaction", "Toxic", "Corrosive", "Flammable",
     ];
-    let compatibilidad = if peligros.iter().any(|p| incompatibles.iter().any(|i| p == i)) {
+    let compatibilidad = if peligros.iter().any(|p| incompatibles.contains(&p.as_str())) {
         "incompatible"
     } else if peligros.iter().any(|p| p != "No known hazardous reaction") {
         "precaucion"
     } else {
         "compatible"
     };
-    Some(CameoAnalysis {
+    (nivel, etiqueta, compatibilidad)
+}
+
+fn push_unique(dst: &mut Vec<String>, src: &[String]) {
+    for s in src {
+        if !dst.iter().any(|q| q == s) {
+            dst.push(s.clone());
+        }
+    }
+}
+
+/// Descargo literal de las ternas (no se envía al traductor automático).
+pub fn cameo_triple_nota(lang: &str) -> String {
+    if lang == "en" {
+        "This summary aggregates NOAA/EPA CAMEO pair predictions. CAMEO does not predict \
+         simultaneous reactions of three substances: no reported pair hazard does not prove \
+         that the whole mixture is safe. Verify with official sources and a qualified professional."
+            .to_string()
+    } else {
+        "Este resumen agrega las predicciones por pares de NOAA/EPA CAMEO. CAMEO no predice \
+         reacciones simultáneas de tres sustancias: la ausencia de peligros por pares no \
+         demuestra que la mezcla sea segura. Verifica con fuentes oficiales y un profesional."
+            .to_string()
+    }
+}
+
+fn cameo_analyze_triple_items(items: [(String, &str); 3]) -> Option<TripleAnalysis> {
+    use std::collections::HashSet;
+
+    // Un CAS repetido (aunque venga de otro CID de PubChem) no es una terna.
+    let mut vistos = HashSet::new();
+    for (_, cas) in &items {
+        let clave = normalize(cas.trim());
+        if clave.is_empty() || !vistos.insert(clave) {
+            return None;
+        }
+    }
+
+    // Cobertura estricta: sin los tres CAS en CAMEO no se afirma nada.
+    let sustancias: Vec<&CameoSubstance> = items
+        .iter()
+        .map(|(_, cas)| cameo_substance_for_cas(*cas))
+        .collect::<Option<Vec<_>>>()?;
+    let cobertura_limitada = sustancias.iter().any(|s| s.grupos.contains(&99));
+
+    let mut parejas = Vec::with_capacity(3);
+    let mut peligros: Vec<String> = Vec::new();
+    let mut gases: Vec<String> = Vec::new();
+    let mut citas: Vec<String> = Vec::new();
+    let mut revisado = false;
+
+    for i in 0..3 {
+        for j in (i + 1)..3 {
+            let a = cameo_analyze(items[i].1, items[j].1)?;
+            parejas.push(TriplePair {
+                nombre_a: items[i].0.clone(),
+                nombre_b: items[j].0.clone(),
+                cas_a: items[i].1.to_string(),
+                cas_b: items[j].1.to_string(),
+                nivel: a.nivel.clone(),
+                compatibilidad: a.compatibilidad.clone(),
+                peligros: a.peligros.clone(),
+                gases: a.gases.clone(),
+                citas: a.citas.clone(),
+                fuentes: a.fuentes.clone(),
+                revisado: a.revisado,
+            });
+            push_unique(&mut peligros, &a.peligros);
+            push_unique(&mut gases, &a.gases);
+            push_unique(&mut citas, &a.citas);
+            revisado |= a.revisado;
+        }
+    }
+    if parejas.iter().all(|p| p.fuentes.is_empty()) {
+        return None;
+    }
+
+    let (nivel, etiqueta, compatibilidad) = cameo_clasificar(&peligros);
+
+    // índices: 0 = AB, 1 = AC, 2 = BC.
+    let comps: Vec<&str> = parejas.iter().map(|p| p.compatibilidad.as_str()).collect();
+    let puente = [0usize, 1, 2].into_iter().find_map(|s| {
+        let (ajena, incidentes): (usize, [usize; 2]) = match s {
+            0 => (2, [0, 1]),
+            1 => (1, [0, 2]),
+            _ => (0, [1, 2]),
+        };
+        if comps[ajena] == "compatible"
+            && incidentes.iter().all(|&k| comps[k] == "incompatible")
+        {
+            Some(TripleBridge {
+                cas: items[s].1.to_string(),
+                nombre: items[s].0.clone(),
+                compatibles: (0..3)
+                    .filter(|&idx| idx != s)
+                    .map(|idx| items[idx].1.to_string())
+                    .collect(),
+            })
+        } else {
+            None
+        }
+    });
+
+    let mut fuentes: Vec<Fuente> = Vec::new();
+    for p in &parejas {
+        for u in &p.fuentes {
+            if !fuentes.iter().any(|f| f.url == *u) {
+                let rg = u.rsplit('/').next().unwrap_or("del par");
+                fuentes.push(Fuente {
+                    titulo: format!("Documentación CAMEO {rg}"),
+                    url: u.clone(),
+                });
+            }
+        }
+    }
+    for (titulo, url) in [
+        ("Cómo se predicen las reacciones · NOAA/EPA CAMEO", CAMEO_METODOLOGIA_URL),
+        ("Grupos reactivos · NOAA/EPA CAMEO", CAMEO_GRUPOS_URL),
+        ("Términos y condiciones · NOAA/EPA CAMEO", CAMEO_TERMINOS_URL),
+    ] {
+        fuentes.push(Fuente {
+            titulo: titulo.to_string(),
+            url: url.to_string(),
+        });
+    }
+
+    Some(TripleAnalysis {
+        nombres: items.iter().map(|(n, _)| n.clone()).collect(),
+        cass: items.iter().map(|(_, c)| c.to_string()).collect(),
         nivel: nivel.to_string(),
         etiqueta: etiqueta.to_string(),
         compatibilidad: compatibilidad.to_string(),
+        parejas,
+        puente,
+        peligros,
+        gases,
+        citas,
+        fuentes,
         revisado,
-        peligros, gases, citas, fuentes,
+        cobertura_limitada,
+        nota: cameo_triple_nota("es"),
     })
+}
+
+/// Terna por CAS: los nombres se toman de la base CAMEO.
+pub fn cameo_analyze_triple(cas_a: &str, cas_b: &str, cas_c: &str) -> Option<TripleAnalysis> {
+    let items = [cas_a, cas_b, cas_c].map(|cas| {
+        let nombre = cameo_substance_for_cas(cas)
+            .map(|s| s.nombre.clone())
+            .unwrap_or_default();
+        (nombre, cas)
+    });
+    cameo_analyze_triple_items(items)
+}
+
+/// Variante para la interfaz: conserva los nombres ya localizados.
+pub fn cameo_analyze_triple_named(nombres: [&str; 3], cass: [&str; 3]) -> Option<TripleAnalysis> {
+    cameo_analyze_triple_items([
+        (nombres[0].to_string(), cass[0]),
+        (nombres[1].to_string(), cass[1]),
+        (nombres[2].to_string(), cass[2]),
+    ])
 }
 
 // ---------------------------------------------------------------------------
@@ -1886,5 +2107,77 @@ mod tests {
                 assert!(is_verified(&s.verificacion), "{}: sin verificar", s.id);
             }
         }
+    }
+
+    #[test]
+    fn triple_agrega_tres_pares_y_fuentes_rg() {
+        let t = cameo_analyze_triple("7647-01-0", "7664-93-9", "1310-73-2").unwrap();
+        assert_eq!(t.parejas.len(), 3);
+        assert_eq!(t.nivel, "alto");
+        assert_eq!(t.compatibilidad, "incompatible");
+        assert!(t.parejas.iter().all(|p| p.nivel == "alto"));
+        assert!(t.parejas.iter().all(|p| !p.fuentes.is_empty()));
+        assert!(t.fuentes.iter().any(|f| f.url.ends_with("RG1-RG2")));
+        assert!(t.fuentes.iter().any(|f| f.url.contains("how_reactivity_is_predicted")));
+        assert!(!t.cobertura_limitada);
+        assert!(!t.revisado);
+    }
+
+    #[test]
+    fn triple_toma_el_nivel_maximo() {
+        let t = cameo_analyze_triple("1310-73-2", "7664-93-9", "64-17-5").unwrap();
+        let niveles: Vec<_> = t.parejas.iter().map(|p| p.nivel.as_str()).collect();
+        assert_eq!(niveles, vec!["alto", "moderado", "alto"]);
+        assert_eq!(t.nivel, "alto");
+    }
+
+    #[test]
+    fn triple_detecta_factor_puente() {
+        let t = cameo_analyze_triple("7647-01-0", "7664-93-9", "67-64-1").unwrap();
+        assert_eq!(t.parejas[0].compatibilidad, "incompatible");
+        assert_eq!(t.parejas[1].compatibilidad, "compatible");
+        assert_eq!(t.parejas[2].compatibilidad, "incompatible");
+        let puente = t.puente.expect("debe detectar el factor puente");
+        assert_eq!(puente.cas, "7664-93-9");
+        assert_eq!(puente.compatibles, vec!["7647-01-0", "67-64-1"]);
+    }
+
+    #[test]
+    fn triple_sin_puente_cuando_los_tres_pares_son_incompatibles() {
+        let t = cameo_analyze_triple("7647-01-0", "1310-73-2", "7664-93-9").unwrap();
+        assert!(t.puente.is_none());
+    }
+
+    #[test]
+    fn triple_desconocido_o_duplicado_da_none() {
+        assert!(cameo_analyze_triple("000-00-0", "67-64-1", "7732-18-5").is_none());
+        assert!(cameo_analyze_triple("67-64-1", "67-64-1", "7732-18-5").is_none());
+        assert!(cameo_analyze_triple_named(
+            ["Acetona", "Acetona", "Agua"],
+            ["67-64-1", "67-64-1", "7732-18-5"],
+        )
+        .is_none());
+        assert!(cameo_analyze_triple("'; DROP TABLE--", "67-64-1", "7732-18-5").is_none());
+    }
+
+    #[test]
+    fn triple_marca_cobertura_limitada_rg99() {
+        let t = cameo_analyze_triple("11099-03-9", "7647-01-0", "1310-73-2").unwrap();
+        assert!(t.cobertura_limitada);
+        assert!(t.parejas.iter().any(|p| p.compatibilidad == "precaucion"));
+    }
+
+    #[test]
+    fn triple_named_conserva_nombres_y_descargo() {
+        let t = cameo_analyze_triple_named(
+            ["HCl", "Ácido sulfúrico", "Acetona"],
+            ["7647-01-0", "7664-93-9", "67-64-1"],
+        )
+        .unwrap();
+        assert_eq!(t.nombres, vec!["HCl", "Ácido sulfúrico", "Acetona"]);
+        assert_eq!(t.parejas[0].nombre_a, "HCl");
+        assert_eq!(t.parejas[2].nombre_b, "Acetona");
+        assert!(t.nota.contains(" CAMEO"));
+        assert!(cameo_triple_nota("en").contains("CAMEO does not predict"));
     }
 }

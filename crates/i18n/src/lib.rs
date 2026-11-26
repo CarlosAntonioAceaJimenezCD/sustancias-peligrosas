@@ -10,7 +10,66 @@
 //! 3. `LocalDictionary`: respaldo offline del diccionario químico del core.
 
 use async_trait::async_trait;
+use serde::Deserialize;
+use std::collections::HashMap;
+use std::sync::OnceLock;
 use sustancias_core as core;
+
+/// Catálogo offline de textos fijos de la interfaz (5 idiomas).
+const UI_TEXTS_JSON: &str = include_str!("../../../data/ui_texts.json");
+
+#[derive(Debug, Deserialize)]
+struct EntradaTexto {
+    es: String,
+    en: String,
+    fr: String,
+    de: String,
+    it: String,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(transparent)]
+struct CatalogoTextos(HashMap<String, EntradaTexto>);
+
+fn catalogo_textos() -> &'static CatalogoTextos {
+    static CAT: OnceLock<CatalogoTextos> = OnceLock::new();
+    CAT.get_or_init(|| serde_json::from_str(UI_TEXTS_JSON).expect("data/ui_texts.json no es válido"))
+}
+
+fn normalizar_lang(lang: &str) -> &'static str {
+    match lang {
+        "en" => "en",
+        "fr" => "fr",
+        "de" => "de",
+        "it" => "it",
+        _ => "es",
+    }
+}
+
+/// Resuelve `auto` al idioma derivado del país (`es`/`en`).
+pub fn idioma_efectivo(sel: &str, country_lang: &str) -> &'static str {
+    let base = if sel == "auto" { country_lang } else { sel };
+    normalizar_lang(base)
+}
+
+/// Texto fijo sin red. Devuelve `""` si la clave no existe.
+pub fn texto_fijo(clave: &str, lang: &str) -> &'static str {
+    let Some(entrada) = catalogo_textos().0.get(clave) else {
+        return "";
+    };
+    match normalizar_lang(lang) {
+        "en" => entrada.en.as_str(),
+        "fr" => entrada.fr.as_str(),
+        "de" => entrada.de.as_str(),
+        "it" => entrada.it.as_str(),
+        _ => entrada.es.as_str(),
+    }
+}
+
+/// Variante con el marcador `{count}` sustituido por un número.
+pub fn texto_fijo_count(clave: &str, lang: &str, count: usize) -> String {
+    texto_fijo(clave, lang).replace("{count}", &count.to_string())
+}
 
 /// Resultado de una traducción, con el idioma de origen cuando se detecta.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -391,5 +450,55 @@ mod tests {
         assert!(d.translate("ácido sulfúrico", "en").await.is_none());
         assert_eq!(DeeplApi::Free.endpoint(), "https://api-free.deepl.com/v2/translate");
         assert_eq!(DeeplApi::Pro.endpoint(), "https://api.deepl.com/v2/translate");
+    }
+
+    #[test]
+    fn texto_fijo_cubre_los_cinco_idiomas() {
+        assert_eq!(texto_fijo("select_country", "es"), "Selecciona tu país");
+        assert_eq!(texto_fijo("select_country", "en"), "Select your country");
+        for lang in ["fr", "de", "it"] {
+            let t = texto_fijo("select_country", lang);
+            assert!(!t.is_empty(), "falta traducción {lang}");
+            assert_ne!(t, texto_fijo("select_country", "es"), "{lang} quedó en español");
+        }
+        for clave in [
+            "select_country", "select_sub", "change_country", "change_sub",
+            "legal_title", "legal_sub", "sub_title", "sub_sub",
+            "pick_substance", "pick_substance_sub", "substances_warning",
+            "interactions_warning", "multi_substance_warning",
+        ] {
+            for lang in ["es", "en", "fr", "de", "it"] {
+                assert!(!texto_fijo(clave, lang).is_empty(), "{clave}/{lang}");
+            }
+        }
+    }
+
+    #[test]
+    fn texto_fijo_fallback_de_idioma_y_clave() {
+        assert_eq!(texto_fijo("select_country", "xx"), "Selecciona tu país");
+        assert_eq!(texto_fijo("select_country", "auto"), "Selecciona tu país");
+        assert_eq!(texto_fijo("clave_inexistente", "en"), "");
+        assert_eq!(texto_fijo_count("clave_inexistente", "fr", 3), "");
+        assert_eq!(idioma_efectivo("auto", "en"), "en");
+        assert_eq!(idioma_efectivo("fr", "en"), "fr");
+        assert_eq!(idioma_efectivo("auto", "fr"), "es");
+    }
+
+    #[test]
+    fn texto_fijo_count_y_paridad_con_core() {
+        let es = texto_fijo_count("multi_substance_warning", "es", 3);
+        assert!(es.contains("3 sustancias"));
+        assert_eq!(es, core::multi_substance_warning(3, "es"));
+        assert_eq!(
+            texto_fijo_count("multi_substance_warning", "en", 10),
+            core::multi_substance_warning(10, "en")
+        );
+        assert_eq!(texto_fijo("interactions_warning", "es"), core::interactions_warning());
+        assert_eq!(texto_fijo("substances_warning", "es").trim(), core::substances_warning().trim());
+        for lang in ["es", "en", "fr", "de", "it"] {
+            let t = texto_fijo_count("multi_substance_warning", lang, 4);
+            assert!(!t.contains("{count}"), "quedó placeholder en {lang}");
+            assert!(t.contains('4'));
+        }
     }
 }
