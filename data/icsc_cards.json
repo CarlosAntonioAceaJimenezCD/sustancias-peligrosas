@@ -1,0 +1,3269 @@
+{
+  "fuente": "ICSC - OIT/OMS",
+  "nota": "Correspondencia CAS -> ficha ICSC obtenida del buscador oficial de la OIT/OMS (chemicalsafety.ilo.org). El contenido de cada ficha se consulta en el sitio oficial; aquí solo se guarda su identificador.",
+  "total": 466,
+  "fichas": [
+    {
+      "cas": "96-12-8",
+      "card_id": "0002",
+      "version": "2",
+      "nombre": "1,2-DIBROMO-3-CLOROPROPANO",
+      "sinonimos": "3-Cloro-1,2-dibromopropano; DBCP; 1-Cloro-2,3-dibromopropano"
+    },
+    {
+      "cas": "624-83-9",
+      "card_id": "0004",
+      "version": "2",
+      "nombre": "ISOCIANATO DE METILO",
+      "sinonimos": "Isocianatometano; Metilisocianato; Éster metílico del ácido isociánico"
+    },
+    {
+      "cas": "1910-42-5",
+      "card_id": "0005",
+      "version": "2",
+      "nombre": "PARAQUAT DICLORURO",
+      "sinonimos": "Paracuat; Dicloruro de 1,1'-dimetil-4,4'-bipiridinio; Metilviológeno"
+    },
+    {
+      "cas": "56-38-2",
+      "card_id": "0006",
+      "version": "2",
+      "nombre": "PARATIÓN",
+      "sinonimos": "Tiofosfato de O,O-dietilo y O-(4-nitrofenilo); Etil paratión; Éster O,O-dietílico y O-(4-nitrofenílico) del ácido tiofosfórico"
+    },
+    {
+      "cas": "78-00-2",
+      "card_id": "0008",
+      "version": "2",
+      "nombre": "TETRAETILPLOMO",
+      "sinonimos": "Tetraetil plumbano; Plomo tetraetilo; TEP"
+    },
+    {
+      "cas": "75-07-0",
+      "card_id": "0009",
+      "version": "2",
+      "nombre": "ACETALDEHÍDO",
+      "sinonimos": "Aldehído acético; Etanal; Etilaldehído"
+    },
+    {
+      "cas": "62-53-3",
+      "card_id": "0011",
+      "version": "2",
+      "nombre": "ANILINA",
+      "sinonimos": "Bencenamina; Aminobenceno; Fenilamina"
+    },
+    {
+      "cas": "71-43-2",
+      "card_id": "0015",
+      "version": "2",
+      "nombre": "BENCENO",
+      "sinonimos": "Ciclohexatrieno; Benzol"
+    },
+    {
+      "cas": "100-44-7",
+      "card_id": "0016",
+      "version": "2",
+      "nombre": "CLORURO DE BENCILO",
+      "sinonimos": "alfa-Clorotolueno; (Clorometil)benceno; Cloruro de tolilo"
+    },
+    {
+      "cas": "124-38-9",
+      "card_id": "0021",
+      "version": "2",
+      "nombre": "DIÓXIDO DE CARBONO",
+      "sinonimos": "Gas carbónico; Anhídrido carbónico"
+    },
+    {
+      "cas": "75-15-0",
+      "card_id": "0022",
+      "version": "2",
+      "nombre": "DISULFURO DE CARBONO",
+      "sinonimos": "Bisulfuro de carbono; Sulfuro de carbono"
+    },
+    {
+      "cas": "630-08-0",
+      "card_id": "0023",
+      "version": "2",
+      "nombre": "MONÓXIDO DE CARBONO",
+      "sinonimos": "Óxido de carbono; Óxido carbónico"
+    },
+    {
+      "cas": "56-23-5",
+      "card_id": "0024",
+      "version": "2",
+      "nombre": "TETRACLORURO DE CARBONO",
+      "sinonimos": "Tetraclorometano; Tetraclorocarbono"
+    },
+    {
+      "cas": "2917-26-2",
+      "card_id": "0025",
+      "version": "2",
+      "nombre": "1-HEXADECANOTIOL",
+      "sinonimos": "Hexadecilmercaptano; 1-Mercaptohexadecano; Cetilmercaptano; Hexadecano-1-tiol"
+    },
+    {
+      "cas": "67-66-3",
+      "card_id": "0027",
+      "version": "2",
+      "nombre": "CLOROFORMO",
+      "sinonimos": "Triclorometano; Tricloruro de metilo; Tricloruro de formilo"
+    },
+    {
+      "cas": "95-48-7",
+      "card_id": "0030",
+      "version": "2",
+      "nombre": "o-CRESOL",
+      "sinonimos": "2-Hidroxi-1-metilbenceno; 2-Metilfenol; orto-Hidroxitolueno; 2-Cresol"
+    },
+    {
+      "cas": "106-44-5",
+      "card_id": "0031",
+      "version": "2",
+      "nombre": "p-CRESOL",
+      "sinonimos": "4-Hidroxi-1-metilbenceno; 4-Metilfenol; para-Hidroxitolueno; 4-Cresol"
+    },
+    {
+      "cas": "1569-69-3",
+      "card_id": "0032",
+      "version": "2",
+      "nombre": "CICLOHEXANOTIOL",
+      "sinonimos": "Ciclohexilmercaptano"
+    },
+    {
+      "cas": "94-75-7",
+      "card_id": "0033",
+      "version": "2",
+      "nombre": "2,4-D",
+      "sinonimos": "Ácido 2,4-diclorofenoxiacético; Ácido 2,4-D"
+    },
+    {
+      "cas": "50-29-3",
+      "card_id": "0034",
+      "version": "2",
+      "nombre": "DDT",
+      "sinonimos": "Diclorodifeniltricloroetano; 1,1,1-Tricloro-2,2-bis(p-clorofenil)etano; 2,2-Bis(p-clorofenil)-1,1,1-tricloroetano; 1,1'-(2,2,2-Tricloroetiliden)bis(4-clorobenceno); p,p'-DDT; Clofe"
+    },
+    {
+      "cas": "143-10-2",
+      "card_id": "0035",
+      "version": "2",
+      "nombre": "1-DECANOTIOL",
+      "sinonimos": "Decilmercaptano"
+    },
+    {
+      "cas": "84-74-2",
+      "card_id": "0036",
+      "version": "2",
+      "nombre": "FTALATO DE DIBUTILO",
+      "sinonimos": "Éster dibutílico del ácido 1,2-bencenodicarboxílico; Ftalato de di-n-butilo; DBP"
+    },
+    {
+      "cas": "106-46-7",
+      "card_id": "0037",
+      "version": "2",
+      "nombre": "1,4-DICLOROBENCENO",
+      "sinonimos": "p-Diclorobenceno; PDCB"
+    },
+    {
+      "cas": "123-91-1",
+      "card_id": "0041",
+      "version": "2",
+      "nombre": "1,4-DIOXANO",
+      "sinonimos": "1,4-Dióxido de dietileno; Dioxano; para-Dioxano"
+    },
+    {
+      "cas": "106-89-8",
+      "card_id": "0043",
+      "version": "2",
+      "nombre": "EPICLORHIDRINA",
+      "sinonimos": "1-Cloro-2,3-epoxipropano; 2-(Clorometil)oxirano; Óxido de gamma-cloropropileno"
+    },
+    {
+      "cas": "106-93-4",
+      "card_id": "0045",
+      "version": "2",
+      "nombre": "DIBROMURO DE ETILENO",
+      "sinonimos": "1,2-Dibromoetano; EDB"
+    },
+    {
+      "cas": "7782-41-4",
+      "card_id": "0046",
+      "version": "2",
+      "nombre": "FLÚOR",
+      "sinonimos": ""
+    },
+    {
+      "cas": "75-69-4",
+      "card_id": "0047",
+      "version": "2",
+      "nombre": "TRICLOROFLUOROMETANO",
+      "sinonimos": "Tricloromonofluorometano; Fluorotriclorometano; CFC 11; R 11"
+    },
+    {
+      "cas": "75-71-8",
+      "card_id": "0048",
+      "version": "2",
+      "nombre": "DICLORODIFLUOROMETANO",
+      "sinonimos": "Difluorodiclorometano; R 12; CFC 12"
+    },
+    {
+      "cas": "75-45-6",
+      "card_id": "0049",
+      "version": "2",
+      "nombre": "CLORODIFLUOROMETANO",
+      "sinonimos": "Monoclorodifluorometano; HCFC 22; R 22"
+    },
+    {
+      "cas": "76-13-1",
+      "card_id": "0050",
+      "version": "2",
+      "nombre": "1,1,2-TRICLORO-1,2,2-TRIFLUOROETANO",
+      "sinonimos": "Triclorotrifluoroetano; CFC 113; R 113"
+    },
+    {
+      "cas": "67-72-1",
+      "card_id": "0051",
+      "version": "2",
+      "nombre": "HEXACLOROETANO",
+      "sinonimos": "Percloroetano; Hexacloruro de carbono"
+    },
+    {
+      "cas": "7439-92-1",
+      "card_id": "0052",
+      "version": "2",
+      "nombre": "PLOMO",
+      "sinonimos": "Plomo metálico"
+    },
+    {
+      "cas": "75-09-2",
+      "card_id": "0058",
+      "version": "2",
+      "nombre": "DICLOROMETANO",
+      "sinonimos": "Cloruro de metileno; DCM"
+    },
+    {
+      "cas": "111-76-2",
+      "card_id": "0059",
+      "version": "2",
+      "nombre": "ÉTER MONOBUTÍLICO DE ETILENGLICOL",
+      "sinonimos": "2-Butoxietanol; Monobutil glicol éter; Butil oxitol; EGBE; Butilcellosolve"
+    },
+    {
+      "cas": "110-80-5",
+      "card_id": "0060",
+      "version": "2",
+      "nombre": "ÉTER MONOETÍLICO DE ETILENGLICOL",
+      "sinonimos": "2-Etoxietanol; Monoetil glicol éter; Oxitol; EGEE; Cellosolve"
+    },
+    {
+      "cas": "13463-39-3",
+      "card_id": "0064",
+      "version": "2",
+      "nombre": "NÍQUEL CARBONILO",
+      "sinonimos": "Níquel tetracarbonilo; Tetracarbonilníquel"
+    },
+    {
+      "cas": "98-95-3",
+      "card_id": "0065",
+      "version": "2",
+      "nombre": "NITROBENCENO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "10024-97-2",
+      "card_id": "0067",
+      "version": "2",
+      "nombre": "ÓXIDO NITROSO",
+      "sinonimos": "Monóxido de dinitrógeno; Anhídrido hiponitroso; Gas hilarante; Óxido de dinitrógeno; Gas de la risa; Protóxido de nitrógeno"
+    },
+    {
+      "cas": "10028-15-6",
+      "card_id": "0068",
+      "version": "2",
+      "nombre": "OZONO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "87-86-5",
+      "card_id": "0069",
+      "version": "2",
+      "nombre": "PENTACLOROFENOL",
+      "sinonimos": ""
+    },
+    {
+      "cas": "108-95-2",
+      "card_id": "0070",
+      "version": "2",
+      "nombre": "FENOL",
+      "sinonimos": "Ácido carbólico; Ácido fénico; Hidroxibenceno"
+    },
+    {
+      "cas": "7782-49-2",
+      "card_id": "0072",
+      "version": "2",
+      "nombre": "SELENIO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "100-42-5",
+      "card_id": "0073",
+      "version": "2",
+      "nombre": "ESTIRENO",
+      "sinonimos": "Vinilbenceno; Feniletileno; Etenilbenceno"
+    },
+    {
+      "cas": "7446-09-5",
+      "card_id": "0074",
+      "version": "2",
+      "nombre": "DIÓXIDO DE AZUFRE",
+      "sinonimos": "Óxido sulfuroso; Anhídrido sulfuroso; Óxido de azufre"
+    },
+    {
+      "cas": "93-76-5",
+      "card_id": "0075",
+      "version": "2",
+      "nombre": "ÁCIDO (2,4,5-TRICLOROFENOXI)ACÉTICO",
+      "sinonimos": "2,4,5-T"
+    },
+    {
+      "cas": "127-18-4",
+      "card_id": "0076",
+      "version": "2",
+      "nombre": "TETRACLOROETILENO",
+      "sinonimos": "1,1,2,2-Tetracloroetileno; Percloroetileno; Tetracloroeteno; Tetracloruro de etileno; PERC"
+    },
+    {
+      "cas": "71-55-6",
+      "card_id": "0079",
+      "version": "2",
+      "nombre": "1,1,1-TRICLOROETANO",
+      "sinonimos": "Metilcloroformo; Metiltriclorometano; alfa-Tricloroetano"
+    },
+    {
+      "cas": "79-00-5",
+      "card_id": "0080",
+      "version": "2",
+      "nombre": "1,1,2-TRICLOROETANO",
+      "sinonimos": "Tricloruro de vinilo; ß-Tricloroetano"
+    },
+    {
+      "cas": "79-01-6",
+      "card_id": "0081",
+      "version": "2",
+      "nombre": "TRICLOROETILENO",
+      "sinonimos": "1,1,2-Tricloroetileno; Tricloroeteno; Tricloruro de etileno; Tricloruro de acetileno; TCE"
+    },
+    {
+      "cas": "75-01-4",
+      "card_id": "0082",
+      "version": "2",
+      "nombre": "CLORURO DE VINILO",
+      "sinonimos": "Cloroeteno; Cloroetileno; Cloruro de vinilo monómero (CVM)"
+    },
+    {
+      "cas": "75-35-4",
+      "card_id": "0083",
+      "version": "2",
+      "nombre": "CLORURO DE VINILIDENO",
+      "sinonimos": "1,1-Dicloroeteno; 1,1-Dicloroetileno; VDC"
+    },
+    {
+      "cas": "95-47-6",
+      "card_id": "0084",
+      "version": "2",
+      "nombre": "o-XILENO",
+      "sinonimos": "orto-Xileno; 1,2-Dimetilbenceno; o-Xilol"
+    },
+    {
+      "cas": "108-38-3",
+      "card_id": "0085",
+      "version": "2",
+      "nombre": "m-XILENO",
+      "sinonimos": "meta-Xileno; 1,3-Dimetilbenceno; m-Xilol"
+    },
+    {
+      "cas": "106-42-3",
+      "card_id": "0086",
+      "version": "2",
+      "nombre": "p-XILENO",
+      "sinonimos": "para-Xileno; 1,4-Dimetilbenceno; p-Xilol"
+    },
+    {
+      "cas": "67-64-1",
+      "card_id": "0087",
+      "version": "2",
+      "nombre": "ACETONA",
+      "sinonimos": "2-Propanona; Dimetil cetona; Metil cetona"
+    },
+    {
+      "cas": "75-05-8",
+      "card_id": "0088",
+      "version": "2",
+      "nombre": "ACETONITRILO",
+      "sinonimos": "Cianuro de metilo; Cianometano; Etanonitrilo; Metanocarbonitrilo"
+    },
+    {
+      "cas": "74-86-2",
+      "card_id": "0089",
+      "version": "2",
+      "nombre": "ACETILENO",
+      "sinonimos": "Etino"
+    },
+    {
+      "cas": "79-06-1",
+      "card_id": "0091",
+      "version": "2",
+      "nombre": "ACRILAMIDA",
+      "sinonimos": "2-Propenamida; Amida del ácido acrílico; Vinilamida"
+    },
+    {
+      "cas": "107-13-1",
+      "card_id": "0092",
+      "version": "2",
+      "nombre": "ACRILONITRILO",
+      "sinonimos": "Cianoetileno; 2-Propenonitrilo; Cianuro de vinilo"
+    },
+    {
+      "cas": "106-92-3",
+      "card_id": "0096",
+      "version": "2",
+      "nombre": "ALILGLICIDILÉTER",
+      "sinonimos": "((2-Propeniloxi)metil)oxirano; Alil 2,3-epoxipropil éter; 1-(Aliloxi)-2,3-epoxipropano"
+    },
+    {
+      "cas": "1912-24-9",
+      "card_id": "0099",
+      "version": "2",
+      "nombre": "ATRAZINA",
+      "sinonimos": "2-Cloro-4-etilamino-6-isopropilamino-1,3,5-triazina; 6-Cloro-N-etil-N'-(1-metiletil)-1,3,5-triazina-2,4-diamina; 2-Cloro-4-etilamino-6-isopropilamino-s-triazina"
+    },
+    {
+      "cas": "92-52-4",
+      "card_id": "0106",
+      "version": "2",
+      "nombre": "BIFENILO",
+      "sinonimos": "Difenilo; Fenilbenceno; Dibenceno"
+    },
+    {
+      "cas": "7726-95-6",
+      "card_id": "0107",
+      "version": "2",
+      "nombre": "BROMO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "75-25-2",
+      "card_id": "0108",
+      "version": "2",
+      "nombre": "BROMOFORMO",
+      "sinonimos": "Tribromometano; Tribromuro de metenilo; Tribromuro de metilo"
+    },
+    {
+      "cas": "74-83-9",
+      "card_id": "0109",
+      "version": "2",
+      "nombre": "BROMURO DE METILO",
+      "sinonimos": "Bromometano; Monobromometano"
+    },
+    {
+      "cas": "71-36-3",
+      "card_id": "0111",
+      "version": "2",
+      "nombre": "1-BUTANOL",
+      "sinonimos": "n-Butanol; Alcohol n-butílico; Propilcarbinol; Alcohol butílico"
+    },
+    {
+      "cas": "78-92-2",
+      "card_id": "0112",
+      "version": "2",
+      "nombre": "2-BUTANOL",
+      "sinonimos": "Alcohol sec-butílico; 1-Metilpropanol; sec-Butanol; Hidrato de butileno; Metiletilcarbinol"
+    },
+    {
+      "cas": "75-65-0",
+      "card_id": "0114",
+      "version": "2",
+      "nombre": "terc-BUTANOL",
+      "sinonimos": "Alcohol terc-butílico; 2-Metil-2-propanol; Trimetilcarbinol; 1,1-Dimetiletanol"
+    },
+    {
+      "cas": "2426-08-6",
+      "card_id": "0115",
+      "version": "2",
+      "nombre": "n-BUTILGLICIDILÉTER",
+      "sinonimos": "1-Butoxi-2,3-epoxipropano; Butil 2,3-epoxipropil éter; (Butoximetil)oxirano; BGE"
+    },
+    {
+      "cas": "105-60-2",
+      "card_id": "0118",
+      "version": "2",
+      "nombre": "CAPROLACTAMA",
+      "sinonimos": "Hexahidro-2H-azepin-2-ona; Lactama del ácido aminocaproico; épsilon-Caprolactama"
+    },
+    {
+      "cas": "2425-06-1",
+      "card_id": "0119",
+      "version": "2",
+      "nombre": "CAPTAFOL",
+      "sinonimos": "N-(1,1,2,2-Tetracloroetiltio)ciclohex-4-eno-1,2-dicarboximida; 3a,4,7,7a-Tetrahidro-N-(1,1,2,2-tetracloroetanosulfenil)ftalimida"
+    },
+    {
+      "cas": "63-25-2",
+      "card_id": "0121",
+      "version": "2",
+      "nombre": "CARBARIL",
+      "sinonimos": "Metilcarbamato de 1-naftilo; Éster 1-naftílico del ácido metilcarbámico; Metilcarbamato de 1-naftalenilo; Carbarilo"
+    },
+    {
+      "cas": "1563-66-2",
+      "card_id": "0122",
+      "version": "2",
+      "nombre": "CARBOFURÁN",
+      "sinonimos": "Metilcarbamato de 2,3-dihidro-2,2-dimetilbenzofuran-7-ilo; Metilcarbamato de 2,2-dimetil-2,3-dihidro-7-benzofuranilo"
+    },
+    {
+      "cas": "7782-50-5",
+      "card_id": "0126",
+      "version": "2",
+      "nombre": "CLORO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "10049-04-4",
+      "card_id": "0127",
+      "version": "2",
+      "nombre": "DIÓXIDO DE CLORO",
+      "sinonimos": "Óxido de cloro; Peróxido de cloro; Óxido de cloro(IV)"
+    },
+    {
+      "cas": "532-27-4",
+      "card_id": "0128",
+      "version": "2",
+      "nombre": "2-CLOROACETOFENONA",
+      "sinonimos": "2-Cloro-1-feniletanona; alfa-Cloroacetofenona; Cloruro de fenacilo"
+    },
+    {
+      "cas": "75-00-3",
+      "card_id": "0132",
+      "version": "2",
+      "nombre": "1-CLOROETANO",
+      "sinonimos": "Cloruro de etilo; Monocloroetano"
+    },
+    {
+      "cas": "126-99-8",
+      "card_id": "0133",
+      "version": "2",
+      "nombre": "CLOROPRENO",
+      "sinonimos": "2-Cloro-1,3-butadieno; 2-Clorobutadieno; ß-Cloropreno"
+    },
+    {
+      "cas": "333-41-5",
+      "card_id": "0137",
+      "version": "2",
+      "nombre": "DIAZINÓN",
+      "sinonimos": "Tiofosfato de O,O-dietil-O-(2-isopropil-6-metilpirimidin-4-ilo); Éster O,O-dietílico y O-(6-metil-2-(1-metiletil)-4-pirimidinílico) del ácido tiofosfórico"
+    },
+    {
+      "cas": "2238-07-5",
+      "card_id": "0145",
+      "version": "2",
+      "nombre": "DI(2,3-EPOXIPROPIL)ÉTER",
+      "sinonimos": "2,2'-(Oxibis(metilen))bis-oxirano; Glicidiléter; Bis(2,3-epoxipropil)éter; Éter diglicidílico; DGE"
+    },
+    {
+      "cas": "57-14-7",
+      "card_id": "0147",
+      "version": "2",
+      "nombre": "1,1-DIMETILHIDRACINA",
+      "sinonimos": "Dimetilhidracina; N,N-Dimetilhidracina; Dimetilhidracina asimétrica; UDMH"
+    },
+    {
+      "cas": "77-78-1",
+      "card_id": "0148",
+      "version": "2",
+      "nombre": "SULFATO DE DIMETILO",
+      "sinonimos": "Éster dimetílico del ácido sulfúrico; Monosulfato de dimetilo; DMS"
+    },
+    {
+      "cas": "75-04-7",
+      "card_id": "0153",
+      "version": "2",
+      "nombre": "ETILAMINA",
+      "sinonimos": "Etanamina; Aminoetano"
+    },
+    {
+      "cas": "75-21-8",
+      "card_id": "0155",
+      "version": "2",
+      "nombre": "ÓXIDO DE ETILENO",
+      "sinonimos": "1,2-Epoxietano; Oxirano; Óxido de dimetileno"
+    },
+    {
+      "cas": "111-30-8",
+      "card_id": "0158",
+      "version": "2",
+      "nombre": "GLUTARALDEHÍDO",
+      "sinonimos": "1,5-Pentanodial; Dialdehído glutárico; Glutaral; 1,3-Diformilpropano"
+    },
+    {
+      "cas": "556-52-5",
+      "card_id": "0159",
+      "version": "2",
+      "nombre": "GLICIDOL",
+      "sinonimos": "2,3-Epoxi-1-propanol; Oxiranometanol; Óxido de 3-hidroxipropileno"
+    },
+    {
+      "cas": "680-31-9",
+      "card_id": "0162",
+      "version": "2",
+      "nombre": "HEXAMETILTRIAMIDA FOSFÓRICA",
+      "sinonimos": "Hexametilfosforamida; Hexametilfosfamida"
+    },
+    {
+      "cas": "7647-01-0",
+      "card_id": "0163",
+      "version": "2",
+      "nombre": "CLORURO DE HIDRÓGENO",
+      "sinonimos": "Cloruro de hidrógeno, anhidro"
+    },
+    {
+      "cas": "7722-84-1",
+      "card_id": "0164",
+      "version": "2",
+      "nombre": "PERÓXIDO DE HIDRÓGENO (disolución acuosa >60%)",
+      "sinonimos": "Hidroperóxido; Dióxido de hidrógeno; Dióxido de dihidrógeno; Agua oxigenada >60%"
+    },
+    {
+      "cas": "123-31-9",
+      "card_id": "0166",
+      "version": "2",
+      "nombre": "HIDROQUINONA",
+      "sinonimos": "1,4-Dihidroxibenceno; Hidroquinol; 1,4-Bencenodiol"
+    },
+    {
+      "cas": "13463-40-6",
+      "card_id": "0168",
+      "version": "2",
+      "nombre": "PENTACARBONILHIERRO",
+      "sinonimos": "Carbonilhierro; Hierro pentacarbonilo"
+    },
+    {
+      "cas": "78-59-1",
+      "card_id": "0169",
+      "version": "2",
+      "nombre": "ISOFORONA",
+      "sinonimos": "1,1,3-Trimetil-3-ciclohexen-5-ona; 3,5,5-Trimetilciclohex-2-enona; Isoacetoforona"
+    },
+    {
+      "cas": "98-82-8",
+      "card_id": "0170",
+      "version": "2",
+      "nombre": "CUMENO",
+      "sinonimos": "(1-Metiletil)benceno; 2-Fenilpropano; Isopropilbenceno"
+    },
+    {
+      "cas": "4016-14-2",
+      "card_id": "0171",
+      "version": "2",
+      "nombre": "ISOPROPILGLICIDILÉTER",
+      "sinonimos": "1,2-Epoxi-3-isopropoxipropano; (Isopropoximetil)oxirano; IGE; Isopropilglicidiléter"
+    },
+    {
+      "cas": "16752-77-5",
+      "card_id": "0177",
+      "version": "2",
+      "nombre": "METOMIL",
+      "sinonimos": "S-Metil-N-(metilcarbamoiloxi)tioacetimidato; Éster metílico del ácido N-{{(metilamino)carbonil}oxi}etanimidotioico; N-{(Metilamino)carboniloxi}etanimidotioato de metilo; Metomilo"
+    },
+    {
+      "cas": "74-89-5",
+      "card_id": "0178",
+      "version": "2",
+      "nombre": "METILAMINA",
+      "sinonimos": "Metanamina; Aminometano; Monometilamina"
+    },
+    {
+      "cas": "78-93-3",
+      "card_id": "0179",
+      "version": "2",
+      "nombre": "METILETILCETONA",
+      "sinonimos": "Etilmetilcetona; 2-Butanona; Metilacetona; MEK"
+    },
+    {
+      "cas": "60-34-4",
+      "card_id": "0180",
+      "version": "2",
+      "nombre": "METILHIDRACINA",
+      "sinonimos": "Monometilhidracina; MMH"
+    },
+    {
+      "cas": "6923-22-4",
+      "card_id": "0181",
+      "version": "2",
+      "nombre": "MONOCROTOFÓS",
+      "sinonimos": "Fosfato de dimetilo y (E)-1-metil-2-(metilcarbamoil)vinilo; trans-Monocrotofós; Éster dimetílico y 1-metil-3-(metilamino)-3-oxo-1-propenílico del ácido fosfórico"
+    },
+    {
+      "cas": "7697-37-2",
+      "card_id": "0183",
+      "version": "2",
+      "nombre": "ÁCIDO NÍTRICO (> 70% en agua)",
+      "sinonimos": "Ácido nítrico concentrado"
+    },
+    {
+      "cas": "55-63-0",
+      "card_id": "0186",
+      "version": "2",
+      "nombre": "NITROGLICERINA",
+      "sinonimos": "Trinitroglicerina; Trinitrato de glicerol; Trinitrato del 1,2,3-propanotriol; Aceite de voladura"
+    },
+    {
+      "cas": "79-46-9",
+      "card_id": "0187",
+      "version": "2",
+      "nombre": "2-NITROPROPANO",
+      "sinonimos": "Isonitropropano; Dimetilnitrometano; sec-Nitropropano; 2-NP"
+    },
+    {
+      "cas": "122-60-1",
+      "card_id": "0188",
+      "version": "2",
+      "nombre": "FENILGLICIDILÉTER",
+      "sinonimos": "1,2-Epoxi-3-fenoxipropano; 2,3-Epoxipropil fenil éter; Fenoximetiloxirano; FGE"
+    },
+    {
+      "cas": "10025-87-3",
+      "card_id": "0190",
+      "version": "2",
+      "nombre": "TRICLORURO DE FOSFORILO",
+      "sinonimos": "Cloruro de fosforilo; Tricloruro óxido de fósforo; Oxicloruro de fósforo"
+    },
+    {
+      "cas": "57-24-9",
+      "card_id": "0197",
+      "version": "2",
+      "nombre": "ESTRICNINA",
+      "sinonimos": "Estricnidin-10-ona"
+    },
+    {
+      "cas": "3383-96-8",
+      "card_id": "0199",
+      "version": "2",
+      "nombre": "TEMEFÓS",
+      "sinonimos": "Bis(tiofosfato) de O,O,O',O'-tetrametilo y O,O'-tiodi-p-fenileno; O,O'-(Tiodi-4,1-fenilen) bis(O,O-dimetiltiofosfato); Éster O,O'-(tiodi-4,1-fenilen)-O,O,O',O'-tetrametílico del ác"
+    },
+    {
+      "cas": "75-74-1",
+      "card_id": "0200",
+      "version": "2",
+      "nombre": "TETRAMETILPLOMO",
+      "sinonimos": "Tetrametil plumbano; Plomo tetrametilo"
+    },
+    {
+      "cas": "121-44-8",
+      "card_id": "0203",
+      "version": "2",
+      "nombre": "TRIETILAMINA",
+      "sinonimos": "N,N-Dietiletanamina"
+    },
+    {
+      "cas": "75-50-3",
+      "card_id": "0206",
+      "version": "2",
+      "nombre": "TRIMETILAMINA",
+      "sinonimos": "N,N-Dimetilmetanamina; TMA"
+    },
+    {
+      "cas": "1314-13-2",
+      "card_id": "0208",
+      "version": "2",
+      "nombre": "ÓXIDO DE CINC",
+      "sinonimos": "Blanco de cinc; Monóxido de cinc; C.I. Pigmento blanco 4"
+    },
+    {
+      "cas": "108-24-7",
+      "card_id": "0209",
+      "version": "2",
+      "nombre": "ANHÍDRIDO ACÉTICO",
+      "sinonimos": "Óxido acético; Anhídrido etanoico; Óxido de acetilo"
+    },
+    {
+      "cas": "111-69-3",
+      "card_id": "0211",
+      "version": "2",
+      "nombre": "ADIPONITRILO",
+      "sinonimos": "1,4-Dicianobutano; Ácido adípico dinitrilo; Cianuro de tetrametileno"
+    },
+    {
+      "cas": "504-29-0",
+      "card_id": "0214",
+      "version": "2",
+      "nombre": "2-AMINOPIRIDINA",
+      "sinonimos": "o-Aminopiridina; alfa-Aminopiridina"
+    },
+    {
+      "cas": "628-63-7",
+      "card_id": "0218",
+      "version": "2",
+      "nombre": "ACETATO DE n-AMILO",
+      "sinonimos": "Acetato de n-pentilo; Acetato de 1-pentilo; Éster 1-pentílico del ácido acético"
+    },
+    {
+      "cas": "626-38-0",
+      "card_id": "0219",
+      "version": "2",
+      "nombre": "ACETATO DE sec-AMILO",
+      "sinonimos": "Acetato de 2-pentilo; Acetato de 1-metilbutilo; Éster 2-pentílico del ácido acético"
+    },
+    {
+      "cas": "92-87-5",
+      "card_id": "0224",
+      "version": "2",
+      "nombre": "BENCIDINA",
+      "sinonimos": "(1,1'-Bifenil)-4,4'-diamina; 4,4'-Diaminobifenilo; p-Diaminodifenilo"
+    },
+    {
+      "cas": "94-36-0",
+      "card_id": "0225",
+      "version": "2",
+      "nombre": "PERÓXIDO DE BENZOILO",
+      "sinonimos": "Peróxido de dibenzoilo; Superóxido de benzoilo"
+    },
+    {
+      "cas": "10294-33-4",
+      "card_id": "0230",
+      "version": "2",
+      "nombre": "BROMURO DE BORO",
+      "sinonimos": "Tribromoborano; Bromuro de boro(III); Tribromuro de boro"
+    },
+    {
+      "cas": "7637-07-2",
+      "card_id": "0231",
+      "version": "2",
+      "nombre": "TRIFLUORURO DE BORO",
+      "sinonimos": "Trifluoroborano"
+    },
+    {
+      "cas": "107-07-3",
+      "card_id": "0236",
+      "version": "2",
+      "nombre": "2-CLOROETANOL",
+      "sinonimos": "Alcohol 2-cloroetílico; Clorhidrina etilénica; Glicol clorhidrina"
+    },
+    {
+      "cas": "542-88-1",
+      "card_id": "0237",
+      "version": "2",
+      "nombre": "BIS(CLOROMETIL)ÉTER",
+      "sinonimos": "Cloro(clorometoxi)metano; Diclorometiléter simétrico; 1,1'-Diclorodimetiléter; Oxibis(clorometano); Éter diclorometílico; BCME"
+    },
+    {
+      "cas": "107-30-2",
+      "card_id": "0238",
+      "version": "2",
+      "nombre": "CLOROMETIL METIL ÉTER",
+      "sinonimos": "Clorometoximetano; Dimetilcloro éter"
+    },
+    {
+      "cas": "4170-30-3",
+      "card_id": "0241",
+      "version": "2",
+      "nombre": "CROTONALDEHÍDO",
+      "sinonimos": "Propilenaldehído; 2-Butenal; beta-Metilacroleína; Metilpropenal; Aldehído crotónico"
+    },
+    {
+      "cas": "110-82-7",
+      "card_id": "0242",
+      "version": "2",
+      "nombre": "CICLOHEXANO",
+      "sinonimos": "Hexahidrobenceno; Hexametileno; Hexanafteno"
+    },
+    {
+      "cas": "108-93-0",
+      "card_id": "0243",
+      "version": "2",
+      "nombre": "CICLOHEXANOL",
+      "sinonimos": "Alcohol ciclohexílico; Hexahidrofenol; Hexalino; Hexalina"
+    },
+    {
+      "cas": "108-91-8",
+      "card_id": "0245",
+      "version": "2",
+      "nombre": "CICLOHEXILAMINA",
+      "sinonimos": "Ciclohexanamina; Aminociclohexano; Aminohexahidrobenceno; Hexahidroanilina"
+    },
+    {
+      "cas": "75-34-3",
+      "card_id": "0249",
+      "version": "2",
+      "nombre": "1,1-DICLOROETANO",
+      "sinonimos": "Cloruro de etilideno"
+    },
+    {
+      "cas": "107-06-2",
+      "card_id": "0250",
+      "version": "2",
+      "nombre": "1,2-DICLOROETANO",
+      "sinonimos": "Dicloruro de etileno; Dicloruro de 1,2-etileno; Cloruro de etileno"
+    },
+    {
+      "cas": "100-37-8",
+      "card_id": "0257",
+      "version": "2",
+      "nombre": "2-DIETILAMINOETANOL",
+      "sinonimos": "N,N-Dietiletanolamina; Alcohol 2-dietilaminoetílico; DEAE"
+    },
+    {
+      "cas": "127-19-5",
+      "card_id": "0259",
+      "version": "2",
+      "nombre": "N,N-DIMETILACETAMIDA",
+      "sinonimos": "Dimetilamida del ácido acético; Dimetilacetamida"
+    },
+    {
+      "cas": "131-11-3",
+      "card_id": "0261",
+      "version": "2",
+      "nombre": "FTALATO DE DIMETILO",
+      "sinonimos": "1,2-Bencenodicarboxilato de dimetilo; Éster dimetílico del ácido ftálico; Éster dimetílico del ácido 1,2-bencenodicarboxílico; DMP"
+    },
+    {
+      "cas": "100-41-4",
+      "card_id": "0268",
+      "version": "2",
+      "nombre": "ETILBENCENO",
+      "sinonimos": "Etilbenzol; Feniletano; EB"
+    },
+    {
+      "cas": "107-21-1",
+      "card_id": "0270",
+      "version": "2",
+      "nombre": "ETILENGLICOL",
+      "sinonimos": "1,2-Etanodiol; 1,2-Dihidroxietano; 2-Hidroxietanol; Glicol; Monoetilenglicol"
+    },
+    {
+      "cas": "117-81-7",
+      "card_id": "0271",
+      "version": "2",
+      "nombre": "FTALATO DE DI(2-ETILHEXILO)",
+      "sinonimos": "Dioctilftalato; DOP; DEHP; Ftalato de bis(2-etilhexilo)"
+    },
+    {
+      "cas": "50-00-0",
+      "card_id": "0275",
+      "version": "2",
+      "nombre": "FORMALDEHÍDO",
+      "sinonimos": "Metanal; Metilaldehído; Óxido de metileno; Oximetileno"
+    },
+    {
+      "cas": "98-01-1",
+      "card_id": "0276",
+      "version": "2",
+      "nombre": "FURFURAL",
+      "sinonimos": "2-Furancarboxialdehído; 2-Furaldehído; 2-Furilmetanal"
+    },
+    {
+      "cas": "151-67-7",
+      "card_id": "0277",
+      "version": "2",
+      "nombre": "HALOTANO",
+      "sinonimos": "2-Bromo-2-cloro-1,1,1-trifluoroetano; 1-Bromo-1-cloro-2,2,2-trifluoroetano"
+    },
+    {
+      "cas": "110-54-3",
+      "card_id": "0279",
+      "version": "2",
+      "nombre": "n-HEXANO",
+      "sinonimos": "Hidruro de hexilo"
+    },
+    {
+      "cas": "302-01-2",
+      "card_id": "0281",
+      "version": "2",
+      "nombre": "HIDRACINA",
+      "sinonimos": "Diamida; Diamina; Hidruro de nitrógeno; (anhidro); Hidrazina"
+    },
+    {
+      "cas": "10035-10-6",
+      "card_id": "0282",
+      "version": "2",
+      "nombre": "BROMURO DE HIDRÓGENO",
+      "sinonimos": "Ácido bromhídrico"
+    },
+    {
+      "cas": "7664-39-3",
+      "card_id": "0283",
+      "version": "2",
+      "nombre": "FLUORURO DE HIDRÓGENO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "7783-07-5",
+      "card_id": "0284",
+      "version": "2",
+      "nombre": "SELENURO DE HIDRÓGENO",
+      "sinonimos": "Hidruro de selenio; Selano"
+    },
+    {
+      "cas": "25639-42-3",
+      "card_id": "0292",
+      "version": "2",
+      "nombre": "METILCICLOHEXANOL (mezcla de isómeros)",
+      "sinonimos": "Hexahidrometilfenol; Hexahidrocresol"
+    },
+    {
+      "cas": "101-68-8",
+      "card_id": "0298",
+      "version": "2",
+      "nombre": "ISOCIANATO DE BISFENILMETILENO",
+      "sinonimos": "MDI; 4,4'-Diisocianato de difenilmetano; Bis(1,4-isocianatofenil)metano; 4,4'-Metilendifenildiisocianato"
+    },
+    {
+      "cas": "74-93-1",
+      "card_id": "0299",
+      "version": "2",
+      "nombre": "METILMERCAPTANO",
+      "sinonimos": "Metanotiol; Mercaptometano; Sulfhidrato de metilo; Tiometanol"
+    },
+    {
+      "cas": "80-62-6",
+      "card_id": "0300",
+      "version": "2",
+      "nombre": "METACRILATO DE METILO",
+      "sinonimos": "2-Metilpropenoato de metilo; Éster metílico del ácido metacrílico"
+    },
+    {
+      "cas": "110-91-8",
+      "card_id": "0302",
+      "version": "2",
+      "nombre": "MORFOLINA",
+      "sinonimos": "Tetrahidro-1,4-oxazina; Dietilenoximida"
+    },
+    {
+      "cas": "100-01-6",
+      "card_id": "0308",
+      "version": "2",
+      "nombre": "4-NITROANILINA",
+      "sinonimos": "p-Nitroanilina; 1-Amino-4-nitrobenceno; C.I. 37035"
+    },
+    {
+      "cas": "594-42-3",
+      "card_id": "0311",
+      "version": "2",
+      "nombre": "CLORURO DE TRICLOROMETANOSULFENILO",
+      "sinonimos": "Cloruro de triclometilsulfenilo; Tetracloruro de tiocarbonilo; Perclorometilmercaptano; Perclorometiltiol"
+    },
+    {
+      "cas": "88-89-1",
+      "card_id": "0316",
+      "version": "2",
+      "nombre": "ÁCIDO PÍCRICO",
+      "sinonimos": "2,4,6-Trinitrofenol; Ácido picronítrico; 2-Hidroxi-1,3,5-trinitrobenceno; Ácido carbazótico; Ácido carbonítrico; Ácido nitroxántico"
+    },
+    {
+      "cas": "74-98-6",
+      "card_id": "0319",
+      "version": "2",
+      "nombre": "PROPANO",
+      "sinonimos": "n-Propano"
+    },
+    {
+      "cas": "107-12-0",
+      "card_id": "0320",
+      "version": "2",
+      "nombre": "PROPIONITRILO",
+      "sinonimos": "Propanonitrilo; Cianuro de etilo; Cianoetano"
+    },
+    {
+      "cas": "75-55-8",
+      "card_id": "0322",
+      "version": "2",
+      "nombre": "PROPILENIMINA",
+      "sinonimos": "2-Metilaziridina; Metiletilenimina"
+    },
+    {
+      "cas": "110-86-1",
+      "card_id": "0323",
+      "version": "2",
+      "nombre": "PIRIDINA",
+      "sinonimos": "Azina; Azabenceno"
+    },
+    {
+      "cas": "14807-96-6",
+      "card_id": "0329",
+      "version": "2",
+      "nombre": "TALCO (libre de sílice y fibras)",
+      "sinonimos": ""
+    },
+    {
+      "cas": "79-34-5",
+      "card_id": "0332",
+      "version": "2",
+      "nombre": "1,1,2,2-TETRACLOROETANO",
+      "sinonimos": "Tetracloruro de acetileno; sim-Tetracloroetano; 1,1-Dicloro-2,2-dicloroetano"
+    },
+    {
+      "cas": "78-10-4",
+      "card_id": "0333",
+      "version": "2",
+      "nombre": "SILICATO DE TETRAETILO",
+      "sinonimos": "Tetraetoxisilano; Silicato de etilo; Ortosilicato de tetraetilo"
+    },
+    {
+      "cas": "13463-67-7",
+      "card_id": "0338",
+      "version": "2",
+      "nombre": "DIÓXIDO DE TITANIO",
+      "sinonimos": "Rutilo; Óxido de titanio(IV); Anatasa"
+    },
+    {
+      "cas": "584-84-9",
+      "card_id": "0339",
+      "version": "2",
+      "nombre": "2,4-DIISOCIANATO DE TOLUENO",
+      "sinonimos": "2,4-TDI; Diisocianato de 4-metil-m-fenileno; 2,4-Diisocianatotolueno; 2,4-Diisocianato-1-metilbenceno"
+    },
+    {
+      "cas": "95-53-4",
+      "card_id": "0341",
+      "version": "2",
+      "nombre": "o-TOLUIDINA",
+      "sinonimos": "2-Aminotolueno; o-Metilanilina; 1-Amino-2-metilbenceno"
+    },
+    {
+      "cas": "106-49-0",
+      "card_id": "0343",
+      "version": "2",
+      "nombre": "p-TOLUIDINA",
+      "sinonimos": "4-Aminotolueno; p-Metilanilina; 1-Amino-4-metilbenceno"
+    },
+    {
+      "cas": "552-30-7",
+      "card_id": "0345",
+      "version": "2",
+      "nombre": "ANHÍDRIDO TRIMELÍTICO",
+      "sinonimos": "Anhídrido 1,2,4-bencenotricarboxílico; Ácido 1,3-dihidro-1,3-dioxo-5-isobenzofuranocarboxílico"
+    },
+    {
+      "cas": "108-05-4",
+      "card_id": "0347",
+      "version": "2",
+      "nombre": "ACETATO DE VINILO (MONÓMERO)",
+      "sinonimos": "1-Acetoxietileno; Éster vinílico del ácido acético; Éster etenílico del ácido acético"
+    },
+    {
+      "cas": "1344-28-1",
+      "card_id": "0351",
+      "version": "2",
+      "nombre": "ÓXIDO DE ALUMINIO",
+      "sinonimos": "Óxido de alfa-aluminio; Alúmina; Trióxido de aluminio"
+    },
+    {
+      "cas": "60-29-7",
+      "card_id": "0355",
+      "version": "2",
+      "nombre": "DIETILÉTER",
+      "sinonimos": "Etoxietano; Éter etílico; Éter; Etiléter; Óxido de etilo"
+    },
+    {
+      "cas": "1310-58-3",
+      "card_id": "0357",
+      "version": "2",
+      "nombre": "HIDRÓXIDO DE POTASIO",
+      "sinonimos": "Potasa cáustica; Hidrato de potasio; Lejía de potasio"
+    },
+    {
+      "cas": "1310-73-2",
+      "card_id": "0360",
+      "version": "2",
+      "nombre": "HIDRÓXIDO DE SODIO",
+      "sinonimos": "Sosa cáustica; Hidrato de sodio; Lejía de sosa"
+    },
+    {
+      "cas": "7664-93-9",
+      "card_id": "0362",
+      "version": "2",
+      "nombre": "ÁCIDO SULFÚRICO, concentrado (> 51% y < 100%)",
+      "sinonimos": "Aceite de vitriolo"
+    },
+    {
+      "cas": "64-19-7",
+      "card_id": "0363",
+      "version": "2",
+      "nombre": "ÁCIDO ACÉTICO",
+      "sinonimos": "Ácido acético glacial; Ácido etanoico; Ácido etílico; Ácido metanocarboxílico"
+    },
+    {
+      "cas": "111-15-9",
+      "card_id": "0364",
+      "version": "2",
+      "nombre": "ACETATO DE 2-ETOXIETILO",
+      "sinonimos": "Acetato del éter monoetílico de etilenglicol; Acetato del 2-etoxietanol; Éster 2-etoxietílico del ácido acético; Acetato de cellosolve; Acetato de etilglicol; EGEEA"
+    },
+    {
+      "cas": "109-73-9",
+      "card_id": "0374",
+      "version": "2",
+      "nombre": "n-BUTILAMINA",
+      "sinonimos": "1-Aminobutano; 1-Butanamina; Monobutilamina"
+    },
+    {
+      "cas": "17804-35-2",
+      "card_id": "0382",
+      "version": "2",
+      "nombre": "BENOMILO",
+      "sinonimos": "1-(Butilcarbamoil)benzimidazol-2-ilcarbamato de metilo; Éster metílico del ácido ((1-(butilamino)carbonil)-1H-benzimidazol-2-il)carbámico"
+    },
+    {
+      "cas": "74-97-5",
+      "card_id": "0392",
+      "version": "2",
+      "nombre": "BROMOCLOROMETANO",
+      "sinonimos": "Clorobromometano; Clorobromuro de metileno"
+    },
+    {
+      "cas": "123-86-4",
+      "card_id": "0399",
+      "version": "2",
+      "nombre": "ACETATO DE n-BUTILO",
+      "sinonimos": "Etanoato de butilo; Éster n-butílico del ácido acético"
+    },
+    {
+      "cas": "141-32-2",
+      "card_id": "0400",
+      "version": "2",
+      "nombre": "ACRILATO DE BUTILO",
+      "sinonimos": "Éster n-butílico del ácido acrílico; Éster butílico del ácido 2-propenoico; 2-Propenoato de butilo; Acrilato de n-butilo"
+    },
+    {
+      "cas": "1305-62-0",
+      "card_id": "0408",
+      "version": "2",
+      "nombre": "HIDRÓXIDO DE CALCIO",
+      "sinonimos": "Dihidróxido de calcio; Hidrato de calcio; Cal hidratada; Cal apagada"
+    },
+    {
+      "cas": "1305-78-8",
+      "card_id": "0409",
+      "version": "2",
+      "nombre": "ÓXIDO DE CALCIO",
+      "sinonimos": "Cal; Cal quemada; Cal viva"
+    },
+    {
+      "cas": "120-80-9",
+      "card_id": "0411",
+      "version": "2",
+      "nombre": "CATECOL",
+      "sinonimos": "Pirocatecol; 1,2-Bencenodiol; 1,2-Dihidroxibenceno"
+    },
+    {
+      "cas": "7664-41-7",
+      "card_id": "0414",
+      "version": "2",
+      "nombre": "AMONIACO (ANHIDRO)",
+      "sinonimos": "R717; Gas refrigerante R717; Trihidruro de nitrógeno"
+    },
+    {
+      "cas": "111-44-4",
+      "card_id": "0417",
+      "version": "2",
+      "nombre": "BIS(2-CLOROETIL)ÉTER",
+      "sinonimos": "1,1'-Oxibis(2-cloro)etano; Dicloroetiléter; Éter 2,2'-dicloroetílico; Dicloroetiléter simétrico; Dicloruro de dietilenglicol"
+    },
+    {
+      "cas": "74-87-3",
+      "card_id": "0419",
+      "version": "2",
+      "nombre": "CLORURO DE METILO",
+      "sinonimos": "Clorometano; Monoclorometano"
+    },
+    {
+      "cas": "420-04-2",
+      "card_id": "0424",
+      "version": "2",
+      "nombre": "CIANAMIDA",
+      "sinonimos": "Carbamonitrilo; Cianamida de hidrógeno; Carbodiimida; Carbimida; Cianogenamida; Amidocianógeno"
+    },
+    {
+      "cas": "108-94-1",
+      "card_id": "0425",
+      "version": "2",
+      "nombre": "CICLOHEXANONA",
+      "sinonimos": "Cetohexametileno; Pimelin cetona; Ciclohexilcetona"
+    },
+    {
+      "cas": "19287-45-7",
+      "card_id": "0432",
+      "version": "2",
+      "nombre": "DIBORANO",
+      "sinonimos": "Boroetano; Hidruro de boro; Hexahidruro de diboro"
+    },
+    {
+      "cas": "594-72-9",
+      "card_id": "0434",
+      "version": "2",
+      "nombre": "1,1-DICLORO-1-NITROETANO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "78-87-5",
+      "card_id": "0441",
+      "version": "2",
+      "nombre": "1,2-DICLOROPROPANO",
+      "sinonimos": "Dicloruro de propileno"
+    },
+    {
+      "cas": "109-89-7",
+      "card_id": "0444",
+      "version": "2",
+      "nombre": "DIETILAMINA",
+      "sinonimos": "N,N-Dietilamina; N-Etiletanamina; Dietamina"
+    },
+    {
+      "cas": "108-18-9",
+      "card_id": "0449",
+      "version": "2",
+      "nombre": "DIISOPROPILAMINA",
+      "sinonimos": "DIPA; N-(1-Metiletil)-2-propanamina"
+    },
+    {
+      "cas": "68-12-2",
+      "card_id": "0457",
+      "version": "2",
+      "nombre": "N,N-DIMETILFORMAMIDA",
+      "sinonimos": "Dimetilformamida; DMF; DMFA; N-Formildimetilamina"
+    },
+    {
+      "cas": "528-29-0",
+      "card_id": "0460",
+      "version": "2",
+      "nombre": "1,2-DINITROBENCENO",
+      "sinonimos": "1,2-Dinitrobenzol; o-Dinitrobenceno; 1,2-DNB"
+    },
+    {
+      "cas": "108-98-5",
+      "card_id": "0463",
+      "version": "2",
+      "nombre": "BENCENOTIOL",
+      "sinonimos": "Tiofenol; Mercaptobenceno; Fenilmercaptano"
+    },
+    {
+      "cas": "25321-14-6",
+      "card_id": "0465",
+      "version": "2",
+      "nombre": "DINITROTOLUENO (Mezcla de isómeros)",
+      "sinonimos": "DNT (mezcla de isómeros); Metildinitrobenceno (mezcla de isómeros); Dinitrotoluol (mezcla de isómeros)"
+    },
+    {
+      "cas": "122-39-4",
+      "card_id": "0466",
+      "version": "2",
+      "nombre": "DIFENILAMINA",
+      "sinonimos": "N-Fenilanilina; Anilinobenceno; N,N-Difenilamina; N-Fenilbencenamina"
+    },
+    {
+      "cas": "75-08-1",
+      "card_id": "0470",
+      "version": "2",
+      "nombre": "ETANOTIOL",
+      "sinonimos": "Etilmercaptano"
+    },
+    {
+      "cas": "1333-86-4",
+      "card_id": "0471",
+      "version": "2",
+      "nombre": "NEGRO DE CARBÓN",
+      "sinonimos": "Negro de humo; Acetileno negro; Hollín de carbón"
+    },
+    {
+      "cas": "16219-75-3",
+      "card_id": "0473",
+      "version": "2",
+      "nombre": "5-ETILIDEN-2-NORBORNENO (estabilizado)",
+      "sinonimos": "5-Etilidenbiciclo(2,2,1)hept-2-eno; Etilidennorborneno; ENB"
+    },
+    {
+      "cas": "558-13-4",
+      "card_id": "0474",
+      "version": "2",
+      "nombre": "TETRABROMURO DE CARBONO",
+      "sinonimos": "Tetrabromometano"
+    },
+    {
+      "cas": "110-49-6",
+      "card_id": "0476",
+      "version": "2",
+      "nombre": "ACETATO DE 2-METOXIETILO",
+      "sinonimos": "Acetato del éter monometílico de etilenglicol; Acetato del 2-metoxietanol; Éster 2-metoxietílico del ácido acético; Acetato de metilcellosolve; Acetato de metilglicol; EGMEA"
+    },
+    {
+      "cas": "100-74-3",
+      "card_id": "0480",
+      "version": "2",
+      "nombre": "N-ETILMORFOLINA",
+      "sinonimos": "4-Etilmorfolina"
+    },
+    {
+      "cas": "91-94-1",
+      "card_id": "0481",
+      "version": "2",
+      "nombre": "3,3'-DICLOROBENCIDINA",
+      "sinonimos": "3,3'-Diclorobifenil-4,4'-ilendiamina; 4,4'-Diamino-3,3'-diclorobifenilo; 3,3'-Dicloro-4,4'-diaminobifenilo"
+    },
+    {
+      "cas": "22224-92-6",
+      "card_id": "0483",
+      "version": "2",
+      "nombre": "FENAMIFÓS",
+      "sinonimos": "Etil-3-metil-4-(metiltio)fenil(1-metiletil)fosforamidato"
+    },
+    {
+      "cas": "591-78-6",
+      "card_id": "0489",
+      "version": "2",
+      "nombre": "2-HEXANONA",
+      "sinonimos": "Metil n-butil cetona; n-Butilmetilcetona; MBK"
+    },
+    {
+      "cas": "74-90-8",
+      "card_id": "0492",
+      "version": "2",
+      "nombre": "CIANURO DE HIDRÓGENO, LICUADO",
+      "sinonimos": "Ácido cianhídrico; Ácido prúsico; Formonitrilo"
+    },
+    {
+      "cas": "110-19-0",
+      "card_id": "0494",
+      "version": "2",
+      "nombre": "ACETATO DE ISOBUTILO",
+      "sinonimos": "Acetato de 2-metilpropilo; Acetato de 2-metil-1-propilo; Éster 2-metilpropílico del ácido acético; Etanoato de ß-metilpropilo"
+    },
+    {
+      "cas": "26952-21-6",
+      "card_id": "0497",
+      "version": "2",
+      "nombre": "ALCOHOL ISOOCTÍLICO (Mezcla de isómeros)",
+      "sinonimos": "Isooctanol (mezcla de isómeros); Alcohol metilheptílico (mezcla de isómeros)"
+    },
+    {
+      "cas": "4098-71-9",
+      "card_id": "0499",
+      "version": "2",
+      "nombre": "DIISOCIANATO DE ISOFORONA",
+      "sinonimos": "IPDI; Isocianato de 3-isocianatometil-3,5,5-trimetilciclohexilo; Éster (3,5,5-trimetil-3,1-ciclohexilen)metilénico del ácido isociánico"
+    },
+    {
+      "cas": "1309-48-4",
+      "card_id": "0504",
+      "version": "2",
+      "nombre": "ÓXIDO DE MAGNESIO",
+      "sinonimos": "Brucita calcinada; Magnesia calcinada; Magnesia"
+    },
+    {
+      "cas": "79-20-9",
+      "card_id": "0507",
+      "version": "2",
+      "nombre": "ACETATO DE METILO",
+      "sinonimos": "Éster metílico del ácido acético"
+    },
+    {
+      "cas": "101-14-4",
+      "card_id": "0508",
+      "version": "2",
+      "nombre": "4,4'-METILENBIS(2-CLOROANILINA)",
+      "sinonimos": "4,4'-Metilenbis(2-cloro)bencenamina; 2,2'-Dicloro-4,4'-metilendianilina; 4,4'-Diamino-3,3'-diclorodifenilmetano; MOCA; MBOCA"
+    },
+    {
+      "cas": "74-88-4",
+      "card_id": "0509",
+      "version": "2",
+      "nombre": "YODURO DE METILO",
+      "sinonimos": "Yodometano"
+    },
+    {
+      "cas": "108-10-1",
+      "card_id": "0511",
+      "version": "2",
+      "nombre": "METILISOBUTILCETONA",
+      "sinonimos": "4-Metil-2-pentanona; Isopropilacetona; Hexona; Isobutilmetilcetona; MIBK"
+    },
+    {
+      "cas": "21087-64-9",
+      "card_id": "0516",
+      "version": "2",
+      "nombre": "METRIBUZINA",
+      "sinonimos": "4-Amino-6-terc-butil-3-metiltio-as-triazin-5-ona; 4-Amino-6-(1,1-dimetiletil)-3-(metiltio)-1,2,4-triazin-5(4H)-ona"
+    },
+    {
+      "cas": "134-32-7",
+      "card_id": "0518",
+      "version": "2",
+      "nombre": "1-NAFTILAMINA",
+      "sinonimos": "alfa-Naftilamina; 1-Aminonaftaleno"
+    },
+    {
+      "cas": "75-52-5",
+      "card_id": "0522",
+      "version": "2",
+      "nombre": "NITROMETANO",
+      "sinonimos": "Nitrocarbol"
+    },
+    {
+      "cas": "20816-12-0",
+      "card_id": "0528",
+      "version": "2",
+      "nombre": "TETRAÓXIDO DE OSMIO",
+      "sinonimos": "Anhídrido de osmio; Óxido de osmio"
+    },
+    {
+      "cas": "144-62-7",
+      "card_id": "0529",
+      "version": "2",
+      "nombre": "ÁCIDO OXÁLICO",
+      "sinonimos": "Ácido etanodioico"
+    },
+    {
+      "cas": "109-66-0",
+      "card_id": "0534",
+      "version": "2",
+      "nombre": "n-PENTANO",
+      "sinonimos": "Hidruro de amilo"
+    },
+    {
+      "cas": "135-88-6",
+      "card_id": "0542",
+      "version": "2",
+      "nombre": "FENIL-beta-NAFTILAMINA",
+      "sinonimos": "N-Fenil-2-naftilamina; N-2-Naftilanilina"
+    },
+    {
+      "cas": "10026-13-8",
+      "card_id": "0544",
+      "version": "2",
+      "nombre": "PENTACLORURO DE FÓSFORO",
+      "sinonimos": "Percloruro de fósforo; Cloruro fosfórico"
+    },
+    {
+      "cas": "107-98-2",
+      "card_id": "0551",
+      "version": "2",
+      "nombre": "ÉTER MONOMETÍLICO DE PROPILENGLICOL",
+      "sinonimos": "1-Metoxi-2-propanol; 1-Metoxi-2-hidroxipropano; Éter metílico de propilenglicol; 2PG1ME"
+    },
+    {
+      "cas": "71-23-8",
+      "card_id": "0553",
+      "version": "2",
+      "nombre": "1-PROPANOL",
+      "sinonimos": "Alcohol propílico; n-Propanol; Alcohol n-propílico; Etilcarbinol"
+    },
+    {
+      "cas": "57-57-8",
+      "card_id": "0555",
+      "version": "2",
+      "nombre": "beta-PROPIOLACTONA",
+      "sinonimos": "1,3-Propiolactona; 2-Oxetanona; Propanólido"
+    },
+    {
+      "cas": "74-99-7",
+      "card_id": "0560",
+      "version": "2",
+      "nombre": "PROPINO",
+      "sinonimos": "Alileno; Metilacetileno"
+    },
+    {
+      "cas": "7803-62-5",
+      "card_id": "0564",
+      "version": "2",
+      "nombre": "SILANO",
+      "sinonimos": "Monosilano; Tetrahidruro de silicio; Silicano"
+    },
+    {
+      "cas": "2551-62-4",
+      "card_id": "0571",
+      "version": "2",
+      "nombre": "HEXAFLUORURO DE AZUFRE",
+      "sinonimos": "Fluoruro de azufre"
+    },
+    {
+      "cas": "126-73-8",
+      "card_id": "0584",
+      "version": "2",
+      "nombre": "FOSFATO DE TRIBUTILO",
+      "sinonimos": "Fosfato de tri-n-butilo; Éster tributílico del ácido fosfórico"
+    },
+    {
+      "cas": "1314-62-1",
+      "card_id": "0596",
+      "version": "2",
+      "nombre": "PENTAÓXIDO DE VANADIO",
+      "sinonimos": "Pentaóxido de divanadio; Anhídrido vanádico; Óxido de vanadio(V)"
+    },
+    {
+      "cas": "593-60-2",
+      "card_id": "0597",
+      "version": "2",
+      "nombre": "BROMURO DE VINILO",
+      "sinonimos": "Bromoeteno; Bromoetileno; Monobromoetileno"
+    },
+    {
+      "cas": "75-02-5",
+      "card_id": "0598",
+      "version": "2",
+      "nombre": "FLUORURO DE VINILO",
+      "sinonimos": "Fluoroeteno; Fluoroetileno"
+    },
+    {
+      "cas": "1300-73-8",
+      "card_id": "0600",
+      "version": "2",
+      "nombre": "XILIDINA (Mezcla de isómeros)",
+      "sinonimos": "Dimetilanilina; Aminodimetilbenceno; Dimetilfenilamina"
+    },
+    {
+      "cas": "91-59-8",
+      "card_id": "0610",
+      "version": "2",
+      "nombre": "2-NAFTILAMINA",
+      "sinonimos": "beta-Naftilamina; 2-Aminonaftaleno"
+    },
+    {
+      "cas": "75-86-5",
+      "card_id": "0611",
+      "version": "2",
+      "nombre": "CIANHIDRINA DE ACETONA",
+      "sinonimos": "2-Hidroxi-2-metilpropionitrilo; 2-Metil-lactonitrilo; 2-Ciano-2-propanol; p-Hidroxiisobutironitrilo; Acetoncianhidrina"
+    },
+    {
+      "cas": "10361-37-2",
+      "card_id": "0614",
+      "version": "2",
+      "nombre": "CLORURO DE BARIO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "111-42-2",
+      "card_id": "0618",
+      "version": "2",
+      "nombre": "DIETANOLAMINA",
+      "sinonimos": "2,2'-Iminodietanol; 2,2'-Dihidroxidietilamina; DEA"
+    },
+    {
+      "cas": "111-40-0",
+      "card_id": "0620",
+      "version": "2",
+      "nombre": "DIETILENTRIAMINA",
+      "sinonimos": "N-(2-Aminoetil)-1,2-etanodiamina; 3-Azapentano-1,5-diamina; 2,2'-Iminodi(etilamina); DETA"
+    },
+    {
+      "cas": "109-94-4",
+      "card_id": "0623",
+      "version": "2",
+      "nombre": "FORMIATO DE ETILO",
+      "sinonimos": "Éster etílico del ácido fórmico; Éter fórmico"
+    },
+    {
+      "cas": "56-81-5",
+      "card_id": "0624",
+      "version": "2",
+      "nombre": "GLICEROL",
+      "sinonimos": "Glicerina; 1,2,3-Propanotriol; 1,2,3-Trihidroxipropano"
+    },
+    {
+      "cas": "96-33-3",
+      "card_id": "0625",
+      "version": "2",
+      "nombre": "ACRILATO DE METILO",
+      "sinonimos": "2-Propenoato de metilo; Éster metílico del ácido 2-propenoico; Éster metílico del ácido acrílico"
+    },
+    {
+      "cas": "98-00-0",
+      "card_id": "0626",
+      "version": "2",
+      "nombre": "PARATIÓN-METILO",
+      "sinonimos": "Tiofosfato de O,O-dimetilo y O-4-nitrofenilo; Tionofosfato de O,O-dimetilo y p-nitrofenilo; Éster O,O-dimetílico y O-(4-nitrofenílico) del ácido tiofosfórico"
+    },
+    {
+      "cas": "61-82-5",
+      "card_id": "0631",
+      "version": "2",
+      "nombre": "AMITROL",
+      "sinonimos": "1,2,4-Triazol-3-ilamina; 3-Amino-1H-1,2,4-triazol; Aminotriazol"
+    },
+    {
+      "cas": "353-50-4",
+      "card_id": "0633",
+      "version": "2",
+      "nombre": "FLUORURO DE CARBONILO",
+      "sinonimos": "Difluoruro de carbonilo; Difluoruro óxido de carbono; Difluoroformaldehído; Fluorofosgeno; Fluofosgeno; Oxifluoruro de carbono"
+    },
+    {
+      "cas": "108-90-7",
+      "card_id": "0642",
+      "version": "2",
+      "nombre": "CLOROBENCENO",
+      "sinonimos": "Cloruro de benceno; Clorobenzol; Cloruro de fenilo"
+    },
+    {
+      "cas": "108-39-4",
+      "card_id": "0646",
+      "version": "2",
+      "nombre": "m-CRESOL",
+      "sinonimos": "3-Cresol; 3-Metilfenol; 3-Hidroxitolueno; 1-Hidroxi-3-metilbenceno"
+    },
+    {
+      "cas": "123-42-2",
+      "card_id": "0647",
+      "version": "2",
+      "nombre": "DIACETONA ALCOHOL",
+      "sinonimos": "4-Hidroxi-4-metil-2-pentanona; 4-Hidroxi-2-ceto-4-metilpentano"
+    },
+    {
+      "cas": "76-14-2",
+      "card_id": "0649",
+      "version": "2",
+      "nombre": "DICLOROTETRAFLUOROETANO",
+      "sinonimos": "1,2-Dicloro-1,1,2,2-tetrafluoroetano; CFC114"
+    },
+    {
+      "cas": "126-98-7",
+      "card_id": "0652",
+      "version": "2",
+      "nombre": "METACRILONITRILO",
+      "sinonimos": "Metilacrilonitrilo; 2-Metil-2-propenonitrilo; 2-Cianopropeno; Isopropenilnitrilo"
+    },
+    {
+      "cas": "3173-72-6",
+      "card_id": "0653",
+      "version": "2",
+      "nombre": "1,5-DIISOCIANATO DE NAFTALENO",
+      "sinonimos": "NDI; 1,5-Diisocianatonaftaleno; Diisocianato de 1,5-naftileno"
+    },
+    {
+      "cas": "55-38-9",
+      "card_id": "0655",
+      "version": "2",
+      "nombre": "FENTIÓN",
+      "sinonimos": "Tiofosfato de O,O-dimetil-O-(4-metiltio-m-tolilo); Éster O,O-dimetílico y O-(3-metil-4-(metiltio)fenílico) del ácido tiofosfórico"
+    },
+    {
+      "cas": "7790-91-2",
+      "card_id": "0656",
+      "version": "2",
+      "nombre": "TRIFLUORURO DE CLORO",
+      "sinonimos": "Fluoruro de cloro"
+    },
+    {
+      "cas": "107-41-5",
+      "card_id": "0660",
+      "version": "2",
+      "nombre": "HEXILENGLICOL",
+      "sinonimos": "2-Metil-2,4-pentanodiol; 2,4-Dihidroxi-2-metilpentano"
+    },
+    {
+      "cas": "108-11-2",
+      "card_id": "0665",
+      "version": "2",
+      "nombre": "METILISOBUTILCARBINOL",
+      "sinonimos": "4-Dimetil-2-butanol; 4-Metil-2-pentanol; Alcohol metilamílico"
+    },
+    {
+      "cas": "151-50-8",
+      "card_id": "0671",
+      "version": "2",
+      "nombre": "CIANURO DE POTASIO",
+      "sinonimos": "Sal de potasio del ácido cianhídrico"
+    },
+    {
+      "cas": "96-18-4",
+      "card_id": "0683",
+      "version": "2",
+      "nombre": "1,2,3-TRICLOROPROPANO",
+      "sinonimos": "Glicerol triclorhidrina; Tricloruro de alilo"
+    },
+    {
+      "cas": "75-38-7",
+      "card_id": "0687",
+      "version": "2",
+      "nombre": "FLUORURO DE VINILIDENO",
+      "sinonimos": "1,1-Difluoroetileno; 1,1-Difluoroeteno; R1132a; Difluoruro de vinilideno"
+    },
+    {
+      "cas": "79-10-7",
+      "card_id": "0688",
+      "version": "2",
+      "nombre": "ÁCIDO ACRÍLICO",
+      "sinonimos": "Ácido etilencarboxílico; Ácido acroleico; Ácido 2-propenoico"
+    },
+    {
+      "cas": "99-65-0",
+      "card_id": "0691",
+      "version": "2",
+      "nombre": "1,3-DINITROBENCENO",
+      "sinonimos": "1,3-Dinitrobenzol; m-Dinitrobenceno; 1,3-DNB"
+    },
+    {
+      "cas": "100-25-4",
+      "card_id": "0692",
+      "version": "2",
+      "nombre": "1,4-DINITROBENCENO",
+      "sinonimos": "1,4-Dinitrobenzol; p-Dinitrobenceno; 1,4-DNB"
+    },
+    {
+      "cas": "7803-51-2",
+      "card_id": "0694",
+      "version": "2",
+      "nombre": "FOSFINA",
+      "sinonimos": "Fosfano; Trihidruro de fósforo; Fosfuro de hidrógeno; Fosfamina"
+    },
+    {
+      "cas": "7719-12-2",
+      "card_id": "0696",
+      "version": "2",
+      "nombre": "TRICLORURO DE FÓSFORO",
+      "sinonimos": "Triclorofosfina; Cloruro de fósforo"
+    },
+    {
+      "cas": "107-20-0",
+      "card_id": "0706",
+      "version": "2",
+      "nombre": "CLOROACETALDEHÍDO (disolución al 40%)",
+      "sinonimos": "2-Cloroacetaldehído; 2-Cloro-1-etanal; Monocloroacetaldehído"
+    },
+    {
+      "cas": "944-22-9",
+      "card_id": "0708",
+      "version": "2",
+      "nombre": "FONOFÓS",
+      "sinonimos": "Etilditiofosfonato de O-etilo y S-fenilo"
+    },
+    {
+      "cas": "17702-41-9",
+      "card_id": "0712",
+      "version": "2",
+      "nombre": "DECABORANO",
+      "sinonimos": "Hidruro de boro; Tetradecahidruro de decaboro"
+    },
+    {
+      "cas": "98-83-9",
+      "card_id": "0732",
+      "version": "2",
+      "nombre": "alfa-METILESTIRENO",
+      "sinonimos": "Isopropenilbenceno; 2-Fenilpropeno; 1-Metil-1-feniletileno"
+    },
+    {
+      "cas": "57-74-9",
+      "card_id": "0740",
+      "version": "2",
+      "nombre": "CLORDANO (producto técnico)",
+      "sinonimos": "1,2,4,5,6,7,8,8-Octacloro-2,3,3a,4,7,7a-hexahidro-4,7-metanoindeno; 1,2,4,5,6,7,8,8-Octacloro-2,3,3a,4,7,7a-hexahidro-4,7-metano-1H-indeno"
+    },
+    {
+      "cas": "115-29-7",
+      "card_id": "0742",
+      "version": "2",
+      "nombre": "ENDOSULFÁN (Mezcla de isómeros)",
+      "sinonimos": "Sulfito de 1,4,5,6,7,7-hexacloro-8,9,10-trinorborn-5-en-2,3-ilenbismetileno; 3-Óxido de 6,7,8,9,10,10-hexacloro-1,5,5a,6,9,9a-hexahidro-6,9-metano-2,4,3-benzodioxatiepina; Endosulf"
+    },
+    {
+      "cas": "76-44-8",
+      "card_id": "0743",
+      "version": "2",
+      "nombre": "HEPTACLORO",
+      "sinonimos": "1,4,5,6,7,8,8-Heptacloro-3a,4,7,7a-tetrahidro-4,7-metanoindeno; 1,4,5,6,7,8,8-Heptacloro-3a,4,7,7a-tetrahidro-4,7-metano-1H-indeno; 3,4,5,6,8,8a-Heptaclorodiciclopentadieno"
+    },
+    {
+      "cas": "2104-64-5",
+      "card_id": "0753",
+      "version": "2",
+      "nombre": "EPN",
+      "sinonimos": "Feniltiofosfonato de O-etilo y O-4-nitrofenilo; Éster O-etílico y O-(4-nitrofenílico) del ácido feniltiofosfónico"
+    },
+    {
+      "cas": "137-26-8",
+      "card_id": "0757",
+      "version": "2",
+      "nombre": "TIRAM",
+      "sinonimos": "Disulfuro de tetrametiltiuram; Disulfuro de bis(dimetiltiocarbamoilo); Tetrametiltioperoxiditiocarboxamida; TMTD"
+    },
+    {
+      "cas": "92-67-1",
+      "card_id": "0759",
+      "version": "2",
+      "nombre": "4-AMINOBIFENILO",
+      "sinonimos": "(1,1'-Bifenil)-4-amina; p-Bifenilamina; p-Xenilamina; 4-Aminodifenilo; Bifenil-4-ilamina"
+    },
+    {
+      "cas": "7778-44-1",
+      "card_id": "0765",
+      "version": "2",
+      "nombre": "ARSENATO DE CALCIO",
+      "sinonimos": "Arsenato de tricalcio; Orto-arsenato de calcio"
+    },
+    {
+      "cas": "309-00-2",
+      "card_id": "0774",
+      "version": "2",
+      "nombre": "ALDRÍN",
+      "sinonimos": "1,2,3,4,10,10-Hexacloro-1,4,4a,5,8,8a-hexahidro-exo-1,4-endo-5,8-dimetanonaftaleno; 1,2,3,4,10,10-Hexacloro-1,4,4a,5,8,8a-hexahidro-(1-alfa,4-alfa,4aß,5alfa,8alfa,8aß)-1,4:5,8-dime"
+    },
+    {
+      "cas": "7440-36-0",
+      "card_id": "0775",
+      "version": "2",
+      "nombre": "ANTIMONIO",
+      "sinonimos": "Antimonio negro; Antimonio regulus; Estibium"
+    },
+    {
+      "cas": "7803-52-3",
+      "card_id": "0776",
+      "version": "2",
+      "nombre": "ESTIBINA",
+      "sinonimos": "Estibano; Trihidruro de antimonio; Hidruro de antimonio; Estibamina"
+    },
+    {
+      "cas": "106-51-4",
+      "card_id": "0779",
+      "version": "2",
+      "nombre": "p-BENZOQUINONA",
+      "sinonimos": "2,5-Ciclohexadieno-1,4-diona; Quinona; 1,4-Benzoquinona; p-Quinona"
+    },
+    {
+      "cas": "7440-48-4",
+      "card_id": "0782",
+      "version": "2",
+      "nombre": "COBALTO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "60-57-1",
+      "card_id": "0787",
+      "version": "2",
+      "nombre": "DIELDRÍN",
+      "sinonimos": "1,2,3,4,10,10-Hexacloro-6,7-epoxi-1,4,4a,5,6,7,8,8a-octahidro-endo-1,4-exo-5,8-dimetanonaftaleno; 3,4,5,6,9,9-Hexacloro-1a,2,2a,3,6,6a,7,7a-octahidro-2,7:3,6-dimetanonaft(2,3-b)oxi"
+    },
+    {
+      "cas": "101-84-8",
+      "card_id": "0791",
+      "version": "2",
+      "nombre": "DIFENILÉTER",
+      "sinonimos": "Óxido de difenilo; Fenoxibenceno; 1,1'-Oxibisbenceno; Feniléter"
+    },
+    {
+      "cas": "106-50-3",
+      "card_id": "0805",
+      "version": "2",
+      "nombre": "p-FENILENDIAMINA",
+      "sinonimos": "1,4-Diaminobenceno; 1,4-Bencenodiamina; p-Aminoanilina"
+    },
+    {
+      "cas": "79-09-4",
+      "card_id": "0806",
+      "version": "2",
+      "nombre": "ÁCIDO PROPIÓNICO",
+      "sinonimos": "Ácido etilfórmico; Ácido metilacético; Ácido propanoico; Ácido etanocarboxílico"
+    },
+    {
+      "cas": "463-51-4",
+      "card_id": "0812",
+      "version": "2",
+      "nombre": "CETENO",
+      "sinonimos": "Etenona; Cetena; Cetoetileno"
+    },
+    {
+      "cas": "7580-67-8",
+      "card_id": "0813",
+      "version": "2",
+      "nombre": "HIDRURO DE LITIO",
+      "sinonimos": "Monohidruro de litio"
+    },
+    {
+      "cas": "110-12-3",
+      "card_id": "0815",
+      "version": "2",
+      "nombre": "ISOAMILMETILCETONA",
+      "sinonimos": "5-Metil-2-hexanona; 2-Metil-5-hexanona; MIAK"
+    },
+    {
+      "cas": "107-87-9",
+      "card_id": "0816",
+      "version": "2",
+      "nombre": "METILPROPILCETONA",
+      "sinonimos": "2-Pentanona; Etilacetona; MPK"
+    },
+    {
+      "cas": "79-24-3",
+      "card_id": "0817",
+      "version": "2",
+      "nombre": "NITROETANO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "7783-41-7",
+      "card_id": "0818",
+      "version": "2",
+      "nombre": "DIFLUORURO DE OXÍGENO",
+      "sinonimos": "Fluoruro de oxígeno; Monóxido de flúor; Monóxido de diflúor"
+    },
+    {
+      "cas": "19624-22-7",
+      "card_id": "0819",
+      "version": "2",
+      "nombre": "PENTABORANO",
+      "sinonimos": "Nonahidruro de pentaboro; Pentaborano(9)"
+    },
+    {
+      "cas": "106-87-6",
+      "card_id": "0820",
+      "version": "2",
+      "nombre": "DIÓXIDO DE VINILCICLOHEXENO",
+      "sinonimos": "3-Oxiranil-7-oxabiciclo(4.1.0)heptano; 1-Epoxietil-3,4-epoxiciclohexano; Diepóxido de vinilciclohexeno"
+    },
+    {
+      "cas": "50-78-2",
+      "card_id": "0822",
+      "version": "2",
+      "nombre": "ÁCIDO 2-(ACETILOXI)BENZOICO",
+      "sinonimos": "Ácido acetilsalicílico; Ácido 2-acetoxibenzoico; Aspirina"
+    },
+    {
+      "cas": "86-50-0",
+      "card_id": "0826",
+      "version": "2",
+      "nombre": "AZINFÓS-METILO",
+      "sinonimos": "Ditiofosfato de S-3,4-dihidro-4-oxo-1,2,3-benzotriazin-3-ilmetilo) y O,O-dimetilo; Éster O,O-dimetílico y S-((4-oxo-11,2,3-benzotriazin-3-(4H)-il)metílico) del ácido ditiofosfórico"
+    },
+    {
+      "cas": "7727-43-7",
+      "card_id": "0827",
+      "version": "2",
+      "nombre": "SULFATO DE BARIO",
+      "sinonimos": "Blanco fijo; Barita artificial; C.I. 77120"
+    },
+    {
+      "cas": "1303-86-2",
+      "card_id": "0836",
+      "version": "2",
+      "nombre": "ÓXIDO DE BORO",
+      "sinonimos": "Anhídrido bórico; Trióxido de boro; Sesquióxido de boro; Trióxido de diboro"
+    },
+    {
+      "cas": "112-07-2",
+      "card_id": "0839",
+      "version": "2",
+      "nombre": "ACETATO DE 2-BUTOXIETILO",
+      "sinonimos": "Acetato de butilglicol; Acetato del éter monobutílico de etilenglicol; Acetato del 2-butoxietanol; Acetato de butilcellosolve; EGBEA"
+    },
+    {
+      "cas": "105-46-4",
+      "card_id": "0840",
+      "version": "2",
+      "nombre": "ACETATO DE sec-BUTILO",
+      "sinonimos": "Acetato de 1-metilpropilo; Éster 2-butílico del ácido acético"
+    },
+    {
+      "cas": "128-37-0",
+      "card_id": "0841",
+      "version": "2",
+      "nombre": "HIDROXITOLUENO BUTILADO",
+      "sinonimos": "2,6-Di-terc-butil-4-metilfenol; 2,6-Di-terc-butil-p-cresol; BHT"
+    },
+    {
+      "cas": "8001-35-2",
+      "card_id": "0843",
+      "version": "2",
+      "nombre": "CANFECLORO",
+      "sinonimos": "Toxafeno; Canfeno clorado (60%); Policlorocanfeno"
+    },
+    {
+      "cas": "79-04-9",
+      "card_id": "0845",
+      "version": "2",
+      "nombre": "CLORURO DE CLOROACETILO",
+      "sinonimos": "Cloruro del ácido cloroacético; Cloruro de monocloroacetilo"
+    },
+    {
+      "cas": "100-00-5",
+      "card_id": "0846",
+      "version": "2",
+      "nombre": "p-CLORONITROBENCENO",
+      "sinonimos": "1-Cloro-4-nitrobenceno; PCNB; PNCB"
+    },
+    {
+      "cas": "7440-58-6",
+      "card_id": "0847",
+      "version": "2",
+      "nombre": "HAFNIO (polvo, pirofórico)",
+      "sinonimos": ""
+    },
+    {
+      "cas": "76-15-3",
+      "card_id": "0848",
+      "version": "2",
+      "nombre": "CLOROPENTAFLUOROETANO",
+      "sinonimos": "1-Cloro-1,1,2,2,2-pentafluoroetano; Fluorocarbono 115; CFC 115"
+    },
+    {
+      "cas": "2921-88-2",
+      "card_id": "0851",
+      "version": "2",
+      "nombre": "CLORPIRIFÓS",
+      "sinonimos": "Tiofosfato de O,O-dietilo y O-(3,5,6-tricloro-2-piridilo); Éster O,O-dietílico y O-(3,5,6-tricloro-2-piridinílico) del ácido tiofosfórico; Clorpirifós etil"
+    },
+    {
+      "cas": "542-92-7",
+      "card_id": "0857",
+      "version": "2",
+      "nombre": "CICLOPENTADIENO",
+      "sinonimos": "1,3-Ciclopentadieno; Pentol; Piropentileno"
+    },
+    {
+      "cas": "141-66-2",
+      "card_id": "0872",
+      "version": "2",
+      "nombre": "DICROTOFÓS",
+      "sinonimos": "Fosfato de (E)-3 (dimetilamino)-1-metil-3-oxoprop-1-enilo y dimetilo; Fosfato de cis-2-dimetilcarbamoil-1-metilvinilo y dimetilo"
+    },
+    {
+      "cas": "77-73-6",
+      "card_id": "0873",
+      "version": "2",
+      "nombre": "DICICLOPENTADIENO",
+      "sinonimos": "3a,4,7,7a-Tetrahidro-4,7-metanoindeno; 3a,4,7,7a-Tetrahidro-4,7-metano-1H-indeno; 1,3-Diciclopentadieno"
+    },
+    {
+      "cas": "96-22-0",
+      "card_id": "0874",
+      "version": "2",
+      "nombre": "3-PENTANONA",
+      "sinonimos": "Dietilcetona; Dimetilacetona; Metacetona"
+    },
+    {
+      "cas": "121-69-7",
+      "card_id": "0877",
+      "version": "2",
+      "nombre": "N,N-DIMETILANILINA",
+      "sinonimos": "N,N-Dimetilfenilamina"
+    },
+    {
+      "cas": "78-34-2",
+      "card_id": "0883",
+      "version": "2",
+      "nombre": "DIOXATION (Mezcla de isómeros)",
+      "sinonimos": "Bis(ditiofosfato) de O,O,O',O'-tetraetilo y S,S'-(1,4-dioxano-2,3-diilo)"
+    },
+    {
+      "cas": "34590-94-8",
+      "card_id": "0884",
+      "version": "2",
+      "nombre": "ÉTER MONOMETÍLICO DE DIPROPILENGLICOL",
+      "sinonimos": "(Metil-2-metoxietoxi)propanol; DPGME"
+    },
+    {
+      "cas": "563-12-2",
+      "card_id": "0888",
+      "version": "2",
+      "nombre": "ETIÓN",
+      "sinonimos": "Dietión; Bis(ditiofosfato) de O,O,O',O'-tetraetilo y S,S'-metileno"
+    },
+    {
+      "cas": "106-35-4",
+      "card_id": "0889",
+      "version": "2",
+      "nombre": "ETIL n-BUTIL CETONA",
+      "sinonimos": "3-Heptanona; Butiletilcetona; Etilbutilcetona"
+    },
+    {
+      "cas": "7782-42-5",
+      "card_id": "0893",
+      "version": "2",
+      "nombre": "GRAFITO (NATURAL)",
+      "sinonimos": "Plumbagina; Plomo negro; Carbono mineral"
+    },
+    {
+      "cas": "87-68-3",
+      "card_id": "0896",
+      "version": "2",
+      "nombre": "HEXACLOROBUTADIENO",
+      "sinonimos": "1,1,2,3,4,4-Hexacloro-1,3-butadieno; Perclorobutadieno"
+    },
+    {
+      "cas": "75-28-5",
+      "card_id": "0901",
+      "version": "2",
+      "nombre": "ISOBUTANO",
+      "sinonimos": "2-Metilpropano; 1,1-Dimetiletano; Trimetilmetano"
+    },
+    {
+      "cas": "108-20-3",
+      "card_id": "0906",
+      "version": "2",
+      "nombre": "DIISOPROPILÉTER",
+      "sinonimos": "Éter isopropílico; 2,2'-Oxibispropano; 2-Isopropoxipropano"
+    },
+    {
+      "cas": "108-21-4",
+      "card_id": "0907",
+      "version": "2",
+      "nombre": "ACETATO DE ISOPROPILO",
+      "sinonimos": "2-Acetoxipropano; Acetato de 2-propilo; Éster 1-metiletílico del ácido acético"
+    },
+    {
+      "cas": "768-52-5",
+      "card_id": "0909",
+      "version": "2",
+      "nombre": "N-ISOPROPILANILINA",
+      "sinonimos": "N-Fenilisopropilamina; N-(1-Metiletil)bencenamina"
+    },
+    {
+      "cas": "68-11-1",
+      "card_id": "0915",
+      "version": "2",
+      "nombre": "ÁCIDO MERCAPTOACÉTICO",
+      "sinonimos": "Ácido tioglicólico; Ácido 2-mercaptoetanoico"
+    },
+    {
+      "cas": "79-41-4",
+      "card_id": "0917",
+      "version": "2",
+      "nombre": "ÁCIDO METACRÍLICO",
+      "sinonimos": "Ácido 2-metilpropenoico; Ácido alfa-metilacrílico"
+    },
+    {
+      "cas": "110-43-0",
+      "card_id": "0920",
+      "version": "2",
+      "nombre": "METIL n-AMIL CETONA",
+      "sinonimos": "2-Heptanona; Amilmetilcetona; Metilpentilcetona"
+    },
+    {
+      "cas": "100-61-8",
+      "card_id": "0921",
+      "version": "2",
+      "nombre": "N-METILANILINA",
+      "sinonimos": "N-Metilbencenamina; Monometilanilina; N-Fenilmetilamina"
+    },
+    {
+      "cas": "563-80-4",
+      "card_id": "0922",
+      "version": "2",
+      "nombre": "3-METIL-2-BUTANONA",
+      "sinonimos": "Metilisopropilcetona; 2-Acetilpropano; Isopropilmetilcetona"
+    },
+    {
+      "cas": "108-87-2",
+      "card_id": "0923",
+      "version": "2",
+      "nombre": "METILCICLOHEXANO",
+      "sinonimos": "Hexahidrotolueno; Ciclohexilmetano"
+    },
+    {
+      "cas": "7786-34-7",
+      "card_id": "0924",
+      "version": "2",
+      "nombre": "MEVINFÓS (Mezcla de isómeros)",
+      "sinonimos": "3-(Dimetoxifosfinoiloxi)-2-butenoato de metilo; Fosfato de 2-metoxicarbonil-1-metilvinilo y dimetilo"
+    },
+    {
+      "cas": "300-76-5",
+      "card_id": "0925",
+      "version": "2",
+      "nombre": "NALED",
+      "sinonimos": "Fosfato de 1,2-dibromo-2,2-dicloroetilo y dimetilo"
+    },
+    {
+      "cas": "10102-44-0",
+      "card_id": "0930",
+      "version": "2",
+      "nombre": "DIÓXIDO DE NITRÓGENO",
+      "sinonimos": "Peróxido de nitrógeno; Tetraóxido de dinitrógeno (ver Notas)"
+    },
+    {
+      "cas": "88-72-2",
+      "card_id": "0931",
+      "version": "2",
+      "nombre": "o-NITROTOLUENO",
+      "sinonimos": "2-Nitrotolueno; 1-Metil-2-nitrobenceno; o-Metilnitrobenceno; o-Mononitrotolueno; ONT"
+    },
+    {
+      "cas": "99-99-0",
+      "card_id": "0932",
+      "version": "2",
+      "nombre": "p-NITROTOLUENO",
+      "sinonimos": "4-Nitrotolueno; 1-Metil-4-nitrobenceno; p-Metilnitrobenceno; PNT"
+    },
+    {
+      "cas": "111-65-9",
+      "card_id": "0933",
+      "version": "2",
+      "nombre": "OCTANO",
+      "sinonimos": "n-Octano"
+    },
+    {
+      "cas": "1321-64-8",
+      "card_id": "0935",
+      "version": "2",
+      "nombre": "PENTACLORONAFTALENO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "92-84-2",
+      "card_id": "0937",
+      "version": "2",
+      "nombre": "FENOTIAZINA",
+      "sinonimos": "Dibenzotiazina; Tiodifenilamina; Dibenzo-1,4-tiazina"
+    },
+    {
+      "cas": "100-63-0",
+      "card_id": "0938",
+      "version": "2",
+      "nombre": "FENILHIDRACINA",
+      "sinonimos": "Hidrazinobenceno; Monofenilhidracina"
+    },
+    {
+      "cas": "109-60-4",
+      "card_id": "0940",
+      "version": "2",
+      "nombre": "ACETATO DE n-PROPILO",
+      "sinonimos": "1-Acetoxipropano; Acetato de 1-propilo; Éster n-propílico del ácido acético"
+    },
+    {
+      "cas": "7783-79-1",
+      "card_id": "0947",
+      "version": "2",
+      "nombre": "HEXAFLUORURO DE SELENIO (licuado)",
+      "sinonimos": "Fluoruro de selenio"
+    },
+    {
+      "cas": "26628-22-8",
+      "card_id": "0950",
+      "version": "2",
+      "nombre": "AZIDA DE SODIO",
+      "sinonimos": "Sal de sodio del ácido hidrazoico; Aziduro de sodio; Trinitruro de sodio; Azida sódica"
+    },
+    {
+      "cas": "7681-49-4",
+      "card_id": "0951",
+      "version": "2",
+      "nombre": "FLUORURO DE SODIO",
+      "sinonimos": "Monofluoruro de sodio"
+    },
+    {
+      "cas": "18282-10-5",
+      "card_id": "0954",
+      "version": "2",
+      "nombre": "ÓXIDO DE ESTAÑO(IV)",
+      "sinonimos": "Óxido estánnico; Anhídrido estánnico; Dióxido de estaño"
+    },
+    {
+      "cas": "21651-19-4",
+      "card_id": "0956",
+      "version": "2",
+      "nombre": "ÓXIDO DE ESTAÑO(II)",
+      "sinonimos": "Monóxido de estaño; Óxido estannoso"
+    },
+    {
+      "cas": "479-45-8",
+      "card_id": "0959",
+      "version": "2",
+      "nombre": "TETRILO",
+      "sinonimos": "N-Metil-N,2,4,6-tetranitroanilina; Picrilnitrometilamina; Nitramina"
+    },
+    {
+      "cas": "119-93-7",
+      "card_id": "0960",
+      "version": "2",
+      "nombre": "o-TOLIDINA",
+      "sinonimos": "3,3'-Dimetil-(1,1'-bifenil)-4,4'-diamina; Bianisidina; 3,3'-Dimetilbencidina; 4,4'-Bi-o-toluidina"
+    },
+    {
+      "cas": "78-30-8",
+      "card_id": "0961",
+      "version": "2",
+      "nombre": "FOSFATO DE TRI-o-CRESILO",
+      "sinonimos": "Fosfato de tri-o-tolilo; Triortocresilfosfato; TOCF"
+    },
+    {
+      "cas": "1321-65-9",
+      "card_id": "0962",
+      "version": "2",
+      "nombre": "TRICLORONAFTALENO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "118-96-7",
+      "card_id": "0967",
+      "version": "2",
+      "nombre": "2,4,6-TRINITROTOLUENO",
+      "sinonimos": "2-Metil-1,3,5-trinitrobenceno; 1-Metil-2,4,6-trinitrobenceno; TNT"
+    },
+    {
+      "cas": "546-93-0",
+      "card_id": "0969",
+      "version": "2",
+      "nombre": "CARBONATO DE MAGNESIO",
+      "sinonimos": "Magnesita; Sal de magnesio del ácido carbónico"
+    },
+    {
+      "cas": "90-04-0",
+      "card_id": "0970",
+      "version": "2",
+      "nombre": "o-ANISIDINA",
+      "sinonimos": "1-Amino-2-metoxibenceno; 2-Metoxianilina; 2-Aminoanisol; 2-Metoxibencenamina"
+    },
+    {
+      "cas": "104-94-9",
+      "card_id": "0971",
+      "version": "2",
+      "nombre": "p-ANISIDINA",
+      "sinonimos": "1-Amino-4-metoxibenceno; 4-Metoxianilina; 4-Aminoanisol; 4-Metoxibencenamina"
+    },
+    {
+      "cas": "86-88-4",
+      "card_id": "0973",
+      "version": "2",
+      "nombre": "alfa-NAFTILTIOUREA",
+      "sinonimos": "ANTU; 1-(1-Naftil)-2-tiourea; 1-Naftiltiourea"
+    },
+    {
+      "cas": "7789-30-2",
+      "card_id": "0974",
+      "version": "2",
+      "nombre": "PENTAFLUORURO DE BROMO",
+      "sinonimos": "Fluoruro de bromo"
+    },
+    {
+      "cas": "10210-68-1",
+      "card_id": "0976",
+      "version": "2",
+      "nombre": "COBALTO CARBONILO",
+      "sinonimos": "Octacarbonildicobalto; Tetracarbonilcobalto"
+    },
+    {
+      "cas": "13494-80-9",
+      "card_id": "0986",
+      "version": "2",
+      "nombre": "TELURO",
+      "sinonimos": "Telurio; Aurum paradoxum; Metallum problematum"
+    },
+    {
+      "cas": "557-05-1",
+      "card_id": "0987",
+      "version": "2",
+      "nombre": "ESTEARATO DE CINC",
+      "sinonimos": "Sal de cinc del ácido octadecanoico; Diestearato de cinc; Sal de cinc del ácido esteárico"
+    },
+    {
+      "cas": "542-75-6",
+      "card_id": "0995",
+      "version": "2",
+      "nombre": "1,3-DICLOROPROPENO (Mezcla de isómeros)",
+      "sinonimos": "1,3-Dicloropropileno; Dicloropropeno; Cloruro de 3-cloroalilo; DCP"
+    },
+    {
+      "cas": "1335-87-1",
+      "card_id": "0997",
+      "version": "2",
+      "nombre": "HEXACLORONAFTALENO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "7439-98-7",
+      "card_id": "1003",
+      "version": "2",
+      "nombre": "MOLIBDENO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "7664-38-2",
+      "card_id": "1008",
+      "version": "2",
+      "nombre": "ÁCIDO FOSFÓRICO",
+      "sinonimos": "Ácido ortofosfórico"
+    },
+    {
+      "cas": "76-22-2",
+      "card_id": "1021",
+      "version": "2",
+      "nombre": "ALCANFOR SINTÉTICO",
+      "sinonimos": "2-Bornanona; 2-Canfanona; 1,7,7-Trimetilbiciclo(2.2.1)heptan-2-ona"
+    },
+    {
+      "cas": "1338-23-4",
+      "card_id": "1028",
+      "version": "2",
+      "nombre": "PERÓXIDO DE METILETILCETONA (producto técnico)",
+      "sinonimos": "Peróxido de 2-butanona; Peróxido de etilmetilcetona; Hidroperóxido de metiletilcetona; MEKP"
+    },
+    {
+      "cas": "108-46-3",
+      "card_id": "1033",
+      "version": "2",
+      "nombre": "RESORCINOL",
+      "sinonimos": "1,3-Dihidroxibenceno; 1,3-Bencenodiol; 3-Hidroxifenol; Resorcina"
+    },
+    {
+      "cas": "120-82-1",
+      "card_id": "1049",
+      "version": "2",
+      "nombre": "1,2,4-TRICLOROBENCENO",
+      "sinonimos": "as-Triclorobenceno; 1,2,4-TCB"
+    },
+    {
+      "cas": "108-03-2",
+      "card_id": "1050",
+      "version": "2",
+      "nombre": "1-NITROPROPANO",
+      "sinonimos": "1-NP"
+    },
+    {
+      "cas": "12125-02-9",
+      "card_id": "1051",
+      "version": "2",
+      "nombre": "CLORURO DE AMONIO",
+      "sinonimos": "Cloruro amónico; Sal de amoniaco"
+    },
+    {
+      "cas": "506-77-4",
+      "card_id": "1053",
+      "version": "2",
+      "nombre": "CLORURO DE CIANÓGENO",
+      "sinonimos": "Cianuro de cloro; Clorocianuro; Clorocianógeno"
+    },
+    {
+      "cas": "110-83-8",
+      "card_id": "1054",
+      "version": "2",
+      "nombre": "CICLOHEXENO",
+      "sinonimos": "Hexanaftileno; Tetrahidrobenceno"
+    },
+    {
+      "cas": "628-96-6",
+      "card_id": "1056",
+      "version": "2",
+      "nombre": "DINITRATO DE ETILENGLICOL",
+      "sinonimos": "Dinitrato de glicol; Nitroglicol; EGDN"
+    },
+    {
+      "cas": "684-16-2",
+      "card_id": "1057",
+      "version": "2",
+      "nombre": "HEXAFLUOROACETONA",
+      "sinonimos": "1,1,1,3,3,3-Hexafluoro-2-propanona; Perfluoroacetona"
+    },
+    {
+      "cas": "2234-13-1",
+      "card_id": "1059",
+      "version": "2",
+      "nombre": "OCTACLORONAFTALENO",
+      "sinonimos": "Percloronaftaleno"
+    },
+    {
+      "cas": "298-02-2",
+      "card_id": "1060",
+      "version": "2",
+      "nombre": "FORATO",
+      "sinonimos": "Ditiofosfato de O,O-dietilo y S-(etiltio)metilo"
+    },
+    {
+      "cas": "409-21-2",
+      "card_id": "1061",
+      "version": "2",
+      "nombre": "CARBURO DE SILICIO (no fibras)",
+      "sinonimos": "Monocarburo de silicio; Carborundo"
+    },
+    {
+      "cas": "8006-64-2",
+      "card_id": "1063",
+      "version": "2",
+      "nombre": "TREMENTINA (Aceite)",
+      "sinonimos": "Aceite de trementina; Esencias de trementina; Vapor destilado de trementina; Goma de trementina; Trementina de madera"
+    },
+    {
+      "cas": "7646-85-7",
+      "card_id": "1064",
+      "version": "2",
+      "nombre": "CLORURO DE CINC",
+      "sinonimos": "Dicloruro de cinc; Cloruro de cinc(II); Mantequilla de cinc"
+    },
+    {
+      "cas": "2698-41-1",
+      "card_id": "1065",
+      "version": "2",
+      "nombre": "o-CLOROBENCILIDENO MALONONITRILO",
+      "sinonimos": "[2-(Clorofenil)metilen]malononitrilo; (2-Clorobenciliden)malononitrilo; (o-Clorobenzal)malononitrilo; ß,ß-Diciano-o-cloroestireno; [(2-Clorofenil)metilen]propanodinitrilo; CS (agen"
+    },
+    {
+      "cas": "95-50-1",
+      "card_id": "1066",
+      "version": "2",
+      "nombre": "1,2-DICLOROBENCENO",
+      "sinonimos": "o-Diclorobenceno"
+    },
+    {
+      "cas": "98-51-1",
+      "card_id": "1068",
+      "version": "2",
+      "nombre": "p-terc-BUTILTOLUENO",
+      "sinonimos": "1-Metil-4-terc-butilbenceno; 4-terc-Butiltolueno; p-TBT"
+    },
+    {
+      "cas": "77-47-4",
+      "card_id": "1096",
+      "version": "2",
+      "nombre": "HEXACLOROCICLOPENTADIENO",
+      "sinonimos": "1,2,3,4,5,5-Hexacloro-1,3-ciclopentadieno; Perclorociclopentadieno"
+    },
+    {
+      "cas": "150-76-5",
+      "card_id": "1097",
+      "version": "2",
+      "nombre": "4-METOXIFENOL",
+      "sinonimos": "Éter monometílico de la hidroquinona; Mequinol; p-Hidroxianisol"
+    },
+    {
+      "cas": "75-43-4",
+      "card_id": "1106",
+      "version": "2",
+      "nombre": "DICLOROMONOFLUOROMETANO (licuado)",
+      "sinonimos": "Fluorodiclorometano; HCFC 21; Fluorocarbono 21; Diclorofluorometano"
+    },
+    {
+      "cas": "101-77-9",
+      "card_id": "1111",
+      "version": "2",
+      "nombre": "4,4'-METILENDIANILINA",
+      "sinonimos": "4,4'-Diaminodifenilmetano; 4,4'-Metilenbisbencenamina; MDA"
+    },
+    {
+      "cas": "7616-94-6",
+      "card_id": "1114",
+      "version": "2",
+      "nombre": "FLUORURO DE PERCLORILO (licuado)",
+      "sinonimos": "Oxifluoruro de cloro; Fluoruro óxido de cloro"
+    },
+    {
+      "cas": "3333-52-6",
+      "card_id": "1121",
+      "version": "2",
+      "nombre": "TETRAMETILSUCCINONITRILO",
+      "sinonimos": "Dinitrilo del ácido tetrametilsuccínico; Tetrametilbutanodinitrilo; TMSN"
+    },
+    {
+      "cas": "7631-90-5",
+      "card_id": "1134",
+      "version": "2",
+      "nombre": "BISULFITO DE SODIO (disolución acuosa 38-40%)",
+      "sinonimos": "Sulfito ácido de sodio; Disolución acuosa de hidrogenosulfito de sodio; Disolución acuosa de metabisulfito de sodio; Sulfito de monosodio; Hidrogenosulfito de sodio; Sal monosódica"
+    },
+    {
+      "cas": "7722-88-5",
+      "card_id": "1140",
+      "version": "2",
+      "nombre": "PIROFOSFATO DE TETRASODIO",
+      "sinonimos": "Pirofosfato de sodio; Sal tetrasódica del ácido pirofosfórico"
+    },
+    {
+      "cas": "93763-70-3",
+      "card_id": "1141",
+      "version": "2",
+      "nombre": "PERLITA",
+      "sinonimos": ""
+    },
+    {
+      "cas": "136-78-7",
+      "card_id": "1142",
+      "version": "2",
+      "nombre": "DISUL-SÓDICO",
+      "sinonimos": "Sal sódica del hidrogenosulfato de 2-(2,4-diclorofenoxi)etilo; Sesona; 2,4-Diclorofenoxietilsulfato sódico"
+    },
+    {
+      "cas": "1332-58-7",
+      "card_id": "1144",
+      "version": "2",
+      "nombre": "CAOLÍN",
+      "sinonimos": "Silicato de aluminio hidratado; Arcilla de China; Argila"
+    },
+    {
+      "cas": "96-45-7",
+      "card_id": "1148",
+      "version": "2",
+      "nombre": "2-MERCAPTOIMIDAZOLINA",
+      "sinonimos": "2-Imidazolidintiona; Etilentiourea; ETU"
+    },
+    {
+      "cas": "109-87-5",
+      "card_id": "1152",
+      "version": "2",
+      "nombre": "METILAL",
+      "sinonimos": "Dimetoximetano; Formal; Formaldehído dimetilacetal; Metilendimetiléter"
+    },
+    {
+      "cas": "107-49-3",
+      "card_id": "1158",
+      "version": "2",
+      "nombre": "PIROFOSFATO DE TETRAETILO",
+      "sinonimos": "Difosfato de tetraetilo; Éster tetraetílico del ácido difosfórico; TEPP"
+    },
+    {
+      "cas": "12108-13-3",
+      "card_id": "1169",
+      "version": "2",
+      "nombre": "TRICARBONIL (METILCICLOPENTADIENIL) MANGANESO",
+      "sinonimos": "TMM"
+    },
+    {
+      "cas": "681-84-5",
+      "card_id": "1188",
+      "version": "2",
+      "nombre": "SILICATO DE METILO",
+      "sinonimos": "Silicato de tetrametilo; Ortosilicato de tetrametilo; Tetrametoxisilano"
+    },
+    {
+      "cas": "13397-24-5",
+      "card_id": "1215",
+      "version": "2",
+      "nombre": "YESO (MINERAL)",
+      "sinonimos": "Sulfato de calcio dihidrato; Aljez"
+    },
+    {
+      "cas": "7783-54-2",
+      "card_id": "1234",
+      "version": "2",
+      "nombre": "TRIFLUORURO DE NITRÓGENO",
+      "sinonimos": "Fluoruro de nitrógeno; Trifluoroamina"
+    },
+    {
+      "cas": "79-27-6",
+      "card_id": "1235",
+      "version": "2",
+      "nombre": "1,1,2,2-TETRABROMOETANO",
+      "sinonimos": "Tetrabromuro de acetileno; Tetrabromoacetileno; sim-Tetrabromoetano"
+    },
+    {
+      "cas": "7782-65-2",
+      "card_id": "1244",
+      "version": "2",
+      "nombre": "GERMANO",
+      "sinonimos": "Hidruro de germanio; Tetrahidruro de germanio"
+    },
+    {
+      "cas": "1918-02-1",
+      "card_id": "1246",
+      "version": "2",
+      "nombre": "PICLORAM",
+      "sinonimos": "Ácido 4-amino-3,5,6-tricloro-2-piridinacarboxílico; Ácido 4-amino-3,5,6-tricloropicolínico"
+    },
+    {
+      "cas": "35400-43-2",
+      "card_id": "1248",
+      "version": "2",
+      "nombre": "SULPROFÓS",
+      "sinonimos": "Ditiofosfato de O-etilo, O-(4-metiltiofenilo) y S-propilo; Éster O-etílico, O-(4-metiltiofenílico) y S-propílico del ácido ditiofosfórico"
+    },
+    {
+      "cas": "61788-32-7",
+      "card_id": "1249",
+      "version": "2",
+      "nombre": "TERFENILOS HIDROGENADOS (40% hidrogenado)",
+      "sinonimos": "Difenilbencenos hidrogenados; Fenilbifenilos hidrogenados"
+    },
+    {
+      "cas": "334-88-3",
+      "card_id": "1256",
+      "version": "2",
+      "nombre": "DIAZOMETANO",
+      "sinonimos": "Azimetileno; Diazirina"
+    },
+    {
+      "cas": "137-05-3",
+      "card_id": "1272",
+      "version": "2",
+      "nombre": "2-CIANOACRILATO DE METILO",
+      "sinonimos": "Éster metílico del ácido 2-ciano-2-propenoico; Éster metílico del ácido 2-cianoacrílico; Mecrilato"
+    },
+    {
+      "cas": "107-66-4",
+      "card_id": "1278",
+      "version": "2",
+      "nombre": "FOSFATO DE DIBUTILO",
+      "sinonimos": "o-Fosfato ácido de dibutilo; Hidrogenofosfato de dibutilo; Éster dibutílico del ácido fosfórico"
+    },
+    {
+      "cas": "7440-74-6",
+      "card_id": "1293",
+      "version": "2",
+      "nombre": "INDIO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "72-43-5",
+      "card_id": "1306",
+      "version": "2",
+      "nombre": "METOXICLORO",
+      "sinonimos": "1,1-(2,2,2-Tricloroetiliden)bis(4-metoxibenceno); 1,1,1-Tricloro-2,2-bis(p-metoxifenil)etano; Dimetoxi-DDT"
+    },
+    {
+      "cas": "10102-43-9",
+      "card_id": "1311",
+      "version": "2",
+      "nombre": "MONÓXIDO DE NITRÓGENO",
+      "sinonimos": "Óxido de nitrógeno; Monóxido de mononitrógeno; Óxido nítrico"
+    },
+    {
+      "cas": "603-34-9",
+      "card_id": "1366",
+      "version": "2",
+      "nombre": "TRIFENILAMINA",
+      "sinonimos": "N,N-Difenilbencenamina; N,N-Difenilanilina"
+    },
+    {
+      "cas": "74-96-4",
+      "card_id": "1378",
+      "version": "2",
+      "nombre": "BROMOETANO",
+      "sinonimos": "Bromuro de etilo"
+    },
+    {
+      "cas": "1335-88-2",
+      "card_id": "1387",
+      "version": "2",
+      "nombre": "TETRACLORONAFTALENO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "2039-87-4",
+      "card_id": "1388",
+      "version": "2",
+      "nombre": "o-CLOROESTIRENO",
+      "sinonimos": "2-Cloroestireno; 2-Cloroetenilbenceno"
+    },
+    {
+      "cas": "460-19-5",
+      "card_id": "1390",
+      "version": "2",
+      "nombre": "CIANÓGENO",
+      "sinonimos": "Dicianógeno; Etanodinitrilo; Oxalonitrilo"
+    },
+    {
+      "cas": "541-85-5",
+      "card_id": "1391",
+      "version": "2",
+      "nombre": "5-METIL-3-HEPTANONA",
+      "sinonimos": "Etilamilcetona; sec-Amiletilcetona"
+    },
+    {
+      "cas": "6423-43-4",
+      "card_id": "1392",
+      "version": "2",
+      "nombre": "DINITRATO DE PROPILENGLICOL",
+      "sinonimos": "Dinitrato de 1,2-propanodiol; DNPG"
+    },
+    {
+      "cas": "7440-06-4",
+      "card_id": "1393",
+      "version": "2",
+      "nombre": "PLATINO (polvo)",
+      "sinonimos": "Esponja de platino; Platino negro (polvo)"
+    },
+    {
+      "cas": "76-01-7",
+      "card_id": "1394",
+      "version": "2",
+      "nombre": "PENTACLOROETANO",
+      "sinonimos": "Pentacloruro de etano; Pentalin"
+    },
+    {
+      "cas": "92-93-3",
+      "card_id": "1395",
+      "version": "2",
+      "nombre": "4-NITRODIFENILO",
+      "sinonimos": "4-Nitrobifenilo; p-Nitrodifenilo; p-Nitrobifenilo"
+    },
+    {
+      "cas": "2699-79-8",
+      "card_id": "1402",
+      "version": "2",
+      "nombre": "FLUORURO DE SULFURILO",
+      "sinonimos": "Difluoruro de sulfurilo; Difluoruro dióxido de azufre"
+    },
+    {
+      "cas": "7440-33-7",
+      "card_id": "1404",
+      "version": "2",
+      "nombre": "TUNGSTENO (polvo)",
+      "sinonimos": "Wolframio"
+    },
+    {
+      "cas": "298-04-4",
+      "card_id": "1408",
+      "version": "2",
+      "nombre": "DISULFOTÓN",
+      "sinonimos": "Ditiodemetón; Ditiofosfato de O,O-dietilo y S-(2-etilmercaptoetilo); Ditiofosfato de O,O-dietilo y S-2-(etiltio)etilo"
+    },
+    {
+      "cas": "7719-09-7",
+      "card_id": "1409",
+      "version": "2",
+      "nombre": "CLORURO DE TIONILO",
+      "sinonimos": "Dicloruro óxido de azufre; Dicloruro sulfuroso; Cloruro de sulfinilo; Dicloruro de tionilo"
+    },
+    {
+      "cas": "99-08-1",
+      "card_id": "1411",
+      "version": "2",
+      "nombre": "m-NITROTOLUENO",
+      "sinonimos": "3-Metilnitrobenceno; 3-Nitrotolueno"
+    },
+    {
+      "cas": "123-19-3",
+      "card_id": "1414",
+      "version": "2",
+      "nombre": "DIPROPILCETONA",
+      "sinonimos": "4-Heptanona; Butirona; Di-n-propilcetona"
+    },
+    {
+      "cas": "110-62-3",
+      "card_id": "1417",
+      "version": "2",
+      "nombre": "VALERALDEHÍDO",
+      "sinonimos": "n-Pentanal; Amilaldehído; Pentaldehído; Aldehído n-valeriánico"
+    },
+    {
+      "cas": "102-81-8",
+      "card_id": "1418",
+      "version": "2",
+      "nombre": "2-N-DIBUTILAMINOETANOL",
+      "sinonimos": "Alcohol 2-di-N-butilaminoetílico; N,N-Dibutil-N-(2-hidroxietil)amina; N,N-Dibutiletanolamina"
+    },
+    {
+      "cas": "75-61-6",
+      "card_id": "1419",
+      "version": "2",
+      "nombre": "DIBROMODIFLUOROMETANO",
+      "sinonimos": "Difluorodibromometano; Fluorocarbono 12-B2"
+    },
+    {
+      "cas": "76-11-9",
+      "card_id": "1420",
+      "version": "2",
+      "nombre": "1,1,1,2-TETRACLORO-2,2-DIFLUOROETANO",
+      "sinonimos": "1,1-Difluoro-1,2,2,2-tetracloroetano; CFC-112a"
+    },
+    {
+      "cas": "2179-59-1",
+      "card_id": "1422",
+      "version": "2",
+      "nombre": "DISULFURO DE ALILPROPILO",
+      "sinonimos": "Disulfuro de 2-propenilpropilo"
+    },
+    {
+      "cas": "600-25-9",
+      "card_id": "1423",
+      "version": "2",
+      "nombre": "1-CLORO-1-NITROPROPANO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "7572-29-4",
+      "card_id": "1426",
+      "version": "2",
+      "nombre": "DICLOROACETILENO",
+      "sinonimos": "Dicloroetino"
+    },
+    {
+      "cas": "107-16-4",
+      "card_id": "1427",
+      "version": "2",
+      "nombre": "GLICOLONITRILO",
+      "sinonimos": "Cianhidrina del formaldehído; Hidroxiacetonitrilo; Cianometanol; Gliconitrilo; Disolución de nitrilo del ácido glicólico"
+    },
+    {
+      "cas": "95-63-6",
+      "card_id": "1433",
+      "version": "2",
+      "nombre": "1,2,4-TRIMETILBENCENO",
+      "sinonimos": "Pseudocumeno"
+    },
+    {
+      "cas": "97-77-8",
+      "card_id": "1438",
+      "version": "2",
+      "nombre": "DISULFIRAM",
+      "sinonimos": "Disulfuro de tetraetiltiuramo; 1,1'-Ditiobis(N,N-dietiltioformamida); Disulfuro de bis-(N,N-dietiltiocarbamoilo); TETD"
+    },
+    {
+      "cas": "540-88-5",
+      "card_id": "1445",
+      "version": "2",
+      "nombre": "ACETATO DE terc-BUTILO",
+      "sinonimos": "Éster terc-butílico del ácido acético; Éster 1,1-dimetiletílico del ácido acético"
+    },
+    {
+      "cas": "314-40-9",
+      "card_id": "1448",
+      "version": "2",
+      "nombre": "BROMACILO",
+      "sinonimos": "5-Bromo-3-sec-butil-6-metiluracilo; 5-Bromo-6-metil-3-(1-metilpropil)uracilo; 5-Bromo-6-metil-3-(1-metilpropil)-2,4(1H,3H)-pirimidinadiona"
+    },
+    {
+      "cas": "8002-74-2",
+      "card_id": "1457",
+      "version": "2",
+      "nombre": "CERA DE PARAFINA",
+      "sinonimos": "Cera de petróleo; Ceras de parafina y ceras hidrocarbonadas; (Ver notas)"
+    },
+    {
+      "cas": "95-49-8",
+      "card_id": "1458",
+      "version": "2",
+      "nombre": "2-CLOROTOLUENO",
+      "sinonimos": "1-Cloro-2-metilbenceno; o-Clorotolueno; Cloruro de o-tolilo"
+    },
+    {
+      "cas": "7681-57-4",
+      "card_id": "1461",
+      "version": "2",
+      "nombre": "DISULFITO DE SODIO",
+      "sinonimos": "Disulfito de disodio; Pirosulfito de disodio; Metabisulfito de sodio"
+    },
+    {
+      "cas": "1477-55-0",
+      "card_id": "1462",
+      "version": "2",
+      "nombre": "1,3-BIS(AMINOMETIL)BENCENO",
+      "sinonimos": "1,3-Bencenodimetanamina; m-Fenilenbis(metilamina); m-Xililendiamina; m-Xileno-alfa,alfa'-diamina"
+    },
+    {
+      "cas": "1746-01-6",
+      "card_id": "1467",
+      "version": "2",
+      "nombre": "2,3,7,8-TETRACLORODIBENZO-p-DIOXINA",
+      "sinonimos": "2,3,7,8-Tetraclorodibenzo [b,e] [1,4]dioxina; 2,3,7,8-Tetracloro-1,4-dioxina; 2,3,7,8-TCDD"
+    },
+    {
+      "cas": "509-14-8",
+      "card_id": "1468",
+      "version": "2",
+      "nombre": "TETRANITROMETANO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "89-72-5",
+      "card_id": "1472",
+      "version": "2",
+      "nombre": "o-sec-BUTILFENOL",
+      "sinonimos": "2-sec-Butilfenol; 2-(1-Metilpropil)fenol"
+    },
+    {
+      "cas": "10022-31-8",
+      "card_id": "1480",
+      "version": "2",
+      "nombre": "NITRATO DE BARIO",
+      "sinonimos": "Sal de bario del ácido nítrico; Dinitrato de bario"
+    },
+    {
+      "cas": "630-20-6",
+      "card_id": "1486",
+      "version": "2",
+      "nombre": "1,1,1,2-TETRACLOROETANO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "109-59-1",
+      "card_id": "1491",
+      "version": "2",
+      "nombre": "ÉTER ISOPROPÍLICO DE ETILENGLICOL",
+      "sinonimos": "2-Isopropoxietanol; 2-(1-Metoxietoxi)-etanol; Isopropilglicol; 4-Metil-3-oxa-1-pentanol; Isopropiloxitol; Isopropilcellosolve; EGiPE"
+    },
+    {
+      "cas": "110-61-2",
+      "card_id": "1497",
+      "version": "2",
+      "nombre": "SUCCINONITRILO",
+      "sinonimos": "Butanodinitrilo; Ácido succínico dinitrilo; Cianuro de etileno; Dicianuro de etileno; Dicianoetano"
+    },
+    {
+      "cas": "60-11-7",
+      "card_id": "1498",
+      "version": "2",
+      "nombre": "4-DIMETILAMINOAZOBENCENO",
+      "sinonimos": "N,N-Dimetil-4-fenilazobencenamina; p-Dimetilaminoazobenceno; N,N-Dimetil-p-(fenilazo)anilina"
+    },
+    {
+      "cas": "581-89-5",
+      "card_id": "1504",
+      "version": "2",
+      "nombre": "2-NITRONAFTALENO",
+      "sinonimos": "ß-Nitronaftaleno"
+    },
+    {
+      "cas": "57-50-1",
+      "card_id": "1507",
+      "version": "2",
+      "nombre": "SACAROSA",
+      "sinonimos": "ß-D-Fructofuranosil-alfa-D-glucopiranosida; alfa-D-Gluco piranosil-ß-D-fructofuranosida; D(+)Sacarosa; Azúcar de remolacha"
+    },
+    {
+      "cas": "7440-21-3",
+      "card_id": "1508",
+      "version": "2",
+      "nombre": "SILICIO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "102-54-5",
+      "card_id": "1512",
+      "version": "2",
+      "nombre": "FERROCENO",
+      "sinonimos": "Hierro diciclopentadienilo; Hierro di-2,4-ciclopentadienilo"
+    },
+    {
+      "cas": "627-13-4",
+      "card_id": "1513",
+      "version": "2",
+      "nombre": "NITRATO DE n-PROPILO",
+      "sinonimos": "Éster propílico del ácido nítrico; Nitrato de monopropilo"
+    },
+    {
+      "cas": "83-26-1",
+      "card_id": "1515",
+      "version": "2",
+      "nombre": "PINDONA",
+      "sinonimos": "2-Pivaloilindano-1,3-diona; 2-(2,2-Dimetil-1-oxopropil)-1H-indeno-1,3 (2H)-diona; 2-Pivaloil-1,3-indanodiona"
+    },
+    {
+      "cas": "110-66-7",
+      "card_id": "1521",
+      "version": "2",
+      "nombre": "1-PENTANOTIOL",
+      "sinonimos": "Amilmercaptano; Pentilmercaptano; Sulfhidrato de amilo; 2-Metilbutilmercaptano"
+    },
+    {
+      "cas": "111-31-9",
+      "card_id": "1523",
+      "version": "2",
+      "nombre": "n-HEXANOTIOL",
+      "sinonimos": "1-Mercaptohexano; 1-Hexiltiol; Hexilmercaptano"
+    },
+    {
+      "cas": "1189-85-1",
+      "card_id": "1533",
+      "version": "2",
+      "nombre": "CROMATO DE terc-BUTILO",
+      "sinonimos": "Cromato de bis(terc-butilo)"
+    },
+    {
+      "cas": "7440-31-5",
+      "card_id": "1535",
+      "version": "2",
+      "nombre": "ESTAÑO",
+      "sinonimos": ""
+    },
+    {
+      "cas": "148-01-6",
+      "card_id": "1552",
+      "version": "2",
+      "nombre": "DINITOLMIDA",
+      "sinonimos": "2-Metil-3,5-dinitrobenzamida; 3,5-Dinitro-2-metilbenzamida; 3,5-Dinitro-o-toluamida"
+    },
+    {
+      "cas": "7773-06-0",
+      "card_id": "1555",
+      "version": "2",
+      "nombre": "SULFAMATO DE AMONIO",
+      "sinonimos": "Sal monoamónica del ácido sulfámico; Amido sulfonato amónico; Sulfamidato de amonio"
+    },
+    {
+      "cas": "121-45-9",
+      "card_id": "1556",
+      "version": "2",
+      "nombre": "FOSFITO DE TRIMETILO",
+      "sinonimos": "Éster trimetílico del ácido fosforoso; Trimetoxi fosfina; Fosfito de metilo"
+    },
+    {
+      "cas": "1309-37-1",
+      "card_id": "1577",
+      "version": "2",
+      "nombre": "ÓXIDO FÉRRICO",
+      "sinonimos": "Óxido férrico anhidro; Óxido de hierro(III); Trióxido de dihierro; Trióxido de hierro; Sesquióxido férrico"
+    },
+    {
+      "cas": "615-05-4",
+      "card_id": "1578",
+      "version": "2",
+      "nombre": "2,4-DIAMINOANISOL",
+      "sinonimos": "4-Metoxi-1,3-bencenodiamina; 4-Metoxi-3-fenilendiamina; 4-Metoxi-m-fenilendiamina; C.I. Base de oxidación 12"
+    },
+    {
+      "cas": "626-17-5",
+      "card_id": "1583",
+      "version": "2",
+      "nombre": "iso-FTALONITRILO",
+      "sinonimos": "Benceno-1,3-dicarbonitrilo; iso-Ftalodinitrilo; m-Dicianobenceno; m-Ftalodinitrilo"
+    },
+    {
+      "cas": "7778-18-9",
+      "card_id": "1589",
+      "version": "2",
+      "nombre": "SULFATO DE CALCIO (ANHIDRO)",
+      "sinonimos": "Sal de calcio del ácido sulfúrico (1:1)"
+    },
+    {
+      "cas": "21351-79-1",
+      "card_id": "1592",
+      "version": "2",
+      "nombre": "HIDRÓXIDO DE CESIO",
+      "sinonimos": "Hidrato de cesio"
+    },
+    {
+      "cas": "1639-09-4",
+      "card_id": "1619",
+      "version": "2",
+      "nombre": "n-HEPTANOTIOL",
+      "sinonimos": "n-Heptiltiol; 1-Mercaptoheptano; Heptilmercaptano"
+    },
+    {
+      "cas": "1455-21-6",
+      "card_id": "1620",
+      "version": "2",
+      "nombre": "1-NONANOTIOL",
+      "sinonimos": "n-Nonilmercaptano; n-Noniltiol; 1-Mercaptononano"
+    },
+    {
+      "cas": "2885-00-9",
+      "card_id": "1622",
+      "version": "2",
+      "nombre": "1-OCTADECANOTIOL",
+      "sinonimos": "Estearil mercaptano; n-Octadecilmercaptano; 1-Octadecilmercaptano; 1-Mercaptooctadecano; n-Octadecanotiol"
+    },
+    {
+      "cas": "76-38-0",
+      "card_id": "1636",
+      "version": "2",
+      "nombre": "METOXIFLURANO",
+      "sinonimos": "2,2-Dicloro-1,1-difluoroetil metil éter; 2,2-Dicloro-1,1-difluoro-1-metoxietano; Metoflurano; Pentrano"
+    },
+    {
+      "cas": "156-62-7",
+      "card_id": "1639",
+      "version": "2",
+      "nombre": "CIANAMIDA DE CALCIO",
+      "sinonimos": "Carbimida de calcio; Cianamida, sal de calcio"
+    },
+    {
+      "cas": "121-82-4",
+      "card_id": "1641",
+      "version": "2",
+      "nombre": "PERHIDRO-1,3,5-TRINITRO-1,3,5-TRIAZINA",
+      "sinonimos": "1,3,5-Triaza-1,3,5-trinitrociclohexano; Hexógeno; Ciclonita; Ciclotrimetilenotrinitramina; RDX"
+    },
+    {
+      "cas": "1929-82-4",
+      "card_id": "1658",
+      "version": "2",
+      "nombre": "2-CLORO-6-TRICLOROMETILPIRIDINA",
+      "sinonimos": "Nitrapirina; alfa,alfa,alfa,6-Tetracloro-2-picolina; 2-Cloro-6-(triclorometil)piridina"
+    }
+  ]
+}

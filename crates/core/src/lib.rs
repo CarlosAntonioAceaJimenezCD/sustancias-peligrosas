@@ -23,6 +23,7 @@ const CAMEO_REACTIONS_JSON: &str = include_str!("../../../data/cameo_reactions_m
 const PUBCHEM_REACTIVITY_JSON: &str = include_str!("../../../data/pubchem_reactivity.json");
 const CAMEO_REVIEWED_JSON: &str = include_str!("../../../data/cameo_reviewed.json");
 const NIOSH_LIMITS_JSON: &str = include_str!("../../../data/niosh_limits.json");
+const ICSC_CARDS_JSON: &str = include_str!("../../../data/icsc_cards.json");
 
 mod query;
 
@@ -199,6 +200,36 @@ pub struct NioshLimit {
 #[derive(Debug, Clone, Deserialize, Serialize)]
 struct NioshLimitsDb {
     pub limites: Vec<NioshLimit>,
+}
+
+/// Correspondencia CAS -> ficha ICSC. Solo guardamos identificadores: el
+/// contenido de la ficha se consulta siempre en el sitio oficial de la OIT/OMS.
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct IcscCard {
+    #[serde(default)]
+    pub cas: String,
+    #[serde(default)]
+    pub card_id: String,
+    #[serde(default)]
+    pub version: String,
+    #[serde(default)]
+    pub nombre: String,
+    #[serde(default)]
+    pub sinonimos: String,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+struct IcscCardsDb {
+    #[serde(default)]
+    pub fichas: Vec<IcscCard>,
+}
+
+/// Referencia estructurada a una ficha ICSC oficial.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct IcscReferencia {
+    pub card_id: String,
+    pub nombre: String,
+    pub url: String,
 }
 
 /// Perfil de reactividad de PubChem para sustancias sin clasificación CAMEO.
@@ -491,6 +522,73 @@ pub fn niosh_limits() -> &'static [NioshLimit] {
 pub fn niosh_limit_for_cas(cas: &str) -> Option<&'static NioshLimit> {
     let buscado = normalize(cas.trim());
     niosh_limits().iter().find(|l| normalize(&l.cas) == buscado)
+}
+
+const ICSC_LISTADO_URL: &str =
+    "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es";
+
+/// Base CAS -> ficha ICSC embebida y cacheada (sin acceso a red).
+pub fn icsc_cards() -> &'static [IcscCard] {
+    static CACHE: OnceLock<IcscCardsDb> = OnceLock::new();
+    &CACHE.get_or_init(|| parse(ICSC_CARDS_JSON)).fichas
+}
+
+/// Primera ficha ICSC cuyo CAS coincide. Un CAS vacío nunca genera una URL.
+pub fn icsc_card_for_cas(cas: &str) -> Option<&'static IcscCard> {
+    let buscado = cas.trim();
+    if buscado.is_empty() {
+        return None;
+    }
+    icsc_cards().iter().find(|c| c.cas.trim() == buscado)
+}
+
+/// ICSC publica en es/en/fr/pt; `auto`, `de`, `it`… caen al español.
+fn icsc_lang(lang: &str) -> &'static str {
+    match lang.trim().to_ascii_lowercase().as_str() {
+        "en" => "en",
+        "fr" => "fr",
+        "pt" => "pt",
+        _ => "es",
+    }
+}
+
+/// URL oficial de una ficha ICSC, con el idioma y la versión disponibles.
+pub fn icsc_url(card_id: &str, version: &str, lang: &str) -> String {
+    let base = format!(
+        "https://chemicalsafety.ilo.org/dyn/icsc/showcard.display?p_lang={}&p_card_id={}",
+        icsc_lang(lang),
+        card_id
+    );
+    let version = version.trim();
+    if version.is_empty() {
+        base
+    } else {
+        format!("{base}&p_version={version}")
+    }
+}
+
+/// Referencia ICSC de una sustancia, si su CAS tiene ficha asignada.
+pub fn icsc_referencia(cas: &str, lang: &str) -> Option<IcscReferencia> {
+    let card = icsc_card_for_cas(cas)?;
+    Some(IcscReferencia {
+        card_id: card.card_id.clone(),
+        nombre: card.nombre.clone(),
+        url: icsc_url(&card.card_id, &card.version, lang),
+    })
+}
+
+/// Enlace profundo a la ficha ICSC; si no hay ficha, al listado oficial.
+pub fn icsc_fuente(cas: &str, lang: &str) -> Fuente {
+    match icsc_referencia(cas, lang) {
+        Some(r) => Fuente {
+            titulo: format!("ICSC {} - {} (OIT/OMS)", r.card_id, r.nombre),
+            url: r.url,
+        },
+        None => Fuente {
+            titulo: "ICSC - OIT/OMS".to_string(),
+            url: ICSC_LISTADO_URL.to_string(),
+        },
+    }
 }
 
 /// Perfiles de reactividad de PubChem (cacheados).
@@ -830,7 +928,7 @@ pub fn substance_from_pubchem(p: &PubChemCompound) -> Substance {
     let consultar = "Esta sección requiere la ficha de datos de seguridad del fabricante. Consulta los enlaces oficiales al final de la ficha.";
     let online_url = p.url();
     let nombre_mostrado = localized_name(&p.synonyms, &p.lang).unwrap_or_else(|| p.title.clone());
-    let icsc = "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es";
+    let icsc = icsc_fuente(&p.cas, &p.lang);
 
     let field = |k: &str, v: String| FdsField { k: k.to_string(), v };
     let sec = |numero: u32, id: &str, titulo: &str, texto: &str,
@@ -909,8 +1007,12 @@ pub fn substance_from_pubchem(p: &PubChemCompound) -> Substance {
             "Verificar REACH, CLP y SGA/GHS según el país seleccionado.", vec![], vec![]),
         sec(16, "otras", "Otras informaciones",
             "Ficha parcial generada en línea a partir de PubChem. No sustituye una FDS completa.",
-            vec![field("Fuente", "PubChem (NIH)".to_string()), field("CID", p.cid.to_string())],
-            links(vec![online_url.clone(), icsc.to_string()])),
+            vec![
+                field("Fuente", "PubChem (NIH)".to_string()),
+                field("CID", p.cid.to_string()),
+                field("ICSC", icsc.titulo.clone()),
+            ],
+            links(vec![online_url.clone(), icsc.url.clone()])),
     ];
 
     Substance {
@@ -927,7 +1029,7 @@ pub fn substance_from_pubchem(p: &PubChemCompound) -> Substance {
         interacciones: Interacciones::default(),
         fuentes: vec![
             Fuente { titulo: format!("PubChem - {} (CID {})", p.title, p.cid), url: online_url },
-            Fuente { titulo: "ICSC - OIT/OMS".to_string(), url: icsc.to_string() },
+            icsc,
         ],
         estado: "online".to_string(),
         verificado_por: String::new(),
@@ -1014,6 +1116,7 @@ pub fn substance_from_pubchem_view(
     lang: &str,
 ) -> Substance {
     let vacias: Vec<serde_json::Value> = Vec::new();
+    let icsc = icsc_fuente(&base.cas, lang);
     let secciones_root = view
         .get("Record")
         .and_then(|r| r.get("Section"))
@@ -1100,6 +1203,7 @@ pub fn substance_from_pubchem_view(
         seccion(16, "otras", "Otras informaciones", vec![
             "Fuente: PubChem (NIH), vista PUG View.".to_string(),
             format!("CID: {}", base.cid),
+            format!("Ficha ICSC (OIT/OMS): {} — {}", icsc.titulo, icsc.url),
             "Ficha generada automáticamente; verificar siempre con la FDS del fabricante.".to_string(),
         ]),
     ];
@@ -1127,7 +1231,7 @@ pub fn substance_from_pubchem_view(
         interacciones: Interacciones::default(),
         fuentes: vec![
             Fuente { titulo: format!("PubChem - CID {}", base.cid), url: base.url() },
-            Fuente { titulo: "ICSC - OIT/OMS".to_string(), url: "https://chemicalsafety.ilo.org/dyn/icsc/showcard.listCards3?p_lang=es".to_string() },
+            icsc,
         ],
         estado: "online".to_string(),
         verificado_por: String::new(),
@@ -1573,6 +1677,49 @@ mod tests {
     fn el_analisis_sigue_siendo_solo_pares() {
         let ids: Vec<String> = (0..10).map(|i| format!("s-{i}")).collect();
         assert_eq!(analyze_interactions_named(&ids, &HashMap::new()).len(), 45);
+    }
+
+    #[test]
+    fn icsc_acetona_usa_ficha_0087_y_url_profunda() {
+        let r = icsc_referencia("67-64-1", "es").expect("67-64-1 debe estar en el dataset ICSC");
+        assert_eq!(r.card_id, "0087");
+        assert_eq!(r.nombre, "ACETONA");
+        assert!(r.url.starts_with("https://chemicalsafety.ilo.org/dyn/icsc/showcard.display?"));
+        assert!(r.url.contains("p_lang=es"));
+        assert!(r.url.contains("p_card_id=0087"));
+        assert!(r.url.contains("p_version=2"));
+    }
+
+    #[test]
+    fn icsc_cas_inexistente_o_vacio_devuelve_none_y_fuente_generica() {
+        assert!(icsc_referencia("000-00-0", "es").is_none());
+        assert!(icsc_referencia("", "es").is_none());
+        assert!(icsc_referencia("   ", "es").is_none());
+        let f = icsc_fuente("000-00-0", "es");
+        assert_eq!(f.titulo, "ICSC - OIT/OMS");
+        assert!(f.url.contains("showcard.listCards3?p_lang=es"));
+    }
+
+    #[test]
+    fn icsc_url_respeta_idioma_y_hace_fallback_de_auto() {
+        let en = icsc_referencia("67-64-1", "en").unwrap();
+        assert!(en.url.contains("p_lang=en"));
+        for lang in ["auto", "de", "it", ""] {
+            let r = icsc_referencia("67-64-1", lang).unwrap();
+            assert!(r.url.contains("p_lang=es"), "fallback falló para {lang:?}");
+        }
+    }
+
+    #[test]
+    fn icsc_dataset_tiene_cas_no_vacios_y_sin_duplicados() {
+        let cards = icsc_cards();
+        assert!(!cards.is_empty());
+        let mut vistos = std::collections::HashSet::new();
+        for c in cards {
+            assert!(!c.cas.trim().is_empty(), "CAS vacío en {}", c.card_id);
+            assert!(vistos.insert(c.cas.trim()), "CAS duplicado: {}", c.cas);
+            assert!(!c.card_id.is_empty());
+        }
     }
 
     #[test]
