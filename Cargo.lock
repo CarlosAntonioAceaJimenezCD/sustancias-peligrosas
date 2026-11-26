@@ -543,6 +543,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "console_error_panic_hook"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a06aeb73f470f66dcdbf7223caeebb85984942f22f1adb2a088cf9668146bbbc"
+dependencies = [
+ "cfg-if",
+ "wasm-bindgen",
+]
+
+[[package]]
 name = "const-serialize"
 version = "0.7.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5013,6 +5023,7 @@ dependencies = [
  "async-trait",
  "gloo-net 0.8.0",
  "reqwest",
+ "serde",
  "serde_json",
  "sustancias-core",
  "tokio",
@@ -5033,15 +5044,19 @@ name = "sustancias-web"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "console_error_panic_hook",
  "dioxus",
  "gloo-net 0.8.0",
+ "gloo-timers",
  "js-sys",
  "reqwest",
  "serde_json",
  "sustancias-core",
  "sustancias-i18n",
  "sustancias-storage",
+ "tokio",
  "urlencoding",
+ "web-sys",
  "webbrowser",
 ]
 

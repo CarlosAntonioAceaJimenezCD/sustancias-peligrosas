@@ -257,6 +257,8 @@ body{
 .multi-nota{margin:var(--sp-1) 0 0;font-size:var(--step--1);color:var(--muted)}
 .aviso-ternario{margin:var(--sp-3) 0 var(--sp-1);border-left:2px solid var(--warn);padding-left:var(--sp-2);font-weight:650}
 .multi-tercias{margin-top:var(--sp-3)}
+.regla-ternaria{margin:var(--sp-2) 0;padding:var(--sp-2);border:1px solid rgba(210,153,34,.38);border-radius:var(--r-sm);background:rgba(210,153,34,.08)}
+.regla-ternaria strong{color:var(--amber-300)}
 
 /* --- Botones --- */
 .boton{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-2);
@@ -774,6 +776,7 @@ struct CameoVisible {
 #[derive(Clone)]
 struct TripleVisible {
     nombres: Vec<String>,
+    reglas: Vec<core::TernaryRule>,
     nivel: String,
     etiqueta: String,
     compatibilidad: String,
@@ -798,7 +801,10 @@ fn triple_prioridad(t: &core::TripleAnalysis) -> u8 {
         "precaucion" => 2,
         _ => 1,
     };
-    nivel * 4 + comp + if t.puente.is_some() { 2 } else { 0 }
+    nivel * 4
+        + comp
+        + if t.puente.is_some() { 2 } else { 0 }
+        + if t.reglas.is_empty() { 0 } else { 4 }
 }
 
 fn combinaciones3(n: usize) -> usize {
@@ -914,12 +920,12 @@ fn tema_efectivo(preferencia: &str) -> &'static str {
 /// Siluetas de los continentes en negro (derivadas de un mapa GeoJSON público).
 fn continent_svg(name: &str, class: &str) -> String {
     let d = match name {
-        "Marco internacional" => r##"M12,2 A10,10 0 1,0 12,22 A10,10 0 1,0 12,2 Z M2,12 L22,12 M12,2 C7,7 7,17 12,22 M12,2 C17,7 17,17 12,22"##,
-        "America" => r##"M18.8,4.9 L18.9,5.1 L18.4,5.5 L18.5,5.6 L17.8,5.5 L17.3,5.0 L17.6,4.9 L17.3,5.0 L17.5,4.8 L17.1,4.7 L17.6,4.6 L17.0,4.6 L17.6,4.5 L17.1,4.5 L17.6,4.5 L17.1,4.4 L17.5,4.2 L16.9,4.1 L17.5,4.1 L17.2,4.0 L17.3,3.9 L16.8,4.0 L17.0,3.8 L16.4,3.4 L15.0,3.3 L14.6,3.2 L15.3,3.1 L14.3,3.0 L16.1,2.5 L19.0,2.4 L18.0,2.4 L18.5,2.4 L18.2,2.3 L21.6,2.4 L20.0,2.5 L21.6,2.5 L21.2,2.7 L23.0,2.6 L21.7,2.7 L22.4,2.7 L21.8,2.8 L21.9,2.9 L21.5,3.1 L22.0,3.2 L21.4,3.2 L21.9,3.5 L20.7,3.7 L21.6,4.1 L20.6,3.9 L21.0,4.0 L20.5,4.1 L21.5,4.2 L20.0,4.4 L19.7,4.7 L18.8,4.9 Z M6.3,6.2 L6.0,6.2 L5.6,5.7 L5.4,5.8 L3.9,5.4 L3.3,5.7 L3.6,5.4 L1.7,6.3 L2.6,5.7 L1.8,5.8 L1.9,5.5 L1.6,5.6 L1.3,5.4 L2.0,4.9 L1.0,4.8 L2.1,4.7 L1.2,4.4 L2.6,4.0 L5.6,4.4 L6.6,4.1 L9.5,4.7 L9.5,4.4 L9.7,4.4 L10.9,4.4 L11.1,4.7 L11.5,4.4 L11.0,4.1 L11.3,3.9 L12.3,4.6 L12.7,4.3 L12.6,4.2 L13.2,4.3 L13.0,4.4 L13.2,4.6 L12.6,4.6 L12.8,4.7 L11.8,4.7 L12.4,4.9 L11.4,5.0 L11.9,5.2 L11.5,5.2 L11.3,5.7 L11.6,6.0 L13.1,6.3 L13.2,6.8 L13.5,6.8 L13.4,6.3 L13.9,6.1 L13.6,5.8 L13.7,5.2 L14.8,5.4 L14.6,5.6 L15.0,5.8 L14.9,5.9 L15.5,5.5 L16.1,6.3 L16.5,6.3 L16.1,6.5 L16.8,6.5 L16.2,6.9 L14.6,7.2 L14.8,7.2 L14.2,7.6 L15.4,7.1 L15.6,7.2 L15.2,7.3 L16.0,7.6 L15.4,7.9 L15.7,7.6 L15.2,7.7 L14.7,7.9 L14.8,8.2 L14.2,8.2 L13.9,8.8 L14.0,8.4 L13.8,8.5 L14.0,9.0 L13.2,9.6 L13.3,10.5 L13.0,9.9 L12.5,9.7 L11.9,9.7 L12.0,9.9 L11.3,9.8 L10.9,10.1 L11.1,11.4 L11.8,11.4 L11.9,11.0 L12.4,11.0 L12.1,11.8 L12.9,11.9 L12.8,12.4 L13.1,12.7 L13.4,12.8 L13.2,13.0 L12.6,12.6 L12.3,12.1 L10.1,11.4 L8.5,9.5 L9.2,10.7 L8.9,10.6 L8.1,9.3 L7.2,8.5 L7.3,7.5 L7.1,7.2 L7.4,7.3 L7.1,6.9 L6.7,6.8 L6.8,6.7 L6.3,6.4 L6.3,6.2 Z M13.7,12.9 L13.8,12.9 L14.5,12.3 L14.5,12.7 L14.8,12.3 L15.0,12.5 L15.9,12.5 L15.8,12.6 L16.4,13.1 L17.0,13.2 L16.9,13.7 L17.4,13.4 L17.6,13.8 L17.2,14.2 L17.5,14.1 L17.6,14.4 L18.0,14.1 L18.3,14.2 L18.3,14.5 L19.0,14.4 L19.7,14.8 L18.8,17.1 L17.8,17.6 L17.8,18.0 L17.0,18.9 L16.5,18.8 L16.6,19.2 L15.8,19.4 L15.8,19.7 L15.5,19.7 L15.7,20.0 L15.1,20.5 L15.4,20.7 L14.9,21.0 L15.0,21.4 L14.9,21.4 L15.5,21.7 L14.5,21.6 L14.9,21.6 L14.7,21.5 L14.8,21.4 L14.3,21.5 L14.6,21.4 L14.3,21.4 L14.4,21.3 L14.1,21.0 L14.3,20.7 L14.0,20.6 L14.4,20.2 L14.3,19.2 L14.8,17.0 L14.7,16.6 L13.9,16.1 L13.2,14.8 L13.4,14.4 L13.2,14.1 L13.8,13.5 L13.7,12.9 Z M17.2,7.3 L16.3,7.3 L16.8,6.8 L16.6,7.0 L17.1,7.1 L17.2,7.3 Z M12.7,4.0 L12.6,3.8 L12.8,3.8 L12.6,3.7 L13.2,3.7 L13.2,3.9 L14.0,3.8 L13.9,3.9 L15.0,4.1 L14.7,4.2 L15.1,4.1 L14.8,4.2 L16.0,4.6 L15.7,4.9 L15.4,4.8 L15.6,4.7 L14.9,4.7 L15.5,5.0 L15.5,5.2 L14.9,5.1 L15.3,5.3 L13.6,4.9 L14.4,4.6 L13.5,4.1 L12.6,4.2 L11.9,3.9 L12.7,3.6 L12.4,3.8 L12.7,4.0 Z M15.9,2.5 L13.6,2.9 L14.1,2.9 L13.5,2.9 L14.1,3.0 L13.1,3.1 L13.7,3.2 L13.2,3.3 L12.0,3.3 L13.0,3.0 L12.4,3.0 L13.2,2.9 L12.5,2.7 L13.3,2.8 L12.9,2.7 L13.8,2.6 L11.7,2.5 L15.9,2.5 Z M13.3,3.5 L11.8,3.5 L11.0,3.2 L13.3,3.5 Z M11.1,2.8 L11.5,2.6 L12.7,2.9 L11.7,3.0 L11.4,2.9 L11.9,2.9 L11.1,2.8 Z M11.1,3.8 L10.7,4.0 L10.2,3.8 L10.9,3.6 L11.1,3.8 Z M10.4,4.2 L8.7,4.4 L8.1,4.2 L9.0,4.1 L7.9,3.9 L8.5,3.7 L9.5,3.9 L9.6,3.7 L10.4,4.2 Z M8.4,3.7 L7.4,4.0 L6.9,3.9 L7.1,3.6 L8.4,3.7 Z"##,
-        "Europa" => r##"M11.5,13.3 L11.4,12.9 L11.9,12.9 L11.9,12.7 L11.7,12.6 L12.6,12.3 L12.5,12.1 L12.6,12.1 L12.5,12.1 L12.7,12.0 L12.6,12.2 L12.9,12.3 L13.3,12.2 L13.3,12.0 L13.5,12.0 L13.4,11.9 L13.8,11.9 L13.3,11.8 L13.3,11.7 L13.6,11.6 L13.4,11.5 L13.1,11.7 L13.2,11.9 L13.0,12.0 L13.0,12.1 L12.8,12.2 L12.7,11.9 L12.5,12.0 L12.3,12.0 L12.4,11.8 L12.3,11.8 L12.5,11.8 L12.3,11.7 L12.7,11.7 L12.6,11.6 L13.1,11.3 L13.5,11.2 L14.5,11.4 L14.4,11.5 L13.9,11.4 L14.3,11.6 L14.2,11.6 L14.7,11.5 L14.6,11.3 L14.8,11.4 L14.7,11.4 L14.8,11.5 L15.3,11.3 L15.6,11.4 L15.7,11.3 L16.2,11.4 L16.1,11.2 L16.4,11.1 L16.5,11.4 L16.2,11.5 L16.4,11.5 L16.6,11.3 L16.8,11.4 L16.5,11.3 L16.5,11.2 L16.6,11.1 L16.7,11.2 L16.8,11.2 L16.6,11.1 L17.1,11.2 L17.1,11.3 L17.1,11.2 L16.9,11.0 L17.3,11.1 L17.4,11.0 L17.2,11.0 L17.3,11.0 L18.1,10.9 L18.4,10.8 L19.0,10.9 L18.4,11.1 L19.6,11.0 L19.9,11.1 L19.8,11.1 L20.0,11.2 L20.6,11.2 L20.6,11.1 L21.7,11.2 L21.8,11.4 L22.4,11.3 L22.4,11.3 L23.0,11.3 L23.0,11.6 L22.7,11.6 L22.8,11.6 L23.0,11.7 L22.0,11.9 L21.9,12.0 L22.0,12.1 L21.6,12.4 L21.6,12.0 L22.1,11.7 L21.8,11.8 L21.8,11.8 L21.6,11.8 L21.5,11.9 L20.6,12.0 L20.3,12.2 L20.6,12.3 L20.6,12.6 L20.1,12.9 L20.0,12.9 L20.2,12.6 L20.0,12.6 L19.6,12.3 L19.3,12.3 L19.2,12.5 L18.6,12.5 L18.0,12.4 L17.9,12.5 L17.6,12.4 L17.3,12.5 L16.9,12.4 L16.7,12.2 L16.5,12.3 L16.2,12.2 L15.7,12.2 L15.8,12.3 L15.7,12.4 L15.8,12.4 L15.1,12.4 L14.9,12.5 L14.8,12.6 L15.0,12.7 L14.9,12.8 L14.9,13.0 L14.2,12.8 L14.4,12.7 L14.2,12.7 L14.2,12.8 L14.1,12.8 L13.9,12.7 L13.7,13.0 L13.4,13.1 L13.4,13.3 L13.2,13.0 L12.8,12.7 L12.8,12.8 L13.1,13.1 L13.0,13.1 L13.0,13.2 L13.0,13.1 L12.5,12.8 L12.2,12.9 L11.9,13.3 L11.5,13.3 Z M11.2,11.6 L10.9,11.7 L10.5,11.5 L11.2,11.6 Z M1.0,11.3 L1.6,11.5 L1.4,11.6 L1.1,11.5 L1.0,11.6 L1.0,11.3 Z M11.8,12.4 L11.7,12.4 L11.8,12.3 L11.7,12.1 L11.6,12.2 L11.7,12.0 L11.9,12.0 L11.8,12.1 L12.1,12.3 L12.1,12.4 L11.7,12.5 L11.8,12.4 Z M13.0,10.9 L12.9,10.8 L13.0,10.8 L12.8,10.8 L13.1,10.8 L12.7,10.7 L13.3,10.7 L13.0,10.9 Z M20.7,12.2 L20.8,12.6 L20.8,12.5 L20.8,12.7 L20.7,12.7 L20.7,12.2 Z"##,
-        "Africa" => r##"M1.5,7.9 L2.0,6.9 L1.7,5.7 L2.4,4.4 L5.0,1.5 L9.8,1.0 L10.2,1.1 L10.0,2.1 L12.6,3.2 L13.5,2.3 L17.3,2.8 L17.3,3.9 L16.7,3.4 L18.9,7.8 L20.0,8.6 L20.1,9.5 L21.5,9.9 L21.8,9.0 L22.5,8.8 L22.5,9.2 L18.8,13.8 L19.3,16.9 L17.4,18.4 L17.6,19.8 L15.3,22.5 L12.9,23.0 L12.4,22.8 L10.4,17.9 L11.1,15.7 L10.9,14.2 L9.5,12.6 L9.8,11.1 L8.6,11.1 L8.0,10.4 L4.5,11.1 L1.5,7.9 Z M20.4,17.3 L21.5,16.9 L21.9,16.0 L22.2,17.1 L20.7,20.2 L20.0,19.2 L20.4,17.3 Z"##,
-        "Asia" => r##"M23.0,8.3 L21.9,8.5 L22.3,7.9 L23.0,8.3 Z M20.3,10.0 L21.7,9.4 L22.2,8.6 L22.0,9.8 L20.3,10.0 Z M22.1,17.9 L21.6,17.3 L20.8,16.8 L20.6,17.0 L20.5,16.8 L20.8,16.7 L20.3,16.5 L20.8,16.4 L21.1,16.9 L21.6,16.5 L22.1,16.7 L22.1,17.9 Z M4.2,13.9 L4.0,13.1 L2.5,11.1 L2.8,9.5 L1.2,9.5 L1.0,8.9 L2.3,8.5 L3.6,8.7 L3.9,8.6 L3.7,8.2 L5.1,8.6 L5.5,8.9 L5.2,9.3 L6.1,9.5 L5.9,8.8 L6.3,8.7 L5.4,8.1 L6.0,7.7 L5.1,7.7 L4.8,7.1 L5.5,6.7 L7.5,6.9 L7.2,6.7 L7.6,6.5 L7.4,6.3 L8.9,6.1 L9.7,6.4 L10.3,6.2 L10.9,6.9 L12.3,7.2 L13.2,6.9 L14.1,7.1 L14.4,6.7 L16.2,7.2 L17.9,7.1 L18.3,6.6 L18.9,6.4 L20.3,7.5 L21.0,7.4 L19.6,9.0 L19.9,9.8 L19.5,10.0 L19.5,9.3 L19.1,9.2 L19.1,8.9 L18.5,9.1 L18.6,8.7 L17.8,9.1 L18.1,9.4 L18.8,9.4 L18.1,9.8 L18.6,10.4 L18.2,10.3 L18.6,10.6 L18.3,10.7 L18.6,10.9 L17.6,12.0 L17.1,12.0 L16.5,12.5 L16.3,12.3 L15.8,12.4 L15.6,12.8 L16.2,13.5 L16.2,14.2 L15.5,14.7 L15.5,14.4 L14.6,13.8 L14.4,14.6 L15.4,16.0 L14.8,15.7 L14.3,14.7 L14.2,13.2 L13.5,13.3 L13.5,12.7 L12.9,11.9 L11.0,13.4 L10.8,14.6 L10.4,14.8 L9.7,13.3 L9.6,12.2 L9.2,12.5 L8.9,12.2 L9.2,12.0 L8.4,11.5 L6.1,11.3 L5.2,10.6 L5.0,10.9 L5.6,11.8 L6.6,11.4 L7.2,12.1 L6.8,12.8 L4.2,13.9 Z M17.8,15.5 L18.1,16.1 L17.5,16.9 L16.5,16.8 L16.3,15.9 L16.7,16.0 L17.7,15.0 L18.1,15.3 L17.8,15.5 Z M15.7,16.8 L15.6,17.3 L15.0,17.0 L13.7,15.2 L15.7,16.8 Z"##,
-        "Oceania" => r##"M21.3,20.0 L20.1,19.8 L22.5,17.8 L23.0,18.1 L21.3,20.0 Z M2.5,15.8 L1.4,15.6 L1.0,11.0 L3.6,10.1 L5.4,8.1 L6.7,8.6 L7.6,7.1 L9.2,7.4 L8.8,8.5 L10.7,9.5 L11.4,6.9 L12.8,9.9 L15.3,12.5 L15.3,14.4 L14.1,16.7 L12.8,17.3 L11.0,17.0 L9.8,15.5 L9.3,15.9 L9.7,14.9 L9.0,15.8 L8.2,14.7 L2.5,15.8 Z M10.9,4.0 L13.2,5.2 L14.4,6.9 L12.1,5.8 L10.8,6.4 L10.9,4.0 Z"##,
+        "{txt(\"continent_international\", lang_ui)}" => r##"M12,2 A10,10 0 1,0 12,22 A10,10 0 1,0 12,2 Z M2,12 L22,12 M12,2 C7,7 7,17 12,22 M12,2 C17,7 17,17 12,22"##,
+        "{txt(\"continent_america\", lang_ui)}" => r##"M18.8,4.9 L18.9,5.1 L18.4,5.5 L18.5,5.6 L17.8,5.5 L17.3,5.0 L17.6,4.9 L17.3,5.0 L17.5,4.8 L17.1,4.7 L17.6,4.6 L17.0,4.6 L17.6,4.5 L17.1,4.5 L17.6,4.5 L17.1,4.4 L17.5,4.2 L16.9,4.1 L17.5,4.1 L17.2,4.0 L17.3,3.9 L16.8,4.0 L17.0,3.8 L16.4,3.4 L15.0,3.3 L14.6,3.2 L15.3,3.1 L14.3,3.0 L16.1,2.5 L19.0,2.4 L18.0,2.4 L18.5,2.4 L18.2,2.3 L21.6,2.4 L20.0,2.5 L21.6,2.5 L21.2,2.7 L23.0,2.6 L21.7,2.7 L22.4,2.7 L21.8,2.8 L21.9,2.9 L21.5,3.1 L22.0,3.2 L21.4,3.2 L21.9,3.5 L20.7,3.7 L21.6,4.1 L20.6,3.9 L21.0,4.0 L20.5,4.1 L21.5,4.2 L20.0,4.4 L19.7,4.7 L18.8,4.9 Z M6.3,6.2 L6.0,6.2 L5.6,5.7 L5.4,5.8 L3.9,5.4 L3.3,5.7 L3.6,5.4 L1.7,6.3 L2.6,5.7 L1.8,5.8 L1.9,5.5 L1.6,5.6 L1.3,5.4 L2.0,4.9 L1.0,4.8 L2.1,4.7 L1.2,4.4 L2.6,4.0 L5.6,4.4 L6.6,4.1 L9.5,4.7 L9.5,4.4 L9.7,4.4 L10.9,4.4 L11.1,4.7 L11.5,4.4 L11.0,4.1 L11.3,3.9 L12.3,4.6 L12.7,4.3 L12.6,4.2 L13.2,4.3 L13.0,4.4 L13.2,4.6 L12.6,4.6 L12.8,4.7 L11.8,4.7 L12.4,4.9 L11.4,5.0 L11.9,5.2 L11.5,5.2 L11.3,5.7 L11.6,6.0 L13.1,6.3 L13.2,6.8 L13.5,6.8 L13.4,6.3 L13.9,6.1 L13.6,5.8 L13.7,5.2 L14.8,5.4 L14.6,5.6 L15.0,5.8 L14.9,5.9 L15.5,5.5 L16.1,6.3 L16.5,6.3 L16.1,6.5 L16.8,6.5 L16.2,6.9 L14.6,7.2 L14.8,7.2 L14.2,7.6 L15.4,7.1 L15.6,7.2 L15.2,7.3 L16.0,7.6 L15.4,7.9 L15.7,7.6 L15.2,7.7 L14.7,7.9 L14.8,8.2 L14.2,8.2 L13.9,8.8 L14.0,8.4 L13.8,8.5 L14.0,9.0 L13.2,9.6 L13.3,10.5 L13.0,9.9 L12.5,9.7 L11.9,9.7 L12.0,9.9 L11.3,9.8 L10.9,10.1 L11.1,11.4 L11.8,11.4 L11.9,11.0 L12.4,11.0 L12.1,11.8 L12.9,11.9 L12.8,12.4 L13.1,12.7 L13.4,12.8 L13.2,13.0 L12.6,12.6 L12.3,12.1 L10.1,11.4 L8.5,9.5 L9.2,10.7 L8.9,10.6 L8.1,9.3 L7.2,8.5 L7.3,7.5 L7.1,7.2 L7.4,7.3 L7.1,6.9 L6.7,6.8 L6.8,6.7 L6.3,6.4 L6.3,6.2 Z M13.7,12.9 L13.8,12.9 L14.5,12.3 L14.5,12.7 L14.8,12.3 L15.0,12.5 L15.9,12.5 L15.8,12.6 L16.4,13.1 L17.0,13.2 L16.9,13.7 L17.4,13.4 L17.6,13.8 L17.2,14.2 L17.5,14.1 L17.6,14.4 L18.0,14.1 L18.3,14.2 L18.3,14.5 L19.0,14.4 L19.7,14.8 L18.8,17.1 L17.8,17.6 L17.8,18.0 L17.0,18.9 L16.5,18.8 L16.6,19.2 L15.8,19.4 L15.8,19.7 L15.5,19.7 L15.7,20.0 L15.1,20.5 L15.4,20.7 L14.9,21.0 L15.0,21.4 L14.9,21.4 L15.5,21.7 L14.5,21.6 L14.9,21.6 L14.7,21.5 L14.8,21.4 L14.3,21.5 L14.6,21.4 L14.3,21.4 L14.4,21.3 L14.1,21.0 L14.3,20.7 L14.0,20.6 L14.4,20.2 L14.3,19.2 L14.8,17.0 L14.7,16.6 L13.9,16.1 L13.2,14.8 L13.4,14.4 L13.2,14.1 L13.8,13.5 L13.7,12.9 Z M17.2,7.3 L16.3,7.3 L16.8,6.8 L16.6,7.0 L17.1,7.1 L17.2,7.3 Z M12.7,4.0 L12.6,3.8 L12.8,3.8 L12.6,3.7 L13.2,3.7 L13.2,3.9 L14.0,3.8 L13.9,3.9 L15.0,4.1 L14.7,4.2 L15.1,4.1 L14.8,4.2 L16.0,4.6 L15.7,4.9 L15.4,4.8 L15.6,4.7 L14.9,4.7 L15.5,5.0 L15.5,5.2 L14.9,5.1 L15.3,5.3 L13.6,4.9 L14.4,4.6 L13.5,4.1 L12.6,4.2 L11.9,3.9 L12.7,3.6 L12.4,3.8 L12.7,4.0 Z M15.9,2.5 L13.6,2.9 L14.1,2.9 L13.5,2.9 L14.1,3.0 L13.1,3.1 L13.7,3.2 L13.2,3.3 L12.0,3.3 L13.0,3.0 L12.4,3.0 L13.2,2.9 L12.5,2.7 L13.3,2.8 L12.9,2.7 L13.8,2.6 L11.7,2.5 L15.9,2.5 Z M13.3,3.5 L11.8,3.5 L11.0,3.2 L13.3,3.5 Z M11.1,2.8 L11.5,2.6 L12.7,2.9 L11.7,3.0 L11.4,2.9 L11.9,2.9 L11.1,2.8 Z M11.1,3.8 L10.7,4.0 L10.2,3.8 L10.9,3.6 L11.1,3.8 Z M10.4,4.2 L8.7,4.4 L8.1,4.2 L9.0,4.1 L7.9,3.9 L8.5,3.7 L9.5,3.9 L9.6,3.7 L10.4,4.2 Z M8.4,3.7 L7.4,4.0 L6.9,3.9 L7.1,3.6 L8.4,3.7 Z"##,
+        "{txt(\"continent_europe\", lang_ui)}" => r##"M11.5,13.3 L11.4,12.9 L11.9,12.9 L11.9,12.7 L11.7,12.6 L12.6,12.3 L12.5,12.1 L12.6,12.1 L12.5,12.1 L12.7,12.0 L12.6,12.2 L12.9,12.3 L13.3,12.2 L13.3,12.0 L13.5,12.0 L13.4,11.9 L13.8,11.9 L13.3,11.8 L13.3,11.7 L13.6,11.6 L13.4,11.5 L13.1,11.7 L13.2,11.9 L13.0,12.0 L13.0,12.1 L12.8,12.2 L12.7,11.9 L12.5,12.0 L12.3,12.0 L12.4,11.8 L12.3,11.8 L12.5,11.8 L12.3,11.7 L12.7,11.7 L12.6,11.6 L13.1,11.3 L13.5,11.2 L14.5,11.4 L14.4,11.5 L13.9,11.4 L14.3,11.6 L14.2,11.6 L14.7,11.5 L14.6,11.3 L14.8,11.4 L14.7,11.4 L14.8,11.5 L15.3,11.3 L15.6,11.4 L15.7,11.3 L16.2,11.4 L16.1,11.2 L16.4,11.1 L16.5,11.4 L16.2,11.5 L16.4,11.5 L16.6,11.3 L16.8,11.4 L16.5,11.3 L16.5,11.2 L16.6,11.1 L16.7,11.2 L16.8,11.2 L16.6,11.1 L17.1,11.2 L17.1,11.3 L17.1,11.2 L16.9,11.0 L17.3,11.1 L17.4,11.0 L17.2,11.0 L17.3,11.0 L18.1,10.9 L18.4,10.8 L19.0,10.9 L18.4,11.1 L19.6,11.0 L19.9,11.1 L19.8,11.1 L20.0,11.2 L20.6,11.2 L20.6,11.1 L21.7,11.2 L21.8,11.4 L22.4,11.3 L22.4,11.3 L23.0,11.3 L23.0,11.6 L22.7,11.6 L22.8,11.6 L23.0,11.7 L22.0,11.9 L21.9,12.0 L22.0,12.1 L21.6,12.4 L21.6,12.0 L22.1,11.7 L21.8,11.8 L21.8,11.8 L21.6,11.8 L21.5,11.9 L20.6,12.0 L20.3,12.2 L20.6,12.3 L20.6,12.6 L20.1,12.9 L20.0,12.9 L20.2,12.6 L20.0,12.6 L19.6,12.3 L19.3,12.3 L19.2,12.5 L18.6,12.5 L18.0,12.4 L17.9,12.5 L17.6,12.4 L17.3,12.5 L16.9,12.4 L16.7,12.2 L16.5,12.3 L16.2,12.2 L15.7,12.2 L15.8,12.3 L15.7,12.4 L15.8,12.4 L15.1,12.4 L14.9,12.5 L14.8,12.6 L15.0,12.7 L14.9,12.8 L14.9,13.0 L14.2,12.8 L14.4,12.7 L14.2,12.7 L14.2,12.8 L14.1,12.8 L13.9,12.7 L13.7,13.0 L13.4,13.1 L13.4,13.3 L13.2,13.0 L12.8,12.7 L12.8,12.8 L13.1,13.1 L13.0,13.1 L13.0,13.2 L13.0,13.1 L12.5,12.8 L12.2,12.9 L11.9,13.3 L11.5,13.3 Z M11.2,11.6 L10.9,11.7 L10.5,11.5 L11.2,11.6 Z M1.0,11.3 L1.6,11.5 L1.4,11.6 L1.1,11.5 L1.0,11.6 L1.0,11.3 Z M11.8,12.4 L11.7,12.4 L11.8,12.3 L11.7,12.1 L11.6,12.2 L11.7,12.0 L11.9,12.0 L11.8,12.1 L12.1,12.3 L12.1,12.4 L11.7,12.5 L11.8,12.4 Z M13.0,10.9 L12.9,10.8 L13.0,10.8 L12.8,10.8 L13.1,10.8 L12.7,10.7 L13.3,10.7 L13.0,10.9 Z M20.7,12.2 L20.8,12.6 L20.8,12.5 L20.8,12.7 L20.7,12.7 L20.7,12.2 Z"##,
+        "{txt(\"continent_africa\", lang_ui)}" => r##"M1.5,7.9 L2.0,6.9 L1.7,5.7 L2.4,4.4 L5.0,1.5 L9.8,1.0 L10.2,1.1 L10.0,2.1 L12.6,3.2 L13.5,2.3 L17.3,2.8 L17.3,3.9 L16.7,3.4 L18.9,7.8 L20.0,8.6 L20.1,9.5 L21.5,9.9 L21.8,9.0 L22.5,8.8 L22.5,9.2 L18.8,13.8 L19.3,16.9 L17.4,18.4 L17.6,19.8 L15.3,22.5 L12.9,23.0 L12.4,22.8 L10.4,17.9 L11.1,15.7 L10.9,14.2 L9.5,12.6 L9.8,11.1 L8.6,11.1 L8.0,10.4 L4.5,11.1 L1.5,7.9 Z M20.4,17.3 L21.5,16.9 L21.9,16.0 L22.2,17.1 L20.7,20.2 L20.0,19.2 L20.4,17.3 Z"##,
+        "{txt(\"continent_asia\", lang_ui)}" => r##"M23.0,8.3 L21.9,8.5 L22.3,7.9 L23.0,8.3 Z M20.3,10.0 L21.7,9.4 L22.2,8.6 L22.0,9.8 L20.3,10.0 Z M22.1,17.9 L21.6,17.3 L20.8,16.8 L20.6,17.0 L20.5,16.8 L20.8,16.7 L20.3,16.5 L20.8,16.4 L21.1,16.9 L21.6,16.5 L22.1,16.7 L22.1,17.9 Z M4.2,13.9 L4.0,13.1 L2.5,11.1 L2.8,9.5 L1.2,9.5 L1.0,8.9 L2.3,8.5 L3.6,8.7 L3.9,8.6 L3.7,8.2 L5.1,8.6 L5.5,8.9 L5.2,9.3 L6.1,9.5 L5.9,8.8 L6.3,8.7 L5.4,8.1 L6.0,7.7 L5.1,7.7 L4.8,7.1 L5.5,6.7 L7.5,6.9 L7.2,6.7 L7.6,6.5 L7.4,6.3 L8.9,6.1 L9.7,6.4 L10.3,6.2 L10.9,6.9 L12.3,7.2 L13.2,6.9 L14.1,7.1 L14.4,6.7 L16.2,7.2 L17.9,7.1 L18.3,6.6 L18.9,6.4 L20.3,7.5 L21.0,7.4 L19.6,9.0 L19.9,9.8 L19.5,10.0 L19.5,9.3 L19.1,9.2 L19.1,8.9 L18.5,9.1 L18.6,8.7 L17.8,9.1 L18.1,9.4 L18.8,9.4 L18.1,9.8 L18.6,10.4 L18.2,10.3 L18.6,10.6 L18.3,10.7 L18.6,10.9 L17.6,12.0 L17.1,12.0 L16.5,12.5 L16.3,12.3 L15.8,12.4 L15.6,12.8 L16.2,13.5 L16.2,14.2 L15.5,14.7 L15.5,14.4 L14.6,13.8 L14.4,14.6 L15.4,16.0 L14.8,15.7 L14.3,14.7 L14.2,13.2 L13.5,13.3 L13.5,12.7 L12.9,11.9 L11.0,13.4 L10.8,14.6 L10.4,14.8 L9.7,13.3 L9.6,12.2 L9.2,12.5 L8.9,12.2 L9.2,12.0 L8.4,11.5 L6.1,11.3 L5.2,10.6 L5.0,10.9 L5.6,11.8 L6.6,11.4 L7.2,12.1 L6.8,12.8 L4.2,13.9 Z M17.8,15.5 L18.1,16.1 L17.5,16.9 L16.5,16.8 L16.3,15.9 L16.7,16.0 L17.7,15.0 L18.1,15.3 L17.8,15.5 Z M15.7,16.8 L15.6,17.3 L15.0,17.0 L13.7,15.2 L15.7,16.8 Z"##,
+        "{txt(\"continent_oceania\", lang_ui)}" => r##"M21.3,20.0 L20.1,19.8 L22.5,17.8 L23.0,18.1 L21.3,20.0 Z M2.5,15.8 L1.4,15.6 L1.0,11.0 L3.6,10.1 L5.4,8.1 L6.7,8.6 L7.6,7.1 L9.2,7.4 L8.8,8.5 L10.7,9.5 L11.4,6.9 L12.8,9.9 L15.3,12.5 L15.3,14.4 L14.1,16.7 L12.8,17.3 L11.0,17.0 L9.8,15.5 L9.3,15.9 L9.7,14.9 L9.0,15.8 L8.2,14.7 L2.5,15.8 Z M10.9,4.0 L13.2,5.2 L14.4,6.9 L12.1,5.8 L10.8,6.4 L10.9,4.0 Z"##,
         _ => "",
     };
     format!("<svg class=\"{}\" viewBox=\"0 0 24 24\" fill='black'><path d=\"{}\"/></svg>", class, d)
@@ -1058,6 +1064,7 @@ fn App() -> Element {
         .iter()
         .filter(|i| filter() == "todos" || i.tema == filter())
         .collect();
+    let n_normas = (visible_instruments.len() + international_sources.len() + org_count).to_string();
     let multi_items = multi_ids();
 
     // Límites de exposición de NIOSH para la sustancia mostrada.
@@ -1361,6 +1368,7 @@ fn App() -> Element {
                     .collect();
                 salida.push(TripleVisible {
                     nombres: t.nombres.clone(),
+                    reglas: t.reglas.clone(),
                     nivel: t.nivel.clone(),
                     etiqueta: traducir_texto(&traductor, lang, t.etiqueta.clone()).await,
                     compatibilidad: t.compatibilidad.clone(),
@@ -1396,7 +1404,7 @@ fn App() -> Element {
     });
 
     let continentes = vec![
-        "Marco internacional", "America", "Europa", "Africa", "Asia", "Oceania",
+        "{txt(\"continent_international\", lang_ui)}", "{txt(\"continent_america\", lang_ui)}", "{txt(\"continent_europe\", lang_ui)}", "{txt(\"continent_africa\", lang_ui)}", "{txt(\"continent_asia\", lang_ui)}", "{txt(\"continent_oceania\", lang_ui)}",
     ];
     let rsx_countries = |_modal: bool| -> Element {
         rsx! {
@@ -1444,14 +1452,14 @@ fn App() -> Element {
         _ => "moon",
     };
     let tema_titulo = match theme().as_str() {
-        "auto" => "Tema automático según tu zona horaria · cambiar a claro",
-        "light" => "Tema claro · cambiar a oscuro",
-        _ => "Tema oscuro · cambiar a automático",
+        "auto" => txt("theme_title_auto", lang_ui),
+        "light" => txt("theme_title_light", lang_ui),
+        _ => txt("theme_title_dark", lang_ui),
     };
 
     rsx! {
         style { {CSS} }
-        a { class: "skip-link", href: "#panel-sustancia", "Saltar al buscador" }
+        a { class: "skip-link", href: "#panel-sustancia", "{txt(\"skip_to_search\", lang_ui)}" }
 
         if !chosen {
             div { class: "overlay",
@@ -1480,8 +1488,8 @@ fn App() -> Element {
             div { class: "marca",
                 span { class: "marca-icono", dangerous_inner_html: "{icon(\"flask\", \"ico ico-lg\")}" }
                 span {
-                    strong { "Sustancias Peligrosas" }
-                    small { "Marco legal y fichas técnicas" }
+                    strong { "{txt(\"brand_title\", lang_ui)}" }
+                    small { "{txt(\"brand_subtitle\", lang_ui)}" }
                 }
             }
             div { class: "cabecera-derecha",
@@ -1525,8 +1533,8 @@ fn App() -> Element {
                 id: "panel-legal",
                 summary {
                     span { class: "panel-icono", dangerous_inner_html: "{icon(\"book\", \"ico ico-lg\")}" }
-                    span { "Documentación legal y marco normativo" }
-                    span { class: "badge", "{visible_instruments.len() + international_sources.len() + org_count} normas" }
+                    span { "{txt(\"legal_details_summary\", lang_ui)}" }
+                    span { class: "badge", "{sustancias_i18n::texto_fijo_fmt(\"norms_count\", lang_ui, &[(\"n\", &n_normas)])}" }
                 }
                 div { class: "panel-cabecera",
                     div { class: "panel-titulo",
@@ -1536,7 +1544,7 @@ fn App() -> Element {
                             p { "{txt(\"legal_sub\", lang_ui)}" }
                         }
                     }
-                    span { class: "badge", "{visible_instruments.len() + international_sources.len() + org_count} normas" }
+                    span { class: "badge", "{sustancias_i18n::texto_fijo_fmt(\"norms_count\", lang_ui, &[(\"n\", &n_normas)])}" }
                 }
                 div { class: "filtros-wrap",
                     span { class: "filtro-icono", dangerous_inner_html: "{icon(\"filter\", \"ico\")}" }
@@ -1544,7 +1552,7 @@ fn App() -> Element {
                         button {
                             class: if filter() == "todos" { "chip activo" } else { "chip" },
                             onclick: move |_| filter.set("todos".to_string()),
-                            "Todos"
+                            "{txt(\"filter_all\", lang_ui)}"
                         }
                         for t in topics.iter() {
                             button {
@@ -1560,7 +1568,7 @@ fn App() -> Element {
                         div { class: "buscador boe-input-wrap",
                             span { class: "buscador-icono", dangerous_inner_html: "{icon(\"search\", \"ico\")}" }
                             input {
-                                placeholder: "Buscar normas en el BOE (España)…",
+                                placeholder: "{txt(\"boe_search_placeholder\", lang_ui)}",
                                 oninput: move |e| {
                                     let value = e.value();
                                     if value.trim().len() < 3 {
@@ -1611,7 +1619,7 @@ fn App() -> Element {
                         }
                         div { class: "boe-resultados", aria_live: "polite",
                             if boe_cargando() {
-                                p { class: "vacio", "Consultando la API de datos abiertos del BOE…" }
+                                p { class: "vacio", "{txt(\"boe_loading\", lang_ui)}" }
                             } else if !boe_resultados().is_empty() {
                                 for n in boe_resultados().iter() {
                                     div { class: "norma",
@@ -1621,17 +1629,17 @@ fn App() -> Element {
                                             if let Some(dep) = &n.departamento {
                                                 span { class: "badge badge-suave", "{dep.texto}" }
                                             }
-                                            span { class: "badge badge-warn", "Texto consolidado informativo" }
+                                            span { class: "badge badge-warn", "{txt(\"boe_consolidated_badge\", lang_ui)}" }
                                         }
                                         a { href: "{n.url()}", target: "_blank",
                                             dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
-                                        a { href: "{n.url()}", target: "_blank", "Ver en el BOE" }
+                                        a { href: "{n.url()}", target: "_blank", "{txt(\"boe_view_link\", lang_ui)}" }
                                     }
                                 }
                                 p { class: "boe-atribucion",
-                                    "Fuente de los datos: "
+                                    "{txt(\"boe_source_prefix\", lang_ui)}"
                                     a { href: "https://www.boe.es", target: "_blank", "Agencia Estatal Boletín Oficial del Estado" }
-                                    ". Texto consolidado de carácter meramente informativo."
+                                    "{txt(\"boe_disclaimer\", lang_ui)}"
                                     if !boe_resultados()[0].fecha_formateada().is_empty() {
                                         " Última actualización: {boe_resultados()[0].fecha_formateada()}."
                                     }
@@ -1645,7 +1653,7 @@ fn App() -> Element {
                 div { class: "legal-lista",
                     if !portals.is_empty() {
                         div { class: "portales",
-                            p { class: "lista-titulo", "Portales oficiales de {country.nombre}" }
+                            p { class: "lista-titulo", "{sustancias_i18n::texto_fijo_fmt(\"portals_title\", lang_ui, &[(\"pais\", country.nombre.as_str())])}" }
                             for p in portals.iter() {
                                 a { href: "{p.url}", target: "_blank",
                                     dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
@@ -1653,13 +1661,13 @@ fn App() -> Element {
                             }
                         }
                     }
-                    h4 { class: "leyenda-grupo", "Marco internacional (ONU y convenciones)" }
+                    h4 { class: "leyenda-grupo", "{txt(\"international_section_title\", lang_ui)}" }
                     for s in international_sources.iter().filter(|s| filter() == "todos" || s.tema == filter()) {
                         div { class: "norma",
                             h4 { "{s.titulo}" }
                             div { class: "norma-meta",
                                 span { class: "badge", "{core::topic_label(&s.tema)}" }
-                                span { class: "badge badge-suave", "Marco internacional" }
+                                span { class: "badge badge-suave", "{txt(\"continent_international\", lang_ui)}" }
                                 span {
                                     class: if core::is_verified(&s.verificacion) { "badge badge-ok" } else { "badge badge-warn" },
                                     "{core::verification_label(&s.verificacion)}"
@@ -1679,7 +1687,7 @@ fn App() -> Element {
                                     div { class: "norma-meta",
                                         span { class: "badge", "{core::topic_label(&u.tema)}" }
                                         span { class: "badge badge-suave", "{bloque.0.nombre}" }
-                                        span { class: "badge badge-ok", "Verificado" }
+                                        span { class: "badge badge-ok", "{txt(\"verified_badge\", lang_ui)}" }
                                     }
                                     a { href: "{u.url}", target: "_blank",
                                         dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
@@ -1688,7 +1696,7 @@ fn App() -> Element {
                             }
                         }
                     }
-                    h4 { class: "leyenda-grupo", "Legislación nacional · {country.nombre}" }
+                    h4 { class: "leyenda-grupo", "{sustancias_i18n::texto_fijo_fmt(\"national_legislation_title\", lang_ui, &[(\"pais\", country.nombre.as_str())])}" }
                     for i in visible_instruments.iter() {
                         div { class: "norma",
                             h4 { "{i.titulo}" }
@@ -1723,7 +1731,7 @@ fn App() -> Element {
                                         move |_| norma.set(Some((titulo.clone(), meta.clone(), texto.clone(), url.clone(), nombre.clone())))
                                     },
                                     span { dangerous_inner_html: "{icon(\"book\", \"ico\")}" }
-                                    "Leer norma íntegra"
+                                    "{txt(\"read_full_norm\", lang_ui)}"
                                 }
                             }
                         }
@@ -1749,27 +1757,27 @@ fn App() -> Element {
                 }
 
                 div { class: "idioma-busqueda",
-                    span { "Buscar en cualquier idioma · mostrar nombre en:" }
+                    span { "{txt(\"language_search_hint\", lang_ui)}" }
                     select {
-                        aria_label: "Idioma de salida",
+                        aria_label: "{txt(\"output_language_label\", lang_ui)}",
                         value: "{output_lang()}",
                         onchange: move |e| {
                             let lang = e.value();
                             output_lang.set(lang.clone());
                             buscar_pubchem(query(), lang);
                         },
-                        option { value: "auto", "Auto" }
-                        option { value: "es", "Español" }
-                        option { value: "en", "English" }
-                        option { value: "fr", "Français" }
-                        option { value: "de", "Deutsch" }
-                        option { value: "it", "Italiano" }
+                        option { value: "auto", "{txt(\"lang_option_auto\", lang_ui)}" }
+                        option { value: "es", "{txt(\"lang_option_es\", lang_ui)}" }
+                        option { value: "en", "{txt(\"lang_option_en\", lang_ui)}" }
+                        option { value: "fr", "{txt(\"lang_option_fr\", lang_ui)}" }
+                        option { value: "de", "{txt(\"lang_option_de\", lang_ui)}" }
+                        option { value: "it", "{txt(\"lang_option_it\", lang_ui)}" }
                     }
                 }
                 div { class: "buscador",
                     span { class: "buscador-icono", dangerous_inner_html: "{icon(\"search\", \"ico\")}" }
                     input {
-                        placeholder: "Ej. Acetona, ibuprofeno, 67-64-1…",
+                        placeholder: "{txt(\"search_placeholder\", lang_ui)}",
                         value: "{query()}",
                         oninput: move |e| {
                             let value = e.value();
@@ -1792,9 +1800,9 @@ fn App() -> Element {
                 if mostrar_estrella() {
                     div { class: "estrella-banner",
                         span { dangerous_inner_html: "{icon(\"flask\", \"ico\")}" }
-                        span { class: "estrella-texto", "¿Te resultó útil? Dale una estrella al proyecto en GitHub." }
-                        a { class: "estrella-enlace", href: GITHUB_URL, target: "_blank", "Dar una estrella" }
-                        button { class: "estrella-cerrar", aria_label: "Quitar aviso", title: "Quitar aviso",
+                        span { class: "estrella-texto", "{txt(\"star_banner_text\", lang_ui)}" }
+                        a { class: "estrella-enlace", href: GITHUB_URL, target: "_blank", "{txt(\"star_banner_link\", lang_ui)}" }
+                        button { class: "estrella-cerrar", aria_label: "{txt(\"star_dismiss\", lang_ui)}", title: "{txt(\"star_dismiss\", lang_ui)}",
                             onclick: move |_| {
                                 mostrar_estrella.set(false);
                                 estrella_cerrada.set(true);
@@ -1806,19 +1814,19 @@ fn App() -> Element {
                 }
                 div { class: "resultados-online", aria_live: "polite",
                     if online_cargando() {
-                        p { class: "vacio", "Consultando bases de datos oficiales…" }
+                        p { class: "vacio", "{txt(\"searching_official_db\", lang_ui)}" }
                     } else if !query().trim().is_empty() && online_resultados().is_empty() {
                         if online_error_red() {
-                            p { class: "vacio", "No se pudo conectar con las bases de datos. Revisa tu conexión e inténtalo de nuevo." }
+                            p { class: "vacio", "{txt(\"network_error_hint\", lang_ui)}" }
                         } else if !core::es_consulta_valida(&query()) {
-                            p { class: "vacio", "La búsqueda debe incluir al menos una letra o un identificador válido (CAS, fórmula o código de producto)." }
+                            p { class: "vacio", "{txt(\"invalid_query_hint\", lang_ui)}" }
                         } else {
-                            p { class: "vacio", "No se encontraron sustancias. Prueba con otro nombre, un CAS (7664-93-9), una fórmula (H2SO4) o un código de producto (AEO7)." }
+                            p { class: "vacio", "{txt(\"no_substances_hint\", lang_ui)}" }
                         }
                     } else if !online_resultados().is_empty() {
                         div { class: "online-titulo",
                             span { dangerous_inner_html: "{icon(\"globe\", \"ico\")}" }
-                            "Resultados en bases de datos oficiales · PubChem (NIH)"
+                            "{txt(\"online_results_title\", lang_ui)}"
                         }
                         for p in online_resultados().iter() {
                             div { class: "online-resultado",
@@ -1852,7 +1860,7 @@ fn App() -> Element {
                                                 });
                                             }
                                         },
-                                        "Ver ficha en línea"
+                                        "{txt(\"view_online_sheet\", lang_ui)}"
                                     }
                                     button {
                                         class: "boton boton-secundario",
@@ -1869,7 +1877,7 @@ fn App() -> Element {
                                                 multi_ids.set(items);
                                             }
                                         },
-                                        "Añadir a comparación"
+                                        "{txt(\"add_to_compare\", lang_ui)}"
                                     }
                                 }
                             }
@@ -1881,17 +1889,17 @@ fn App() -> Element {
                     div { class: "multi-cabecera",
                         span { class: "multi-titulo",
                             span { dangerous_inner_html: "{icon(\"layers\", \"ico\")}" }
-                            strong { "Comparación de varias sustancias" }
+                            strong { "{txt(\"compare_title\", lang_ui)}" }
                         }
                         if cameo_visible().is_empty() && triple_visible().is_empty() {
-                            span { class: "badge badge-suave", "Añade sustancias" }
+                            span { class: "badge badge-suave", "{txt(\"add_substances_badge\", lang_ui)}" }
                         } else {
-                            span { class: "badge badge-ok", "{cameo_visible().len()} parejas · {triple_visible().len()}/{combinaciones3(multi_items.len())} ternas" }
+                            span { class: "badge badge-ok", "{sustancias_i18n::texto_fijo_fmt(\"compare_counts\", lang_ui, &[(\"n\", &cameo_visible().len().to_string()), (\"m\", &triple_visible().len().to_string()), (\"t\", &combinaciones3(multi_items.len()).to_string())])}" }
                         }
                     }
                     div { class: "multi-anadir",
                         input {
-                            placeholder: "Añadir otra sustancia…",
+                            placeholder: "{txt(\"add_another_placeholder\", lang_ui)}",
                             value: "{multi_input()}",
                             oninput: move |e| multi_input.set(e.value()),
                         }
@@ -1913,7 +1921,7 @@ fn App() -> Element {
                                 }
                             },
                             span { dangerous_inner_html: "{icon(\"plus\", \"ico\")}" }
-                            "Añadir"
+                            "{txt(\"add_button\", lang_ui)}"
                         }
                     }
                     div { class: "multi-chips",
@@ -1926,10 +1934,10 @@ fn App() -> Element {
                         if let Some(textos) = perfil.secciones.get("Reactivity Profile") {
                             div { class: "interaccion cameo",
                                 div { class: "interaccion-cabecera",
-                                    strong { "Perfil de reactividad · {nombre}" }
+                                    strong { "{sustancias_i18n::texto_fijo_fmt(\"reactivity_prefix\", lang_ui, &[(\"nombre\", nombre.as_str())])}" }
                                     span { class: "badge badge-suave", "PubChem" }
                                 }
-                                p { class: "multi-nota", "Fuente: PubChem (NIH). Sin clasificación CAMEO disponible." }
+                                p { class: "multi-nota", "{txt(\"pubchem_source_note\", lang_ui)}" }
                                 for txt in textos.iter() { p { "{txt}" } }
                             }
                         }
@@ -1947,8 +1955,8 @@ fn App() -> Element {
                                     "{a.etiqueta}"
                                 }
                             }
-                            p { class: "multi-nota", "Compatibilidad segun NOAA/EPA CAMEO Chemicals" }
-                            if a.revisado { span { class: "badge badge-ok", "Revisado por profesional" } }
+                            p { class: "multi-nota", "{txt(\"cameo_compatibility_note\", lang_ui)}" }
+                            if a.revisado { span { class: "badge badge-ok", "{txt(\"reviewed_badge\", lang_ui)}" } }
                             span {
                                 class: match a.compatibilidad.as_str() {
                                     "incompatible" => "badge badge-danger",
@@ -1956,39 +1964,39 @@ fn App() -> Element {
                                     _ => "badge badge-ok",
                                 },
                                 match a.compatibilidad.as_str() {
-                                    "incompatible" => "INCOMPATIBLE",
-                                    "precaucion" => "PRECAUCION",
-                                    _ => "COMPATIBLE",
+                                    "incompatible" => "{txt(\"status_incompatible\", lang_ui)}",
+                                    "precaucion" => "{txt(\"status_precaution\", lang_ui)}",
+                                    _ => "{txt(\"status_compatible\", lang_ui)}",
                                 }
                             }
                             if !a.peligros.is_empty() {
-                                p { class: "lista-titulo", "Peligros previstos" }
+                                p { class: "lista-titulo", "{txt(\"predicted_hazards\", lang_ui)}" }
                                 ul { class: "lista",
                                     for x in a.peligros.iter() { li { "{x}" } }
                                 }
                             }
                             if !a.gases.is_empty() {
-                                p { class: "lista-titulo", "Posibles gases" }
+                                p { class: "lista-titulo", "{txt(\"possible_gases\", lang_ui)}" }
                                 p { class: "interaccion-productos", "{a.gases.join(\", \")}" }
                             }
                             if !a.citas.is_empty() {
                                 details { class: "citas",
-                                    summary { "Referencias bibliograficas" }
+                                    summary { "{txt(\"pair_references_summary\", lang_ui)}" }
                                     ul { class: "lista",
                                         for c in a.citas.iter() { li { "{c}" } }
                                     }
                                 }
                             }
                             for u in a.fuentes.iter() {
-                                a { href: "{u}", target: "_blank", class: "multi-nota", "Ver documentacion del par en CAMEO" }
+                                a { href: "{u}", target: "_blank", class: "multi-nota", "{txt(\"view_pair_docs_cameo\", lang_ui)}" }
                             }
                         }
                     }
                     }
                     if !triple_visible().is_empty() {
                         div { class: "multi-tercias",
-                            p { class: "lista-titulo", "Resumen de ternas (derivado de pares CAMEO)" }
-                            p { class: "multi-nota", "Los pares y sus peligros se detallan arriba; aquí solo se agrega su resultado." }
+                            p { class: "lista-titulo", "{txt(\"triple_summary_title\", lang_ui)}" }
+                            p { class: "multi-nota", "{txt(\"triple_summary_note\", lang_ui)}" }
                             for t in triple_visible.iter() {
                                 div { class: "interaccion cameo",
                                     div { class: "interaccion-cabecera",
@@ -2009,10 +2017,10 @@ fn App() -> Element {
                                             _ => "badge badge-ok",
                                         },
                                         match (t.compatibilidad.as_str(), lang_ui) {
-                                            ("incompatible", _) => "INCOMPATIBLE (POR PARES)",
-                                            ("precaucion", _) => "PRECAUCION (POR PARES)",
+                                            ("incompatible", _) => "{txt(\"status_incompatible_pairs\", lang_ui)}",
+                                            ("precaucion", _) => "{txt(\"status_precaution_pairs\", lang_ui)}",
                                             (_, "en") => "NO HAZARD REPORTED FOR ANY PAIR",
-                                            _ => "SIN PELIGRO REGISTRADO POR PARES",
+                                            _ => "{txt(\"status_no_hazard_pairs\", lang_ui)}",
                                         }
                                     }
                                     div { class: "multi-chips",
@@ -2029,17 +2037,33 @@ fn App() -> Element {
                                     }
                                     if let Some(puente) = &t.puente {
                                         p { class: "multi-nota",
-                                            "Patrón por pares: {puente} es incompatible con las otras dos, que son compatibles entre sí. No implica reacción ternaria ni catálisis."
+                                            "{sustancias_i18n::texto_fijo_fmt(\"bridge_pattern\", lang_ui, &[(\"puente\", puente.as_str())])}"
                                         }
                                     }
                                     if t.cobertura_limitada {
-                                        span { class: "badge badge-warn", "Cobertura limitada (RG99)" }
+                                        span { class: "badge badge-warn", "{txt(\"limited_coverage_badge\", lang_ui)}" }
                                     }
                                     if t.revisado {
-                                        span { class: "badge badge-ok", "Revisado por profesional" }
+                                        span { class: "badge badge-ok", "{txt(\"reviewed_badge\", lang_ui)}" }
+                                    }
+                                    for r in t.reglas.iter() {
+                                        div { class: "regla-ternaria",
+                                            strong { "{sustancias_i18n::texto_fijo_fmt(\"rule_badge\", lang_ui, &[(\"titulo\", r.titulo.as_str())])}" }
+                                            p { class: "multi-nota", "{r.descripcion}" }
+                                            p { class: "multi-nota", "{sustancias_i18n::texto_fijo_fmt(\"rule_conditions\", lang_ui, &[(\"condiciones\", r.condiciones.as_str())])}" }
+                                            p { class: "multi-nota", "{sustancias_i18n::texto_fijo_fmt(\"rule_hazards\", lang_ui, &[(\"peligros\", &r.peligros.join(\", \"))])}" }
+                                            details { class: "citas",
+                                                summary { "{txt(\"rule_source_summary\", lang_ui)}" }
+                                                ul { class: "lista",
+                                                    for f in r.fuentes.iter() {
+                                                        li { a { href: "{f.url}", target: "_blank", "{f.titulo}" } }
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                     details { class: "citas",
-                                        summary { "Referencias oficiales de la terna" }
+                                        summary { "{txt(\"triple_references_summary\", lang_ui)}" }
                                         ul { class: "lista",
                                             for f in t.fuentes.iter() {
                                                 li { a { href: "{f.url}", target: "_blank", "{f.titulo}" } }
@@ -2054,7 +2078,7 @@ fn App() -> Element {
                     if multi_items.len() >= 3 {
                         div {
                             class: "aviso aviso-ternario",
-                            aria_label: "Aviso sobre mezclas de tres o mas sustancias",
+                            aria_label: "{txt(\"ternary_warning_aria\", lang_ui)}",
                             span { dangerous_inner_html: "{icon(\"alert\", \"ico\")}" }
                             span { "{sustancias_i18n::texto_fijo_count(\"multi_substance_warning\", lang_ui, multi_items.len())}" }
                         }
@@ -2067,11 +2091,11 @@ fn App() -> Element {
                         div { class: "ficha-titulo",
                             h4 { "{s.nombre}" }
                             if s.estado == "online" {
-                                span { class: "badge badge-online", "DATOS EN LÍNEA · PUBCHEM" }
+                                span { class: "badge badge-online", "{txt(\"badge_online_data\", lang_ui)}" }
                             } else if core::substance_is_verified(&s) {
-                                span { class: "badge badge-ok", "FDS VERIFICADA" }
+                                span { class: "badge badge-ok", "{txt(\"badge_verified_sheet\", lang_ui)}" }
                             } else {
-                                span { class: "badge badge-demo", "DEMO · 16 SECCIONES" }
+                                span { class: "badge badge-demo", "{txt(\"badge_demo_sheet\", lang_ui)}" }
                             }
                         }
                         div { class: "identificadores",
@@ -2080,21 +2104,21 @@ fn App() -> Element {
                             span { class: "ident", "ONU {s.onu}" }
                             span { class: "ident", "{s.palabra_advertencia}" }
                             if !s.fecha_verificacion.is_empty() {
-                                span { class: "ident", "Verificada: {s.fecha_verificacion}" }
+                                span { class: "ident", "{sustancias_i18n::texto_fijo_fmt(\"verified_date\", lang_ui, &[(\"fecha\", s.fecha_verificacion.as_str())])}" }
                             }
                             if !s.verificado_por.is_empty() {
-                                span { class: "ident", "Por: {s.verificado_por}" }
+                                span { class: "ident", "{sustancias_i18n::texto_fijo_fmt(\"verified_by\", lang_ui, &[(\"quien\", s.verificado_por.as_str())])}" }
                             }
                         }
                         if s.estado == "online" {
                             div { class: "aviso",
                                 span { dangerous_inner_html: "{icon(\"alert\", \"ico\")}" }
-                                span { "Ficha parcial generada con datos públicos de PubChem. No sustituye la ficha de datos de seguridad del fabricante." }
+                                span { "{txt(\"partial_sheet_notice\", lang_ui)}" }
                             }
                         }
                         if let Some(lim) = limites {
                             div { class: "seccion limites",
-                                h5 { "Límites de exposición · NIOSH" }
+                                h5 { "{txt(\"exposure_limits_title\", lang_ui)}" }
                                 div { class: "prop-grid",
                                     if !lim.rel.is_empty() {
                                         div { class: "prop", b { "NIOSH REL" } "{lim.rel}" }
@@ -2107,7 +2131,7 @@ fn App() -> Element {
                                     }
                                 }
                                 p { class: "multi-nota",
-                                    a { href: "{lim.url}", target: "_blank", "Fuente: NIOSH Pocket Guide (CDC)" }
+                                    a { href: "{lim.url}", target: "_blank", "{txt(\"niosh_source\", lang_ui)}" }
                                 }
                             }
                         }
@@ -2146,14 +2170,14 @@ fn App() -> Element {
                             }
                         }
                         div { class: "seccion fuentes",
-                            h5 { "Fuentes" }
+                            h5 { "{txt(\"sources_title\", lang_ui)}" }
                             for f in s.fuentes.iter() {
                                 a { href: "{f.url}", target: "_blank", "{f.titulo}" }
                             }
                         }
                         div { class: "seccion documentos",
-                            h5 { "Documentos y descarga" }
-                            p { "Guarda esta ficha o descarga el documento PDF original cuando esté disponible." }
+                            h5 { "{txt(\"documents_title\", lang_ui)}" }
+                            p { "{txt(\"documents_intro\", lang_ui)}" }
                             div { class: "documentos-acciones",
                                 if !s.pdf_url.is_empty() {
                                     button {
@@ -2170,7 +2194,7 @@ fn App() -> Element {
                                             );
                                         },
                                         span { dangerous_inner_html: "{icon(\"download\", \"ico\")}" }
-                                        "Descargar FDS en PDF"
+                                        "{txt(\"download_sds_pdf\", lang_ui)}"
                                     }
                                 }
                                 button {
@@ -2179,7 +2203,7 @@ fn App() -> Element {
                                         dioxus::document::eval("window.print()");
                                     },
                                     span { dangerous_inner_html: "{icon(\"file\", \"ico\")}" }
-                                    "Guardar ficha como PDF (imprimir)"
+                                    "{txt(\"print_sheet_pdf\", lang_ui)}"
                                 }
                             }
                         }
@@ -2211,7 +2235,7 @@ fn App() -> Element {
                             href: "{url}",
                             target: "_blank",
                             span { dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
-                            "Abrir PDF original"
+                            "{txt(\"open_original_pdf\", lang_ui)}"
                         }
                         button {
                             class: "boton boton-descargar",
@@ -2227,7 +2251,7 @@ fn App() -> Element {
                                 );
                             },
                             span { dangerous_inner_html: "{icon(\"download\", \"ico\")}" }
-                            "Descargar PDF"
+                            "{txt(\"download_pdf\", lang_ui)}"
                         }
                     }
                 }
@@ -2240,8 +2264,8 @@ fn App() -> Element {
                     div { class: "panel-titulo",
                         span { class: "panel-icono", dangerous_inner_html: "{icon(\"download\", \"ico ico-lg\")}" }
                         div {
-                            h3 { "Documentos sin conexión" }
-                            p { "Solo en la aplicación nativa. La versión web no almacena archivos." }
+                            h3 { "{txt(\"offline_docs_title\", lang_ui)}" }
+                            p { "{txt(\"offline_docs_sub\", lang_ui)}" }
                         }
                     }
                 }
@@ -2257,7 +2281,7 @@ fn App() -> Element {
                                 opciones.set(o);
                             },
                         }
-                        "Guardar documentos en la app para consultarlos sin internet"
+                        "{txt(\"opt_save_offline\", lang_ui)}"
                     }
                     label { class: "opcion",
                         input {
@@ -2270,7 +2294,7 @@ fn App() -> Element {
                                 opciones.set(o);
                             },
                         }
-                        "Copiar automáticamente al directorio de descargas del sistema"
+                        "{txt(\"opt_copy_downloads\", lang_ui)}"
                     }
                     label { class: "opcion",
                         input {
@@ -2283,12 +2307,12 @@ fn App() -> Element {
                                 opciones.set(o);
                             },
                         }
-                        "Enviar automáticamente feedback y reportes de errores"
+                        "{txt(\"opt_auto_report\", lang_ui)}"
                     }
                     label { class: "opcion",
-                        span { "Proveedor de traducción" }
+                        span { "{txt(\"translation_provider\", lang_ui)}" }
                         select {
-                            aria_label: "Proveedor de traducción",
+                            aria_label: "{txt(\"translation_provider\", lang_ui)}",
                             value: if opciones().deepl_enabled { "deepl" } else { "google" },
                             onchange: move |e| {
                                 let mut o = opciones();
@@ -2296,17 +2320,17 @@ fn App() -> Element {
                                 guardar_opciones(&o);
                                 opciones.set(o);
                             },
-                            option { value: "google", "Google Translate (gratuito, por defecto)" }
-                            option { value: "deepl", "DeepL (con mi propia key)" }
+                            option { value: "google", "{txt(\"provider_google\", lang_ui)}" }
+                            option { value: "deepl", "{txt(\"provider_deepl\", lang_ui)}" }
                         }
                     }
                     if opciones().deepl_enabled {
                         label { class: "opcion",
-                            span { "Key de DeepL (se guarda solo en este dispositivo)" }
+                            span { "{txt(\"deepl_key_label\", lang_ui)}" }
                             input {
                                 r#type: "password",
                                 value: opciones().deepl_key.clone(),
-                                placeholder: "Introduce tu key de DeepL",
+                                placeholder: "{txt(\"deepl_key_placeholder\", lang_ui)}",
                                 onchange: move |e| {
                                     let mut o = opciones();
                                     o.deepl_key = e.value();
@@ -2326,7 +2350,7 @@ fn App() -> Element {
                                     opciones.set(o);
                                 },
                             }
-                            "Usar endpoint de pago (DeepL Pro)"
+                            "{txt(\"deepl_pro_option\", lang_ui)}"
                         }
                     }
                     if !cfg!(target_arch = "wasm32") {
@@ -2336,11 +2360,11 @@ fn App() -> Element {
                                 #[cfg(not(target_arch = "wasm32"))]
                                 abrir_issue("Feedback sobre Sustancias Peligrosas", "Cuéntanos qué funciona mal o qué te gustaría mejorar:");
                             },
-                            "Enviar feedback / reportar un bug"
+                            "{txt(\"feedback_button\", lang_ui)}"
                         }
                     }
                     label { class: "opcion",
-                        span { "Clave API de CAS Common Chemistry (opcional; se solicita gratis en cas.org)" }
+                        span { "{txt(\"cas_key_label\", lang_ui)}" }
                         input {
                             r#type: "password",
                             value: opciones().cas_api_key.clone(),
@@ -2354,22 +2378,22 @@ fn App() -> Element {
                         }
                     }
                     details { class: "tutorial-cas",
-                        summary { "Cómo obtener tu clave de CAS (gratis, 2 minutos)" }
+                        summary { "{txt(\"cas_tutorial_summary\", lang_ui)}" }
                         ol { class: "lista",
-                            li { "Abre " a { href: "https://www.cas.org/services/commonchemistry-api", target: "_blank", "el formulario de CAS Common Chemistry" } "." }
-                            li { "Rellena tu nombre, tu correo y para qué quieres usar la clave." }
-                            li { "Recibirás un token por correo. Es personal: no lo compartas." }
-                            li { "Pega el token en el campo de arriba y se guardará solo en este dispositivo." }
+                            li { "Abre " a { href: "https://www.cas.org/services/commonchemistry-api", target: "_blank", "{txt(\"cas_step_form_link\", lang_ui)}" } "." }
+                            li { "{txt(\"cas_step_fill\", lang_ui)}" }
+                            li { "{txt(\"cas_step_token\", lang_ui)}" }
+                            li { "{txt(\"cas_step_paste\", lang_ui)}" }
                         }
-                        p { class: "multi-nota", "Solo hace falta si PubChem no devuelve el número CAS. La licencia de Common Chemistry es de uso no comercial." }
+                        p { class: "multi-nota", "{txt(\"cas_tutorial_note\", lang_ui)}" }
                     }
                     label { class: "opcion",
-                        span { "Apoyar al creador" }
+                        span { "{txt(\"support_creator\", lang_ui)}" }
                         a { class: "estrella-enlace", href: GITHUB_URL, target: "_blank",
-                            "Dale una estrella al proyecto en GitHub" }
+                            "{txt(\"star_support_link\", lang_ui)}" }
                     }
                     label { class: "opcion",
-                        "Directorio de descargas personalizado (vacío = el del sistema)"
+                        "{txt(\"downloads_dir_label\", lang_ui)}"
                         input {
                             r#type: "text",
                             value: opciones().downloads_dir.clone(),
@@ -2385,9 +2409,9 @@ fn App() -> Element {
                 if !estado_descarga().is_empty() {
                     p { class: "estado-descarga", "{estado_descarga()}" }
                 }
-                h4 { "Documentos guardados" }
+                h4 { "{txt(\"saved_docs_title\", lang_ui)}" }
                 if guardados().is_empty() {
-                    p { class: "vacio", "Todavía no has guardado ningún documento." }
+                    p { class: "vacio", "{txt(\"no_saved_docs\", lang_ui)}" }
                 } else {
                     for d in guardados().iter() {
                         div { class: "doc-guardado",
@@ -2408,7 +2432,7 @@ fn App() -> Element {
                                         guardados.set(cargar_guardados());
                                     }
                                 },
-                                "Eliminar"
+                                "{txt(\"delete_button\", lang_ui)}"
                             }
                         }
                     }
@@ -2419,35 +2443,35 @@ fn App() -> Element {
         details { class: "panel feedback-panel",
             summary {
                 span { class: "panel-icono", dangerous_inner_html: "{icon(\"info\", \"ico ico-lg\")}" }
-                span { "Enviar feedback / reportar un bug" }
+                span { "{txt(\"feedback_button\", lang_ui)}" }
             }
-            p { class: "multi-nota", "Completa el formulario: el reporte se estructuran automáticamente y se abre como issue en el repositorio." }
+            p { class: "multi-nota", "{txt(\"feedback_intro\", lang_ui)}" }
             div { class: "formulario",
                 label { class: "opcion",
-                    "Tipo"
+                    "{txt(\"feedback_type_label\", lang_ui)}"
                     select {
-                        aria_label: "Tipo de reporte",
+                        aria_label: "{txt(\"feedback_type_aria\", lang_ui)}",
                         value: "{feedback_tipo()}",
                         onchange: move |e| feedback_tipo.set(e.value()),
-                        option { value: "Sugerencia", "Sugerencia" }
-                        option { value: "Bug", "Bug" }
-                        option { value: "Datos", "Datos incorrectos" }
+                        option { value: "Sugerencia", "{txt(\"feedback_type_suggestion\", lang_ui)}" }
+                        option { value: "Bug", "{txt(\"feedback_type_bug\", lang_ui)}" }
+                        option { value: "Datos incorrectos", "{txt(\"feedback_type_data\", lang_ui)}" }
                     }
                 }
                 label { class: "opcion",
-                    "Título"
+                    "{txt(\"feedback_title_label\", lang_ui)}"
                     input {
                         r#type: "text",
                         value: "{feedback_titulo()}",
-                        placeholder: "Resumen breve",
+                        placeholder: "{txt(\"feedback_title_placeholder\", lang_ui)}",
                         oninput: move |e| feedback_titulo.set(e.value()),
                     }
                 }
                 label { class: "opcion",
-                    "Detalles"
+                    "{txt(\"feedback_details_label\", lang_ui)}"
                     textarea {
                         value: "{feedback_texto()}",
-                        placeholder: "Qué ocurrió, qué esperabas, pasos para reproducirlo…",
+                        placeholder: "{txt(\"feedback_details_placeholder\", lang_ui)}",
                         oninput: move |e| feedback_texto.set(e.value()),
                     }
                 }
@@ -2467,20 +2491,20 @@ fn App() -> Element {
                         feedback_titulo.set(String::new());
                         feedback_texto.set(String::new());
                     },
-                    "Enviar reporte estructurado"
+                    "{txt(\"send_report\", lang_ui)}"
                 }
             }
         }
 
         section { class: "panel redes-panel",
-            h3 { "Redes y enlaces" }
+            h3 { "{txt(\"social_title\", lang_ui)}" }
             div { class: "redes",
                 a { href: "{GITHUB_URL}", target: "_blank", aria_label: "GitHub",
                     dangerous_inner_html: "{icon(\"link\", \"ico\")}" }
                     "GitHub"
-                a { href: "{GITHUB_URL}/issues", target: "_blank", aria_label: "Issues de GitHub",
+                a { href: "{GITHUB_URL}/issues", target: "_blank", aria_label: "{txt(\"github_issues_aria\", lang_ui)}",
                     dangerous_inner_html: "{icon(\"info\", \"ico\")}" }
-                    "Issues"
+                    "{txt(\"github_issues_link\", lang_ui)}"
                 a { href: "https://www.linkedin.com/", target: "_blank", aria_label: "LinkedIn",
                     dangerous_inner_html: "{icon(\"globe\", \"ico\")}" }
                     "LinkedIn"
@@ -2489,13 +2513,13 @@ fn App() -> Element {
 
         footer { class: "pie",
             p { "{txt(\"substances_warning\", lang_ui)}" }
-            p { "Fuentes normativas: UNECE · OMI · OIT · INSST · BOE · DOF · SINIA · Gaceta Oficial de Cuba" }
+            p { "{txt(\"footer_sources\", lang_ui)}" }
             p {
                 a {
                     href: "{GITHUB_URL}/issues/new",
                     target: "_blank",
                     class: "link-feedback",
-                    "Enviar feedback / reportar un bug"
+                    "{txt(\"feedback_button\", lang_ui)}"
                 }
             }
         }

@@ -26,7 +26,7 @@ Base de conocimiento multilingüe de sustancias peligrosas: **marco legal por pa
    - Nombre químico en español, inglés, francés, alemán, italiano, portugués, ruso, chino, árabe… (traducción automática al inglés antes de consultar PubChem).
    - **Código CAS** (`7664-93-9`), **fórmula molecular** (`H2SO4`, `NaCl`, `CH3COOH`) y **códigos de producto** (`AEO7`, `TX-100`, `SDS`, `SLS`, `EDTA`, `BHT`, `TEA`). Los términos ambiguos muestran una nota aclaratoria.
 4. **Abre la ficha completa** con los 16 apartados del SGA y datos reales de PubChem PUG View (propiedades, clasificación GHS, todas las frases H, sinónimos y enlaces oficiales). Todo se muestra dentro de la app, sin saltar a sitios externos.
-5. **Compara sustancias** por parejas: nivel de peligro, tipo de reacción, productos, consecuencias y acciones recomendadas (`data/interactions.json`). Las parejas sin regla explícita usan una regla general de «sin reacción registrada».
+5. **Compara sustancias** con datos reales de NOAA/EPA CAMEO (nivel, compatibilidad, gases, peligros y referencias RG), sin reglas propias ni bloque heredado de «sin reacción registrada». Con 3 o más sustancias muestra además un **resumen de ternas**: agrega los tres pares, detecta un factor puente y señala reglas ternarias citadas por fuentes oficiales (caso glicerina + ácido nítrico + ácido sulfúrico de la propia documentación de CAMEO, y mezclas alcohol + peróxido + ácido sulfúrico de PubChem). La app advierte explícitamente que CAMEO no predice reacciones simultáneas entre tres sustancias.
 6. **Envía feedback** mediante un formulario que genera automáticamente un issue estructurado (tipo, descripción, país, idioma, búsqueda actual y plataforma). En la versión nativa puedes activar además el reporte automático de errores.
 
 ---
@@ -42,6 +42,8 @@ La traducción vive en `crates/i18n`, **no en la web**, para que la misma implem
 | **Diccionario local** | Respaldo offline | 209 términos químicos multilingües + alias industriales del core; funciona sin internet |
 
 La cadena prueba los proveedores en ese orden y devuelve el primero que responde. La **entrada** se traduce al inglés antes de consultar PubChem y la **salida** al idioma elegido en el selector (es, en, fr, de, it, pt, ru, zh, ja, ar, hi, nl, sv, pl, tr, ko o «auto»).
+
+Los **textos fijos de la interfaz** (142 claves: títulos, botones, placeholders, aria-labels y avisos) no usan la cadena: viven en `data/ui_texts.json`, embebido en el binario, con traducciones revisadas a **es/en/fr/de/it** y funcionan sin red. Las plantillas con contadores usan marcadores (`{n}`, `{pais}`, `{puente}`). El texto dinámico de CAMEO en inglés sigue traduciéndose con la cadena; el `if lang == "en"` de `traducir_texto` es deliberado y ya no afecta a los textos fijos.
 
 *Privacidad:* al traducir, el texto de la búsqueda se envía a Google Translate (o a DeepL si lo configuraste). El diccionario local no envía nada.
 
@@ -262,9 +264,9 @@ Paso único: **Settings → Pages → Build and deployment → Source: GitHub Ac
 
 ## Estado verificado
 
-- `cargo test --workspace`: ✅ 23 tests (core 17 + i18n 3 + storage 3)
+- `cargo test --workspace`: ✅ 52 tests (core 41 + i18n 7 + storage 4)
 - `cargo check -p sustancias-web --target wasm32-unknown-unknown`: ✅
-- `cargo check -p sustancias-web --features desktop`: ✅
+- Build nativo optimizado (`--features desktop --profile native-release`): ✅ en CI (en Linux requiere `libxdo`, aportado por `xdotool`)
 - Despliegue en GitHub Pages: ✅
 - Búsquedas verificadas en vivo: `ácido sulfúrico`, `alcohol etoxilado`, `AEO7`, `éter`, `H2SO4`, `7664-93-9`, `TX-100`
 - Frases H del ácido sulfúrico: 9 (`H290`, `H303`, `H314`, `H318`, `H330`, `H370`, `H372`, `H402`, `H410`)
@@ -273,9 +275,11 @@ Paso único: **Settings → Pages → Build and deployment → Source: GitHub Ac
 
 ## Pendiente
 
-- Ampliar las reglas de `data/interactions.json` a más pares de sustancias.
+- Integrar la Guía de Respuesta a Emergencias 2024 (DOT/PHMSA) como referencia estructurada; hoy solo está citada y enlazada.
+- Completar la revisión profesional de los 20 pares en `data/cameo_reviewed.json` (todos figuran como `pendiente`, por lo que no se muestra la insignia «Revisado por profesional»).
 - Validar en navegador los enlaces con `verificacion: portal_validar`.
 - Generar los paquetes de instalación para escritorio y móvil (iOS/macOS requieren Apple).
+- Tramitar licencia CAS de pago si la aplicación deja de ser gratuita (Common Chemistry es `CC BY-NC`).
 
 ## Licencia
 

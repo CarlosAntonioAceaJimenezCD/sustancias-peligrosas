@@ -78,6 +78,15 @@ pub fn texto_fijo_count(clave: &str, lang: &str, count: usize) -> String {
     texto_fijo(clave, lang).replace("{count}", &count.to_string())
 }
 
+/// Plantilla con marcadores nominales, p. ej. `{pais}` o `{puente}`.
+pub fn texto_fijo_fmt(clave: &str, lang: &str, vars: &[(&str, &str)]) -> String {
+    let mut salida = texto_fijo(clave, lang).to_string();
+    for (nombre, valor) in vars {
+        salida = salida.replace(&format!("{{{nombre}}}"), valor);
+    }
+    salida
+}
+
 /// Resultado de una traducción, con el idioma de origen cuando se detecta.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Traduccion {
@@ -489,6 +498,22 @@ mod tests {
         assert_eq!(idioma_efectivo("auto", "en"), "en");
         assert_eq!(idioma_efectivo("fr", "en"), "fr");
         assert_eq!(idioma_efectivo("auto", "fr"), "es");
+    }
+
+    #[test]
+    fn texto_fijo_fmt_sustituye_variables() {
+        let es = texto_fijo_fmt("bridge_pattern", "es", &[("puente", "Ácido sulfúrico")]);
+        assert!(es.contains("Ácido sulfúrico"));
+        assert!(!es.contains("{puente}"));
+
+        let en = texto_fijo_fmt(
+            "compare_counts",
+            "en",
+            &[("n", "3"), ("m", "1"), ("t", "2")],
+        );
+        assert!(en.contains('3'));
+        assert!(!en.contains('{'));
+        assert_eq!(texto_fijo_fmt("clave_inexistente", "fr", &[]), "");
     }
 
     #[test]

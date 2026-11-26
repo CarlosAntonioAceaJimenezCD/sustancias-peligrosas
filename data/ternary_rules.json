@@ -1,0 +1,70 @@
+{
+  "fuente": "NOAA/EPA CAMEO Chemicals (metodología de reactividad) y PubChem PUG View (NIH)",
+  "nota": "Reglas ternarias citadas explícitamente por fuentes oficiales. No se deducen de los pares CAMEO y no sustituyen la evaluación de un profesional.",
+  "reglas": [
+    {
+      "id": "glicerina-nitracion",
+      "titulo": "Glicerina + ácido nítrico + ácido sulfúrico",
+      "cas": ["56-81-5", "7697-37-2", "7664-93-9"],
+      "descripcion": "La documentación oficial de CAMEO indica que glicerina y ácido nítrico reaccionan poco por separado, pero al añadir ácido sulfúrico los tres forman nitroglicerina, un explosivo potente. CAMEO no predice esta reacción porque solo evalúa pares.",
+      "peligros": ["Formación de nitroglicerina", "Explosión"],
+      "condiciones": "Mezcla de los tres compuestos; los pares por separado no reproducen el resultado.",
+      "nivel": "alto",
+      "compatibilidad": "incompatible",
+      "fuentes": [
+        {
+          "titulo": "Reactions Between More than Two Chemicals · NOAA/EPA CAMEO",
+          "url": "https://cameochemicals.noaa.gov/help/reactivity/how_reactivity_is_predicted.htm"
+        }
+      ]
+    },
+    {
+      "id": "metanol-peroxido-acido",
+      "titulo": "Metanol + peróxido de hidrógeno concentrado + ácido sulfúrico concentrado",
+      "cas": ["67-56-1", "7722-84-1", "7664-93-9"],
+      "descripcion": "El perfil de reactividad de PubChem (NTP) señala que las mezclas de metanol con ácido sulfúrico concentrado y peróxido de hidrógeno concentrado pueden causar explosiones.",
+      "peligros": ["Explosión"],
+      "condiciones": "Peróxido y ácido concentrados; escenario de accidente, no proceso controlado.",
+      "nivel": "alto",
+      "compatibilidad": "incompatible",
+      "fuentes": [
+        {
+          "titulo": "PubChem PUG View · Methanol (CID 887)",
+          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/887"
+        }
+      ]
+    },
+    {
+      "id": "etanol-peroxido-acido",
+      "titulo": "Etanol + peróxido de hidrógeno concentrado + ácido sulfúrico concentrado",
+      "cas": ["64-17-5", "7722-84-1", "7664-93-9"],
+      "descripcion": "El perfil de reactividad de PubChem (NTP) señala que las mezclas de alcoholes con ácido sulfúrico concentrado y peróxido de hidrógeno concentrado pueden causar explosiones; el etanol es uno de los ejemplos documentados.",
+      "peligros": ["Explosión"],
+      "condiciones": "Peróxido y ácido concentrados; escenario de accidente, no proceso controlado.",
+      "nivel": "alto",
+      "compatibilidad": "incompatible",
+      "fuentes": [
+        {
+          "titulo": "PubChem PUG View · Ethanol (CID 702)",
+          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/702"
+        }
+      ]
+    },
+    {
+      "id": "alcohol-amilico-peroxido-acido",
+      "titulo": "Alcohol amílico + peróxido de hidrógeno concentrado + ácido sulfúrico concentrado",
+      "cas": ["123-51-3", "7722-84-1", "7664-93-9"],
+      "descripcion": "El perfil de reactividad de PubChem (NTP) indica que las mezclas de alcohol isoamílico con ácido sulfúrico concentrado y peróxido de hidrógeno concentrado pueden causar explosiones.",
+      "peligros": ["Explosión"],
+      "condiciones": "Peróxido y ácido concentrados; escenario de accidente, no proceso controlado.",
+      "nivel": "alto",
+      "compatibilidad": "incompatible",
+      "fuentes": [
+        {
+          "titulo": "PubChem PUG View · Isoamyl Alcohol (CID 31260)",
+          "url": "https://pubchem.ncbi.nlm.nih.gov/compound/31260"
+        }
+      ]
+    }
+  ]
+}

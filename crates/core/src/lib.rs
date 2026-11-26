@@ -24,6 +24,7 @@ const PUBCHEM_REACTIVITY_JSON: &str = include_str!("../../../data/pubchem_reacti
 const CAMEO_REVIEWED_JSON: &str = include_str!("../../../data/cameo_reviewed.json");
 const NIOSH_LIMITS_JSON: &str = include_str!("../../../data/niosh_limits.json");
 const ICSC_CARDS_JSON: &str = include_str!("../../../data/icsc_cards.json");
+const TERNARY_RULES_JSON: &str = include_str!("../../../data/ternary_rules.json");
 
 mod query;
 
@@ -346,6 +347,34 @@ pub struct TripleBridge {
     pub compatibles: Vec<String>,
 }
 
+/// Regla ternaria documentada por una fuente oficial (no deducida de pares).
+#[derive(Debug, Clone, Deserialize, Serialize)]
+pub struct TernaryRule {
+    #[serde(default)]
+    pub id: String,
+    #[serde(default)]
+    pub titulo: String,
+    pub cas: Vec<String>,
+    #[serde(default)]
+    pub descripcion: String,
+    #[serde(default)]
+    pub peligros: Vec<String>,
+    #[serde(default)]
+    pub condiciones: String,
+    #[serde(default)]
+    pub nivel: String,
+    #[serde(default)]
+    pub compatibilidad: String,
+    #[serde(default)]
+    pub fuentes: Vec<Fuente>,
+}
+
+#[derive(Debug, Clone, Deserialize, Serialize)]
+struct TernaryRulesDb {
+    #[serde(default)]
+    pub reglas: Vec<TernaryRule>,
+}
+
 /// Agregación conservadora de los tres pares CAMEO de una terna.
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub struct TripleAnalysis {
@@ -354,6 +383,9 @@ pub struct TripleAnalysis {
     pub nivel: String,
     pub etiqueta: String,
     pub compatibilidad: String,
+    /// Reglas oficiales que describen explícitamente esta combinación de tres.
+    #[serde(default)]
+    pub reglas: Vec<TernaryRule>,
     /// Siempre tres elementos, en orden AB, AC, BC.
     pub parejas: Vec<TriplePair>,
     pub puente: Option<TripleBridge>,
@@ -787,6 +819,26 @@ pub fn cameo_triple_nota(lang: &str) -> String {
     }
 }
 
+/// Reglas ternarias documentadas por fuentes oficiales (embebidas, sin red).
+pub fn ternary_rules() -> &'static [TernaryRule] {
+    static CACHE: OnceLock<TernaryRulesDb> = OnceLock::new();
+    &CACHE.get_or_init(|| parse(TERNARY_RULES_JSON)).reglas
+}
+
+/// Reglas cuyos tres CAS están presentes en la selección, en cualquier orden.
+pub fn matching_ternary_rules(cass: &[&str]) -> Vec<&'static TernaryRule> {
+    let seleccion: Vec<String> = cass.iter().map(|c| normalize(c.trim())).collect();
+    ternary_rules()
+        .iter()
+        .filter(|r| {
+            !r.cas.is_empty()
+                && r.cas
+                    .iter()
+                    .all(|cas| seleccion.iter().any(|s| s == &normalize(cas.trim())))
+        })
+        .collect()
+}
+
 fn cameo_analyze_triple_items(items: [(String, &str); 3]) -> Option<TripleAnalysis> {
     use std::collections::HashSet;
 
@@ -798,6 +850,12 @@ fn cameo_analyze_triple_items(items: [(String, &str); 3]) -> Option<TripleAnalys
             return None;
         }
     }
+
+    let seleccion: Vec<&str> = items.iter().map(|(_, cas)| *cas).collect();
+    let reglas: Vec<TernaryRule> = matching_ternary_rules(&seleccion)
+        .into_iter()
+        .cloned()
+        .collect();
 
     // Cobertura estricta: sin los tres CAS en CAMEO no se afirma nada.
     let sustancias: Vec<&CameoSubstance> = items
@@ -834,11 +892,14 @@ fn cameo_analyze_triple_items(items: [(String, &str); 3]) -> Option<TripleAnalys
             revisado |= a.revisado;
         }
     }
-    if parejas.iter().all(|p| p.fuentes.is_empty()) {
+    if parejas.iter().all(|p| p.fuentes.is_empty()) && reglas.is_empty() {
         return None;
     }
 
-    let (nivel, etiqueta, compatibilidad) = cameo_clasificar(&peligros);
+    let (nivel_base, etiqueta_base, compatibilidad_base) = cameo_clasificar(&peligros);
+    let mut nivel = nivel_base.to_string();
+    let mut etiqueta = etiqueta_base.to_string();
+    let mut compatibilidad = compatibilidad_base.to_string();
 
     // índices: 0 = AB, 1 = AC, 2 = BC.
     let comps: Vec<&str> = parejas.iter().map(|p| p.compatibilidad.as_str()).collect();
@@ -887,12 +948,30 @@ fn cameo_analyze_triple_items(items: [(String, &str); 3]) -> Option<TripleAnalys
         });
     }
 
+    // Las reglas documentadas pueden agravar el resultado que dan los pares.
+    for r in &reglas {
+        if r.nivel == "alto" {
+            nivel = "alto".to_string();
+            etiqueta = "Peligro alto".to_string();
+        }
+        if r.compatibilidad == "incompatible" {
+            compatibilidad = "incompatible".to_string();
+        }
+        push_unique(&mut peligros, &r.peligros);
+        for f in &r.fuentes {
+            if !fuentes.iter().any(|x| x.url == f.url) {
+                fuentes.push(f.clone());
+            }
+        }
+    }
+
     Some(TripleAnalysis {
         nombres: items.iter().map(|(n, _)| n.clone()).collect(),
         cass: items.iter().map(|(_, c)| c.to_string()).collect(),
-        nivel: nivel.to_string(),
-        etiqueta: etiqueta.to_string(),
-        compatibilidad: compatibilidad.to_string(),
+        nivel,
+        etiqueta,
+        compatibilidad,
+        reglas,
         parejas,
         puente,
         peligros,
@@ -2186,5 +2265,34 @@ mod tests {
         assert_eq!(t.parejas[2].nombre_b, "Acetona");
         assert!(t.nota.contains(" CAMEO"));
         assert!(cameo_triple_nota("en").contains("CAMEO does not predict"));
+    }
+
+    #[test]
+    fn regla_ternaria_de_nitracion_se_aplica_y_agrava() {
+        let reglas = matching_ternary_rules(&["7664-93-9", "56-81-5", "7697-37-2"]);
+        assert_eq!(reglas.len(), 1);
+        assert_eq!(reglas[0].id, "glicerina-nitracion");
+
+        let t = cameo_analyze_triple("56-81-5", "7697-37-2", "7664-93-9").unwrap();
+        assert_eq!(t.reglas.len(), 1);
+        assert_eq!(t.nivel, "alto");
+        assert_eq!(t.compatibilidad, "incompatible");
+        assert!(t.fuentes.iter().any(|f| f.url.contains("how_reactivity_is_predicted")));
+        assert!(t.peligros.iter().any(|p| p.contains("nitroglicerina")));
+    }
+
+    #[test]
+    fn regla_ternaria_de_peroxido_identifica_alcohol() {
+        let t = cameo_analyze_triple("67-56-1", "7722-84-1", "7664-93-9").unwrap();
+        assert_eq!(t.reglas.len(), 1);
+        assert_eq!(t.reglas[0].id, "metanol-peroxido-acido");
+        assert!(t.fuentes.iter().any(|f| f.url.contains("compound/887")));
+    }
+
+    #[test]
+    fn ternas_sin_regla_no_muestran_reglas() {
+        let t = cameo_analyze_triple("7647-01-0", "1310-73-2", "67-64-1").unwrap();
+        assert!(t.reglas.is_empty());
+        assert!(!ternary_rules().is_empty());
     }
 }

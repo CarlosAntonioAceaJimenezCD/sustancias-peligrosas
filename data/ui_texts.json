@@ -85,9 +85,912 @@
   },
   "substances_warning": {
     "es": " No se almacenan fichas técnicas en este repositorio. Las sustancias se consultan en vivo en bases de datos oficiales (PubChem / NIH) y se marcan como DATOS EN LÍNEA. Verifica siempre la peligrosidad y el transporte en la FDS del fabricante.",
-    "en": "No technical sheets are stored in this repository.",
+    "en": " No technical data sheets are stored in this repository. Substances are looked up live in official databases (PubChem / NIH) and marked as ONLINE DATA. Always verify the hazards and transport in the manufacturer's safety data sheet.",
     "fr": "Aucune fiche technique n'est stockée dans ce référentiel. Les substances sont interrogées en direct dans les bases de données officielles (PubChem/NIH) et marquées comme DONNÉES EN LIGNE. Vérifiez toujours le danger et le transport dans la FDS du fabricant.",
     "de": "In diesem Repository sind keine technischen Datenblätter gespeichert. Die Substanzen werden live aus offiziellen Datenbanken (PubChem/NIH) abgefragt und als ONLINE-DATEN gekennzeichnet. Prüfen Sie Gefährlichkeit und Transport stets im Sicherheitsdatenblatt des Herstellers.",
     "it": "In questo repository non sono archiviate schede tecniche. Le sostanze vengono consultate in tempo reale in banche dati ufficiali (PubChem/NIH) e contrassegnate come DATI ONLINE. Verifica sempre la pericolosità e il trasporto nella scheda di dati di sicurezza del produttore."
+  },
+  "brand_subtitle": {
+    "es": "Marco legal y fichas técnicas",
+    "en": "Legal framework and technical sheets",
+    "fr": "Cadre juridique et fiches techniques",
+    "de": "Rechtliche Rahmenbedingungen und technische Datenblätter",
+    "it": "Quadro normativo e schede tecniche"
+  },
+  "theme_title_light": {
+    "es": "Tema claro · cambiar a oscuro",
+    "en": "Light theme · change to dark",
+    "fr": "Thème clair · passer au sombre",
+    "de": "Helles Thema · Wechseln Sie zu Dunkel",
+    "it": "Tema chiaro · cambia in scuro"
+  },
+  "theme_title_auto": {
+    "es": "Tema automático según tu zona horaria · cambiar a claro",
+    "en": "Automatic theme based on your time zone · change to light",
+    "fr": "Thème automatique basé sur votre fuseau horaire · passer à la lumière",
+    "de": "Automatisches Thema basierend auf Ihrer Zeitzone · Wechseln Sie zu Licht",
+    "it": "Tema automatico basato sul tuo fuso orario · cambia in luce"
+  },
+  "brand_title": {
+    "es": "Sustancias Peligrosas",
+    "en": "Hazardous Substances",
+    "fr": "Substances dangereuses",
+    "de": "Gefährliche Stoffe",
+    "it": "Sostanze pericolose"
+  },
+  "skip_to_search": {
+    "es": "Saltar al buscador",
+    "en": "Jump to search engine",
+    "fr": "Aller au moteur de recherche",
+    "de": "Zur Suchmaschine springen",
+    "it": "Vai al motore di ricerca"
+  },
+  "continent_europe": {
+    "es": "Europa",
+    "en": "Europe",
+    "fr": "Europe",
+    "de": "Europa",
+    "it": "Europa"
+  },
+  "continent_africa": {
+    "es": "Africa",
+    "en": "Africa",
+    "fr": "Afrique",
+    "de": "Afrika",
+    "it": "Africa"
+  },
+  "continent_america": {
+    "es": "America",
+    "en": "America",
+    "fr": "Amérique",
+    "de": "Amerika",
+    "it": "America"
+  },
+  "continent_asia": {
+    "es": "Asia",
+    "en": "Asia",
+    "fr": "Asie",
+    "de": "Asien",
+    "it": "Asia"
+  },
+  "continent_oceania": {
+    "es": "Oceania",
+    "en": "Oceania",
+    "fr": "Océanie",
+    "de": "Ozeanien",
+    "it": "Oceania"
+  },
+  "filter_all": {
+    "es": "Todos",
+    "en": "All",
+    "fr": "Tous",
+    "de": "Alle",
+    "it": "Tutto"
+  },
+  "continent_international": {
+    "es": "Marco internacional",
+    "en": "International framework",
+    "fr": "Cadre international",
+    "de": "Internationaler Rahmen",
+    "it": "Quadro internazionale"
+  },
+  "theme_title_dark": {
+    "es": "Tema oscuro · cambiar a automático",
+    "en": "Dark theme · switch to automatic",
+    "fr": "Thème sombre · passer en mode automatique",
+    "de": "Dunkles Thema · Wechseln Sie zu automatisch",
+    "it": "Tema scuro · passa ad automatico"
+  },
+  "legal_details_summary": {
+    "es": "Documentación legal y marco normativo",
+    "en": "Legal documentation and regulatory framework",
+    "fr": "Documentation juridique et cadre réglementaire",
+    "de": "Rechtliche Dokumentation und regulatorischer Rahmen",
+    "it": "Documentazione legale e quadro normativo"
+  },
+  "boe_search_placeholder": {
+    "es": "Buscar normas en el BOE (España)…",
+    "en": "Search for regulations in the BOE (Spain)…",
+    "fr": "Recherche de réglementations au BOE (Espagne)…",
+    "de": "Suche nach Vorschriften in der BOE (Spanien)…",
+    "it": "Cerca regolamenti nella BOE (Spagna)…"
+  },
+  "boe_loading": {
+    "es": "Consultando la API de datos abiertos del BOE…",
+    "en": "Consulting the BOE open data API…",
+    "fr": "Consultation de l’API open data BOE…",
+    "de": "Konsultation der BOE Open Data API…",
+    "it": "Consultando l'API open data BOE..."
+  },
+  "boe_consolidated_badge": {
+    "es": "Texto consolidado informativo",
+    "en": "Informative consolidated text",
+    "fr": "Texte consolidé informatif",
+    "de": "Informativer konsolidierter Text",
+    "it": "Testo consolidato informativo"
+  },
+  "boe_view_link": {
+    "es": "Ver en el BOE",
+    "en": "See in the BOE",
+    "fr": "Voir dans le BOE",
+    "de": "Siehe im BOE",
+    "it": "Vedi nel BOE"
+  },
+  "boe_source_prefix": {
+    "es": "Fuente de los datos: ",
+    "en": "Data source:",
+    "fr": "Source des données :",
+    "de": "Datenquelle:",
+    "it": "Fonte dati:"
+  },
+  "boe_disclaimer": {
+    "es": ". Texto consolidado de carácter meramente informativo.",
+    "en": ". Consolidated text of a purely informative nature.",
+    "fr": ". Texte consolidé à caractère purement informatif.",
+    "de": ". Konsolidierter Text mit rein informativem Charakter.",
+    "it": ". Testo consolidato di carattere puramente informativo."
+  },
+  "verified_badge": {
+    "es": "Verificado",
+    "en": "Verified",
+    "fr": "Vérifié",
+    "de": "Verifiziert",
+    "it": "Verificato"
+  },
+  "international_section_title": {
+    "es": "Marco internacional (ONU y convenciones)",
+    "en": "International framework (UN and conventions)",
+    "fr": "Cadre international (ONU et conventions)",
+    "de": "Internationaler Rahmen (UN und Konventionen)",
+    "it": "Quadro internazionale (ONU e convenzioni)"
+  },
+  "read_full_norm": {
+    "es": "Leer norma íntegra",
+    "en": "Read full standard",
+    "fr": "Lire la norme complète",
+    "de": "Lesen Sie den vollständigen Standard",
+    "it": "Leggi la norma completa"
+  },
+  "lang_option_auto": {
+    "es": "Auto",
+    "en": "Car",
+    "fr": "Voiture",
+    "de": "Auto",
+    "it": "Auto"
+  },
+  "lang_option_es": {
+    "es": "Español",
+    "en": "Spanish",
+    "fr": "Espagnol",
+    "de": "Spanisch",
+    "it": "spagnolo"
+  },
+  "lang_option_en": {
+    "es": "English",
+    "en": "English",
+    "fr": "Anglais",
+    "de": "Englisch",
+    "it": "Inglese"
+  },
+  "lang_option_fr": {
+    "es": "Français",
+    "en": "French",
+    "fr": "Français",
+    "de": "Französisch",
+    "it": "francese"
+  },
+  "lang_option_de": {
+    "es": "Deutsch",
+    "en": "German",
+    "fr": "Allemand",
+    "de": "Deutsch",
+    "it": "tedesco"
+  },
+  "output_language_label": {
+    "es": "Idioma de salida",
+    "en": "Output language",
+    "fr": "Langue de sortie",
+    "de": "Ausgabesprache",
+    "it": "Lingua di uscita"
+  },
+  "lang_option_it": {
+    "es": "Italiano",
+    "en": "Italian",
+    "fr": "italien",
+    "de": "Italienisch",
+    "it": "Italiano"
+  },
+  "language_search_hint": {
+    "es": "Buscar en cualquier idioma · mostrar nombre en:",
+    "en": "Search in any language · show name in:",
+    "fr": "Rechercher dans n'importe quelle langue · afficher le nom dans :",
+    "de": "In einer beliebigen Sprache suchen · Name anzeigen in:",
+    "it": "Cerca in qualsiasi lingua · mostra il nome in:"
+  },
+  "searching_official_db": {
+    "es": "Consultando bases de datos oficiales…",
+    "en": "Consulting official databases…",
+    "fr": "Consultation des bases de données officielles…",
+    "de": "Konsultation offizieller Datenbanken…",
+    "it": "Consultando i database ufficiali..."
+  },
+  "search_placeholder": {
+    "es": "Ej. Acetona, ibuprofeno, 67-64-1…",
+    "en": "Ex. Acetone, ibuprofen, 67-64-1…",
+    "fr": "Ex. Acétone, ibuprofène, 67-64-1…",
+    "de": "Ex. Aceton, Ibuprofen, 67-64-1…",
+    "it": "Ex. Acetone, ibuprofene, 67-64-1…"
+  },
+  "star_dismiss": {
+    "es": "Quitar aviso",
+    "en": "Remove notice",
+    "fr": "Supprimer l'avis",
+    "de": "Hinweis entfernen",
+    "it": "Rimuovere l'avviso"
+  },
+  "star_banner_link": {
+    "es": "Dar una estrella",
+    "en": "Give a star",
+    "fr": "Donne une étoile",
+    "de": "Gib einen Stern",
+    "it": "Regala una stella"
+  },
+  "star_banner_text": {
+    "es": "¿Te resultó útil? Dale una estrella al proyecto en GitHub.",
+    "en": "Did you find it useful? Give the project a star on GitHub.",
+    "fr": "L'avez-vous trouvé utile ? Donnez une étoile au projet sur GitHub.",
+    "de": "Fanden Sie es nützlich? Geben Sie dem Projekt auf GitHub einen Stern.",
+    "it": "Lo hai trovato utile? Assegna una stella al progetto su GitHub."
+  },
+  "invalid_query_hint": {
+    "es": "La búsqueda debe incluir al menos una letra o un identificador válido (CAS, fórmula o código de producto).",
+    "en": "The search must include at least one letter or a valid identifier (CAS, formula, or product code).",
+    "fr": "La recherche doit comporter au moins une lettre ou un identifiant valide (CAS, formule ou code produit).",
+    "de": "Die Suche muss mindestens einen Buchstaben oder eine gültige Kennung (CAS, Formel oder Produktcode) enthalten.",
+    "it": "La ricerca deve includere almeno una lettera o un identificatore valido (CAS, formula o codice prodotto)."
+  },
+  "no_substances_hint": {
+    "es": "No se encontraron sustancias. Prueba con otro nombre, un CAS (7664-93-9), una fórmula (H2SO4) o un código de producto (AEO7).",
+    "en": "No substances were found. Try another name, a CAS (7664-93-9), a formula (H2SO4), or a product code (AEO7).",
+    "fr": "Aucune substance n'a été trouvée. Essayez un autre nom, un CAS (7664-93-9), une formule (H2SO4) ou un code produit (AEO7).",
+    "de": "Es wurden keine Substanzen gefunden. Versuchen Sie es mit einem anderen Namen, einem CAS (7664-93-9), einer Formel (H2SO4) oder einem Produktcode (AEO7).",
+    "it": "Non è stata trovata alcuna sostanza. Prova un altro nome, un CAS (7664-93-9), una formula (H2SO4) o un codice prodotto (AEO7)."
+  },
+  "network_error_hint": {
+    "es": "No se pudo conectar con las bases de datos. Revisa tu conexión e inténtalo de nuevo.",
+    "en": "Could not connect to the databases. Check your connection and try again.",
+    "fr": "Impossible de se connecter aux bases de données. Vérifiez votre connexion et réessayez.",
+    "de": "Es konnte keine Verbindung zu den Datenbanken hergestellt werden. Überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "it": "Impossibile connettersi ai database. Controlla la connessione e riprova."
+  },
+  "online_results_title": {
+    "es": "Resultados en bases de datos oficiales · PubChem (NIH)",
+    "en": "Results in official databases · PubChem (NIH)",
+    "fr": "Résultats dans les bases de données officielles · PubChem (NIH)",
+    "de": "Ergebnisse in offiziellen Datenbanken · PubChem (NIH)",
+    "it": "Risultati nei database ufficiali · PubChem (NIH)"
+  },
+  "view_online_sheet": {
+    "es": "Ver ficha en línea",
+    "en": "See online file",
+    "fr": "Voir le dossier en ligne",
+    "de": "Siehe Online-Datei",
+    "it": "Vedi scheda on-line"
+  },
+  "add_to_compare": {
+    "es": "Añadir a comparación",
+    "en": "Add to comparison",
+    "fr": "Ajouter à la comparaison",
+    "de": "Zum Vergleich hinzufügen",
+    "it": "Aggiungi al confronto"
+  },
+  "add_button": {
+    "es": "Añadir",
+    "en": "Add",
+    "fr": "Ajouter",
+    "de": "Hinzufügen",
+    "it": "Aggiungere"
+  },
+  "add_substances_badge": {
+    "es": "Añade sustancias",
+    "en": "Add substances",
+    "fr": "Ajouter des substances",
+    "de": "Stoffe hinzufügen",
+    "it": "Aggiungi sostanze"
+  },
+  "add_another_placeholder": {
+    "es": "Añadir otra sustancia…",
+    "en": "Add another substance…",
+    "fr": "Ajoutez une autre substance…",
+    "de": "Fügen Sie eine weitere Substanz hinzu…",
+    "it": "Aggiungi un'altra sostanza..."
+  },
+  "compare_title": {
+    "es": "Comparación de varias sustancias",
+    "en": "Comparison of various substances",
+    "fr": "Comparaison de diverses substances",
+    "de": "Vergleich verschiedener Substanzen",
+    "it": "Confronto tra varie sostanze"
+  },
+  "status_incompatible": {
+    "es": "INCOMPATIBLE",
+    "en": "INCOMPATIBLE",
+    "fr": "INCOMPATIBLE",
+    "de": "UNVEREINBAR",
+    "it": "INCOMPATIBILE"
+  },
+  "pubchem_source_note": {
+    "es": "Fuente: PubChem (NIH). Sin clasificación CAMEO disponible.",
+    "en": "Source: PubChem (NIH). No CAMEO grading available.",
+    "fr": "Source : PubChem (NIH). Aucun classement CAMEO disponible.",
+    "de": "Quelle: PubChem (NIH). Keine CAMEO-Bewertung verfügbar.",
+    "it": "Fonte: PubChem (NIH). Nessuna classificazione CAMEO disponibile."
+  },
+  "status_precaution": {
+    "es": "PRECAUCION",
+    "en": "CAUTION",
+    "fr": "PRUDENCE",
+    "de": "VORSICHT",
+    "it": "ATTENZIONE"
+  },
+  "cameo_compatibility_note": {
+    "es": "Compatibilidad según NOAA/EPA CAMEO Chemicals",
+    "en": "Compatibility according to NOAA/EPA CAMEO Chemicals",
+    "fr": "Compatibilité selon NOAA/EPA CAMEO Chemicals",
+    "de": "Verträglichkeit gemäß NOAA/EPA CAMEO Chemicals",
+    "it": "Compatibilità secondo NOAA/EPA CAMEO Chemicals"
+  },
+  "status_compatible": {
+    "es": "COMPATIBLE",
+    "en": "COMPATIBLE",
+    "fr": "COMPATIBLE",
+    "de": "KOMPATIBEL",
+    "it": "COMPATIBILE"
+  },
+  "reviewed_badge": {
+    "es": "Revisado por profesional",
+    "en": "Professionally reviewed",
+    "fr": "Examiné professionnellement",
+    "de": "Professionell überprüft",
+    "it": "Revisionato professionalmente"
+  },
+  "pair_references_summary": {
+    "es": "Referencias bibliográficas",
+    "en": "Bibliographic references",
+    "fr": "Références bibliographiques",
+    "de": "Literaturverweise",
+    "it": "Riferimenti bibliografici"
+  },
+  "predicted_hazards": {
+    "es": "Peligros previstos",
+    "en": "Anticipated hazards",
+    "fr": "Dangers anticipés",
+    "de": "Voraussichtliche Gefahren",
+    "it": "Pericoli previsti"
+  },
+  "triple_summary_title": {
+    "es": "Resumen de ternas (derivado de pares CAMEO)",
+    "en": "Summary of shortlists (derived from CAMEO pairs)",
+    "fr": "Résumé des listes restreintes (dérivées des paires CAMEO)",
+    "de": "Zusammenfassung der Shortlists (abgeleitet von CAMEO-Paaren)",
+    "it": "Riepilogo delle liste (derivate dalle coppie CAMEO)"
+  },
+  "view_pair_docs_cameo": {
+    "es": "Ver documentación del par en CAMEO",
+    "en": "View pair documentation in CAMEO",
+    "fr": "Voir la documentation de la paire dans CAMEO",
+    "de": "Dokumentation des Paares in CAMEO ansehen",
+    "it": "Vedi la documentazione della coppia in CAMEO"
+  },
+  "possible_gases": {
+    "es": "Posibles gases",
+    "en": "Possible gases",
+    "fr": "Gaz possibles",
+    "de": "Mögliche Gase",
+    "it": "Possibili gas"
+  },
+  "triple_summary_note": {
+    "es": "Los pares y sus peligros se detallan arriba; aquí solo se agrega su resultado.",
+    "en": "Pairs and their dangers are detailed above; here only its result is added.",
+    "fr": "Les couples et leurs dangers sont détaillés ci-dessus ; ici seul son résultat est ajouté.",
+    "de": "Paare und ihre Gefahren sind oben detailliert beschrieben; hier wird nur das Ergebnis hinzugefügt.",
+    "it": "Le coppie e i loro pericoli sono descritti in dettaglio sopra; qui viene aggiunto solo il suo risultato."
+  },
+  "limited_coverage_badge": {
+    "es": "Cobertura limitada (RG99)",
+    "en": "Limited coverage (RG99)",
+    "fr": "Couverture limitée (RG99)",
+    "de": "Begrenzte Abdeckung (RG99)",
+    "it": "Copertura limitata (RG99)"
+  },
+  "status_precaution_pairs": {
+    "es": "PRECAUCION (POR PARES)",
+    "en": "CAUTION (IN PAIRS)",
+    "fr": "ATTENTION (PAR PAIRE)",
+    "de": "VORSICHT (PAARWEISE)",
+    "it": "ATTENZIONE (IN COPPIA)"
+  },
+  "status_incompatible_pairs": {
+    "es": "INCOMPATIBLE (POR PARES)",
+    "en": "INCOMPATIBLE (PAIRS)",
+    "fr": "INCOMPATIBLE (PAIRES)",
+    "de": "INKOMPATIBEL (PAARE)",
+    "it": "INCOMPATIBILI (COPPIE)"
+  },
+  "status_no_hazard_pairs": {
+    "es": "SIN PELIGRO REGISTRADO POR PARES",
+    "en": "NO HAZARD REGISTERED BY PEERS",
+    "fr": "AUCUN DANGER ENREGISTRÉ PAR LES PAIRS",
+    "de": "KEINE GEFAHR VON GLEICHGEBERN REGISTRIERT",
+    "it": "NESSUN PERICOLO REGISTRATO DA PARI"
+  },
+  "triple_references_summary": {
+    "es": "Referencias oficiales de la terna",
+    "en": "Official references of the shortlist",
+    "fr": "Références officielles de la shortlist",
+    "de": "Offizielle Referenzen der Shortlist",
+    "it": "Riferimenti ufficiali della shortlist"
+  },
+  "ternary_warning_aria": {
+    "es": "Aviso sobre mezclas de tres o más sustancias",
+    "en": "Warning about mixtures of three or more substances",
+    "fr": "Avertissement sur les mélanges de trois substances ou plus",
+    "de": "Warnung zu Gemischen aus drei oder mehr Stoffen",
+    "it": "Avviso sulle miscele di tre o più sostanze"
+  },
+  "rule_conditions": {
+    "es": "Condiciones: {condiciones}",
+    "en": "Conditions: {condiciones}",
+    "fr": "Conditions : {condiciones}",
+    "de": "Bedingungen: {condiciones}",
+    "it": "Condizioni: {condiciones}"
+  },
+  "rule_badge": {
+    "es": "Regla documentada: {titulo}",
+    "en": "Documented rule: {titulo}",
+    "fr": "Règle documentée : {titulo}",
+    "de": "Dokumentierte Regel: {titulo}",
+    "it": "Regola documentata: {titulo}"
+  },
+  "badge_online_data": {
+    "es": "DATOS EN LÍNEA · PUBCHEM",
+    "en": "ONLINE DATA · PUBCHEM",
+    "fr": "DONNÉES EN LIGNE · PUBCHEM",
+    "de": "ONLINE-DATEN · PUBCHEM",
+    "it": "DATI ONLINE · PUBCHEM"
+  },
+  "rule_source_summary": {
+    "es": "Fuente oficial de la regla",
+    "en": "Official rule source",
+    "fr": "Source officielle des règles",
+    "de": "Offizielle Regelquelle",
+    "it": "Fonte ufficiale della regola"
+  },
+  "rule_hazards": {
+    "es": "Peligros: {peligros}",
+    "en": "Hazards: {peligros}",
+    "fr": "Dangers : {peligros}",
+    "de": "Gefahren: {peligros}",
+    "it": "Pericoli: {peligros}"
+  },
+  "badge_verified_sheet": {
+    "es": "FDS VERIFICADA",
+    "en": "VERIFIED SDS",
+    "fr": "FDS VÉRIFIÉE",
+    "de": "Geprüftes Sicherheitsdatenblatt",
+    "it": "SDS VERIFICATA"
+  },
+  "sources_title": {
+    "es": "Fuentes",
+    "en": "Sources",
+    "fr": "Sources",
+    "de": "Quellen",
+    "it": "Fonti"
+  },
+  "niosh_source": {
+    "es": "Fuente: NIOSH Pocket Guide (CDC)",
+    "en": "Source: NIOSH Pocket Guide (CDC)",
+    "fr": "Source : Guide de poche NIOSH (CDC)",
+    "de": "Quelle: NIOSH Pocket Guide (CDC)",
+    "it": "Fonte: Guida tascabile NIOSH (CDC)"
+  },
+  "badge_demo_sheet": {
+    "es": "DEMO · 16 SECCIONES",
+    "en": "DEMO · 16 SECTIONS",
+    "fr": "DÉMO · 16 SECTIONS",
+    "de": "DEMO · 16 ABSCHNITTE",
+    "it": "DEMO · 16 SEZIONI"
+  },
+  "exposure_limits_title": {
+    "es": "Límites de exposición · NIOSH",
+    "en": "Exposure limits · NIOSH",
+    "fr": "Limites d'exposition · NIOSH",
+    "de": "Expositionsgrenzwerte · NIOSH",
+    "it": "Limiti di esposizione · NIOSH"
+  },
+  "partial_sheet_notice": {
+    "es": "Ficha parcial generada con datos públicos de PubChem. No sustituye la ficha de datos de seguridad del fabricante.",
+    "en": "Partial file generated with public PubChem data. It does not replace the manufacturer's safety data sheet.",
+    "fr": "Fichier partiel généré avec des données publiques PubChem. Elle ne remplace pas la fiche de données de sécurité du fabricant.",
+    "de": "Teilweise mit öffentlichen PubChem-Daten generierte Datei. Es ersetzt nicht das Sicherheitsdatenblatt des Herstellers.",
+    "it": "File parziale generato con dati PubChem pubblici. Non sostituisce la scheda dati di sicurezza del produttore."
+  },
+  "documents_intro": {
+    "es": "Guarda esta ficha o descarga el documento PDF original cuando esté disponible.",
+    "en": "Save this sheet or download the original PDF document when available.",
+    "fr": "Enregistrez cette feuille ou téléchargez le document PDF original lorsqu'il est disponible.",
+    "de": "Speichern Sie dieses Blatt oder laden Sie das Original-PDF-Dokument herunter, sofern verfügbar.",
+    "it": "Salva questo foglio o scarica il documento PDF originale quando disponibile."
+  },
+  "documents_title": {
+    "es": "Documentos y descarga",
+    "en": "Documents and download",
+    "fr": "Documents et téléchargement",
+    "de": "Dokumente und Download",
+    "it": "Documenti e download"
+  },
+  "download_pdf": {
+    "es": "Descargar PDF",
+    "en": "Download PDF",
+    "fr": "Télécharger le PDF",
+    "de": "PDF herunterladen",
+    "it": "Scarica PDF"
+  },
+  "open_original_pdf": {
+    "es": "Abrir PDF original",
+    "en": "Open original PDF",
+    "fr": "Ouvrir le PDF original",
+    "de": "Original-PDF öffnen",
+    "it": "Apri il PDF originale"
+  },
+  "print_sheet_pdf": {
+    "es": "Guardar ficha como PDF (imprimir)",
+    "en": "Save file as PDF (print)",
+    "fr": "Enregistrer le fichier au format PDF (imprimer)",
+    "de": "Datei als PDF speichern (drucken)",
+    "it": "Salva file come PDF (stampa)"
+  },
+  "download_sds_pdf": {
+    "es": "Descargar FDS en PDF",
+    "en": "Download FDS in PDF",
+    "fr": "Télécharger la FDS en PDF",
+    "de": "Laden Sie FDS als PDF herunter",
+    "it": "Scarica la FDS in PDF"
+  },
+  "offline_docs_sub": {
+    "es": "Solo en la aplicación nativa. La versión web no almacena archivos.",
+    "en": "Only in the native application. The web version does not store files.",
+    "fr": "Uniquement dans l'application native. La version Web ne stocke pas de fichiers.",
+    "de": "Nur in der nativen Anwendung. Die Webversion speichert keine Dateien.",
+    "it": "Solo nell'applicazione nativa. La versione web non memorizza file."
+  },
+  "opt_copy_downloads": {
+    "es": "Copiar automáticamente al directorio de descargas del sistema",
+    "en": "Automatically copy to system downloads directory",
+    "fr": "Copier automatiquement dans le répertoire de téléchargement du système",
+    "de": "Automatisch in das Download-Verzeichnis des Systems kopieren",
+    "it": "Copia automaticamente nella directory dei download di sistema"
+  },
+  "opt_save_offline": {
+    "es": "Guardar documentos en la app para consultarlos sin internet",
+    "en": "Save documents in the app to consult them without internet",
+    "fr": "Enregistrez des documents dans l'application pour les consulter sans Internet",
+    "de": "Speichern Sie Dokumente in der App, um sie ohne Internet einzusehen",
+    "it": "Salva i documenti nell'app per consultarli senza internet"
+  },
+  "offline_docs_title": {
+    "es": "Documentos sin conexión",
+    "en": "Offline documents",
+    "fr": "Documents hors ligne",
+    "de": "Offline-Dokumente",
+    "it": "Documenti offline"
+  },
+  "opt_auto_report": {
+    "es": "Enviar automáticamente feedback y reportes de errores",
+    "en": "Automatically send feedback and bug reports",
+    "fr": "Envoyez automatiquement des commentaires et des rapports de bogues",
+    "de": "Senden Sie automatisch Feedback und Fehlerberichte",
+    "it": "Invia automaticamente feedback e segnalazioni di bug"
+  },
+  "translation_provider": {
+    "es": "Proveedor de traducción",
+    "en": "Translation provider",
+    "fr": "Fournisseur de traduction",
+    "de": "Übersetzungsanbieter",
+    "it": "Fornitore di traduzioni"
+  },
+  "provider_deepl": {
+    "es": "DeepL (con mi propia key)",
+    "en": "DeepL (with my own key)",
+    "fr": "DeepL (avec ma propre clé)",
+    "de": "DeepL (mit meinem eigenen Schlüssel)",
+    "it": "DeepL (con la mia chiave)"
+  },
+  "provider_google": {
+    "es": "Google Translate (gratuito, por defecto)",
+    "en": "Google Translate (free, by default)",
+    "fr": "Google Translate (gratuit, par défaut)",
+    "de": "Google Translate (standardmäßig kostenlos)",
+    "it": "Google Translate (gratuito, per impostazione predefinita)"
+  },
+  "deepl_key_label": {
+    "es": "Key de DeepL (se guarda solo en este dispositivo)",
+    "en": "DeepL Key (saved only on this device)",
+    "fr": "Clé DeepL (enregistrée uniquement sur cet appareil)",
+    "de": "DeepL-Schlüssel (nur auf diesem Gerät gespeichert)",
+    "it": "Chiave DeepL (salvata solo su questo dispositivo)"
+  },
+  "deepl_key_placeholder": {
+    "es": "Introduce tu key de DeepL",
+    "en": "Enter your DeepL key",
+    "fr": "Entrez votre clé DeepL",
+    "de": "Geben Sie Ihren DeepL-Schlüssel ein",
+    "it": "Inserisci la tua chiave DeepL"
+  },
+  "deepl_pro_option": {
+    "es": "Usar endpoint de pago (DeepL Pro)",
+    "en": "Use payment endpoint (DeepL Pro)",
+    "fr": "Utiliser le point de terminaison de paiement (DeepL Pro)",
+    "de": "Zahlungsendpunkt verwenden (DeepL Pro)",
+    "it": "Utilizza endpoint di pagamento (DeepL Pro)"
+  },
+  "feedback_button": {
+    "es": "Enviar feedback / reportar un bug",
+    "en": "Send feedback / report a bug",
+    "fr": "Envoyer des commentaires / signaler un bug",
+    "de": "Senden Sie Feedback / melden Sie einen Fehler",
+    "it": "Invia feedback/segnala un bug"
+  },
+  "cas_key_label": {
+    "es": "Clave API de CAS Common Chemistry (opcional; se solicita gratis en cas.org)",
+    "en": "CAS Common Chemistry API Key (optional; free to order at cas.org)",
+    "fr": "Clé API CAS Common Chemistry (facultatif ; commande gratuite sur cas.org)",
+    "de": "CAS Common Chemistry API Key (optional; kostenlos bei cas.org bestellbar)",
+    "it": "Chiave API CAS Common Chemistry (opzionale; ordinabile gratuitamente su cas.org)"
+  },
+  "cas_step_form_link": {
+    "es": "el formulario de CAS Common Chemistry",
+    "en": "the CAS Common Chemistry form",
+    "fr": "le formulaire CAS Common Chemistry",
+    "de": "das CAS Common Chemistry-Formular",
+    "it": "il modulo CAS Common Chemistry"
+  },
+  "cas_tutorial_summary": {
+    "es": "Cómo obtener tu clave de CAS (gratis, 2 minutos)",
+    "en": "How to get your CAS key (free, 2 minutes)",
+    "fr": "Comment obtenir votre clé CAS (gratuit, 2 minutes)",
+    "de": "So erhalten Sie Ihren CAS-Schlüssel (kostenlos, 2 Minuten)",
+    "it": "Come ottenere la chiave CAS (gratuito, 2 minuti)"
+  },
+  "cas_step_token": {
+    "es": "Recibirás un token por correo. Es personal: no lo compartas.",
+    "en": "You will receive a token by mail. It's personal: don't share it.",
+    "fr": "Vous recevrez un jeton par courrier. C'est personnel : ne le partagez pas.",
+    "de": "Sie erhalten einen Token per Post. Es ist persönlich: Teilen Sie es nicht.",
+    "it": "Riceverai un token via e-mail. È personale: non condividerlo."
+  },
+  "cas_step_fill": {
+    "es": "Rellena tu nombre, tu correo y para qué quieres usar la clave.",
+    "en": "Fill in your name, your email and what you want to use the password for.",
+    "fr": "Remplissez votre nom, votre email et la raison pour laquelle vous souhaitez utiliser le mot de passe.",
+    "de": "Geben Sie Ihren Namen, Ihre E-Mail-Adresse und den Zweck ein, für den Sie das Passwort verwenden möchten.",
+    "it": "Inserisci il tuo nome, la tua email e per cosa desideri utilizzare la password."
+  },
+  "cas_step_paste": {
+    "es": "Pega el token en el campo de arriba y se guardará solo en este dispositivo.",
+    "en": "Paste the token in the field above and it will be saved only on this device.",
+    "fr": "Collez le jeton dans le champ ci-dessus et il sera enregistré uniquement sur cet appareil.",
+    "de": "Fügen Sie das Token in das Feld oben ein und es wird nur auf diesem Gerät gespeichert.",
+    "it": "Incolla il token nel campo sopra e verrà salvato solo su questo dispositivo."
+  },
+  "cas_tutorial_note": {
+    "es": "Solo hace falta si PubChem no devuelve el número CAS. La licencia de Common Chemistry es de uso no comercial.",
+    "en": "Only needed if PubChem does not return the CAS number. The Common Chemistry license is for non-commercial use.",
+    "fr": "Nécessaire uniquement si PubChem ne renvoie pas le numéro CAS. La licence Common Chemistry est destinée à un usage non commercial.",
+    "de": "Wird nur benötigt, wenn PubChem die CAS-Nummer nicht zurückgibt. Die Common Chemistry-Lizenz ist für die nichtkommerzielle Nutzung bestimmt.",
+    "it": "Necessario solo se PubChem non restituisce il numero CAS. La licenza Common Chemistry è per uso non commerciale."
+  },
+  "support_creator": {
+    "es": "Apoyar al creador",
+    "en": "Support the creator",
+    "fr": "Soutenez le créateur",
+    "de": "Unterstützen Sie den Ersteller",
+    "it": "Sostieni il creatore"
+  },
+  "star_support_link": {
+    "es": "Dale una estrella al proyecto en GitHub",
+    "en": "Give the project a star on GitHub",
+    "fr": "Donnez une étoile au projet sur GitHub",
+    "de": "Geben Sie dem Projekt einen Stern auf GitHub",
+    "it": "Assegna una stella al progetto su GitHub"
+  },
+  "saved_docs_title": {
+    "es": "Documentos guardados",
+    "en": "Saved documents",
+    "fr": "Documents enregistrés",
+    "de": "Gespeicherte Dokumente",
+    "it": "Documenti salvati"
+  },
+  "delete_button": {
+    "es": "Eliminar",
+    "en": "Eliminate",
+    "fr": "Éliminer",
+    "de": "Beseitigen",
+    "it": "Eliminare"
+  },
+  "feedback_type_label": {
+    "es": "Tipo",
+    "en": "Guy",
+    "fr": "Gars",
+    "de": "Kerl",
+    "it": "Tipo"
+  },
+  "feedback_type_suggestion": {
+    "es": "Sugerencia",
+    "en": "Suggestion",
+    "fr": "Suggestion",
+    "de": "Anregung",
+    "it": "Suggerimento"
+  },
+  "downloads_dir_label": {
+    "es": "Directorio de descargas personalizado (vacío = el del sistema)",
+    "en": "Custom download directory (empty = system one)",
+    "fr": "Répertoire de téléchargement personnalisé (vide = système un)",
+    "de": "Benutzerdefiniertes Download-Verzeichnis (leer = System eins)",
+    "it": "Directory di download personalizzata (vuota = sistema uno)"
+  },
+  "feedback_type_aria": {
+    "es": "Tipo de reporte",
+    "en": "Report type",
+    "fr": "Type de rapport",
+    "de": "Berichtstyp",
+    "it": "Tipo di rapporto"
+  },
+  "feedback_intro": {
+    "es": "Completa el formulario: el reporte se estructura automáticamente y se abre como issue en el repositorio.",
+    "en": "Fill in the form: the report is structured automatically and opens as an issue in the repository.",
+    "fr": "Remplissez le formulaire : le rapport est structuré automatiquement et s'ouvre sous forme d'issue dans le dépôt.",
+    "de": "Füllen Sie das Formular aus: Der Bericht wird automatisch strukturiert und als Issue im Repository geöffnet.",
+    "it": "Compila il modulo: la segnalazione viene strutturata automaticamente e aperta come issue nel repository."
+  },
+  "no_saved_docs": {
+    "es": "Todavía no has guardado ningún documento.",
+    "en": "You have not saved any documents yet.",
+    "fr": "Vous n'avez encore enregistré aucun document.",
+    "de": "Sie haben noch keine Dokumente gespeichert.",
+    "it": "Non hai ancora salvato nessun documento."
+  },
+  "feedback_type_bug": {
+    "es": "Bug",
+    "en": "Bug",
+    "fr": "Bogue",
+    "de": "Insekt",
+    "it": "Insetto"
+  },
+  "feedback_title_label": {
+    "es": "Título",
+    "en": "Qualification",
+    "fr": "Qualification",
+    "de": "Qualifikation",
+    "it": "Qualificazione"
+  },
+  "feedback_details_label": {
+    "es": "Detalles",
+    "en": "Details",
+    "fr": "Détails",
+    "de": "Einzelheiten",
+    "it": "Dettagli"
+  },
+  "feedback_details_placeholder": {
+    "es": "Qué ocurrió, qué esperabas, pasos para reproducirlo…",
+    "en": "What happened, what did you expect, steps to reproduce it...",
+    "fr": "Que s'est-il passé, à quoi vous attendiez-vous, les étapes pour le reproduire...",
+    "de": "Was ist passiert, was haben Sie erwartet, Schritte zur Reproduktion ...",
+    "it": "Cosa è successo, cosa ti aspettavi, i passaggi per riprodurlo..."
+  },
+  "feedback_title_placeholder": {
+    "es": "Resumen breve",
+    "en": "Brief summary",
+    "fr": "Bref résumé",
+    "de": "Kurze Zusammenfassung",
+    "it": "Breve riassunto"
+  },
+  "feedback_type_data": {
+    "es": "Datos incorrectos",
+    "en": "Incorrect data",
+    "fr": "Données incorrectes",
+    "de": "Falsche Daten",
+    "it": "Dati errati"
+  },
+  "social_title": {
+    "es": "Redes y enlaces",
+    "en": "Networks and links",
+    "fr": "Réseaux et liens",
+    "de": "Netzwerke und Links",
+    "it": "Reti e collegamenti"
+  },
+  "github_issues_link": {
+    "es": "Issues",
+    "en": "Issues",
+    "fr": "Problèmes",
+    "de": "Probleme",
+    "it": "Problemi"
+  },
+  "send_report": {
+    "es": "Enviar reporte estructurado",
+    "en": "Send structured report",
+    "fr": "Envoyer un rapport structuré",
+    "de": "Senden Sie einen strukturierten Bericht",
+    "it": "Invia report strutturato"
+  },
+  "github_issues_aria": {
+    "es": "Issues de GitHub",
+    "en": "GitHub Issues",
+    "fr": "Problèmes GitHub",
+    "de": "GitHub-Probleme",
+    "it": "Problemi di GitHub"
+  },
+  "footer_sources": {
+    "es": "Fuentes normativas: UNECE · OMI · OIT · INSST · BOE · DOF · SINIA · Gaceta Oficial de Cuba",
+    "en": "Normative sources: UNECE · IMO · ILO · INSST · BOE · DOF · SINIA · Official Gazette of Cuba",
+    "fr": "Sources normatives : CEE-ONU · OMI · OIT · INSST · BOE · DOF · SINIA · Journal officiel de Cuba",
+    "de": "Normative Quellen: UNECE · IMO · ILO · INSST · BOE · DOF · SINIA · Amtsblatt von Kuba",
+    "it": "Fonti normative: UNECE · IMO · ILO · INSST · BOE · DOF · SINIA · Gazzetta Ufficiale di Cuba"
+  },
+  "norms_count": {
+    "es": "{n} normas",
+    "en": "{n} regulations",
+    "fr": "{n} normes",
+    "de": "{n} Vorschriften",
+    "it": "{n} normative"
+  },
+  "national_legislation_title": {
+    "es": "Legislación nacional · {pais}",
+    "en": "National legislation · {pais}",
+    "fr": "Législation nationale · {pais}",
+    "de": "Nationale Gesetzgebung · {pais}",
+    "it": "Normativa nazionale · {pais}"
+  },
+  "portals_title": {
+    "es": "Portales oficiales de {pais}",
+    "en": "Official portals of {pais}",
+    "fr": "Portails officiels de {pais}",
+    "de": "Offizielle Portale von {pais}",
+    "it": "Portali ufficiali di {pais}"
+  },
+  "verified_by": {
+    "es": "Por: {quien}",
+    "en": "By: {quien}",
+    "fr": "Par : {quien}",
+    "de": "Von: {quien}",
+    "it": "Di: {quien}"
+  },
+  "reactivity_prefix": {
+    "es": "Perfil de reactividad · {nombre}",
+    "en": "Reactivity profile · {nombre}",
+    "fr": "Profil de réactivité · {nombre}",
+    "de": "Reaktivitätsprofil · {nombre}",
+    "it": "Profilo di reattività · {nombre}"
+  },
+  "bridge_pattern": {
+    "es": "Patrón por pares: {puente} es incompatible con las otras dos, que son compatibles entre sí. No implica reacción ternaria ni catálisis.",
+    "en": "Pair pattern: {puente} is incompatible with the other two, which are compatible with each other. This does not imply a ternary reaction or catalysis.",
+    "fr": "Motif par paires : {puente} est incompatible avec les deux autres, qui sont compatibles entre elles. Cela n'implique pas une réaction ternaire ni une catalyse.",
+    "de": "Paarmuster: {puente} ist mit den beiden anderen unverträglich, die miteinander verträglich sind. Dies bedeutet keine ternäre Reaktion oder Katalyse.",
+    "it": "Schema a coppie: {puente} è incompatibile con le altre due, che sono compatibili tra loro. Non implica una reazione ternaria né catalisi."
+  },
+  "compare_counts": {
+    "es": "{n} parejas · {m}/{t} ternas",
+    "en": "{n} pairs · {m}/{t} triples",
+    "fr": "{n} paires · {m}/{t} triplets",
+    "de": "{n} Paare · {m}/{t} Triple",
+    "it": "{n} coppie · {m}/{t} terne"
+  },
+  "verified_date": {
+    "es": "Verificada: {fecha}",
+    "en": "Verified: {fecha}",
+    "fr": "Vérifiée : {fecha}",
+    "de": "Geprüft: {fecha}",
+    "it": "Verificata: {fecha}"
   }
 }
