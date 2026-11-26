@@ -178,7 +178,9 @@ pub fn par_revisado(id: &str) -> bool {
     static CACHE: OnceLock<CameoReviewedDb> = OnceLock::new();
     let db = CACHE.get_or_init(|| parse(CAMEO_REVIEWED_JSON));
     db.revisiones.iter().any(|r| {
-        r.get("id").and_then(|v| v.as_str()).map(|s| s == id).unwrap_or(false)
+        let mismo_par = r.get("id").and_then(|v| v.as_str()) == Some(id);
+        let aprobado = r.get("estado").and_then(|v| v.as_str()) == Some("revisado");
+        mismo_par && aprobado
     })
 }
 
@@ -2107,6 +2109,11 @@ mod tests {
                 assert!(is_verified(&s.verificacion), "{}: sin verificar", s.id);
             }
         }
+    }
+
+    #[test]
+    fn pares_pendientes_no_se_marcan_como_revisados() {
+        assert!(!par_revisado("RG2-RG10"));
     }
 
     #[test]
