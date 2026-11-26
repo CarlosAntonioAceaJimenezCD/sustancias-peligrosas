@@ -1169,6 +1169,26 @@ pub fn interactions_warning() -> String {
     interactions_db().advertencia.clone()
 }
 
+/// Aviso cuando se comparan 3 o más sustancias a la vez.
+///
+/// CAMEO predice incompatibilidades únicamente entre pares de grupos
+/// reactivos: no cubre reacciones simultáneas de tres o más sustancias.
+/// Con 0, 1 o 2 sustancias devuelve una cadena vacía para que la interfaz
+/// pueda ocultar el aviso. El número se calcula sobre las sustancias
+/// seleccionadas, no sobre los pares disponibles, porque una sustancia sin
+/// cobertura CAMEO también forma parte de la mezcla.
+pub fn multi_substance_warning(count: usize, lang: &str) -> String {
+    if count < 3 {
+        return String::new();
+    }
+    let plantilla = if lang == "en" {
+        "CAMEO compatibility analysis covers substance pairs only. With {count} substances it evaluates two-by-two combinations, but it does NOT predict simultaneous reactions among 3 or more substances (ternary mixtures). Do not assume the whole mixture is safe: verify compatibility with official sources and a qualified professional."
+    } else {
+        "El análisis de CAMEO es únicamente por pares: con {count} sustancias se evalúan combinaciones de dos, pero NO cubre reacciones simultáneas de 3 o más sustancias (mezclas ternarias). No asumas que la mezcla completa es segura: verifica su compatibilidad en fuentes oficiales y con un profesional."
+    };
+    plantilla.replace("{count}", &count.to_string())
+}
+
 /// Etiqueta legible de un nivel de peligro.
 pub fn level_label(level: &str) -> String {
     interactions_db()
@@ -1518,6 +1538,41 @@ mod tests {
     fn interacciones_propias_retiradas() {
         assert!(interactions_db().interacciones.is_empty());
         assert_eq!(interactions_db().niveles.len(), 4);
+    }
+
+    #[test]
+    fn aviso_ternario_solo_con_tres_o_mas() {
+        assert_eq!(multi_substance_warning(0, "es"), "");
+        assert_eq!(multi_substance_warning(1, "es"), "");
+        assert_eq!(multi_substance_warning(2, "es"), "");
+        assert_eq!(multi_substance_warning(2, "en"), "");
+
+        let tres = multi_substance_warning(3, "es");
+        assert!(tres.contains("3 sustancias"));
+        assert!(tres.to_lowercase().contains("pares"));
+        assert!(tres.to_lowercase().contains("ternarias"));
+
+        let diez = multi_substance_warning(10, "es");
+        assert!(diez.contains("10 sustancias"));
+    }
+
+    #[test]
+    fn aviso_ternario_se_adapta_al_idioma() {
+        let en = multi_substance_warning(3, "en");
+        assert!(en.contains("pairs only"));
+        assert!(en.contains("3 substances"));
+        assert!(!en.contains("sustancias"));
+    }
+
+    #[test]
+    fn aviso_ternario_no_esta_en_el_aviso_general() {
+        assert!(!interactions_warning().to_lowercase().contains("ternari"));
+    }
+
+    #[test]
+    fn el_analisis_sigue_siendo_solo_pares() {
+        let ids: Vec<String> = (0..10).map(|i| format!("s-{i}")).collect();
+        assert_eq!(analyze_interactions_named(&ids, &HashMap::new()).len(), 45);
     }
 
     #[test]

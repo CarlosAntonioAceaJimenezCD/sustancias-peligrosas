@@ -252,6 +252,7 @@ body{
 .multi-chip{background:rgba(163,113,247,.14);color:#d2a8ff;border:1px solid rgba(163,113,247,.38);
   border-radius:var(--r-pill);padding:4px 11px;font-size:var(--step--1);font-weight:650}
 .multi-nota{margin:var(--sp-1) 0 0;font-size:var(--step--1);color:var(--muted)}
+.aviso-ternario{margin:var(--sp-3) 0 var(--sp-1);border-left:2px solid var(--warn);padding-left:var(--sp-2);font-weight:650}
 
 /* --- Botones --- */
 .boton{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-2);
@@ -1885,6 +1886,14 @@ fn App() -> Element {
                             }
                         }
                     }
+                    }
+                    if multi_items.len() >= 3 {
+                        div {
+                            class: "aviso aviso-ternario",
+                            aria_label: "Aviso sobre mezclas de tres o mas sustancias",
+                            span { dangerous_inner_html: "{icon(\"alert\", \"ico\")}" }
+                            span { "{core::multi_substance_warning(multi_items.len(), lang)}" }
+                        }
                     }
                     p { class: "multi-nota", "{core::interactions_warning()}" }
                 }
