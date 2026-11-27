@@ -49,6 +49,18 @@ Los **textos fijos de la interfaz** (142 claves: títulos, botones, placeholders
 
 ---
 
+## Herramientas de la interfaz
+
+- **Búsquedas recientes y favoritos** persistentes (web y nativa), con `Ctrl/Cmd+K` para enfocar el buscador y `Esc` para cerrar ventanas.
+- **Copiar identificadores** (CAS y ONU) y **exportar la comparación** completa a JSON desde el propio comparador.
+- **Glosario** de las frases H de la ficha y de los grupos reactivos CAMEO.
+- **Comparador de marcos legales** entre dos jurisdicciones, lado a lado.
+- **Selector de escenario** (ambiente, incendio o proceso) con el descargo de responsabilidad adecuado para cada caso.
+- **Accesibilidad**: tamaño de texto, contraste alto y reducción de movimiento como preferencias persistentes.
+- **Orígenes y atribuciones**: pantalla con fuentes oficiales, licencias y condiciones de uso.
+
+---
+
 ## Política de fuentes
 
 **Normativa: solo fuentes oficiales.** Gobiernos (`.gob.*`, `.gov.*`, `.mil.*`), organismos internacionales (ONU/UNECE, OMI, OIT, OPCW, convenciones) o instituciones públicas reconocidas (LATU). Se excluyen empresas, consultoras, blogs, agregadores comerciales, enciclopedias y repositorios de presentaciones.
@@ -279,6 +291,7 @@ Paso único: **Settings → Pages → Build and deployment → Source: GitHub Ac
 - Completar la revisión profesional de los 20 pares en `data/cameo_reviewed.json` (todos figuran como `pendiente`, por lo que no se muestra la insignia «Revisado por profesional»).
 - Validar en navegador los enlaces con `verificacion: portal_validar`.
 - Generar los paquetes de instalación para escritorio y móvil (iOS/macOS requieren Apple).
+- Actualizador nativo con artefactos firmados: requiere par de claves de firma, publicación de manifiestos de versión y verificación criptográfica antes de instalar. No se implementa un actualizador sin firma porque daría falsa sensación de seguridad.
 - Tramitar licencia CAS de pago si la aplicación deja de ser gratuita (Common Chemistry es `CC BY-NC`).
 
 ## Licencia

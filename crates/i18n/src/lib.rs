@@ -517,6 +517,21 @@ mod tests {
     }
 
     #[test]
+    fn catalogo_cubre_las_nuevas_herramientas() {
+        for clave in [
+            "copy_cas", "copy_onu", "export_comparison", "compare_legal",
+            "accessibility_title", "glossary_button", "sources_info_title",
+            "history_title", "favorites_title", "scenario_label",
+            "scenario_note_ambiente", "scenario_note_incendio",
+            "scenario_note_proceso",
+        ] {
+            for lang in ["es", "en", "fr", "de", "it"] {
+                assert!(!texto_fijo(clave, lang).is_empty(), "{clave}/{lang}");
+            }
+        }
+    }
+
+    #[test]
     fn texto_fijo_count_y_paridad_con_core() {
         let es = texto_fijo_count("multi_substance_warning", "es", 3);
         assert!(es.contains("3 sustancias"));

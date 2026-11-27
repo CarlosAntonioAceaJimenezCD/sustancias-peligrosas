@@ -58,6 +58,21 @@ pub struct Options {
     /// Clave gratuita de la API de CAS Common Chemistry.
     #[serde(default)]
     pub cas_api_key: String,
+    /// Escala de tamaño de texto: normal, large o xlarge.
+    #[serde(default)]
+    pub font_scale: String,
+    /// Aumentar el contraste de textos y bordes.
+    #[serde(default)]
+    pub high_contrast: bool,
+    /// Reducir animaciones y transiciones.
+    #[serde(default)]
+    pub reduce_motion: bool,
+    /// Últimas búsquedas (máximo 8).
+    #[serde(default)]
+    pub recent_searches: Vec<String>,
+    /// Nombres de sustancias marcadas como favoritas.
+    #[serde(default)]
+    pub favorites: Vec<String>,
 }
 
 impl Default for Options {
@@ -71,6 +86,11 @@ impl Default for Options {
             deepl_key: String::new(),
             deepl_pro: false,
             cas_api_key: String::new(),
+            font_scale: "normal".to_string(),
+            high_contrast: false,
+            reduce_motion: false,
+            recent_searches: Vec::new(),
+            favorites: Vec::new(),
         }
     }
 }
@@ -261,5 +281,15 @@ mod tests {
             downloads_target(&opciones),
             PathBuf::from("/tmp/descargas").join(EXPORT_DIR)
         );
+    }
+
+    #[test]
+    fn preferencias_de_accesibilidad_tienen_valores_por_defecto() {
+        let o = Options::default();
+        assert_eq!(o.font_scale, "normal");
+        assert!(!o.high_contrast);
+        assert!(!o.reduce_motion);
+        assert!(o.recent_searches.is_empty());
+        assert!(o.favorites.is_empty());
     }
 }

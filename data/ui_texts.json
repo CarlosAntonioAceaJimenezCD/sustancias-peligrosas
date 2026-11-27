@@ -992,5 +992,271 @@
     "fr": "Vérifiée : {fecha}",
     "de": "Geprüft: {fecha}",
     "it": "Verificata: {fecha}"
+  },
+  "font_large": {
+    "es": "Grande",
+    "en": "Big",
+    "fr": "Grand",
+    "de": "Groß",
+    "it": "Grande"
+  },
+  "font_size_label": {
+    "es": "Tamaño del texto",
+    "en": "Text size",
+    "fr": "Taille du texte",
+    "de": "Textgröße",
+    "it": "Dimensione del testo"
+  },
+  "font_xlarge": {
+    "es": "Muy grande",
+    "en": "very big",
+    "fr": "très grand",
+    "de": "sehr groß",
+    "it": "molto grande"
+  },
+  "accessibility_sub": {
+    "es": "Tamaño de texto, contraste y movimiento en todas las plataformas.",
+    "en": "Text size, contrast and movement on all platforms.",
+    "fr": "Taille, contraste et mouvement du texte sur toutes les plateformes.",
+    "de": "Textgröße, Kontrast und Bewegung auf allen Plattformen.",
+    "it": "Dimensioni, contrasto e movimento del testo su tutte le piattaforme."
+  },
+  "accessibility_title": {
+    "es": "Accesibilidad y lectura",
+    "en": "Accessibility and reading",
+    "fr": "Accessibilité et lecture",
+    "de": "Zugänglichkeit und Lesen",
+    "it": "Accessibilità e lettura"
+  },
+  "opt_high_contrast": {
+    "es": "Aumentar el contraste",
+    "en": "Increase contrast",
+    "fr": "Augmenter le contraste",
+    "de": "Kontrast erhöhen",
+    "it": "Aumenta il contrasto"
+  },
+  "opt_reduce_motion": {
+    "es": "Reducir animaciones",
+    "en": "Reduce animations",
+    "fr": "Réduire les animations",
+    "de": "Animationen reduzieren",
+    "it": "Riduci le animazioni"
+  },
+  "sources_official": {
+    "es": "Fuentes oficiales",
+    "en": "Official sources",
+    "fr": "Sources officielles",
+    "de": "Offizielle Quellen",
+    "it": "Fonti ufficiali"
+  },
+  "sources_info_title": {
+    "es": "Orígenes y atribuciones",
+    "en": "Origins and attributions",
+    "fr": "Origines et attributions",
+    "de": "Herkunft und Zuschreibungen",
+    "it": "Origini e attribuzioni"
+  },
+  "sources_info_sub": {
+    "es": "Fuentes oficiales, licencias y condiciones de uso de los datos.",
+    "en": "Official sources, licenses and conditions of use of data.",
+    "fr": "Sources officielles, licences et conditions d'utilisation des données.",
+    "de": "Offizielle Quellen, Lizenzen und Nutzungsbedingungen der Daten.",
+    "it": "Fonti ufficiali, licenze e condizioni di utilizzo dei dati."
+  },
+  "license_cameo": {
+    "es": "NOAA/EPA CAMEO Chemicals: uso con atribución y descargo de responsabilidad.",
+    "en": "NOAA/EPA CAMEO Chemicals: Use with attribution and disclaimer.",
+    "fr": "Produits chimiques NOAA/EPA CAMEO : Utiliser avec attribution et avertissement.",
+    "de": "NOAA/EPA CAMEO Chemicals: Verwendung mit Namensnennung und Haftungsausschluss.",
+    "it": "Sostanze chimiche CAMEO NOAA/EPA: utilizzare con attribuzione e esclusione di responsabilità."
+  },
+  "sources_licenses": {
+    "es": "Licencias y condiciones",
+    "en": "Licenses and conditions",
+    "fr": "Licences et conditions",
+    "de": "Lizenzen und Bedingungen",
+    "it": "Licenze e condizioni"
+  },
+  "license_pubchem": {
+    "es": "PubChem (NIH): datos públicos; se muestra su origen en cada ficha.",
+    "en": "PubChem (NIH): public data; Its origin is shown on each card.",
+    "fr": "PubChem (NIH) : données publiques ; Son origine est indiquée sur chaque carte.",
+    "de": "PubChem (NIH): öffentliche Daten; Auf jeder Karte ist der Ursprung angegeben.",
+    "it": "PubChem (NIH): dati pubblici; La sua origine è mostrata su ogni carta."
+  },
+  "history_title": {
+    "es": "Búsquedas recientes",
+    "en": "Recent searches",
+    "fr": "Recherches récentes",
+    "de": "Aktuelle Suchanfragen",
+    "it": "Ricerche recenti"
+  },
+  "license_niosh": {
+    "es": "NIOSH Pocket Guide (CDC): documento de dominio público.",
+    "en": "NIOSH Pocket Guide (CDC): Public domain document.",
+    "fr": "NIOSH Pocket Guide (CDC) : document du domaine public.",
+    "de": "NIOSH Pocket Guide (CDC): Gemeinfreies Dokument.",
+    "it": "NIOSH Pocket Guide (CDC): documento di pubblico dominio."
+  },
+  "license_icsc": {
+    "es": "ICSC (OIT/OMS): solo se guardan identificadores; la ficha se consulta en el sitio oficial.",
+    "en": "ICSC (ILO/WHO): only identifiers are stored; The file is consulted on the official site.",
+    "fr": "ICSC (OIT/OMS) : seuls les identifiants sont stockés ; Le dossier est consulté sur le site officiel.",
+    "de": "ICSC (ILO/WHO): Es werden nur Identifikatoren gespeichert; Die Datei kann auf der offiziellen Website eingesehen werden.",
+    "it": "ICSC (ILO/OMS): vengono memorizzati solo gli identificatori; Il file è consultabile sul sito ufficiale."
+  },
+  "favorites_title": {
+    "es": "Favoritos",
+    "en": "Favorites",
+    "fr": "Favoris",
+    "de": "Favoriten",
+    "it": "Preferiti"
+  },
+  "license_cas": {
+    "es": "CAS Common Chemistry: CC BY-NC mientras la aplicación sea gratuita.",
+    "en": "CAS Common Chemistry: CC BY-NC as long as the app is free.",
+    "fr": "CAS Common Chemistry : CC BY-NC tant que l’application est gratuite.",
+    "de": "CAS Common Chemistry: CC BY-NC, solange die App kostenlos ist.",
+    "it": "Chimica comune CAS: CC BY-NC purché l'app sia gratuita."
+  },
+  "remove_favorite": {
+    "es": "Quitar de favoritos",
+    "en": "Remove from favorites",
+    "fr": "Supprimer des favoris",
+    "de": "Aus Favoriten entfernen",
+    "it": "Rimuovi dai preferiti"
+  },
+  "add_favorite": {
+    "es": "Añadir a favoritos",
+    "en": "Add to favorites",
+    "fr": "Ajouter aux favoris",
+    "de": "Zu Favoriten hinzufügen",
+    "it": "Aggiungi ai preferiti"
+  },
+  "glossary_button": {
+    "es": "Ver glosario",
+    "en": "See glossary",
+    "fr": "Voir le glossaire",
+    "de": "Siehe Glossar",
+    "it": "Vedi glossario"
+  },
+  "glossary_title": {
+    "es": "Glosario de la ficha",
+    "en": "Sheet glossary",
+    "fr": "Feuille de glossaire",
+    "de": "Blatt-Glossar",
+    "it": "Glossario dei fogli"
+  },
+  "glossary_rg_note": {
+    "es": "Los grupos reactivos explican por qué CAMEO predice una incompatibilidad entre dos sustancias.",
+    "en": "Reactive groups explain why CAMEO predicts an incompatibility between two substances.",
+    "fr": "Les groupes réactifs expliquent pourquoi CAMEO prédit une incompatibilité entre deux substances.",
+    "de": "Reaktive Gruppen erklären, warum CAMEO eine Unverträglichkeit zwischen zwei Substanzen vorhersagt.",
+    "it": "I gruppi reattivi spiegano perché CAMEO prevede un'incompatibilità tra due sostanze."
+  },
+  "glossary_h_title": {
+    "es": "Frases H de esta sustancia",
+    "en": "H phrases of this substance",
+    "fr": "Phrases H de cette substance",
+    "de": "H-Sätze dieses Stoffes",
+    "it": "Frasi H di questa sostanza"
+  },
+  "glossary_rg_title": {
+    "es": "Grupos reactivos CAMEO",
+    "en": "CAMEO reactive groups",
+    "fr": "Groupes réactifs CAMEO",
+    "de": "CAMEO-reaktive Gruppen",
+    "it": "Gruppi reattivi CAMEO"
+  },
+  "font_normal": {
+    "es": "Normal",
+    "en": "Normal",
+    "fr": "Normale",
+    "de": "Normal",
+    "it": "Normale"
+  },
+  "glossary_rg_link": {
+    "es": "Ver la lista oficial de grupos reactivos (NOAA/EPA)",
+    "en": "View the official reactive groups list (NOAA/EPA)",
+    "fr": "Voir la liste officielle des groupes réactifs (NOAA/EPA)",
+    "de": "Siehe die offizielle Liste der reaktiven Gruppen (NOAA/EPA)",
+    "it": "Consulta l'elenco ufficiale dei gruppi reattivi (NOAA/EPA)"
+  },
+  "copy_onu": {
+    "es": "Copiar el número ONU",
+    "en": "Copy UN number",
+    "fr": "Copier le numéro ONU",
+    "de": "UN-Nummer kopieren",
+    "it": "Copia il numero ONU"
+  },
+  "copy_cas": {
+    "es": "Copiar el número CAS",
+    "en": "Copy CAS number",
+    "fr": "Copier le numéro CAS",
+    "de": "CAS-Nummer kopieren",
+    "it": "Copia il numero CAS"
+  },
+  "scenario_label": {
+    "es": "Escenario de la mezcla",
+    "en": "Mixing scenario",
+    "fr": "Scénario de mixage",
+    "de": "Mischszenario",
+    "it": "Scenario di miscelazione"
+  },
+  "export_comparison": {
+    "es": "Exportar comparación (JSON)",
+    "en": "Export comparison (JSON)",
+    "fr": "Comparaison d'exportation (JSON)",
+    "de": "Vergleich exportieren (JSON)",
+    "it": "Confronto delle esportazioni (JSON)"
+  },
+  "scenario_fire": {
+    "es": "Incendio / accidente",
+    "en": "Fire/accident",
+    "fr": "Incendie/accident",
+    "de": "Feuer/Unfall",
+    "it": "Incendio/incidente"
+  },
+  "scenario_process": {
+    "es": "Proceso industrial controlado",
+    "en": "Controlled industrial process",
+    "fr": "Processus industriel maîtrisé",
+    "de": "Kontrollierter Industrieprozess",
+    "it": "Processo industriale controllato"
+  },
+  "scenario_note_proceso": {
+    "es": "Un proceso con calor, presión o catálisis no sigue las reglas de compatibilidad de CAMEO: aplica ingeniería de seguridad de procesos.",
+    "en": "A process with heat, pressure or catalysis does not follow CAMEO compatibility rules: process safety engineering applies.",
+    "fr": "Un procédé avec chaleur, pression ou catalyse ne suit pas les règles de compatibilité CAMEO : l'ingénierie de sécurité des procédés s'applique.",
+    "de": "Ein Prozess mit Hitze, Druck oder Katalyse unterliegt nicht den CAMEO-Kompatibilitätsregeln: Es gilt die Prozesssicherheitstechnik.",
+    "it": "Un processo con calore, pressione o catalisi non segue le regole di compatibilità CAMEO: si applica l'ingegneria della sicurezza di processo."
+  },
+  "scenario_note_ambiente": {
+    "es": "Escenario CAMEO: proporciones similares, 1 atm y 24–49 °C, sin impurezas catalíticas.",
+    "en": "CAMEO scenario: similar proportions, 1 atm and 24–49 °C, without catalytic impurities.",
+    "fr": "Scénario CAMEO : proportions similaires, 1 atm et 24–49 °C, sans impuretés catalytiques.",
+    "de": "CAMEO-Szenario: ähnliche Verhältnisse, 1 atm und 24–49 °C, ohne katalytische Verunreinigungen.",
+    "it": "Scenario CAMEO: proporzioni simili, 1 atm e 24–49 °C, senza impurità catalitiche."
+  },
+  "scenario_ambient": {
+    "es": "Ambiente (1 atm, 24–49 °C)",
+    "en": "Ambient (1 atm, 24–49 °C)",
+    "fr": "Ambiante (1 atmosphère, 24–49 °C)",
+    "de": "Umgebungstemperatur (1 atm, 24–49 °C)",
+    "it": "Ambiente (1 atm, 24–49 °C)"
+  },
+  "scenario_note_incendio": {
+    "es": "En un incendio las condiciones cambian rápido: CAMEO no predice la mezcla resultante. Busca asesoramiento químico especializado.",
+    "en": "In a fire conditions change quickly: CAMEO does not predict the resulting mix. Seek specialized chemical advice.",
+    "fr": "En cas d'incendie, les conditions évoluent rapidement : CAMEO ne prédit pas le mélange résultant. Demandez des conseils spécialisés en produits chimiques.",
+    "de": "Bei einem Brand ändern sich die Bedingungen schnell: CAMEO kann die resultierende Mischung nicht vorhersagen. Suchen Sie spezialisierten chemischen Rat ein.",
+    "it": "In un incendio le condizioni cambiano rapidamente: CAMEO non prevede la miscela risultante. Richiedi una consulenza chimica specializzata."
+  },
+  "compare_legal": {
+    "es": "Comparar marcos legales",
+    "en": "Compare legal frameworks",
+    "fr": "Comparez les cadres juridiques",
+    "de": "Vergleichen Sie rechtliche Rahmenbedingungen",
+    "it": "Confrontare i quadri giuridici"
   }
 }

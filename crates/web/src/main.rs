@@ -109,6 +109,15 @@ body{
 }
 /* Foco siempre visible: requisito WCAG 2.4.7 */
 :focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+/* Preferencias de accesibilidad persistentes (12 y 13) */
+html[data-font="large"]{font-size:112.5%}
+html[data-font="xlarge"]{font-size:125%}
+html[data-contrast="high"]{--muted:var(--ink);--focus:#ffbf00}
+html[data-contrast="high"] .badge,html[data-contrast="high"] .norma,html[data-contrast="high"] .interaccion{border-width:2px}
+@media (prefers-reduced-motion:reduce){html,body{scroll-behavior:auto!important}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+html[data-motion="reduce"]{scroll-behavior:auto}
+html[data-motion="reduce"] *,html[data-motion="reduce"] *::before,html[data-motion="reduce"] *::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
 .skip-link{position:absolute;left:-9999px;top:0;z-index:100;background:var(--accent);
   color:var(--gray-950);padding:10px 16px;border-radius:0 0 var(--r-sm) 0;font-weight:700}
 .skip-link:focus{left:0}
@@ -259,6 +268,10 @@ body{
 .multi-tercias{margin-top:var(--sp-3)}
 .regla-ternaria{margin:var(--sp-2) 0;padding:var(--sp-2);border:1px solid rgba(210,153,34,.38);border-radius:var(--r-sm);background:rgba(210,153,34,.08)}
 .regla-ternaria strong{color:var(--amber-300)}
+.boton-copiar{background:none;border:1px solid var(--line);border-radius:var(--r-sm);color:var(--accent);cursor:pointer;padding:2px 7px;font-size:var(--step--1)}
+.legal-cmp{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3)}
+.legal-cmp-col{min-width:0}
+@media (max-width:720px){.legal-cmp{grid-template-columns:1fr}}
 
 /* --- Botones --- */
 .boton{display:inline-flex;align-items:center;justify-content:center;gap:var(--sp-2);
@@ -580,7 +593,7 @@ async fn descargar_nativo(
 
 
 /// Tipos neutrales (existen en web y nativo) para no condicionar el RSX.
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
 struct AppOptions {
     offline_cache: bool,
     copy_to_downloads: bool,
@@ -590,6 +603,20 @@ struct AppOptions {
     deepl_key: String,
     deepl_pro: bool,
     cas_api_key: String,
+    #[serde(default = "font_scale_default")]
+    font_scale: String,
+    #[serde(default)]
+    high_contrast: bool,
+    #[serde(default)]
+    reduce_motion: bool,
+    #[serde(default)]
+    recent_searches: Vec<String>,
+    #[serde(default)]
+    favorites: Vec<String>,
+}
+
+fn font_scale_default() -> String {
+    "normal".to_string()
 }
 
 impl Default for AppOptions {
@@ -603,6 +630,11 @@ impl Default for AppOptions {
             deepl_key: String::new(),
             deepl_pro: false,
             cas_api_key: String::new(),
+            font_scale: font_scale_default(),
+            high_contrast: false,
+            reduce_motion: false,
+            recent_searches: Vec::new(),
+            favorites: Vec::new(),
         }
     }
 }
@@ -623,6 +655,11 @@ impl From<&AppOptions> for sustancias_storage::Options {
             deepl_key: o.deepl_key.clone(),
             deepl_pro: o.deepl_pro,
             cas_api_key: o.cas_api_key.clone(),
+            font_scale: o.font_scale.clone(),
+            high_contrast: o.high_contrast,
+            reduce_motion: o.reduce_motion,
+            recent_searches: o.recent_searches.clone(),
+            favorites: o.favorites.clone(),
         }
     }
 }
@@ -652,12 +689,21 @@ fn cargar_opciones() -> AppOptions {
         deepl_key: o.deepl_key,
         deepl_pro: o.deepl_pro,
         cas_api_key: o.cas_api_key,
+        font_scale: o.font_scale,
+        high_contrast: o.high_contrast,
+        reduce_motion: o.reduce_motion,
+        recent_searches: o.recent_searches,
+        favorites: o.favorites,
     }
 }
 
 #[cfg(target_arch = "wasm32")]
 fn cargar_opciones() -> AppOptions {
-    AppOptions::default()
+    let guardado = web_sys::window()
+        .and_then(|w| w.local_storage().ok().flatten())
+        .and_then(|s| s.get_item("sustancias-opciones").ok().flatten())
+        .and_then(|txt| serde_json::from_str::<AppOptions>(&txt).ok());
+    guardado.unwrap_or_default()
 }
 
 #[cfg(not(target_arch = "wasm32"))]
@@ -687,7 +733,15 @@ fn guardar_opciones(o: &AppOptions) {
 }
 
 #[cfg(target_arch = "wasm32")]
-fn guardar_opciones(_o: &AppOptions) {}
+fn guardar_opciones(o: &AppOptions) {
+    if let Some(storage) = web_sys::window()
+        .and_then(|w| w.local_storage().ok().flatten())
+    {
+        if let Ok(json) = serde_json::to_string(o) {
+            let _ = storage.set_item("sustancias-opciones", &json);
+        }
+    }
+}
 
 /// Tipo de documento para la descarga compartida.
 #[allow(dead_code)]
@@ -746,6 +800,38 @@ fn url_issue(titulo: &str, cuerpo: &str) -> String {
         urlencoding::encode(titulo),
         urlencoding::encode(cuerpo)
     )
+}
+
+/// Copia un identificador al portapapeles del documento de la app.
+fn copiar_al_portapapeles(texto: &str) {
+    dioxus::document::eval(&format!(
+        "(function(){{try{{navigator.clipboard.writeText({:?});}}catch(e){{}}}})()",
+        texto
+    ));
+}
+
+/// Exporta la comparación visible como JSON descargable desde la propia app.
+fn exportar_comparacion(items: &[(String, String, String)], pares: &[CameoVisible], ternas: &[TripleVisible]) {
+    let datos = serde_json::json!({
+        "sustancias": items.iter().map(|(id, nombre, cas)| serde_json::json!({
+            "id": id, "nombre": nombre, "cas": cas
+        })).collect::<Vec<_>>(),
+        "parejas": pares.iter().map(|p| serde_json::json!({
+            "a": p.na, "b": p.nb, "nivel": p.nivel,
+            "compatibilidad": p.compatibilidad, "peligros": p.peligros,
+            "gases": p.gases, "citas": p.citas, "fuentes": p.fuentes
+        })).collect::<Vec<_>>(),
+        "ternas": ternas.iter().map(|t| serde_json::json!({
+            "nombres": t.nombres, "nivel": t.nivel,
+            "compatibilidad": t.compatibilidad, "parejas": t.parejas,
+            "puente": t.puente, "reglas": t.reglas,
+            "fuentes": t.fuentes.iter().map(|f| &f.url).collect::<Vec<_>>()
+        })).collect::<Vec<_>>(),
+    });
+    dioxus::document::eval(&format!(
+        "(function(){{var b=new Blob([{:?}],{{type:'application/json'}});var u=URL.createObjectURL(b);var a=document.createElement('a');a.href=u;a.download='comparacion-sustancias.json';a.click();URL.revokeObjectURL(u);}})()",
+        datos.to_string()
+    ));
 }
 
 /// Abre el issue con el reporte ya redactado, en web o en nativo.
@@ -992,10 +1078,16 @@ fn App() -> Element {
 
     let mut selected_id: Signal<Option<String>> = use_signal(|| None);
     let mut modal_open: Signal<bool> = use_signal(|| false);
+    let mut info_open: Signal<bool> = use_signal(|| false);
+    let mut glosario_open: Signal<bool> = use_signal(|| false);
+    let mut legal_cmp_open: Signal<bool> = use_signal(|| false);
+    let mut pais_a: Signal<String> = use_signal(|| "cuba".to_string());
+    let mut pais_b: Signal<String> = use_signal(|| "espana".to_string());
     let mut query: Signal<String> = use_signal(String::new);
     let mut filter: Signal<String> = use_signal(|| "todos".to_string());
     let mut selected_substance: Signal<Option<String>> = use_signal(|| None);
     let mut multi_input: Signal<String> = use_signal(String::new);
+    let mut escenario: Signal<String> = use_signal(|| "ambiente".to_string());
     let mut multi_ids: Signal<Vec<(String, String, String)>> = use_signal(Vec::new);
     let mut norma: Signal<Option<(String, String, String, String, String)>> = use_signal(|| None);
     let mut online_resultados: Signal<Vec<core::PubChemCompound>> = use_signal(Vec::new);
@@ -1068,8 +1160,18 @@ fn App() -> Element {
     let multi_items = multi_ids();
 
     // Límites de exposición de NIOSH para la sustancia mostrada.
-    let limites = online_ficha()
-        .or_else(|| active_substance.clone())
+    let ficha_activa = online_ficha().or_else(|| active_substance.clone());
+    let favorito_actual = ficha_activa
+        .as_ref()
+        .map(|s| opciones().favorites.iter().any(|f| f == &s.cas))
+        .unwrap_or(false);
+    let favorite_key = if favorito_actual {
+        "remove_favorite"
+    } else {
+        "add_favorite"
+    };
+    let limites = ficha_activa
+        .clone()
         .and_then(|s| core::niosh_limit_for_cas(&s.cas).cloned());
 
     // Perfiles de reactividad de PubChem para sustancias sin cobertura CAMEO.
@@ -1403,6 +1505,30 @@ fn App() -> Element {
         });
     });
 
+    // Aplica tamaño de texto, contraste y movimiento a todas las plataformas.
+    use_effect(move || {
+        let o = opciones();
+        let contraste = if o.high_contrast { "high" } else { "normal" };
+        let movimiento = if o.reduce_motion { "reduce" } else { "auto" };
+        dioxus::document::eval(&format!(
+            "var d=document.documentElement;d.dataset.font={:?};d.dataset.contrast={:?};d.dataset.motion={:?};",
+            o.font_scale, contraste, movimiento
+        ));
+    });
+
+    // Ctrl/Cmd+K enfoca el buscador; solo afecta al documento de la app.
+    use_effect(move || {
+        dioxus::document::eval(
+            r#"(function(){if(window.__sustanciasAtajo)return;window.__sustanciasAtajo=1;
+              document.addEventListener('keydown',function(e){
+                if((e.ctrlKey||e.metaKey)&&String(e.key).toLowerCase()==='k'){
+                  e.preventDefault();var el=document.getElementById('buscador-principal');
+                  if(el){el.focus();el.select();}
+                }
+              });})()"#,
+        );
+    });
+
     let continentes = vec![
         "{txt(\"continent_international\", lang_ui)}", "{txt(\"continent_america\", lang_ui)}", "{txt(\"continent_europe\", lang_ui)}", "{txt(\"continent_africa\", lang_ui)}", "{txt(\"continent_asia\", lang_ui)}", "{txt(\"continent_oceania\", lang_ui)}",
     ];
@@ -1474,12 +1600,107 @@ fn App() -> Element {
 
         if modal_open() {
             div { class: "overlay",
-                div { class: "overlay-card compacta",
+                div { class: "overlay-card compacta", autofocus: true,
+                        onkeydown: move |e| { if e.key().legacy_keycode() == 27 { modal_open.set(false); } },
                     button { class: "cerrar", onclick: move |_| modal_open.set(false),
                         dangerous_inner_html: "{icon(\"x\", \"ico\")}" }
                     h2 { "{txt(\"change_country\", lang_ui)}" }
                     p { "{txt(\"change_sub\", lang_ui)}" }
                     div { class: "pais-grid", {rsx_countries(true)} }
+                }
+            }
+        }
+
+        if info_open() {
+            div { class: "overlay",
+                div { class: "overlay-card", autofocus: true,
+                        onkeydown: move |e| { if e.key().legacy_keycode() == 27 { info_open.set(false); } },
+                    button { class: "cerrar", onclick: move |_| info_open.set(false),
+                        dangerous_inner_html: "{icon(\"x\", \"ico\")}" }
+                    h2 { "{txt(\"sources_info_title\", lang_ui)}" }
+                    p { "{txt(\"sources_info_sub\", lang_ui)}" }
+                    h4 { class: "lista-titulo", "{txt(\"sources_official\", lang_ui)}" }
+                    ul { class: "lista",
+                        for fuente in all_sources.iter() {
+                            li { a { href: "{fuente.url}", target: "_blank", "{fuente.titulo}" } }
+                        }
+                    }
+                    h4 { class: "lista-titulo", "{txt(\"sources_licenses\", lang_ui)}" }
+                    ul { class: "lista",
+                        li { "{txt(\"license_pubchem\", lang_ui)}" }
+                        li { "{txt(\"license_cameo\", lang_ui)}" }
+                        li { "{txt(\"license_icsc\", lang_ui)}" }
+                        li { "{txt(\"license_niosh\", lang_ui)}" }
+                        li { "{txt(\"license_cas\", lang_ui)}" }
+                    }
+                }
+            }
+        }
+
+        if glosario_open() {
+            div { class: "overlay",
+                div { class: "overlay-card", autofocus: true,
+                        onkeydown: move |e| { if e.key().legacy_keycode() == 27 { glosario_open.set(false); } },
+                    button { class: "cerrar", onclick: move |_| glosario_open.set(false),
+                        dangerous_inner_html: "{icon(\"x\", \"ico\")}" }
+                    h2 { "{txt(\"glossary_title\", lang_ui)}" }
+                    if let Some(s) = ficha_activa.clone() {
+                        p { class: "lista-titulo", "{txt(\"glossary_h_title\", lang_ui)}" }
+                        ul { class: "lista",
+                            for f in s.peligrosidad.frases_h.iter() {
+                                li { strong { "{f.codigo}" } " — {f.texto}" }
+                            }
+                        }
+                    }
+                    p { class: "lista-titulo", "{txt(\"glossary_rg_title\", lang_ui)}" }
+                    p { class: "multi-nota", "{txt(\"glossary_rg_note\", lang_ui)}" }
+                    a {
+                        href: "https://cameochemicals.noaa.gov/help/reactivity/reactive_groups.htm",
+                        target: "_blank",
+                        "{txt(\"glossary_rg_link\", lang_ui)}"
+                    }
+                }
+            }
+        }
+
+        if legal_cmp_open() {
+            div { class: "overlay",
+                div { class: "overlay-card", autofocus: true,
+                    onkeydown: move |e| { if e.key().legacy_keycode() == 27 { legal_cmp_open.set(false); } },
+                    button { class: "cerrar", onclick: move |_| legal_cmp_open.set(false),
+                        dangerous_inner_html: "{icon(\"x\", \"ico\")}" }
+                    h2 { "{txt(\"compare_legal\", lang_ui)}" }
+                    div { class: "multi-anadir",
+                        select {
+                            aria_label: "{txt(\"compare_legal\", lang_ui)}",
+                            value: "{pais_a()}",
+                            onchange: move |e| pais_a.set(e.value()),
+                            for c in countries.iter() {
+                                option { value: "{c.id}", "{c.nombre}" }
+                            }
+                        }
+                        select {
+                            aria_label: "{txt(\"compare_legal\", lang_ui)}",
+                            value: "{pais_b()}",
+                            onchange: move |e| pais_b.set(e.value()),
+                            for c in countries.iter() {
+                                option { value: "{c.id}", "{c.nombre}" }
+                            }
+                        }
+                    }
+                    div { class: "legal-cmp",
+                        for id in [pais_a(), pais_b()] {
+                            div { class: "legal-cmp-col",
+                                h4 { "{core::country_by_id(&id).map(|c| c.nombre.clone()).unwrap_or_default()}" }
+                                for ins in core::instruments_for(&id) {
+                                    div { class: "norma",
+                                        h4 { "{ins.titulo}" }
+                                        if !ins.nota.is_empty() { p { class: "multi-nota", "{ins.nota}" } }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1545,6 +1766,11 @@ fn App() -> Element {
                         }
                     }
                     span { class: "badge", "{sustancias_i18n::texto_fijo_fmt(\"norms_count\", lang_ui, &[(\"n\", &n_normas)])}" }
+                    button {
+                        class: "boton boton-secundario",
+                        onclick: move |_| legal_cmp_open.set(true),
+                        "{txt(\"compare_legal\", lang_ui)}"
+                    }
                 }
                 div { class: "filtros-wrap",
                     span { class: "filtro-icono", dangerous_inner_html: "{icon(\"filter\", \"ico\")}" }
@@ -1777,6 +2003,7 @@ fn App() -> Element {
                 div { class: "buscador",
                     span { class: "buscador-icono", dangerous_inner_html: "{icon(\"search\", \"ico\")}" }
                     input {
+                        id: "buscador-principal",
                         placeholder: "{txt(\"search_placeholder\", lang_ui)}",
                         value: "{query()}",
                         oninput: move |e| {
@@ -1784,6 +2011,54 @@ fn App() -> Element {
                             query.set(value.clone());
                             buscar_pubchem(value, if output_lang() == "auto" { lang.to_string() } else { output_lang() });
                         },
+                        onchange: move |e| {
+                            let termino = e.value().trim().to_string();
+                            if termino.is_empty() { return; }
+                            let mut o = opciones();
+                            if !o.recent_searches.iter().any(|x| x == &termino) {
+                                o.recent_searches.insert(0, termino);
+                                o.recent_searches.truncate(8);
+                                guardar_opciones(&o);
+                                opciones.set(o);
+                            }
+                        },
+                    }
+                }
+
+                if !opciones().recent_searches.is_empty() || !opciones().favorites.is_empty() {
+                    div { class: "multi-chips",
+                        if !opciones().recent_searches.is_empty() {
+                            strong { "{txt(\"history_title\", lang_ui)}" }
+                            for q in opciones().recent_searches.iter() {
+                                button {
+                                    class: "multi-chip",
+                                    onclick: {
+                                        let q = q.clone();
+                                        move |_| {
+                                            query.set(q.clone());
+                                            buscar_pubchem(q.clone(), if output_lang() == "auto" { lang.to_string() } else { output_lang() });
+                                        }
+                                    },
+                                    "{q}"
+                                }
+                            }
+                        }
+                        if !opciones().favorites.is_empty() {
+                            strong { "{txt(\"favorites_title\", lang_ui)}" }
+                            for fav in opciones().favorites.iter() {
+                                button {
+                                    class: "multi-chip",
+                                    onclick: {
+                                        let fav = fav.clone();
+                                        move |_| {
+                                            query.set(fav.clone());
+                                            buscar_pubchem(fav.clone(), if output_lang() == "auto" { lang.to_string() } else { output_lang() });
+                                        }
+                                    },
+                                    "{fav}"
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -1896,8 +2171,27 @@ fn App() -> Element {
                         } else {
                             span { class: "badge badge-ok", "{sustancias_i18n::texto_fijo_fmt(\"compare_counts\", lang_ui, &[(\"n\", &cameo_visible().len().to_string()), (\"m\", &triple_visible().len().to_string()), (\"t\", &combinaciones3(multi_items.len()).to_string())])}" }
                         }
+                        if !multi_items.is_empty() {
+                            button {
+                                class: "boton boton-secundario",
+                                onclick: {
+                                    let items = multi_items.clone();
+                                    move |_| exportar_comparacion(&items, &cameo_visible(), &triple_visible())
+                                },
+                                "{txt(\"export_comparison\", lang_ui)}"
+                            }
+                        }
                     }
                     div { class: "multi-anadir",
+                        span { "{txt(\"scenario_label\", lang_ui)}" }
+                        select {
+                            aria_label: "{txt(\"scenario_label\", lang_ui)}",
+                            value: "{escenario()}",
+                            onchange: move |e| escenario.set(e.value()),
+                            option { value: "ambiente", "{txt(\"scenario_ambient\", lang_ui)}" }
+                            option { value: "incendio", "{txt(\"scenario_fire\", lang_ui)}" }
+                            option { value: "proceso", "{txt(\"scenario_process\", lang_ui)}" }
+                        }
                         input {
                             placeholder: "{txt(\"add_another_placeholder\", lang_ui)}",
                             value: "{multi_input()}",
@@ -1924,6 +2218,7 @@ fn App() -> Element {
                             "{txt(\"add_button\", lang_ui)}"
                         }
                     }
+                    p { class: "multi-nota", "{txt(&format!(\"scenario_note_{}\", escenario()), lang_ui)}" }
                     div { class: "multi-chips",
                         for (_, nombre, _) in multi_items.iter() {
                             span { class: "multi-chip", "{nombre}" }
@@ -2098,10 +2393,50 @@ fn App() -> Element {
                                 span { class: "badge badge-demo", "{txt(\"badge_demo_sheet\", lang_ui)}" }
                             }
                         }
+                        button {
+                            class: "boton boton-secundario",
+                            onclick: {
+                                let cas = s.cas.clone();
+                                let nombre = s.nombre.clone();
+                                move |_| {
+                                    let mut o = opciones();
+                                    let entrada = if cas.trim().is_empty() { nombre.clone() } else { cas.clone() };
+                                    if let Some(pos) = o.favorites.iter().position(|f| f == &entrada) {
+                                        o.favorites.remove(pos);
+                                    } else {
+                                        o.favorites.push(entrada);
+                                    }
+                                    guardar_opciones(&o);
+                                    opciones.set(o);
+                                }
+                            },
+                            "{txt(favorite_key, lang_ui)}"
+                        }
+                        button {
+                            class: "boton boton-secundario",
+                            onclick: move |_| glosario_open.set(true),
+                            "{txt(\"glossary_button\", lang_ui)}"
+                        }
                         div { class: "identificadores",
                             span { class: "ident", "CAS {s.cas}" }
+                            button {
+                                class: "boton-copiar",
+                                aria_label: "{txt(\"copy_cas\", lang_ui)}",
+                                title: "{txt(\"copy_cas\", lang_ui)}",
+                                onclick: { let valor = s.cas.clone(); move |_| copiar_al_portapapeles(&valor) },
+                                "⧉"
+                            }
                             span { class: "ident", "CE {s.ce}" }
                             span { class: "ident", "ONU {s.onu}" }
+                            if !s.onu.trim().is_empty() {
+                                button {
+                                    class: "boton-copiar",
+                                    aria_label: "{txt(\"copy_onu\", lang_ui)}",
+                                    title: "{txt(\"copy_onu\", lang_ui)}",
+                                    onclick: { let valor = s.onu.clone(); move |_| copiar_al_portapapeles(&valor) },
+                                    "⧉"
+                                }
+                            }
                             span { class: "ident", "{s.palabra_advertencia}" }
                             if !s.fecha_verificacion.is_empty() {
                                 span { class: "ident", "{sustancias_i18n::texto_fijo_fmt(\"verified_date\", lang_ui, &[(\"fecha\", s.fecha_verificacion.as_str())])}" }
@@ -2254,6 +2589,61 @@ fn App() -> Element {
                             "{txt(\"download_pdf\", lang_ui)}"
                         }
                     }
+                }
+            }
+        }
+
+        section { class: "panel offline-panel",
+            div { class: "panel-cabecera",
+                div { class: "panel-titulo",
+                    span { class: "panel-icono", dangerous_inner_html: "{icon(\"layers\", \"ico ico-lg\")}" }
+                    div {
+                        h3 { "{txt(\"accessibility_title\", lang_ui)}" }
+                        p { "{txt(\"accessibility_sub\", lang_ui)}" }
+                    }
+                }
+            }
+            div { class: "opciones",
+                label { class: "opcion",
+                    span { "{txt(\"font_size_label\", lang_ui)}" }
+                    select {
+                        value: "{opciones().font_scale}",
+                        onchange: move |e| {
+                            let mut o = opciones();
+                            o.font_scale = e.value();
+                            guardar_opciones(&o);
+                            opciones.set(o);
+                        },
+                        option { value: "normal", "{txt(\"font_normal\", lang_ui)}" }
+                        option { value: "large", "{txt(\"font_large\", lang_ui)}" }
+                        option { value: "xlarge", "{txt(\"font_xlarge\", lang_ui)}" }
+                    }
+                }
+                label { class: "opcion",
+                    input {
+                        r#type: "checkbox",
+                        checked: opciones().high_contrast,
+                        onchange: move |e| {
+                            let mut o = opciones();
+                            o.high_contrast = e.checked();
+                            guardar_opciones(&o);
+                            opciones.set(o);
+                        },
+                    }
+                    "{txt(\"opt_high_contrast\", lang_ui)}"
+                }
+                label { class: "opcion",
+                    input {
+                        r#type: "checkbox",
+                        checked: opciones().reduce_motion,
+                        onchange: move |e| {
+                            let mut o = opciones();
+                            o.reduce_motion = e.checked();
+                            guardar_opciones(&o);
+                            opciones.set(o);
+                        },
+                    }
+                    "{txt(\"opt_reduce_motion\", lang_ui)}"
                 }
             }
         }
@@ -2512,6 +2902,11 @@ fn App() -> Element {
         }
 
         footer { class: "pie",
+            button {
+                class: "link-feedback",
+                onclick: move |_| info_open.set(true),
+                "{txt(\"sources_info_title\", lang_ui)}"
+            }
             p { "{txt(\"substances_warning\", lang_ui)}" }
             p { "{txt(\"footer_sources\", lang_ui)}" }
             p {

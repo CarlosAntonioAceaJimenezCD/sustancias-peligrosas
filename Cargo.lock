@@ -5050,6 +5050,7 @@ dependencies = [
  "gloo-timers",
  "js-sys",
  "reqwest",
+ "serde",
  "serde_json",
  "sustancias-core",
  "sustancias-i18n",

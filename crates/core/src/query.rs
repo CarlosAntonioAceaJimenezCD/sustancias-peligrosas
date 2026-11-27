@@ -144,9 +144,20 @@ pub fn detect_cas(query: &str) -> Option<String> {
     if valido { Some(q.to_string()) } else { None }
 }
 
+/// Convierte subíndices Unicode (H₂SO₄) a dígitos ASCII (H2SO4).
+pub fn normalizar_formula(query: &str) -> String {
+    query
+        .chars()
+        .map(|c| match c {
+            '₀'..='₉' => char::from_u32('0' as u32 + (c as u32 - '₀' as u32)).unwrap_or(c),
+            _ => c,
+        })
+        .collect()
+}
+
 /// Detecta una fórmula molecular escrita sin espacios (H2SO4, NaCl, CH3COOH).
 pub fn detect_formula(query: &str) -> Option<String> {
-    let q = query.trim();
+    let q = normalizar_formula(query.trim());
     if q.is_empty() || q.len() > 40 || q.chars().any(char::is_whitespace) {
         return None;
     }
@@ -177,7 +188,7 @@ pub fn detect_formula(query: &str) -> Option<String> {
             _ => return None,
         }
     }
-    if simbolos > 0 { Some(q.to_string()) } else { None }
+    if simbolos > 0 { Some(q) } else { None }
 }
 
 
@@ -269,4 +280,16 @@ pub fn name_variants(query: &str) -> Vec<String> {
     let mut variantes = vec![english(query), normalize(query.trim())];
     variantes.dedup();
     variantes
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn subindices_se_normalizan_como_formula() {
+        assert_eq!(normalizar_formula("H₂SO₄"), "H2SO4");
+        assert_eq!(detect_formula("H₂SO₄"), Some("H2SO4".to_string()));
+        assert_eq!(classify("H₂SO₄"), QueryKind::Formula("H2SO4".to_string()));
+    }
 }

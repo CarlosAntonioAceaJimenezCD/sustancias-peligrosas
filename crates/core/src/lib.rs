@@ -713,16 +713,47 @@ pub fn cameo_substances() -> &'static [CameoSubstance] {
     &CACHE.get_or_init(|| parse(CAMEO_SUBSTANCES_JSON)).sustancias
 }
 
+/// CAS normalizado -> posición en `cameo_substances()` (construido una sola vez).
+///
+/// `or_insert` conserva el primero en caso de CAS repetidos, igual que `iter().find`.
+fn cameo_cas_index() -> &'static HashMap<String, usize> {
+    static INDEX: OnceLock<HashMap<String, usize>> = OnceLock::new();
+    INDEX.get_or_init(|| {
+        let sustancias = cameo_substances();
+        let mut index = HashMap::with_capacity(sustancias.len());
+        for (i, s) in sustancias.iter().enumerate() {
+            index.entry(normalize(s.cas.trim())).or_insert(i);
+        }
+        index
+    })
+}
+
 /// Busca una sustancia de CAMEO por número CAS normalizado.
 pub fn cameo_substance_for_cas(cas: &str) -> Option<&'static CameoSubstance> {
     let buscado = normalize(cas.trim());
-    cameo_substances().iter().find(|s| normalize(&s.cas) == buscado)
+    cameo_cas_index()
+        .get(&buscado)
+        .map(|&i| &cameo_substances()[i])
 }
 
 /// Base de pares reactivos (cacheada).
 pub fn cameo_pairs() -> &'static [CameoPair] {
     static CACHE: OnceLock<CameoReactionsDb> = OnceLock::new();
     &CACHE.get_or_init(|| parse(CAMEO_REACTIONS_JSON)).pares
+}
+
+/// Par RG ordenado `(min, max)` -> posición en `cameo_pairs()`.
+fn cameo_pair_index() -> &'static HashMap<(u32, u32), usize> {
+    static INDEX: OnceLock<HashMap<(u32, u32), usize>> = OnceLock::new();
+    INDEX.get_or_init(|| {
+        let pares = cameo_pairs();
+        let mut index = HashMap::with_capacity(pares.len());
+        for (i, p) in pares.iter().enumerate() {
+            let clave = if p.a <= p.b { (p.a, p.b) } else { (p.b, p.a) };
+            index.entry(clave).or_insert(i);
+        }
+        index
+    })
 }
 
 /// Analiza la compatibilidad entre dos CAS con datos de NOAA/EPA CAMEO.
@@ -733,6 +764,7 @@ pub fn cameo_analyze(cas_a: &str, cas_b: &str) -> Option<CameoAnalysis> {
     let a = cameo_substance_for_cas(cas_a)?;
     let b = cameo_substance_for_cas(cas_b)?;
     let pares = cameo_pairs();
+    let indice = cameo_pair_index();
     let mut peligros: Vec<String> = Vec::new();
     let mut gases: Vec<String> = Vec::new();
     let mut citas: Vec<String> = Vec::new();
@@ -741,7 +773,8 @@ pub fn cameo_analyze(cas_a: &str, cas_b: &str) -> Option<CameoAnalysis> {
     for ga in &a.grupos {
         for gb in &b.grupos {
             let (x, y) = if ga <= gb { (*ga, *gb) } else { (*gb, *ga) };
-            if let Some(par) = pares.iter().find(|p| p.a == x && p.b == y) {
+            if let Some(&i) = indice.get(&(x, y)) {
+                let par = &pares[i];
                 if par_revisado(&par.id) { revisado = true; }
                 for d in &par.peligros {
                     if !peligros.iter().any(|q| q == d) { peligros.push(d.clone()); }
@@ -2294,5 +2327,47 @@ mod tests {
         let t = cameo_analyze_triple("7647-01-0", "1310-73-2", "67-64-1").unwrap();
         assert!(t.reglas.is_empty());
         assert!(!ternary_rules().is_empty());
+    }
+
+    #[test]
+    fn indice_cameo_igual_que_busqueda_lineal() {
+        // CAS conocido: el índice debe devolver exactamente la misma sustancia.
+        let cas = "7664-93-9";
+        let buscado = normalize(cas.trim());
+        let lineal = cameo_substances()
+            .iter()
+            .find(|s| normalize(&s.cas) == buscado);
+        let por_indice = cameo_substance_for_cas(cas);
+        let campos = |s: &CameoSubstance| (s.cas.clone(), s.cameo_id, s.grupos.clone());
+        assert!(lineal.is_some());
+        assert_eq!(lineal.map(campos), por_indice.map(campos));
+        // normalize y trim se aplican igual en ambas rutas.
+        assert_eq!(
+            cameo_substance_for_cas("  7664-93-9  ").map(campos),
+            lineal.map(campos)
+        );
+        assert!(cameo_substance_for_cas("000-00-0").is_none());
+
+        // Par RG conocido: la clave ordenada (min, max) debe dar el mismo par.
+        let pares = cameo_pairs();
+        let (x, y) = (1u32, 2u32);
+        let lineal = pares.iter().find(|p| p.a == x && p.b == y);
+        let por_indice = cameo_pair_index()
+            .get(&(x, y))
+            .map(|&i| &pares[i]);
+        let campos_par = |p: &CameoPair| {
+            (
+                p.id.clone(), p.a, p.b,
+                p.peligros.clone(), p.gases.clone(), p.citas.clone(), p.url(),
+            )
+        };
+        assert!(lineal.is_some());
+        assert_eq!(lineal.map(campos_par), por_indice.map(campos_par));
+        // La búsqueda canonicaliza los grupos: invertir el orden de los CAS
+        // debe dar exactamente el mismo par RG1-RG2.
+        let directo = cameo_analyze("7647-01-0", "7664-93-9").unwrap();
+        let invertido = cameo_analyze("7664-93-9", "7647-01-0").unwrap();
+        assert_eq!(directo.fuentes, invertido.fuentes);
+        assert_eq!(directo.peligros, invertido.peligros);
     }
 }
