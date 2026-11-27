@@ -1170,6 +1170,7 @@ fn App() -> Element {
     } else {
         "add_favorite"
     };
+    let escenario_nota = txt(&format!("scenario_note_{}", escenario()), lang_ui);
     let limites = ficha_activa
         .clone()
         .and_then(|s| core::niosh_limit_for_cas(&s.cas).cloned());
@@ -2218,7 +2219,7 @@ fn App() -> Element {
                             "{txt(\"add_button\", lang_ui)}"
                         }
                     }
-                    p { class: "multi-nota", "{txt(&format!(\"scenario_note_{}\", escenario()), lang_ui)}" }
+                    p { class: "multi-nota", "{escenario_nota}" }
                     div { class: "multi-chips",
                         for (_, nombre, _) in multi_items.iter() {
                             span { class: "multi-chip", "{nombre}" }
