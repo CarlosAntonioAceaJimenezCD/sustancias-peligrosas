@@ -2397,11 +2397,15 @@ fn App() -> Element {
                         button {
                             class: "boton boton-secundario",
                             onclick: {
-                                let cas = s.cas.clone();
-                                let nombre = s.nombre.clone();
+                                let ficha = ficha_activa.clone();
                                 move |_| {
+                                    let Some(s) = ficha.clone() else { return; };
                                     let mut o = opciones();
-                                    let entrada = if cas.trim().is_empty() { nombre.clone() } else { cas.clone() };
+                                    let entrada = if s.cas.trim().is_empty() {
+                                        s.nombre.clone()
+                                    } else {
+                                        s.cas.clone()
+                                    };
                                     if let Some(pos) = o.favorites.iter().position(|f| f == &entrada) {
                                         o.favorites.remove(pos);
                                     } else {
