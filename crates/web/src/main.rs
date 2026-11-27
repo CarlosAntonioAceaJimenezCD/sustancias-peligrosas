@@ -347,7 +347,7 @@ html[data-motion="reduce"] *,html[data-motion="reduce"] *::before,html[data-moti
 .redes a:hover{text-decoration:underline}
 .pie{text-align:center;padding:var(--sp-5);color:var(--muted);font-size:var(--step--1);
   border-top:1px solid var(--line)}
-.link-feedback{color:var(--accent);text-decoration:none;border-bottom:1px dashed var(--accent-line)}
+.link-feedback{color:var(--accent);text-decoration:none;border:0;border-bottom:1px dashed var(--accent-line);background:none;padding:0;font:inherit;cursor:pointer}
 .link-feedback:hover{text-decoration:underline}
 .pie p{margin:var(--sp-1) 0}
 
