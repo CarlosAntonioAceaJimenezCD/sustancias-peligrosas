@@ -1975,13 +1975,13 @@ fn App() -> Element {
                             if !i.nota.is_empty() {
                                 p { class: "multi-nota", "{i.nota}" }
                             }
-                            if !i.texto.is_empty() {
+                            if !core::instrument_text(&i.id).is_empty() {
                                 button {
                                     class: "boton leer-norma",
                                     onclick: {
                                         let titulo = i.titulo.clone();
                                         let meta = format!("Páginas {} de la Gaceta Oficial", i.paginas);
-                                        let texto = i.texto.clone();
+                                        let texto = core::instrument_text(&i.id).to_string();
                                         let url = i.url.clone();
                                         let nombre = core::pdf_filename(&i.url, &i.pdf_nombre);
                                         move |_| norma.set(Some((titulo.clone(), meta.clone(), texto.clone(), url.clone(), nombre.clone())))

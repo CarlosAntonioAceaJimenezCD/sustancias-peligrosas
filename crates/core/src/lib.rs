@@ -13,6 +13,7 @@ const COUNTRIES_JSON: &str = include_str!("../../../data/countries.json");
 const TOPICS_JSON: &str = include_str!("../../../data/topics.json");
 const SOURCES_JSON: &str = include_str!("../../../data/sources.json");
 const LEGISLATION_JSON: &str = include_str!("../../../data/legislation.json");
+const LEGAL_TEXTS_JSON: &str = include_str!("../../../data/legal_texts.json");
 const SUBSTANCES_JSON: &str = include_str!("../../../data/substances.json");
 const INTERACTIONS_JSON: &str = include_str!("../../../data/interactions.json");
 const ORGANIZATIONS_JSON: &str = include_str!("../../../data/organizations.json");
@@ -1056,6 +1057,20 @@ pub fn countries() -> Vec<Country> {
     CACHE.get_or_init(|| parse(COUNTRIES_JSON)).paises.clone()
 }
 
+#[derive(Debug, Deserialize)]
+struct LegalTextsDb {
+    #[serde(default)]
+    textos: HashMap<String, String>,
+}
+
+/// Texto íntegro de una norma. Se parsea la primera vez que se pide, no al
+/// arrancar: `data/legislation.json` solo conserva los metadatos.
+pub fn instrument_text(id: &str) -> &'static str {
+    static CACHE: OnceLock<LegalTextsDb> = OnceLock::new();
+    let db = CACHE.get_or_init(|| parse(LEGAL_TEXTS_JSON));
+    db.textos.get(id).map(String::as_str).unwrap_or("")
+}
+
 /// Carga y devuelve todos los apartados/temas (datos cacheados).
 pub fn topics() -> Vec<Topic> {
     static CACHE: OnceLock<TopicsDb> = OnceLock::new();
@@ -1905,6 +1920,15 @@ mod tests {
             .iter()
             .any(|i| i.verificacion == "documento_local_verificado"));
         assert!(instruments.iter().any(|i| i.id == "cu-res-253-2021"));
+    }
+
+    #[test]
+    fn texto_integro_se_carga_bajo_demanda() {
+        assert!(instrument_text("cu-ley-150-2022").len() > 100_000);
+        assert_eq!(instrument_text("id-inexistente"), "");
+        assert!(instruments_for("cuba")
+            .iter()
+            .all(|i| i.texto.is_empty()));
     }
 
     #[test]
