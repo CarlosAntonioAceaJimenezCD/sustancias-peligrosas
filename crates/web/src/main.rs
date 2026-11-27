@@ -1083,6 +1083,8 @@ fn App() -> Element {
     let mut legal_cmp_open: Signal<bool> = use_signal(|| false);
     let mut pais_a: Signal<String> = use_signal(|| "cuba".to_string());
     let mut pais_b: Signal<String> = use_signal(|| "espana".to_string());
+    let mut abiertos: Signal<std::collections::HashSet<String>> = use_signal(std::collections::HashSet::new);
+    let mut legal_abierto: Signal<bool> = use_signal(|| false);
     let mut query: Signal<String> = use_signal(String::new);
     let mut filter: Signal<String> = use_signal(|| "todos".to_string());
     let mut selected_substance: Signal<Option<String>> = use_signal(|| None);
@@ -1171,6 +1173,18 @@ fn App() -> Element {
         "add_favorite"
     };
     let escenario_nota = txt(&format!("scenario_note_{}", escenario()), lang_ui);
+    let sugerencias: Vec<(String, String)> = if online_resultados().is_empty()
+        && !online_cargando()
+        && !online_error_red()
+        && query().trim().len() >= 4
+    {
+        let q = query();
+        let mut v = core::sugerir_cas(&q, 4);
+        v.extend(core::sugerir_nombres(&q, 4));
+        v
+    } else {
+        Vec::new()
+    };
     let limites = ficha_activa
         .clone()
         .and_then(|s| core::niosh_limit_for_cas(&s.cas).cloned());
@@ -1537,7 +1551,20 @@ fn App() -> Element {
         rsx! {
             for cont in continentes.iter() {
                 details { class: "continente-carpeta",
-                    summary { class: "continente-titulo",
+                    summary {
+                        class: "continente-titulo",
+                        tabindex: "0",
+                        aria_expanded: if abiertos().contains(*cont) { "true" } else { "false" },
+                        onclick: {
+                            let continente = cont.to_string();
+                            move |_| {
+                                let mut actuales = abiertos();
+                                if !actuales.remove(&continente) {
+                                    actuales.insert(continente.clone());
+                                }
+                                abiertos.set(actuales);
+                            }
+                        },
                         span { class: "continente-icono", dangerous_inner_html: "{continent_svg(*cont, \"continente-silueta\")}" }
                         span { "{cont}" }
                         span { class: "badge badge-suave", "{countries.iter().filter(|c| c.continente.as_str() == *cont).count()}" }
@@ -1754,11 +1781,13 @@ fn App() -> Element {
                 class: "panel panel-legal",
                 id: "panel-legal",
                 summary {
+                    onclick: move |_| legal_abierto.set(!legal_abierto()),
                     span { class: "panel-icono", dangerous_inner_html: "{icon(\"book\", \"ico ico-lg\")}" }
                     span { "{txt(\"legal_details_summary\", lang_ui)}" }
                     span { class: "badge", "{sustancias_i18n::texto_fijo_fmt(\"norms_count\", lang_ui, &[(\"n\", &n_normas)])}" }
                 }
-                div { class: "panel-cabecera",
+                if legal_abierto() {
+                    div { class: "panel-cabecera",
                     div { class: "panel-titulo",
                         span { class: "panel-icono", dangerous_inner_html: "{icon(\"scale\", \"ico ico-lg\")}" }
                         div {
@@ -2098,6 +2127,24 @@ fn App() -> Element {
                             p { class: "vacio", "{txt(\"invalid_query_hint\", lang_ui)}" }
                         } else {
                             p { class: "vacio", "{txt(\"no_substances_hint\", lang_ui)}" }
+                            if !sugerencias.is_empty() {
+                                div { class: "multi-chips",
+                                    strong { "{txt(\"suggestions_title\", lang_ui)}" }
+                                    for (valor, etiqueta) in sugerencias.iter() {
+                                        button {
+                                            class: "multi-chip",
+                                            onclick: {
+                                                let v = valor.clone();
+                                                move |_| {
+                                                    query.set(v.clone());
+                                                    buscar_pubchem(v.clone(), if output_lang() == "auto" { lang.to_string() } else { output_lang() });
+                                                }
+                                            },
+                                            "{etiqueta}"
+                                        }
+                                    }
+                                }
+                            }
                         }
                     } else if !online_resultados().is_empty() {
                         div { class: "online-titulo",
@@ -2161,6 +2208,7 @@ fn App() -> Element {
                     }
                 }
 
+                                    }
                 div { class: "multi",
                     div { class: "multi-cabecera",
                         span { class: "multi-titulo",

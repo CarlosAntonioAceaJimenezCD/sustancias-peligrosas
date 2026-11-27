@@ -1258,5 +1258,12 @@
     "fr": "Comparez les cadres juridiques",
     "de": "Vergleichen Sie rechtliche Rahmenbedingungen",
     "it": "Confrontare i quadri giuridici"
+  },
+  "suggestions_title": {
+    "es": "¿Quizás querías decir?",
+    "en": "Maybe you meant?",
+    "fr": "Peut-être que tu voulais dire ?",
+    "de": "Vielleicht meintest du?",
+    "it": "Forse intendevi?"
   }
 }

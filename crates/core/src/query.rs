@@ -292,4 +292,90 @@ mod tests {
         assert_eq!(detect_formula("H₂SO₄"), Some("H2SO4".to_string()));
         assert_eq!(classify("H₂SO₄"), QueryKind::Formula("H2SO4".to_string()));
     }
+
+    #[test]
+    fn distancia_edicion_basica() {
+        assert_eq!(distancia_edicion("acetona", "acetona"), 0);
+        assert_eq!(distancia_edicion("acetona", "aceton"), 1);
+        assert_eq!(distancia_edicion("7664-93-9", "7664-93-8"), 1);
+    }
+
+    #[test]
+    fn sugerencias_cas_y_nombres() {
+        let cas = sugerir_cas("7664-93-8", 5);
+        assert!(cas.iter().any(|(c, _)| c == "7664-93-9"));
+        let nombres = sugerir_nombres("aceton", 5);
+        assert!(!nombres.is_empty());
+        assert!(sugerir_cas("", 5).is_empty());
+    }
+}
+
+/// Distancia de edición de Levenshtein entre dos cadenas (mayúsculas dadas).
+pub fn distancia_edicion(a: &str, b: &str) -> usize {
+    let a: Vec<char> = a.chars().collect();
+    let b: Vec<char> = b.chars().collect();
+    let mut anterior: Vec<usize> = (0..=b.len()).collect();
+    let mut actual = vec![0usize; b.len() + 1];
+    for (i, ca) in a.iter().enumerate() {
+        actual[0] = i + 1;
+        for (j, cb) in b.iter().enumerate() {
+            let coste = usize::from(ca != cb);
+            actual[j + 1] = (anterior[j + 1] + 1)
+                .min(actual[j] + 1)
+                .min(anterior[j] + coste);
+        }
+        std::mem::swap(&mut anterior, &mut actual);
+    }
+    anterior[b.len()]
+}
+
+/// Sugiere números CAS cercanos al texto escrito (a distancia <= 2).
+pub fn sugerir_cas(query: &str, limite: usize) -> Vec<(String, String)> {
+    let buscado = normalize(query.trim());
+    if buscado.len() < 4 {
+        return Vec::new();
+    }
+    let mut candidatos: Vec<(usize, String, String)> = crate::cameo_substances()
+        .iter()
+        .filter_map(|s| {
+            let distancia = distancia_edicion(&buscado, &normalize(&s.cas));
+            if distancia <= 2 && distancia < buscado.len() {
+                Some((distancia, s.cas.clone(), s.nombre.clone()))
+            } else {
+                None
+            }
+        })
+        .collect();
+    candidatos.sort_by_key(|(d, _, _)| *d);
+    candidatos
+        .into_iter()
+        .take(limite)
+        .map(|(_, cas, nombre)| (cas, nombre))
+        .collect()
+}
+
+/// Sugiere nombres de sustancias cercanos al texto escrito (distancia <= 3).
+pub fn sugerir_nombres(query: &str, limite: usize) -> Vec<(String, String)> {
+    let buscado = normalize(query.trim());
+    if buscado.len() < 5 {
+        return Vec::new();
+    }
+    let mut candidatos: Vec<(usize, String, String)> = crate::cameo_substances()
+        .iter()
+        .filter_map(|s| {
+            let nombre = normalize(&s.nombre);
+            let distancia = distancia_edicion(&buscado, &nombre);
+            if distancia <= 3 && distancia < nombre.len().min(buscado.len()) {
+                Some((distancia, s.cas.clone(), s.nombre.clone()))
+            } else {
+                None
+            }
+        })
+        .collect();
+    candidatos.sort_by_key(|(d, _, _)| *d);
+    candidatos
+        .into_iter()
+        .take(limite)
+        .map(|(_, cas, nombre)| (cas, nombre))
+        .collect()
 }
