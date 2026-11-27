@@ -29,8 +29,9 @@ const TERNARY_RULES_JSON: &str = include_str!("../../../data/ternary_rules.json"
 mod query;
 
 pub use query::{
-    classify, corregir_tildes, detect_cas, detect_formula, english, es_consulta_valida,
-    name_variants, QueryKind,
+    classify, corregir_tildes, detect_cas, detect_formula, distancia_edicion, english,
+    es_consulta_valida, name_variants, normalizar_formula, sugerir_cas, sugerir_nombres,
+    QueryKind,
 };
 
 // ---------------------------------------------------------------------------
